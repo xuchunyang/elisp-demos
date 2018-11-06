@@ -65,9 +65,9 @@
          (rx line-start (or "[back]" "[forward]"))
          nil t)
         (let ((inhibit-read-only t))
+          (when (eobp) (insert "\n"))
           (insert (elisp-demos--syntax-highlight src) "\n")
-          (unless (eobp)
-            (insert "\n")))))))
+          (unless (eobp) (insert "\n")))))))
 
 ;; (advice-add 'describe-function :after #'elisp-demos--describe-function)
 
