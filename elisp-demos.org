@@ -1,0 +1,22 @@
+#+PROPERTY: header-args:elisp :results pp
+
+* mapcar
+
+#+BEGIN_SRC elisp
+(mapcar #'1+ '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (2 3 4)
+
+* mapcan
+
+#+BEGIN_SRC elisp
+(mapcan
+ (lambda (pair)
+   (list (car pair) (cdr pair)))
+ '((x . 1) (y . 2) (z . 3)))
+#+END_SRC
+
+#+RESULTS:
+: (x 1 y 2 z 3)
