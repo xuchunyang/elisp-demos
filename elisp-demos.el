@@ -69,8 +69,6 @@
           (insert (elisp-demos--syntax-highlight src) "\n")
           (unless (eobp) (insert "\n")))))))
 
-;; (advice-add 'describe-function :after #'elisp-demos--describe-function)
-
 ;;; * helpful.el - https://github.com/Wilfred/helpful
 
 (defvar helpful--sym)
@@ -87,7 +85,16 @@
            (helpful--heading "Demos")
            (elisp-demos--syntax-highlight src) "\n\n"))))))
 
-;; (advice-add 'helpful-update :after #'elisp-demos--helpful-update)
+;;;###autoload
+(define-minor-mode elisp-demos-hack-mode
+  "Toggle advice of `describe-function' etc."
+  :global t
+  :require 'elisp-demos
+  (if elisp-demos-hack-mode
+      (progn (advice-add 'describe-function :after #'elisp-demos--describe-function)
+             (advice-add 'helpful-update :after #'elisp-demos--helpful-update))
+    (advice-remove 'describe-function #'elisp-demos--describe-function)
+    (advice-remove 'helpful-update #'elisp-demos--helpful-update)))
 
 (provide 'elisp-demos)
 ;;; elisp-demos.el ends here
