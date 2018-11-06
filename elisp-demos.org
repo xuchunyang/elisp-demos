@@ -1,5 +1,43 @@
 #+PROPERTY: header-args:elisp :results pp
 
+* let-alist
+
+#+BEGIN_SRC elisp
+(let-alist '((id . 1234)
+             (payload
+              (url . "https://example.com")
+              (title . "Example Domain")
+              (content . "This domain is...")))
+  (list :id .id
+        :url .payload.url))
+#+END_SRC
+
+#+RESULTS:
+: (:id 1234 :url "https://example.com")
+
+* map-let
+
+#+BEGIN_SRC elisp
+(map-let (one three) '((one . 1)
+                       (two . 2)
+                       (three . 3))
+  (list :one one
+        :three three))
+#+END_SRC
+
+#+RESULTS:
+: (:one 1 :three 3)
+
+#+BEGIN_SRC elisp
+(map-let (('one x)  ('three z)) '((one . 1)
+                                  (two . 2)
+                                  (three . 3))
+  (list x z))
+#+END_SRC
+
+#+RESULTS:
+: (1 3)
+
 * mapcan
 
 #+BEGIN_SRC elisp
