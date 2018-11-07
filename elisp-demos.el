@@ -118,9 +118,12 @@
   (or
    (catch 'found
      (while (re-search-forward "^\\* \\(.+\\)$" nil t)
-       (when (string> (match-string-no-properties 1) (symbol-name symbol))
-         (goto-char (line-beginning-position))
-         (throw 'found t))))
+       (cond ((string= (match-string-no-properties 1) (symbol-name symbol))
+              (goto-char (line-beginning-position))
+              (user-error "%s already exists" symbol))
+             ((string> (match-string-no-properties 1) (symbol-name symbol))
+              (goto-char (line-beginning-position))
+              (throw 'found t)))))
    (goto-char (point-max)))
   (org-insert-heading)
   (insert (symbol-name symbol) "\n"
