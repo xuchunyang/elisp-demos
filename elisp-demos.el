@@ -87,14 +87,19 @@
     (and (re-search-forward
           (format "^\\* %s$" (regexp-quote (symbol-name symbol))))
          (goto-char (line-beginning-position))
-         (org-show-entry))))
+         (org-show-entry))
+    t))
 
 ;;; * C-h f (`describe-function')
 
 (defun elisp-demos-help-find-demo-at-point ()
   "Find the demo at point."
   (interactive)
-  (elisp-demos-find-demo (get-text-property (point) 'symbol)))
+  (let ((offset (- (point) (get-text-property (point) 'start))))
+    (and (elisp-demos-find-demo (get-text-property (point) 'symbol))
+         ;; Skip heading and an empty line
+         (forward-line 2)
+         (forward-char offset))))
 
 (defvar elisp-demos-help-keymap
   (let ((map (make-sparse-keymap)))
@@ -114,6 +119,7 @@
           (when (eobp) (insert "\n"))
           (insert
            (propertize (elisp-demos--syntax-highlight src)
+                       'start (point)
                        'symbol function
                        'keymap elisp-demos-help-keymap)
            "\n")
@@ -134,6 +140,7 @@
           (insert
            (helpful--heading "Demos")
            (propertize (elisp-demos--syntax-highlight src)
+                       'start (point)
                        'symbol helpful--sym
                        'keymap elisp-demos-help-keymap)
            "\n\n"))))))
