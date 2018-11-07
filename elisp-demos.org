@@ -150,6 +150,42 @@
 #+RESULTS:
 : "3"
 
+* file-name-base
+
+#+BEGIN_SRC elisp
+(file-name-base "/Users/xcy/.emacs.d/init.el")
+#+END_SRC
+
+#+RESULTS:
+: "init"
+
+* file-name-directory
+
+#+BEGIN_SRC elisp
+(file-name-directory "/Users/xcy/.emacs.d/init.el")
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/.emacs.d/"
+
+* file-name-extension
+
+#+BEGIN_SRC elisp
+(file-name-extension "init.el")
+#+END_SRC
+
+#+RESULTS:
+: "el"
+
+* file-name-nondirectory
+
+#+BEGIN_SRC elisp
+(file-name-nondirectory "/Users/xcy/.emacs.d/init.el")
+#+END_SRC
+
+#+RESULTS:
+: "init.el"
+
 * insert-file-contents
 
 #+BEGIN_SRC elisp
@@ -202,6 +238,15 @@
 
 #+RESULTS:
 : (:id 1234 :url "https://example.com")
+
+* locate-user-emacs-file
+
+#+BEGIN_SRC elisp
+(locate-user-emacs-file "custom.el")
+#+END_SRC
+
+#+RESULTS:
+: "~/.emacs.d/custom.el"
 
 * make-string
 
