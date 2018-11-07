@@ -90,6 +90,46 @@
          (org-show-entry))
     t))
 
+;; Borrowed from `helpful--read-symbol'
+(defun elisp-demos--read-symbol (prompt predicate)
+  (let* ((sym-here (symbol-at-point))
+         (default-val
+           (when (funcall predicate sym-here)
+             (symbol-name sym-here))))
+    (when default-val
+      (setq prompt
+            (replace-regexp-in-string
+             (rx ": " eos)
+             (format " (default: %s): " default-val)
+             prompt)))
+    (intern (completing-read prompt obarray
+                             predicate t nil nil
+                             default-val))))
+
+(defun elisp-demos-add-demo (symbol)
+  (interactive
+   (list (elisp-demos--read-symbol "Add demo: "
+                                   (lambda (sym)
+                                     (or (functionp sym)
+                                         (special-form-p sym)
+                                         (macrop sym))))))
+  (find-file elisp-demos--elisp-demos.org)
+  (goto-char (point-min))
+  (or
+   (catch 'found
+     (while (re-search-forward "^\\* \\(.+\\)$" nil t)
+       (when (string> (match-string-no-properties 1) (symbol-name symbol))
+         (goto-char (line-beginning-position))
+         (throw 'found t))))
+   (goto-char (point-max)))
+  (org-insert-heading)
+  (insert (symbol-name symbol) "\n"
+          "\n"
+          "#+BEGIN_SRC elisp\n"
+          "\n"
+          "#+END_SRC")
+  (search-backward "\n#+END_SRC"))
+
 ;;; * C-h f (`describe-function')
 
 (defun elisp-demos-help-find-demo-at-point ()
