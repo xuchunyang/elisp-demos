@@ -136,6 +136,14 @@
 #+RESULTS:
 : (2 3 4)
 
+* mapconcat
+
+#+BEGIN_SRC elisp
+(mapconcat #'identity '("abc" "def" "ghi") ", ")
+#+END_SRC
+
+#+RESULTS:
+: "abc, def, ghi"
 * process-lines
 
 #+BEGIN_SRC elisp
