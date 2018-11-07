@@ -65,6 +65,8 @@
         (push (intern (match-string-no-properties 1)) symbols))
       (nreverse symbols))))
 
+(declare-function org-show-entry "org")
+
 (defun elisp-demos-find-demo (symbol)
   "Find the demo of the SYMBOL."
   (interactive
@@ -84,7 +86,8 @@
     (goto-char (point-min))
     (and (re-search-forward
           (format "^\\* %s$" (regexp-quote (symbol-name symbol))))
-         (goto-char (line-beginning-position)))))
+         (goto-char (line-beginning-position))
+         (org-show-entry))))
 
 ;;; * C-h f (`describe-function')
 
