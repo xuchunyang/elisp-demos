@@ -10,6 +10,26 @@
 #+RESULTS:
 : (1 2 3 4 5)
 
+* clear-string
+
+#+BEGIN_SRC elisp
+(let ((password "123456"))
+  (clear-string password)
+  (string-to-list password))
+#+END_SRC
+
+#+RESULTS:
+: (0 0 0 0 0 0)
+
+* concat
+
+#+BEGIN_SRC elisp
+(concat "hello" " world")
+#+END_SRC
+
+#+RESULTS:
+: "hello world"
+
 * let-alist
 
 #+BEGIN_SRC elisp
@@ -24,6 +44,15 @@
 
 #+RESULTS:
 : (:id 1234 :url "https://example.com")
+
+* make-string
+
+#+BEGIN_SRC elisp
+(make-string 5 ?x)
+#+END_SRC
+
+#+RESULTS:
+: "xxxxx"
 
 * map-let
 
@@ -68,6 +97,89 @@
 
 #+RESULTS:
 : (2 3 4)
+
+* split-string
+
+#+BEGIN_SRC elisp
+(split-string "The   quick brown fox." " +")
+#+END_SRC
+
+#+RESULTS:
+: ("The" "quick" "brown" "fox.")
+
+* store-substring
+
+#+BEGIN_SRC elisp
+(let ((a-str "hello"))
+  (store-substring a-str 0 ?H)
+  a-str)
+#+END_SRC
+
+#+RESULTS:
+: "Hello"
+
+* string
+
+#+BEGIN_SRC elisp
+(string ?a ?b ?c)
+#+END_SRC
+
+#+RESULTS:
+: "abc"
+
+* string-prefix-p
+
+#+BEGIN_SRC elisp
+(string-prefix-p "Sat" "Saturday night plans")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* string-suffix-p
+
+#+BEGIN_SRC elisp
+(string-suffix-p "!" "Cats are the best!")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* string-to-list
+
+#+BEGIN_SRC elisp
+(string-to-list "abc")
+#+END_SRC
+
+#+RESULTS:
+: (97 98 99)
+
+* substring
+
+#+BEGIN_SRC elisp
+(substring "abcdefg" 0 3)
+#+END_SRC
+
+#+RESULTS:
+: "abc"
+
+#+BEGIN_SRC elisp
+;; Get the first and last character in a non-empty string
+(list :first (substring "abcdefg" 0 1)
+      :last  (substring "abcdefg" -1))
+#+END_SRC
+
+#+RESULTS:
+: (:first "a" :last "g")
+
+* substring-no-properties
+
+#+BEGIN_SRC elisp
+(substring-no-properties (propertize "hello" 'face 'italic))
+#+END_SRC
+
+#+RESULTS:
+: "hello"
 
 * with-current-buffer
 
