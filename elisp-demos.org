@@ -298,20 +298,20 @@
 : "foo, bar, baz"
 
 #+BEGIN_SRC elisp :lexical t
-;; -*- lexical-binding: t; -*-
-(let* ((string (concat "- one\n"
-                       "- two\n"
-                       "- three\n"))
-       (regexp "^-")
-       (rep (let ((count 0))
-              (lambda (_substring)
-                (setq count (1+ count))
-                (format "%d." count)))))
-  (replace-regexp-in-string regexp rep string))
+(replace-regexp-in-string
+ "[0-9][0-9]\\'"
+ (lambda (substring)
+   (let ((suffixes
+          ;; https://en.wikipedia.org/wiki/Ordinal_indicator
+          (append '("st" "nd" "rd") (make-list 17 "th")
+                  '("st" "nd" "rd") (make-list 7 "th")
+                  '("st"))))
+     (concat substring (elt suffixes (string-to-number substring)))))
+ "2018 Nov 07")
 #+END_SRC
 
 #+RESULTS:
-: "1. one\n2. two\n3. three\n"
+: "2018 Nov 07th"
 
 * reverse
 
