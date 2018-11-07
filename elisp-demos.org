@@ -150,6 +150,20 @@
 #+RESULTS:
 : "3"
 
+* insert-file-contents
+
+#+BEGIN_SRC elisp
+(write-region "Hello World\n" nil "/tmp/tmp.txt")
+(with-temp-buffer
+  (list :return-value (insert-file-contents "/tmp/tmp.txt")
+        :file-contents (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: (:return-value
+:  ("/tmp/tmp.txt" 12)
+:  :file-contents "Hello World\n")
+
 * length
 
 #+BEGIN_SRC elisp
@@ -554,4 +568,13 @@
 
 #+RESULTS:
 : "helloworld"
+
+* write-region
+
+#+BEGIN_SRC elisp
+(write-region "Hello World\n" nil "/tmp/tmp.txt")
+#+END_SRC
+
+#+RESULTS:
+: nil
 
