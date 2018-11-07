@@ -1,6 +1,12 @@
 #+PROPERTY: header-args:elisp :results pp
 
 #+BEGIN_SRC elisp :results silent
+;; Ensure two final newlines
+(save-excursion
+  (goto-char (point-max))
+  (cond ((looking-back "\n\n"))
+        ((looking-back "\n") (insert "\n"))
+        (t (insert "\n\n"))))
 (mark-whole-buffer)
 (org-sort-entries nil ?a)
 #+END_SRC
