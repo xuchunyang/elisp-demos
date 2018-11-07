@@ -1,5 +1,10 @@
 #+PROPERTY: header-args:elisp :results pp
 
+#+BEGIN_SRC elisp :results silent
+(mark-whole-buffer)
+(org-sort-entries nil ?a)
+#+END_SRC
+
 * call-process
 
 #+BEGIN_SRC elisp
