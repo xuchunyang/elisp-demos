@@ -32,10 +32,13 @@
 (defconst elisp-demos--load-dir (file-name-directory
                                  (or load-file-name buffer-file-name)))
 
+(defconst elisp-demos--elisp-demos.org (expand-file-name
+                                        "elisp-demos.org"
+                                        elisp-demos--load-dir))
+
 (defun elisp-demos--search (name)
   (with-temp-buffer
-    (insert-file-contents
-     (expand-file-name "elisp-demos.org" elisp-demos--load-dir))
+    (insert-file-contents elisp-demos--elisp-demos.org)
     (goto-char (point-min))
     (when (re-search-forward (format "^\\* %s$" (regexp-quote name)) nil t)
       (let (beg end)
@@ -52,6 +55,33 @@
     (delay-mode-hooks (org-mode))
     (font-lock-ensure)
     (buffer-string)))
+
+(defun elisp-demos--names ()
+  (with-temp-buffer
+    (insert-file-contents elisp-demos--elisp-demos.org)
+    (goto-char (point-min))
+    (let (names)
+      (while (re-search-forward "^\\* \\(.+\\)$" nil t)
+        (push (match-string-no-properties 1) names))
+      (nreverse names))))
+
+(defun elisp-demos-find-demo (function)
+  "Find the demo of the FUNCTION"
+  (interactive
+   (let* ((sym-here (symbol-at-point))
+          (demo-names (elisp-demos--names))
+          (default-val (and sym-here
+                            (member (symbol-name sym-here) demo-names)
+                            (symbol-name sym-here)))
+          (prompt (if default-val
+                      (format "Find demo (default: %s): " default-val)
+                    "Find demo: ")))
+     (list (read (completing-read prompt demo-names nil t nil nil default-val)))))
+  (find-file elisp-demos--elisp-demos.org)
+  (goto-char (point-min))
+  (and (re-search-forward
+        (format "^\\* %s$" (regexp-quote (symbol-name function))))
+       (goto-char (line-beginning-position))))
 
 ;;; * C-h f (`describe-function')
 
