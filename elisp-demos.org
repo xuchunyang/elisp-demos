@@ -9,6 +9,7 @@
 
 #+RESULTS:
 : (1 2 3 4 5)
+
 * let-alist
 
 #+BEGIN_SRC elisp
@@ -67,6 +68,16 @@
 
 #+RESULTS:
 : (2 3 4)
+
+* with-current-buffer
+
+#+BEGIN_SRC elisp
+(with-current-buffer "*Messages*"
+  (current-buffer))
+#+END_SRC
+
+#+RESULTS:
+: #<buffer *Messages*>
 
 * with-temp-buffer
 
