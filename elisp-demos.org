@@ -79,6 +79,18 @@
 #+RESULTS:
 : "hello world"
 
+* cond
+
+#+BEGIN_SRC elisp
+(let ((x 42))
+  (cond ((= x 0) 'zero)
+        ((> x 0) 'positive)
+        (t 'negative)))
+#+END_SRC
+
+#+RESULTS:
+: positive
+
 * copy-sequence
 
 #+BEGIN_SRC elisp
@@ -259,6 +271,48 @@
 #+RESULTS:
 : ("1" "2" "3")
 
+* re-search-forward
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "# Intro\n"
+          "# Usage\n"
+          "# License\n")
+  (goto-char (point-min))
+  (let ((matches '()))
+    (while (re-search-forward "^# \\(.+\\)$" nil t)
+      (push (match-string 1) matches))
+    (nreverse matches)))
+#+END_SRC
+
+#+RESULTS:
+: ("Intro" "Usage" "License")
+
+* replace-regexp-in-string
+
+#+BEGIN_SRC elisp
+(replace-regexp-in-string "-" ", " "foo-bar-baz")
+#+END_SRC
+
+#+RESULTS:
+: "foo, bar, baz"
+
+#+BEGIN_SRC elisp :lexical t
+;; -*- lexical-binding: t; -*-
+(let* ((string (concat "- one\n"
+                       "- two\n"
+                       "- three\n"))
+       (regexp "^-")
+       (rep (let ((count 0))
+              (lambda (_substring)
+                (setq count (1+ count))
+                (format "%d." count)))))
+  (replace-regexp-in-string regexp rep string))
+#+END_SRC
+
+#+RESULTS:
+: "1. one\n2. two\n3. three\n"
+
 * reverse
 
 #+BEGIN_SRC elisp
@@ -349,6 +403,42 @@
 
 #+RESULTS:
 : "abc"
+
+* string-match
+
+#+BEGIN_SRC elisp
+(let* ((string "Today is <2018-11-07>."))
+  (when (string-match "<\\([-0-9]+\\)>" string)
+    (match-string 1 string)))
+#+END_SRC
+
+#+RESULTS:
+: "2018-11-07"
+
+#+BEGIN_SRC elisp
+;; `match-string' ignores case as `case-fold-search' defaults to t
+(let ((string "Hello World")
+      (regexp "hello"))
+  (list
+   ;; Ignore case
+   (string-match regexp string)
+   ;; Don't ignore case
+   (let (case-fold-search)
+     (string-match regexp string))))
+#+END_SRC
+
+#+RESULTS:
+: (0 nil)
+
+* string-match-p
+
+#+BEGIN_SRC elisp
+(list (string-match-p "world" "hello world")
+      (string-match-p "12345" "hello world"))
+#+END_SRC
+
+#+RESULTS:
+: (6 nil)
 
 * string-prefix-p
 
