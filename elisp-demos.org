@@ -59,3 +59,14 @@
 #+RESULTS:
 : (2 3 4)
 
+* with-temp-buffer
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (insert "world")
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "helloworld"
