@@ -597,6 +597,15 @@
 #+RESULTS:
 : "Elapsed time: 1.006051s"
 
+* url-hexify-string
+
+#+BEGIN_SRC elisp
+(url-hexify-string "hello world")
+#+END_SRC
+
+#+RESULTS:
+: "hello%20world"
+
 * url-retrieve
 
 #+BEGIN_SRC elisp
@@ -623,6 +632,15 @@
 
 #+RESULTS:
 : ((message . "GitHub lives! (2018-11-06 21:40:11 -0800) (1)"))
+
+* url-unhex-string
+
+#+BEGIN_SRC elisp
+(url-unhex-string "hello%20world")
+#+END_SRC
+
+#+RESULTS:
+: "hello world"
 
 * with-current-buffer
 
