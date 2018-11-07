@@ -245,6 +245,17 @@
 #+RESULTS:
 : "hello"
 
+* url-retrieve-synchronously
+
+#+BEGIN_SRC elisp
+(with-current-buffer (url-retrieve-synchronously "https://api.github.com/status")
+  (goto-char url-http-end-of-headers)
+  (json-read))
+#+END_SRC
+
+#+RESULTS:
+: ((message . "GitHub lives! (2018-11-06 21:40:11 -0800) (1)"))
+
 * with-current-buffer
 
 #+BEGIN_SRC elisp
