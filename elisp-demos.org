@@ -404,6 +404,18 @@
 #+RESULTS:
 : "hello"
 
+* time-subtract
+
+#+BEGIN_SRC elisp
+(let ((t1 (current-time)))
+  (sit-for 1)
+  (message "Elapsed time: %fs"
+           (float-time (time-subtract nil t1))))
+#+END_SRC
+
+#+RESULTS:
+: "Elapsed time: 1.006051s"
+
 * url-retrieve
 
 #+BEGIN_SRC elisp
