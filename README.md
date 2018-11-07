@@ -29,4 +29,4 @@ Put your awesome Elisp demos into [elisp-demos.org](elisp-demos.org). A demo is 
 : (2 3 4)
 ```
 
-To keep these demos sorted, type  `C-x h` (`M-x mark-whole-buffer`) and `C-c ^ a` (`M-x org-sort a`).
+To keep these demos sorted alphabetically, type  `C-x h` (`M-x mark-whole-buffer`) and `C-c ^ a` (`M-x org-sort a`).
