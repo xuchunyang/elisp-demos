@@ -330,6 +330,16 @@
 #+RESULTS:
 : ("1" "2" "3")
 
+* propertize
+
+#+BEGIN_SRC elisp
+(propertize "Hello" 'face 'italic)
+#+END_SRC
+
+#+RESULTS:
+: #("Hello" 0 5
+:   (face italic))
+
 * re-search-forward
 
 #+BEGIN_SRC elisp
