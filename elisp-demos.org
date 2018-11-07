@@ -1,5 +1,43 @@
 #+PROPERTY: header-args:elisp :results pp
 
+* call-process
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (list :exit-status
+        (call-process "echo" nil t nil "hello" "world")
+        :output
+        (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: (:exit-status 0 :output "hello world\n")
+
+* call-process-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello\n")
+  (call-process-region (point-min) (point-max) "wc" t t)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "       1       1       6\n"
+
+* call-process-shell-command
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (list :exit-status
+        (call-process-shell-command "echo hello | wc" nil t)
+        :output
+        (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: (:exit-status 0 :output "       1       1       6\n")
+
 * cl-loop
 
 #+BEGIN_SRC elisp
@@ -97,6 +135,24 @@
 
 #+RESULTS:
 : (2 3 4)
+
+* process-lines
+
+#+BEGIN_SRC elisp
+(process-lines "seq" "3")
+#+END_SRC
+
+#+RESULTS:
+: ("1" "2" "3")
+
+* shell-command-to-string
+
+#+BEGIN_SRC elisp
+(shell-command-to-string "echo hello world")
+#+END_SRC
+
+#+RESULTS:
+: "hello world\n"
 
 * split-string
 
