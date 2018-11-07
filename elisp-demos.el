@@ -36,11 +36,11 @@
                                         "elisp-demos.org"
                                         elisp-demos--load-dir))
 
-(defun elisp-demos--search (name)
+(defun elisp-demos--search (symbol)
   (with-temp-buffer
     (insert-file-contents elisp-demos--elisp-demos.org)
     (goto-char (point-min))
-    (when (re-search-forward (format "^\\* %s$" (regexp-quote name)) nil t)
+    (when (re-search-forward (format "^\\* %s$" (regexp-quote (symbol-name symbol))) nil t)
       (let (beg end)
         (forward-line 1)
         (setq beg (point))
@@ -56,27 +56,29 @@
     (font-lock-ensure)
     (buffer-string)))
 
-(defun elisp-demos--names ()
+(defun elisp-demos--symbols ()
   (with-temp-buffer
     (insert-file-contents elisp-demos--elisp-demos.org)
     (goto-char (point-min))
-    (let (names)
+    (let (symbols)
       (while (re-search-forward "^\\* \\(.+\\)$" nil t)
-        (push (match-string-no-properties 1) names))
-      (nreverse names))))
+        (push (intern (match-string-no-properties 1)) symbols))
+      (nreverse symbols))))
 
 (defun elisp-demos-find-demo (symbol)
   "Find the demo of the SYMBOL."
   (interactive
    (let* ((sym-here (symbol-at-point))
-          (demo-names (elisp-demos--names))
+          (symbols (elisp-demos--symbols))
           (default-val (and sym-here
-                            (member (symbol-name sym-here) demo-names)
+                            (memq sym-here symbols)
                             (symbol-name sym-here)))
           (prompt (if default-val
                       (format "Find demo (default: %s): " default-val)
                     "Find demo: ")))
-     (list (read (completing-read prompt demo-names nil t nil nil default-val)))))
+     (list (read (completing-read prompt
+                                  (mapcar #'symbol-name symbols)
+                                  nil t nil nil default-val)))))
   (when symbol
     (find-file elisp-demos--elisp-demos.org)
     (goto-char (point-min))
@@ -97,7 +99,7 @@
     map))
 
 (defun elisp-demos--describe-function (function)
-  (when-let* ((src (elisp-demos--search (symbol-name function)))
+  (when-let* ((src (elisp-demos--search function))
               (buf (get-buffer "*Help*")))
     (with-current-buffer buf
       (save-excursion
@@ -120,7 +122,7 @@
 (declare-function helpful--heading "helpful")
 
 (defun elisp-demos--helpful-update ()
-  (when-let* ((src (elisp-demos--search (symbol-name helpful--sym))))
+  (when-let* ((src (elisp-demos--search helpful--sym)))
     (save-excursion
       (goto-char (point-min))
       (when (re-search-forward "^References$")
