@@ -394,6 +394,28 @@
 : ((1 2 3)
 :  (3 2 1))
 
+* setq
+
+#+BEGIN_SRC elisp
+(let (x)
+  (setq x 1)
+  x)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+#+BEGIN_SRC elisp
+(let (x y z)
+  (setq x 1
+        y 2
+        z (+ x y))
+  (list x y z))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
 * shell-command-to-string
 
 #+BEGIN_SRC elisp
