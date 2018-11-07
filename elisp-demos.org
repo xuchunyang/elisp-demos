@@ -171,6 +171,24 @@
 #+RESULTS:
 : ("The" "quick" "brown" "fox.")
 
+* start-process
+
+#+BEGIN_SRC elisp
+(start-process "sleep" "*sleep*" "sleep" "5")
+#+END_SRC
+
+#+RESULTS:
+: #<process sleep>
+
+* start-process-shell-command
+
+#+BEGIN_SRC elisp
+(start-process-shell-command "sleep" "*sleep*" "sleep 5 && echo wake")
+#+END_SRC
+
+#+RESULTS:
+: #<process sleep>
+
 * store-substring
 
 #+BEGIN_SRC elisp
@@ -244,6 +262,22 @@
 
 #+RESULTS:
 : "hello"
+
+* url-retrieve
+
+#+BEGIN_SRC elisp
+(url-retrieve "http://example.com"
+              (lambda (status start-time)
+                (message "The request is completed in %f seconds"
+                         (float-time (time-subtract nil start-time)))
+                (display-buffer (current-buffer)))
+              `(,(current-time))
+              'silent
+              'inhibit-cookies)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer  *http example.com:80*-426008>
 
 * url-retrieve-synchronously
 
