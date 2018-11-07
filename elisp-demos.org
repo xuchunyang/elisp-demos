@@ -150,6 +150,18 @@
 #+RESULTS:
 : "3"
 
+* erase-buffer
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello world\n")
+  (erase-buffer)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: ""
+
 * file-name-base
 
 #+BEGIN_SRC elisp
@@ -185,6 +197,17 @@
 
 #+RESULTS:
 : "init.el"
+
+* insert
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello" ?\s "world" ?\n)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "hello world\n"
 
 * insert-file-contents
 
