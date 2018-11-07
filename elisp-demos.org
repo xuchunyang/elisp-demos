@@ -1,5 +1,14 @@
 #+PROPERTY: header-args:elisp :results pp
 
+* cl-loop
+
+#+BEGIN_SRC elisp
+(cl-loop for i from 1 to 5
+         collect i)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5)
 * let-alist
 
 #+BEGIN_SRC elisp
@@ -70,3 +79,4 @@
 
 #+RESULTS:
 : "helloworld"
+
