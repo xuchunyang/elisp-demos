@@ -65,8 +65,8 @@
         (push (match-string-no-properties 1) names))
       (nreverse names))))
 
-(defun elisp-demos-find-demo (function)
-  "Find the demo of the FUNCTION"
+(defun elisp-demos-find-demo (symbol)
+  "Find the demo of the SYMBOL."
   (interactive
    (let* ((sym-here (symbol-at-point))
           (demo-names (elisp-demos--names))
@@ -77,13 +77,24 @@
                       (format "Find demo (default: %s): " default-val)
                     "Find demo: ")))
      (list (read (completing-read prompt demo-names nil t nil nil default-val)))))
-  (find-file elisp-demos--elisp-demos.org)
-  (goto-char (point-min))
-  (and (re-search-forward
-        (format "^\\* %s$" (regexp-quote (symbol-name function))))
-       (goto-char (line-beginning-position))))
+  (when symbol
+    (find-file elisp-demos--elisp-demos.org)
+    (goto-char (point-min))
+    (and (re-search-forward
+          (format "^\\* %s$" (regexp-quote (symbol-name symbol))))
+         (goto-char (line-beginning-position)))))
 
 ;;; * C-h f (`describe-function')
+
+(defun elisp-demos-help-find-demo-at-point ()
+  "Find the demo at point."
+  (interactive)
+  (elisp-demos-find-demo (get-text-property (point) 'symbol)))
+
+(defvar elisp-demos-help-keymap
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "RET") #'elisp-demos-help-find-demo-at-point)
+    map))
 
 (defun elisp-demos--describe-function (function)
   (when-let* ((src (elisp-demos--search (symbol-name function)))
@@ -96,7 +107,11 @@
          nil t)
         (let ((inhibit-read-only t))
           (when (eobp) (insert "\n"))
-          (insert (elisp-demos--syntax-highlight src) "\n")
+          (insert
+           (propertize (elisp-demos--syntax-highlight src)
+                       'symbol function
+                       'keymap elisp-demos-help-keymap)
+           "\n")
           (unless (eobp) (insert "\n")))))))
 
 ;;; * helpful.el - https://github.com/Wilfred/helpful
@@ -113,14 +128,17 @@
         (let ((inhibit-read-only t))
           (insert
            (helpful--heading "Demos")
-           (elisp-demos--syntax-highlight src) "\n\n"))))))
+           (propertize (elisp-demos--syntax-highlight src)
+                       'symbol helpful--sym
+                       'keymap elisp-demos-help-keymap)
+           "\n\n"))))))
 
 ;;;###autoload
-(define-minor-mode elisp-demos-hack-mode
-  "Toggle advice of `describe-function' etc."
+(define-minor-mode elisp-demos-help-mode
+  "Inject Elisp demos into *Help*."
   :global t
   :require 'elisp-demos
-  (if elisp-demos-hack-mode
+  (if elisp-demos-help-mode
       (progn (advice-add 'describe-function :after #'elisp-demos--describe-function)
              (advice-add 'helpful-update :after #'elisp-demos--helpful-update))
     (advice-remove 'describe-function #'elisp-demos--describe-function)
