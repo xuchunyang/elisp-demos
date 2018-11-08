@@ -203,6 +203,12 @@
 :  :copied
 :  (1 2 3 4))
 
+* declare-function
+
+#+BEGIN_SRC elisp
+(declare-function dired-jump "dired-x" (&optional other-window file-name))
+#+END_SRC
+
 * define-minor-mode
 
 #+BEGIN_SRC elisp
