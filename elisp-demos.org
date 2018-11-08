@@ -35,6 +35,25 @@
 #+RESULTS:
 : nil
 
+* buffer-end
+
+#+BEGIN_SRC elisp
+(cl-assert (buffer-end +1) (point-max))
+(cl-assert (buffer-end -1) (point-min))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* buffer-size
+
+#+BEGIN_SRC elisp
+(buffer-size)
+#+END_SRC
+
+#+RESULTS:
+: 14480
+
 * call-process
 
 #+BEGIN_SRC elisp
@@ -384,6 +403,12 @@
 #+RESULTS:
 : "init.el"
 
+* goto-char
+
+#+BEGIN_SRC elisp :results silent
+(goto-char (point-min))
+#+END_SRC
+
 * insert
 
 #+BEGIN_SRC elisp
@@ -603,6 +628,33 @@
 #+RESULTS:
 : (10 9 8 7 6 5 4 3 2 1)
 
+* point
+
+#+BEGIN_SRC elisp
+(point)
+#+END_SRC
+
+#+RESULTS:
+: 7899
+
+* point-max
+
+#+BEGIN_SRC elisp
+(point-max)
+#+END_SRC
+
+#+RESULTS:
+: 14180
+
+* point-min
+
+#+BEGIN_SRC elisp
+(point-min)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
 * process-lines
 
 #+BEGIN_SRC elisp
@@ -675,6 +727,16 @@
 #+RESULTS:
 : ((1 2 3)
 :  (3 2 1))
+
+* save-excursion
+
+#+BEGIN_SRC elisp
+(save-excursion 
+  (goto-char (point-min)))
+#+END_SRC
+
+#+RESULTS:
+: 1
 
 * seq-filter
 
