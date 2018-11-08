@@ -11,6 +11,29 @@
 (org-sort-entries nil ?a)
 #+END_SRC
 
+* atom
+
+#+BEGIN_SRC elisp
+(atom 42)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+#+BEGIN_SRC elisp
+(atom '())
+#+END_SRC
+
+#+RESULTS:
+: t
+
+#+BEGIN_SRC elisp
+(atom '(1 2 . 3))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * call-process
 
 #+BEGIN_SRC elisp
@@ -48,6 +71,47 @@
 
 #+RESULTS:
 : (:exit-status 0 :output "       1       1       6\n")
+
+* car
+
+#+BEGIN_SRC elisp
+(car '(a b c))
+#+END_SRC
+
+#+RESULTS:
+: a
+
+#+BEGIN_SRC elisp
+(car '())
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* cdr
+
+#+BEGIN_SRC elisp
+(cdr '(a b c))
+#+END_SRC
+
+#+RESULTS:
+: (b c)
+
+#+BEGIN_SRC elisp
+(cdr '())
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* cl-assert
+
+#+BEGIN_SRC elisp
+(cl-assert (= (+ 2 3) 5))
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * cl-incf
 
@@ -182,6 +246,29 @@
 
 #+RESULTS:
 : positive
+
+* consp
+
+#+BEGIN_SRC elisp
+(consp '(1 . 2))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+#+BEGIN_SRC elisp
+(consp '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+#+BEGIN_SRC elisp
+(consp '())
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * copy-sequence
 
@@ -360,6 +447,32 @@
 #+RESULTS:
 : (:id 1234 :url "https://example.com")
 
+* listp
+
+#+BEGIN_SRC elisp
+;; normal list
+(listp '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+#+BEGIN_SRC elisp
+;; empty list (aka nil)
+(listp '())
+#+END_SRC
+
+#+RESULTS:
+: t
+
+#+BEGIN_SRC elisp
+;; cons cell
+(listp '(1 . 2))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * locate-user-emacs-file
 
 #+BEGIN_SRC elisp
@@ -449,6 +562,45 @@
 
 #+RESULTS:
 : (4 3 2 1)
+
+* null
+
+#+BEGIN_SRC elisp
+(null '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+#+BEGIN_SRC elisp
+(null '())
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* number-sequence
+
+#+BEGIN_SRC elisp
+(number-sequence 1 10)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6 7 8 9 10)
+
+#+BEGIN_SRC elisp
+(number-sequence 1 10 2)
+#+END_SRC
+
+#+RESULTS:
+: (1 3 5 7 9)
+
+#+BEGIN_SRC elisp
+(number-sequence 10 1 -1)
+#+END_SRC
+
+#+RESULTS:
+: (10 9 8 7 6 5 4 3 2 1)
 
 * process-lines
 
