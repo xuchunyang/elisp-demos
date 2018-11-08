@@ -28,6 +28,7 @@
 ;;; Code:
 
 (require 'subr-x)
+(require 'cl-lib)
 
 (defconst elisp-demos--load-dir (file-name-directory
                                  (or load-file-name buffer-file-name)))
@@ -65,7 +66,8 @@
         (push (intern (match-string-no-properties 1)) symbols))
       (nreverse symbols))))
 
-(declare-function org-show-entry "org")
+(declare-function org-show-entry "org" ())
+(declare-function org-insert-heading "org" (&optional arg invisible-ok top))
 
 (defun elisp-demos-find-demo (symbol)
   "Find the demo of the SYMBOL."
@@ -107,6 +109,7 @@
                              default-val))))
 
 (defun elisp-demos-add-demo (symbol)
+  "Add demo for SYMBOL."
   (interactive
    (list (elisp-demos--read-symbol "Add demo: "
                                    (lambda (sym)
