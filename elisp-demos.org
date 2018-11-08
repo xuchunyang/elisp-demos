@@ -49,6 +49,26 @@
 #+RESULTS:
 : (:exit-status 0 :output "       1       1       6\n")
 
+* cl-incf
+
+#+BEGIN_SRC elisp
+(let ((x 0))
+  (cl-incf x)
+  x)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+#+BEGIN_SRC elisp
+(let ((nums (list 1 2 3)))
+  (cl-incf (cadr nums) 100)
+  nums)
+#+END_SRC
+
+#+RESULTS:
+: (1 102 3)
+
 * cl-loop
 
 #+BEGIN_SRC elisp
@@ -58,6 +78,78 @@
 
 #+RESULTS:
 : (1 2 3 4 5)
+
+* cl-mapcan
+
+#+BEGIN_SRC elisp
+(cl-mapcan
+ (lambda (pair)
+   (let ((key (car pair))
+         (val (cdr pair)))
+     (list (intern (format ":%s" key)) val)))
+ '((x . 1) (y . 2) (z . 3)))
+#+END_SRC
+
+#+RESULTS:
+: (:x 1 :y 2 :z 3)
+
+#+BEGIN_SRC elisp
+(cl-mapcan #'make-list '(1 2 3) '(a b c))
+#+END_SRC
+
+#+RESULTS:
+: (a b b c c c)
+
+* cl-mapcar
+
+#+BEGIN_SRC elisp
+(cl-mapcar #'cons '(a b c) '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: ((a . 1)
+:  (b . 2)
+:  (c . 3))
+
+* cl-mapcon
+
+#+BEGIN_SRC elisp
+(cl-mapcon #'copy-sequence '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 2 3 3)
+
+* cl-mapl
+
+#+BEGIN_SRC elisp :results output
+(cl-mapl #'print '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: "\n(1 2 3)\n\n(2 3)\n\n(3)\n"
+
+* cl-maplist
+
+#+BEGIN_SRC elisp
+(cl-maplist #'identity '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2 3 4 5)
+:  (2 3 4 5)
+:  (3 4 5)
+:  (4 5)
+:  (5))
+
+* cl-remove-if
+
+#+BEGIN_SRC elisp
+(cl-remove-if (lambda (elt) (< elt 0)) '(0 1 -1 3 -3 5))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 3 5)
 
 * clear-string
 
@@ -315,6 +407,14 @@
 #+RESULTS:
 : (x 1 y 2 z 3)
 
+#+BEGIN_SRC elisp
+(mapcan (lambda (x) (and (numberp x) (list x))) 
+        '(a 1 b c 3 4 d 5))
+#+END_SRC
+
+#+RESULTS:
+: (1 3 4 5)
+
 * mapcar
 
 #+BEGIN_SRC elisp
@@ -416,6 +516,22 @@
 #+RESULTS:
 : ((1 2 3)
 :  (3 2 1))
+
+* seq-filter
+
+#+BEGIN_SRC elisp
+(seq-filter (lambda (elt) (> elt 0)) [1 -1 3 -3 5])
+#+END_SRC
+
+#+RESULTS:
+: (1 3 5)
+
+#+BEGIN_SRC elisp
+(seq-filter #'numberp '(a 1 b c 3 4 d 5))
+#+END_SRC
+
+#+RESULTS:
+: (1 3 4 5)
 
 * setq
 
