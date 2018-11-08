@@ -533,6 +533,23 @@
 #+RESULTS:
 : (1 3 4 5)
 
+* setf
+
+#+BEGIN_SRC elisp
+(let ((nums (list 1 2 3 4 5)))
+  (setf (elt nums 2) 300)
+  nums)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 300 4 5)
+
+#+BEGIN_SRC elisp :results silent
+(cl-assert (equal (macroexpand '(setf (point) (point-min)))
+                  '(goto-char (point-min))))
+(setf (point) (point-min))
+#+END_SRC
+
 * setq
 
 #+BEGIN_SRC elisp
