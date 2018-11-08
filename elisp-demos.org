@@ -1015,6 +1015,37 @@
 :  :sorted
 :  (0 1 2 3 4 5 6))
 
+* sort-subr
+
+#+BEGIN_SRC elisp :results drawer
+(with-temp-buffer
+  (insert "\
+1 + 2 + 3
+123
+0 * 100
+2 ^ 10
+10 * 100")
+  (goto-char (point-min))
+  (sort-subr nil
+             #'forward-line #'end-of-line
+             ;; Compute the sort key
+             (lambda ()
+               (string-to-number
+                (calc-eval
+                 (buffer-substring (line-beginning-position)
+                                   (line-end-position))))))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+0 * 100
+1 + 2 + 3
+123
+10 * 100
+2 ^ 10
+:END:
+
 * split-string
 
 #+BEGIN_SRC elisp
