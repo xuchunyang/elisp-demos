@@ -202,5 +202,36 @@
     (advice-remove 'describe-function #'elisp-demos--describe-function)
     (advice-remove 'helpful-update #'elisp-demos--helpful-update)))
 
+;;; * JSON
+
+(declare-function json-encode-string "json" (string))
+
+(defun elisp-demos--export-json-file (json-file)
+  "Export all demos as json to JSON-FILE."
+  (require 'json)
+  (with-temp-buffer
+    (insert-file-contents elisp-demos--elisp-demos.org)
+    (goto-char (point-min))
+    (let (title body beg end (output-buffer (generate-new-buffer " *elisp-demos-json*")))
+      (while (re-search-forward "^\\* \\(.+\\)$" nil t)
+        (setq title (match-string-no-properties 1))
+        (setq beg (save-excursion
+                    (forward-line 1)
+                    (line-beginning-position)))
+        (setq end (save-excursion
+                    (if (re-search-forward "^\\* " nil t)
+                        (line-beginning-position)
+                      (point-max))))
+        (setq body (buffer-substring-no-properties beg end))
+        (setq title (string-trim title))
+        (setq body (string-trim body))
+        (with-current-buffer output-buffer
+          (insert (json-encode-string title) ": " (json-encode-string body) ",\n")))
+      (with-current-buffer output-buffer
+        (delete-char -2)
+        (goto-char (point-min)) (insert "{\n")
+        (goto-char (point-max)) (insert "}\n")
+        (write-region (point-min) (point-max) json-file)))))
+
 (provide 'elisp-demos)
 ;;; elisp-demos.el ends here
