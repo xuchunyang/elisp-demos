@@ -81,14 +81,14 @@
      (list (read (completing-read prompt
                                   (mapcar #'symbol-name symbols)
                                   nil t nil nil default-val)))))
-  (when symbol
-    (find-file elisp-demos--elisp-demos.org)
-    (goto-char (point-min))
-    (and (re-search-forward
-          (format "^\\* %s$" (regexp-quote (symbol-name symbol))))
-         (goto-char (line-beginning-position))
-         (org-show-entry))
-    t))
+  (cl-assert symbol)
+  (find-file elisp-demos--elisp-demos.org)
+  (goto-char (point-min))
+  (and (re-search-forward
+        (format "^\\* %s$" (regexp-quote (symbol-name symbol))))
+       (goto-char (line-beginning-position))
+       (org-show-entry))
+  t)
 
 ;; Borrowed from `helpful--read-symbol'
 (defun elisp-demos--read-symbol (prompt predicate)
