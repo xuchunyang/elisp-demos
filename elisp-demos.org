@@ -1,5 +1,6 @@
 #+PROPERTY: header-args:elisp :results pp
 
+#+CAPTION: Sort headings alphabetically
 #+BEGIN_SRC elisp :results silent
 ;; Ensure two final newlines
 (save-excursion
