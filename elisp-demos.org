@@ -1104,21 +1104,6 @@
 #+RESULTS:
 : "2018-11-07"
 
-#+BEGIN_SRC elisp
-;; `match-string' ignores case as `case-fold-search' defaults to t
-(let ((string "Hello World")
-      (regexp "hello"))
-  (list
-   ;; Ignore case
-   (string-match regexp string)
-   ;; Don't ignore case
-   (let (case-fold-search)
-     (string-match regexp string))))
-#+END_SRC
-
-#+RESULTS:
-: (0 nil)
-
 * string-match-p
 
 #+BEGIN_SRC elisp
