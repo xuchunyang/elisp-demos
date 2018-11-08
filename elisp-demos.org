@@ -1096,7 +1096,7 @@
 * string-match
 
 #+BEGIN_SRC elisp
-(let* ((string "Today is <2018-11-07>."))
+(let ((string "Today is <2018-11-07>."))
   (when (string-match "<\\([-0-9]+\\)>" string)
     (match-string 1 string)))
 #+END_SRC
