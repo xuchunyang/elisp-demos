@@ -106,6 +106,15 @@
 #+RESULTS:
 : 14480
 
+* calc-eval
+
+#+BEGIN_SRC elisp
+(calc-eval "2 + 3")
+#+END_SRC
+
+#+RESULTS:
+: "5"
+
 * call-process
 
 #+BEGIN_SRC elisp
@@ -378,6 +387,27 @@
 
 #+RESULTS:
 : nil
+
+* dolist
+
+#+BEGIN_SRC elisp
+(let (result)
+  (dolist (elt '(1 2 3) result)
+    (push elt result)))
+#+END_SRC
+
+#+RESULTS:
+: (3 2 1)
+
+* dotimes
+
+#+BEGIN_SRC elisp :results output
+(dotimes (i 5)
+  (princ i))
+#+END_SRC
+
+#+RESULTS:
+: "01234"
 
 * elt
 
@@ -741,6 +771,36 @@
 #+RESULTS:
 : "abc, def, ghi"
 
+* match-string
+
+#+BEGIN_SRC elisp
+(let ((string "Today is <2018-11-09>")
+      (regexp (rx (group (= 4 num)) "-"
+                  (group (= 2 num)) "-"
+                  (group (= 2 num)))))
+  (when (string-match regexp string)
+    (list :year (match-string 1 string)
+          :month (match-string 2 string)
+          :day (match-string 3 string))))
+#+END_SRC
+
+#+RESULTS:
+: (:year "2018" :month "11" :day "09")
+
+* match-string-no-properties
+
+#+BEGIN_SRC elisp
+(let ((string (propertize "hello" 'face 'bold)))
+  (string-match ".*" string)
+  (list (match-string 0 string)
+        (match-string-no-properties 0 string)))
+#+END_SRC
+
+#+RESULTS:
+: (#("hello" 0 5
+:    (face bold))
+:  "hello")
+
 * md5
 
 #+BEGIN_SRC elisp
@@ -749,6 +809,15 @@
 
 #+RESULTS:
 : "5d41402abc4b2a76b9719d911017c592"
+
+* message
+
+#+BEGIN_SRC elisp
+(message "Hi, %s!" "Tyke")
+#+END_SRC
+
+#+RESULTS:
+: "Hi, Tyke!"
 
 * nreverse
 
@@ -863,6 +932,24 @@
 #+RESULTS:
 : ("Intro" "Usage" "License")
 
+* replace-match
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "65 83 68 70")
+  (goto-char (point-min))
+  (while (re-search-forward "[0-9]+" nil t)
+    (replace-match
+     ;; "65" => ?A => "A"
+     (string (read (match-string 0)))
+     'fixedcase
+     'literal))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "A S D F"
+
 * replace-regexp-in-string
 
 #+BEGIN_SRC elisp
@@ -909,6 +996,24 @@
 
 #+RESULTS:
 : 1
+
+* save-match-data
+
+#+BEGIN_SRC elisp
+(list
+ (string-match "hello" "hello world")
+ (match-data)
+ (save-match-data
+   (string-match "world" "hello world")
+   (match-data))
+ (match-data))
+#+END_SRC
+
+#+RESULTS:
+: (0
+:  (0 5)
+:  (6 11)
+:  (0 5))
 
 * secure-hash
 
@@ -1224,6 +1329,20 @@
 
 #+RESULTS:
 : "hello world"
+
+* while
+
+#+BEGIN_SRC elisp
+(let ((nums '())
+      (i 0))
+  (while (< i 10)
+    (push i nums)
+    (setq i (1+ i)))
+  (nreverse nums))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 2 3 4 5 6 7 8 9)
 
 * with-current-buffer
 
