@@ -116,7 +116,11 @@
                                      (or (functionp sym)
                                          (special-form-p sym)
                                          (macrop sym))))))
-  (find-file elisp-demos--elisp-demos.org)
+  ;; Try to reuse existing window 
+  (if-let* ((buffer (get-file-buffer elisp-demos--elisp-demos.org))
+            (window (get-buffer-window buffer)))
+      (select-window window)
+    (find-file elisp-demos--elisp-demos.org))
   (goto-char (point-min))
   (or
    (catch 'found
