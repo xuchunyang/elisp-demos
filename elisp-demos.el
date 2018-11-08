@@ -212,7 +212,8 @@
   (with-temp-buffer
     (insert-file-contents elisp-demos--elisp-demos.org)
     (goto-char (point-min))
-    (let (title body beg end (output-buffer (generate-new-buffer " *elisp-demos-json*")))
+    (let ((output-buffer (generate-new-buffer " *elisp-demos-json*"))
+          title body beg end)
       (while (re-search-forward "^\\* \\(.+\\)$" nil t)
         (setq title (match-string-no-properties 1))
         (setq beg (save-excursion
@@ -231,7 +232,8 @@
         (delete-char -2)
         (goto-char (point-min)) (insert "{\n")
         (goto-char (point-max)) (insert "}\n")
-        (write-region (point-min) (point-max) json-file)))))
+        (write-region (point-min) (point-max) json-file))
+      (kill-buffer output-buffer))))
 
 (provide 'elisp-demos)
 ;;; elisp-demos.el ends here
