@@ -476,6 +476,89 @@
 :  ("/tmp/tmp.txt" 12)
 :  :file-contents "Hello World\n")
 
+* json-encode
+
+#+BEGIN_SRC elisp
+(json-encode '((id . 42)
+               (comment ((author . "Spike")
+                         (date . "2018-11-08")))))
+#+END_SRC
+
+#+RESULTS:
+: "{\"id\":42,\"comment\":[{\"author\":\"Spike\",\"date\":\"2018-11-08\"}]}"
+
+* json-insert
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (json-insert '(:id 42 :message "hello world"))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "{\"id\":42,\"message\":\"hello world\"}"
+
+* json-parse-buffer
+
+#+BEGIN_SRC elisp
+(with-current-buffer (url-retrieve-synchronously "https://api.github.com/status")
+  (goto-char url-http-end-of-headers)
+  (json-parse-buffer :object-type 'alist))
+#+END_SRC
+
+#+RESULTS:
+: ((message . "GitHub lives! (2018-11-08 07:59:55 -0800) (1)"))
+
+* json-parse-string
+
+#+BEGIN_SRC elisp
+(json-parse-string "{\"name\": \"Jessica\"}"
+                   :object-type 'plist)
+#+END_SRC
+
+#+RESULTS:
+: (:name "Jessica")
+
+* json-read
+
+#+BEGIN_SRC elisp
+(with-current-buffer (url-retrieve-synchronously "https://api.github.com/status")
+  (goto-char url-http-end-of-headers)
+  (json-read))
+#+END_SRC
+
+#+RESULTS:
+: ((message . "GitHub lives! (2018-11-08 07:42:52 -0800) (1)"))
+
+* json-read-file
+
+#+BEGIN_SRC elisp
+(write-region "{\"name\": \"Jessica\"}" nil "/tmp/tmp.json")
+(json-read-file "/tmp/tmp.json")
+#+END_SRC
+
+#+RESULTS:
+: ((name . "Jessica"))
+
+* json-read-from-string
+
+#+BEGIN_SRC elisp
+(json-read-from-string "{\"name\": \"Tom\", \"age\": 13}")
+#+END_SRC
+
+#+RESULTS:
+: ((name . "Tom")
+:  (age . 13))
+
+* json-serialize
+
+#+BEGIN_SRC elisp
+(json-serialize '(:id 42 :message "hello world"))
+#+END_SRC
+
+#+RESULTS:
+: "{\"id\":42,\"message\":\"hello world\"}"
+
 * length
 
 #+BEGIN_SRC elisp
