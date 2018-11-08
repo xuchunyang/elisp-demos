@@ -87,6 +87,16 @@
 #+RESULTS:
 : nil
 
+* buffer-hash
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (buffer-hash))
+#+END_SRC
+
+#+RESULTS:
+: "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+
 * buffer-size
 
 #+BEGIN_SRC elisp
@@ -731,6 +741,15 @@
 #+RESULTS:
 : "abc, def, ghi"
 
+* md5
+
+#+BEGIN_SRC elisp
+(md5 "hello")
+#+END_SRC
+
+#+RESULTS:
+: "5d41402abc4b2a76b9719d911017c592"
+
 * nreverse
 
 #+BEGIN_SRC elisp
@@ -890,6 +909,24 @@
 
 #+RESULTS:
 : 1
+
+* secure-hash
+
+#+BEGIN_SRC elisp
+(secure-hash 'md5 "hello")
+#+END_SRC
+
+#+RESULTS:
+: "5d41402abc4b2a76b9719d911017c592"
+
+* secure-hash-algorithms
+
+#+BEGIN_SRC elisp
+(secure-hash-algorithms)
+#+END_SRC
+
+#+RESULTS:
+: (md5 sha1 sha224 sha256 sha384 sha512)
 
 * seq-filter
 
