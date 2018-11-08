@@ -35,6 +35,48 @@
 #+RESULTS:
 : nil
 
+* base64-decode-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "aGVsbG8=")
+  (base64-decode-region (point-min) (point-max))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "hello"
+
+* base64-decode-string
+
+#+BEGIN_SRC elisp
+(base64-decode-string "aGVsbG8=")
+#+END_SRC
+
+#+RESULTS:
+: "hello"
+
+* base64-encode-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (base64-encode-region (point-min) (point-max))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "aGVsbG8="
+
+* base64-encode-string
+
+#+BEGIN_SRC elisp
+(base64-encode-string "hello")
+#+END_SRC
+
+#+RESULTS:
+: "aGVsbG8="
+
 * buffer-end
 
 #+BEGIN_SRC elisp
@@ -472,6 +514,34 @@
 
 #+RESULTS:
 : (:id 1234 :url "https://example.com")
+
+* libxml-available-p
+
+#+BEGIN_SRC elisp
+(libxml-available-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* libxml-parse-html-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "<html><body><h1>Heading 1</h1><p>...</p></body></html>")
+  (libxml-parse-html-region (point-min) (point-max)))
+#+END_SRC
+
+#+RESULTS:
+: (html nil
+:       (body nil
+:             (h1 nil "Heading 1")
+:             (p nil "...")))
+
+#+BEGIN_SRC elisp :results silent
+(with-current-buffer (url-retrieve-synchronously "http://example.com")
+  (libxml-parse-html-region url-http-end-of-headers (point-max)))
+#+END_SRC
 
 * listp
 
