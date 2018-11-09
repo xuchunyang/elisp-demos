@@ -753,6 +753,15 @@
 #+RESULTS:
 : "~/.emacs.d/custom.el"
 
+* make-record
+
+#+BEGIN_SRC elisp
+(make-record 'foo 9 'Z)
+#+END_SRC
+
+#+RESULTS:
+: #s(foo Z Z Z Z Z Z Z Z Z)
+
 * make-string
 
 #+BEGIN_SRC elisp
@@ -761,6 +770,15 @@
 
 #+RESULTS:
 : "xxxxx"
+
+* make-vector
+
+#+BEGIN_SRC elisp
+(make-vector 3 'Z)
+#+END_SRC
+
+#+RESULTS:
+: [Z Z Z]
 
 * map-apply
 
@@ -1138,6 +1156,16 @@
 #+RESULTS:
 : (3 1 2)
 
+* random
+
+#+BEGIN_SRC elisp
+;; [0, 3)
+(random 3)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
 * re-search-forward
 
 #+BEGIN_SRC elisp
@@ -1154,6 +1182,26 @@
 
 #+RESULTS:
 : ("Intro" "Usage" "License")
+
+* record
+
+#+BEGIN_SRC elisp
+(record 'foo 23 [bar baz] "rats")
+#+END_SRC
+
+#+RESULTS:
+: #s(foo 23
+:        [bar baz]
+:        "rats")
+
+* recordp
+
+#+BEGIN_SRC elisp
+(recordp #s(a))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * replace-match
 
@@ -1271,6 +1319,17 @@
 
 #+RESULTS:
 : (1 3 4 5)
+
+* sequencep
+
+#+BEGIN_SRC elisp
+(and (sequencep '(1 2 3))
+     (sequencep [1 2 3])
+     (sequencep "123"))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * setf
 
@@ -1508,6 +1567,15 @@
 #+RESULTS:
 : "Elapsed time: 1.006051s"
 
+* type-of
+
+#+BEGIN_SRC elisp
+(type-of 42)
+#+END_SRC
+
+#+RESULTS:
+: integer
+
 * url-hexify-string
 
 #+BEGIN_SRC elisp
@@ -1552,6 +1620,33 @@
 
 #+RESULTS:
 : "hello world"
+
+* vconcat
+
+#+BEGIN_SRC elisp
+(vconcat '(a b) "cd" [e f])
+#+END_SRC
+
+#+RESULTS:
+: [a b 99 100 e f]
+
+* vector
+
+#+BEGIN_SRC elisp
+(vector 1 2 3)
+#+END_SRC
+
+#+RESULTS:
+: [1 2 3]
+
+* vectorp
+
+#+BEGIN_SRC elisp
+(vectorp [1 2 3])
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * while
 
