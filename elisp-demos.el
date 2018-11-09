@@ -41,7 +41,9 @@
   (with-temp-buffer
     (insert-file-contents elisp-demos--elisp-demos.org)
     (goto-char (point-min))
-    (when (re-search-forward (format "^\\* %s$" (regexp-quote (symbol-name symbol))) nil t)
+    (when (re-search-forward
+           (format "^\\* %s$" (regexp-quote (symbol-name symbol)))
+           nil t)
       (let (beg end)
         (forward-line 1)
         (setq beg (point))
@@ -116,7 +118,7 @@
                                      (or (functionp sym)
                                          (special-form-p sym)
                                          (macrop sym))))))
-  ;; Try to reuse existing window 
+  ;; Try to reuse existing window
   (if-let ((buffer (get-file-buffer elisp-demos--elisp-demos.org))
            (window (get-buffer-window buffer)))
       (select-window window)
@@ -201,8 +203,9 @@
   :global t
   :require 'elisp-demos
   (if elisp-demos-help-mode
-      (progn (advice-add 'describe-function :after #'elisp-demos--describe-function)
-             (advice-add 'helpful-update :after #'elisp-demos--helpful-update))
+      (progn
+        (advice-add 'describe-function :after #'elisp-demos--describe-function)
+        (advice-add 'helpful-update :after #'elisp-demos--helpful-update))
     (advice-remove 'describe-function #'elisp-demos--describe-function)
     (advice-remove 'helpful-update #'elisp-demos--helpful-update)))
 
@@ -231,7 +234,8 @@
         (setq title (string-trim title))
         (setq body (string-trim body))
         (with-current-buffer output-buffer
-          (insert (json-encode-string title) ": " (json-encode-string body) ",\n")))
+          (insert
+           (json-encode-string title) ": " (json-encode-string body) ",\n")))
       (with-current-buffer output-buffer
         (delete-char -2)
         (goto-char (point-min)) (insert "{\n")
