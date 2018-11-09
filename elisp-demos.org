@@ -12,6 +12,19 @@
 (org-sort-entries nil ?a)
 #+END_SRC
 
+* add-to-list
+
+#+BEGIN_SRC elisp
+(let ((l '(1 2)))
+  (add-to-list 'l 1)
+  (add-to-list 'l 2)
+  (add-to-list 'l 3)
+  l)
+#+END_SRC
+
+#+RESULTS:
+: (3 1 2)
+
 * atom
 
 #+BEGIN_SRC elisp
@@ -599,6 +612,25 @@
 #+RESULTS:
 : "{\"id\":42,\"message\":\"hello world\"}"
 
+* lax-plist-get
+
+#+BEGIN_SRC elisp
+(lax-plist-get '("foo" 1 "bar" 2) "bar")
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* lax-plist-put
+
+#+BEGIN_SRC elisp
+(let ((plist (list "a" 1 "b" 2)))
+  (setq plist (lax-plist-put plist "b" 200)))
+#+END_SRC
+
+#+RESULTS:
+: ("a" 1 "b" 200)
+
 * length
 
 #+BEGIN_SRC elisp
@@ -994,6 +1026,41 @@
 #+RESULTS:
 : (10 9 8 7 6 5 4 3 2 1)
 
+* plist-get
+
+#+BEGIN_SRC elisp
+(plist-get '(:a 1 :b 2 :c 3) :b)
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* plist-member
+
+#+BEGIN_SRC elisp
+(plist-member '(:x nil) :x)
+#+END_SRC
+
+#+RESULTS:
+: (:x nil)
+
+#+BEGIN_SRC elisp
+(plist-member '(:x nil) :y)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* plist-put
+
+#+BEGIN_SRC elisp
+(let ((plist (list :a 1 :b 2)))
+  (setq plist (plist-put plist :b 200)))
+#+END_SRC
+
+#+RESULTS:
+: (:a 1 :b 200)
+
 * point
 
 #+BEGIN_SRC elisp
@@ -1039,6 +1106,17 @@
 #+RESULTS:
 : #("Hello" 0 5
 :   (face italic))
+
+* push
+
+#+BEGIN_SRC elisp
+(let ((l '(1 2)))
+  (push 3 l)
+  l)
+#+END_SRC
+
+#+RESULTS:
+: (3 1 2)
 
 * re-search-forward
 
