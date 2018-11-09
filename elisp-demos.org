@@ -462,6 +462,26 @@
 #+RESULTS:
 : ""
 
+* eval-when-compile
+
+#+BEGIN_SRC elisp :eval no
+;;; foo.el
+
+(eval-when-compile
+  (require 'cl-lib))
+
+(defun foo ()
+  (cl-incf (point)))
+
+;;; foo.el ends here
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent
+(message "1 Day has %d seconds."
+         (eval-when-compile
+           (* 24 60 60)))
+#+END_SRC
+
 * file-name-base
 
 #+BEGIN_SRC elisp
