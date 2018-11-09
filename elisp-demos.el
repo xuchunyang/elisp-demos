@@ -117,8 +117,8 @@
                                          (special-form-p sym)
                                          (macrop sym))))))
   ;; Try to reuse existing window 
-  (if-let* ((buffer (get-file-buffer elisp-demos--elisp-demos.org))
-            (window (get-buffer-window buffer)))
+  (if-let ((buffer (get-file-buffer elisp-demos--elisp-demos.org))
+           (window (get-buffer-window buffer)))
       (select-window window)
     (find-file elisp-demos--elisp-demos.org))
   (goto-char (point-min))
@@ -157,8 +157,8 @@
     map))
 
 (defun elisp-demos--describe-function (function)
-  (when-let* ((src (elisp-demos--search function))
-              (buf (get-buffer "*Help*")))
+  (when-let ((src (elisp-demos--search function))
+             (buf (get-buffer "*Help*")))
     (with-current-buffer buf
       (save-excursion
         (goto-char (point-max))
@@ -181,7 +181,7 @@
 (declare-function helpful--heading "helpful")
 
 (defun elisp-demos--helpful-update ()
-  (when-let* ((src (elisp-demos--search helpful--sym)))
+  (when-let ((src (elisp-demos--search helpful--sym)))
     (save-excursion
       (goto-char (point-min))
       (when (re-search-forward "^References$")
