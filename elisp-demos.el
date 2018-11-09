@@ -28,7 +28,7 @@
 ;;; Code:
 
 (require 'subr-x)
-(require 'cl-lib)
+(eval-when-compile (require 'cl-lib))
 
 (defconst elisp-demos--load-dir (file-name-directory
                                  (or load-file-name buffer-file-name)))
