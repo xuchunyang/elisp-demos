@@ -25,6 +25,24 @@
 #+RESULTS:
 : (3 1 2)
 
+* alist-get
+
+#+BEGIN_SRC elisp
+(alist-get 'y '((x . 1) (y . 2)))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+#+BEGIN_SRC elisp
+;; TESTFN was added since 26.1
+(cl-assert (version<= "26.1" emacs-version))
+(alist-get "x" '(("x" . 1) ("y" . 2)) nil nil #'equal)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
 * and
 
 #+BEGIN_SRC elisp
@@ -34,6 +52,41 @@
 
 #+RESULTS:
 : (3 nil)
+
+* assoc
+
+#+BEGIN_SRC elisp
+(assoc "two" '(("one" 1)
+               ("two" 2)
+               ("three" 3)))
+#+END_SRC
+
+#+RESULTS:
+: ("two" 2)
+
+* assoc-default
+
+#+BEGIN_SRC elisp
+(list (assoc-default 'x '(x (y 2)) #'eq 1)
+      (assoc-default 'y '(x (y 2)) #'eq 1)
+      (assoc-default 'z '(x (y 2)) #'eq 1))
+#+END_SRC
+
+#+RESULTS:
+: (1
+:  (2)
+:  nil)
+
+* assq
+
+#+BEGIN_SRC elisp
+(assq 'y '((x . 1)
+           (y . 2)
+           (z . 3)))
+#+END_SRC
+
+#+RESULTS:
+: (y . 2)
 
 * atom
 
@@ -1485,6 +1538,26 @@
 
 #+RESULTS:
 : 1
+
+* rassoc
+
+#+BEGIN_SRC elisp
+(rassoc '(2) '(("one" 1)
+               ("two" 2)
+               ("three" 3)))
+#+END_SRC
+
+#+RESULTS:
+: ("two" 2)
+
+* rassq
+
+#+BEGIN_SRC elisp
+(rassq 'tyke '((tom . jerry) (spike . tyke)))
+#+END_SRC
+
+#+RESULTS:
+: (spike . tyke)
 
 * re-search-forward
 
