@@ -25,6 +25,16 @@
 #+RESULTS:
 : (3 1 2)
 
+* and
+
+#+BEGIN_SRC elisp
+(list (and 1 2 3)
+      (and 1 nil 3))
+#+END_SRC
+
+#+RESULTS:
+: (3 nil)
+
 * atom
 
 #+BEGIN_SRC elisp
@@ -633,6 +643,15 @@
 #+RESULTS:
 : nil
 
+* if
+
+#+BEGIN_SRC elisp
+(if nil 1 2)
+#+END_SRC
+
+#+RESULTS:
+: 2
+
 * insert
 
 #+BEGIN_SRC elisp
@@ -1167,6 +1186,16 @@
 #+RESULTS:
 : "Hi, Tyke!"
 
+* not
+
+#+BEGIN_SRC elisp
+(list (not (> 1 2))
+      (not (< 1 2)))
+#+END_SRC
+
+#+RESULTS:
+: (t nil)
+
 * nreverse
 
 #+BEGIN_SRC elisp
@@ -1216,6 +1245,15 @@
 
 #+RESULTS:
 : (10 9 8 7 6 5 4 3 2 1)
+
+* or
+
+#+BEGIN_SRC elisp
+(or nil nil 1 2)
+#+END_SRC
+
+#+RESULTS:
+: 1
 
 * plist-get
 
@@ -1287,6 +1325,33 @@
 
 #+RESULTS:
 : ("1" "2" "3")
+
+* prog1
+
+#+BEGIN_SRC elisp
+(prog1 1 2 3)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* prog2
+
+#+BEGIN_SRC elisp
+(progn 1 2 3)
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* progn
+
+#+BEGIN_SRC elisp
+(progn 1 2 3)
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * propertize
 
@@ -1830,6 +1895,15 @@
 #+RESULTS:
 : integer
 
+* unless
+
+#+BEGIN_SRC elisp
+(unless nil 123)
+#+END_SRC
+
+#+RESULTS:
+: 123
+
 * url-hexify-string
 
 #+BEGIN_SRC elisp
@@ -1902,19 +1976,33 @@
 #+RESULTS:
 : t
 
-* while
+* when
 
 #+BEGIN_SRC elisp
-(let ((nums '())
-      (i 0))
-  (while (< i 10)
-    (push i nums)
-    (setq i (1+ i)))
-  (nreverse nums))
+(when t 123)
 #+END_SRC
 
 #+RESULTS:
-: (0 1 2 3 4 5 6 7 8 9)
+: 123
+
+#+BEGIN_SRC elisp
+(when nil 123
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* while
+
+#+BEGIN_SRC elisp :results output
+(let ((list '(1 2 3 4)))
+  (while list
+    (princ (car list))
+    (setq list (cdr list))))
+#+END_SRC
+
+#+RESULTS:
+: "1234"
 
 * with-current-buffer
 
