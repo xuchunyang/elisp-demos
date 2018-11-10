@@ -300,6 +300,19 @@
 :  (4 5)
 :  (5))
 
+* cl-psetq
+
+#+BEGIN_SRC elisp
+(let ((x 1)
+      (y 2))
+  (cl-psetq x y
+            y x)
+  (list x y))
+#+END_SRC
+
+#+RESULTS:
+: (2 1)
+
 * cl-remove-if
 
 #+BEGIN_SRC elisp
@@ -1528,6 +1541,36 @@
 #+RESULTS:
 : (97 98 99)
 
+* subst-char-in-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello world")
+  (subst-char-in-region (point-min) (point-max) ?o ?O)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "hellO wOrld"
+
+* subst-char-in-string
+
+#+BEGIN_SRC elisp
+(subst-char-in-string ?o ?O "hello world")
+#+END_SRC
+
+#+RESULTS:
+: "hellO wOrld"
+
+#+BEGIN_SRC elisp
+(let ((string "hello world"))
+  (subst-char-in-string ?o ?O string 'inplace)
+  string)
+#+END_SRC
+
+#+RESULTS:
+: "hellO wOrld"
+
 * substring
 
 #+BEGIN_SRC elisp
@@ -1566,6 +1609,28 @@
 
 #+RESULTS:
 : "Elapsed time: 1.006051s"
+
+* translate-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "Hello World")
+  ;; Reverse case, a -> A and A -> a
+  (translate-region
+   (point-min)
+   (point-max)
+   (apply #'string
+          (mapcar (lambda (char)
+                    (cond ((<= ?a char ?z) (- char 32))
+                          ((<= ?A char ?Z) (+ char 32))
+                          (t char)))
+                  ;; ASCII code range
+                  (number-sequence 0 255))))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "hELLO wORLD"
 
 * type-of
 
