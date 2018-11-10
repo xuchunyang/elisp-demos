@@ -1243,7 +1243,7 @@
 #+RESULTS:
 : "foo, bar, baz"
 
-#+BEGIN_SRC elisp :lexical t
+#+BEGIN_SRC elisp
 (replace-regexp-in-string
  "[0-9][0-9]\\'"
  (lambda (substring)
