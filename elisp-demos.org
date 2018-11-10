@@ -1632,6 +1632,28 @@
 #+RESULTS:
 : "hELLO wORLD"
 
+* transpose-regions
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (let (beg1 end1 beg2 end2)
+    (insert "hello" ?\n
+            "world" ?\n)
+    (goto-char (point-min))
+    (setq beg1 (line-beginning-position)
+          end1 (line-end-position))
+
+    (forward-line 1)
+    (setq beg2 (line-beginning-position)
+          end2 (line-end-position))
+    (transpose-regions beg1 end1
+                       beg2 end2)
+    (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: "world\nhello\n"
+
 * type-of
 
 #+BEGIN_SRC elisp
