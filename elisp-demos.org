@@ -120,6 +120,19 @@
 #+RESULTS:
 : "da39a3ee5e6b4b0d3255bfef95601890afd80709"
 
+* buffer-narrowed-p
+
+#+BEGIN_SRC elisp
+(list (buffer-narrowed-p)
+      (with-temp-buffer
+        (insert "hello")
+        (narrow-to-region 1 2)
+        (buffer-narrowed-p)))
+#+END_SRC
+
+#+RESULTS:
+: (nil t)
+
 * buffer-size
 
 #+BEGIN_SRC elisp
@@ -191,6 +204,17 @@
 
 #+RESULTS:
 : nil
+
+* catch
+
+#+BEGIN_SRC elisp
+(catch 'break
+  (while t
+    (throw 'break 42)))
+#+END_SRC
+
+#+RESULTS:
+: 42
 
 * cdr
 
@@ -1239,6 +1263,18 @@
 #+RESULTS:
 : "Hi, Tyke!"
 
+* narrow-to-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello world")
+  (narrow-to-region 1 6)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "hello"
+
 * not
 
 #+BEGIN_SRC elisp
@@ -1583,6 +1619,23 @@
 :  (0 5)
 :  (6 11)
 :  (0 5))
+
+* save-restriction
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello world")
+  (narrow-to-region 1 6)
+  (list (buffer-narrowed-p)
+        (save-restriction
+          (widen)
+          (buffer-narrowed-p))
+        (buffer-narrowed-p)))
+
+#+END_SRC
+
+#+RESULTS:
+: (t nil t)
 
 * secure-hash
 
@@ -2067,6 +2120,22 @@
 
 #+RESULTS:
 : (4 3 2 1)
+
+* widen
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello world")
+  (narrow-to-region 1 6)
+  `(:narrowed
+    ,(buffer-string)
+    ,@(widen)
+    :widened
+    ,(buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: (:narrowed "hello" :widened "hello world")
 
 * with-current-buffer
 
