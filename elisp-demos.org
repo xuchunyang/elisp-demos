@@ -2056,15 +2056,17 @@
 
 * while
 
-#+BEGIN_SRC elisp :results output
-(let ((list '(1 2 3 4)))
+#+BEGIN_SRC elisp
+(let ((list '(1 2 3 4))
+      result)
   (while list
-    (princ (car list))
-    (setq list (cdr list))))
+    (push (car list) result)
+    (setq list (cdr list)))
+  result)
 #+END_SRC
 
 #+RESULTS:
-: "1234"
+: (4 3 2 1)
 
 * with-current-buffer
 
