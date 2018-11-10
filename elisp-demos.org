@@ -565,6 +565,17 @@
 #+RESULTS:
 : "init.el"
 
+* gensym
+
+#+BEGIN_SRC elisp
+(list gensym-counter
+      (gensym)
+      gensym-counter)
+#+END_SRC
+
+#+RESULTS:
+: (11 g11 12)
+
 * gethash
 
 #+BEGIN_SRC elisp
@@ -676,6 +687,25 @@
 : (:return-value
 :  ("/tmp/tmp.txt" 12)
 :  :file-contents "Hello World\n")
+
+* intern
+
+#+BEGIN_SRC elisp
+(intern "foo")
+#+END_SRC
+
+#+RESULTS:
+: foo
+
+* intern-soft
+
+#+BEGIN_SRC elisp
+(list (intern-soft "abcde")
+      (intern-soft "intern-soft"))
+#+END_SRC
+
+#+RESULTS:
+: (nil intern-soft)
 
 * json-encode
 
@@ -920,6 +950,15 @@
 #+RESULTS:
 : "xxxxx"
 
+* make-symbol
+
+#+BEGIN_SRC elisp
+(make-symbol "foo")
+#+END_SRC
+
+#+RESULTS:
+: foo
+
 * make-vector
 
 #+BEGIN_SRC elisp
@@ -1076,6 +1115,20 @@
 
 #+RESULTS:
 : (1 2)
+
+* mapatoms
+
+#+BEGIN_SRC elisp
+(let (commands)
+  (mapatoms
+   (lambda (symbol)
+     (when (commandp symbol)
+       (push symbol commands))))
+  (message "There are %d Emacs commands" (length commands)))
+#+END_SRC
+
+#+RESULTS:
+: "There are 7101 Emacs commands"
 
 * mapc
 
@@ -1829,6 +1882,15 @@
 
 #+RESULTS:
 : "hello"
+
+* symbol-name
+
+#+BEGIN_SRC elisp
+(symbol-name 'foo)
+#+END_SRC
+
+#+RESULTS:
+: "foo"
 
 * time-subtract
 
