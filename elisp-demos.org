@@ -333,6 +333,20 @@
 #+RESULTS:
 : (0 0 0 0 0 0)
 
+* clrhash
+
+#+BEGIN_SRC elisp
+(let ((table (make-hash-table)))
+  (puthash 'x 1 table)
+  (puthash 'y 2 table)
+  (clrhash table)
+  table)
+#+END_SRC
+
+#+RESULTS:
+: #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
+: ())
+
 * concat
 
 #+BEGIN_SRC elisp
@@ -376,6 +390,16 @@
 
 #+RESULTS:
 : nil
+
+* copy-hash-table
+
+#+BEGIN_SRC elisp
+(copy-hash-table #s(hash-table data (x 1 y 2)))
+#+END_SRC
+
+#+RESULTS:
+: #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
+: (x 1 y 2))
 
 * copy-sequence
 
@@ -531,11 +555,83 @@
 #+RESULTS:
 : "init.el"
 
+* gethash
+
+#+BEGIN_SRC elisp
+(gethash 'x #s(hash-table data (x 1 y 2)))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
 * goto-char
 
 #+BEGIN_SRC elisp :results silent
 (goto-char (point-min))
 #+END_SRC
+
+* hash-table-count
+
+#+BEGIN_SRC elisp
+(hash-table-count #s(hash-table data (x 1 y 2 z 3)))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* hash-table-p
+
+#+BEGIN_SRC elisp
+(hash-table-p #s(hash-table))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* hash-table-rehash-size
+
+#+BEGIN_SRC elisp
+(hash-table-rehash-size #s(hash-table))
+#+END_SRC
+
+#+RESULTS:
+: 1.5
+
+* hash-table-rehash-threshold
+
+#+BEGIN_SRC elisp
+(hash-table-rehash-threshold #s(hash-table))
+#+END_SRC
+
+#+RESULTS:
+: 0.8125
+
+* hash-table-size
+
+#+BEGIN_SRC elisp
+(hash-table-size #s(hash-table))
+#+END_SRC
+
+#+RESULTS:
+: 65
+
+* hash-table-test
+
+#+BEGIN_SRC elisp
+(hash-table-test #s(hash-table test eq))
+#+END_SRC
+
+#+RESULTS:
+: eq
+
+* hash-table-weakness
+
+#+BEGIN_SRC elisp
+(hash-table-weakness #s(hash-table))
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * insert
 
@@ -644,6 +740,17 @@
 
 #+RESULTS:
 : "{\"id\":42,\"message\":\"hello world\"}"
+
+* lambda
+
+#+BEGIN_SRC elisp
+(lambda (x y) (+ x y))
+#+END_SRC
+
+#+RESULTS:
+: (lambda
+:   (x y)
+:   (+ x y))
 
 * lax-plist-get
 
@@ -765,6 +872,16 @@
 
 #+RESULTS:
 : "~/.emacs.d/custom.el"
+
+* make-hash-table
+
+#+BEGIN_SRC elisp
+(make-hash-table)
+#+END_SRC
+
+#+RESULTS:
+: #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
+: ())
 
 * make-record
 
@@ -941,6 +1058,15 @@
 #+RESULTS:
 : (1 2)
 
+* mapc
+
+#+BEGIN_SRC elisp :results output
+(mapc #'princ '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: "123"
+
 * mapcan
 
 #+BEGIN_SRC elisp
@@ -978,6 +1104,20 @@
 
 #+RESULTS:
 : "abc, def, ghi"
+
+* maphash
+
+#+BEGIN_SRC elisp
+(let (alist)
+  (maphash (lambda (key val)
+             (push (cons key val) alist))
+           #s(hash-table data (x 1 y 2)))
+  (nreverse alist))
+#+END_SRC
+
+#+RESULTS:
+: ((x . 1)
+:  (y . 2))
 
 * match-string
 
@@ -1169,6 +1309,19 @@
 #+RESULTS:
 : (3 1 2)
 
+* puthash
+
+#+BEGIN_SRC elisp
+(let ((table (make-hash-table)))
+  (puthash 'x 1 table)
+  (puthash 'y 2 table)
+  table)
+#+END_SRC
+
+#+RESULTS:
+: #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
+: (x 1 y 2))
+
 * random
 
 #+BEGIN_SRC elisp
@@ -1215,6 +1368,20 @@
 
 #+RESULTS:
 : t
+
+* remhash
+
+#+BEGIN_SRC elisp
+(let ((table (make-hash-table)))
+  (puthash 'x 1 table)
+  (puthash 'y 2 table)
+  (remhash 'x table)
+  table)
+#+END_SRC
+
+#+RESULTS:
+: #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
+: ( y 2))
 
 * replace-match
 
