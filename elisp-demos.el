@@ -4,7 +4,7 @@
 
 ;; Author: Xu Chunyang <mail@xuchunyang.me>
 ;; Homepage: https://github.com/xuchunyang/elisp-demos
-;; Keywords: help, lisp
+;; Keywords: elisp
 ;; Version: 0.1
 ;; Package-Requires: ((emacs "25.1"))
 
