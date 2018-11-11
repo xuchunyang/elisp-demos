@@ -12,6 +12,149 @@
 (org-sort-entries nil ?a)
 #+END_SRC
 
+* %
+
+#+BEGIN_SRC elisp
+(% 9 4)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* *
+
+#+BEGIN_SRC elisp
+(* 2 3)
+#+END_SRC
+
+#+RESULTS:
+: 6
+
+* +
+
+#+BEGIN_SRC elisp
+(+ 1 2 3)
+#+END_SRC
+
+#+RESULTS:
+: 6
+
+* -
+
+#+BEGIN_SRC elisp
+(- 3 1)
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* /
+
+#+BEGIN_SRC elisp
+(/ 6 2)
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+#+BEGIN_SRC elisp
+(list (/ 3 2)
+      (/ 3 2.0))
+#+END_SRC
+
+#+RESULTS:
+: (1 1.5)
+
+* /=
+
+#+BEGIN_SRC elisp
+(/= 2 3)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* 1+
+
+#+BEGIN_SRC elisp
+(1+ 2)
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* 1-
+
+#+BEGIN_SRC elisp
+(1- 2)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* <
+
+#+BEGIN_SRC elisp
+(< 2 3)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* <=
+
+#+BEGIN_SRC elisp
+(<= 2 2.0)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* =
+
+#+BEGIN_SRC elisp
+(= 1 1.0)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* >
+
+#+BEGIN_SRC elisp
+(> 3 2)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* >=
+
+#+BEGIN_SRC elisp
+(>= 2 2.0)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* abs
+
+#+BEGIN_SRC elisp
+(abs -4)
+#+END_SRC
+
+#+RESULTS:
+: 4
+
+* acos
+
+#+BEGIN_SRC elisp
+(acos 0)
+#+END_SRC
+
+#+RESULTS:
+: 1.5707963267948966
+
 * add-hook
 
 #+BEGIN_SRC elisp :eval no
@@ -82,6 +225,15 @@
 #+RESULTS:
 : 5050
 
+* asin
+
+#+BEGIN_SRC elisp
+(asin 1)
+#+END_SRC
+
+#+RESULTS:
+: 1.5707963267948966
+
 * assoc
 
 #+BEGIN_SRC elisp
@@ -116,6 +268,15 @@
 
 #+RESULTS:
 : (y . 2)
+
+* atan
+
+#+BEGIN_SRC elisp
+(atan 1)
+#+END_SRC
+
+#+RESULTS:
+: 0.7853981633974483
 
 * atom
 
@@ -334,6 +495,16 @@
 
 #+RESULTS:
 : nil
+
+* ceiling
+
+#+BEGIN_SRC elisp
+;; -> +∞
+(ceiling 1.2)
+#+END_SRC
+
+#+RESULTS:
+: 2
 
 * char-before
 
@@ -611,6 +782,15 @@
 #+RESULTS:
 : nil
 
+* cos
+
+#+BEGIN_SRC elisp
+(cos 0)
+#+END_SRC
+
+#+RESULTS:
+: 1.0
+
 * declare-function
 
 #+BEGIN_SRC elisp
@@ -712,6 +892,24 @@
 #+RESULTS:
 : "3"
 
+* eql
+
+#+BEGIN_SRC elisp
+(eql 'foo 'foo)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+#+BEGIN_SRC elisp
+(list (eql 1.0 1.0)
+      (eql 1 1)
+      (eql 1.0 1))
+#+END_SRC
+
+#+RESULTS:
+: (t t nil)
+
 * erase-buffer
 
 #+BEGIN_SRC elisp
@@ -743,6 +941,42 @@
          (eval-when-compile
            (* 24 60 60)))
 #+END_SRC
+
+* exp
+
+#+BEGIN_SRC elisp
+(exp 1)
+#+END_SRC
+
+#+RESULTS:
+: 2.718281828459045
+
+* expt
+
+#+BEGIN_SRC elisp
+(expt 2 10)
+#+END_SRC
+
+#+RESULTS:
+: 1024
+
+* fceiling
+
+#+BEGIN_SRC elisp
+(fceiling 1.2)
+#+END_SRC
+
+#+RESULTS:
+: 2.0
+
+* ffloor
+
+#+BEGIN_SRC elisp
+(ffloor 1.2)
+#+END_SRC
+
+#+RESULTS:
+: 1.0
 
 * file-exists-p
 
@@ -798,6 +1032,26 @@
 #+RESULTS:
 : #<buffer init.el>
 
+* float
+
+#+BEGIN_SRC elisp
+;; -> 0
+(float 1)
+#+END_SRC
+
+#+RESULTS:
+: 1.0
+
+* floor
+
+#+BEGIN_SRC elisp
+;; -> -∞
+(floor 1.2)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
 * format
 
 #+BEGIN_SRC elisp
@@ -814,6 +1068,24 @@
 
 #+RESULTS:
 : "65 (#o101, #x41, ?A)"
+
+* fround
+
+#+BEGIN_SRC elisp
+(fround 1.5)
+#+END_SRC
+
+#+RESULTS:
+: 2.0
+
+* ftruncate
+
+#+BEGIN_SRC elisp
+(ftruncate 1.2)
+#+END_SRC
+
+#+RESULTS:
+: 1.0
 
 * gensym
 
@@ -1217,6 +1489,25 @@
 #+RESULTS:
 : "~/.emacs.d/custom.el"
 
+* log
+
+#+BEGIN_SRC elisp
+(log 8 2)
+#+END_SRC
+
+#+RESULTS:
+: 3.0
+
+* lsh
+
+#+BEGIN_SRC elisp
+(cl-assert #b1010 (lsh #b101 1))
+(cl-assert #b10 (lsh #b101 -1))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * make-hash-table
 
 #+BEGIN_SRC elisp
@@ -1525,6 +1816,15 @@
 :    (face bold))
 :  "hello")
 
+* max
+
+#+BEGIN_SRC elisp
+(max 1 3 2.5)
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * md5
 
 #+BEGIN_SRC elisp
@@ -1542,6 +1842,24 @@
 
 #+RESULTS:
 : "Hi, Tyke!"
+
+* min
+
+#+BEGIN_SRC elisp
+(min -4 1)
+#+END_SRC
+
+#+RESULTS:
+: -4
+
+* mod
+
+#+BEGIN_SRC elisp
+(mod 5.5 2.5)
+#+END_SRC
+
+#+RESULTS:
+: 0.5
 
 * narrow-to-region
 
@@ -1928,6 +2246,16 @@
 : ((1 2 3)
 :  (3 2 1))
 
+* round
+
+#+BEGIN_SRC elisp
+(list (round 1.2)
+      (round 1.5))
+#+END_SRC
+
+#+RESULTS:
+: (1 2)
+
 * save-excursion
 
 #+BEGIN_SRC elisp
@@ -2075,6 +2403,15 @@
 #+RESULTS:
 : "hello world\n"
 
+* sin
+
+#+BEGIN_SRC elisp
+(sin (/ float-pi 2))
+#+END_SRC
+
+#+RESULTS:
+: 1.0
+
 * sort
 
 #+BEGIN_SRC elisp
@@ -2137,6 +2474,15 @@
 
 #+RESULTS:
 : ("The" "quick" "brown" "fox.")
+
+* sqrt
+
+#+BEGIN_SRC elisp
+(sqrt 4)
+#+END_SRC
+
+#+RESULTS:
+: 2.0
 
 * start-process
 
@@ -2332,6 +2678,15 @@
 #+RESULTS:
 : "foo"
 
+* tan
+
+#+BEGIN_SRC elisp
+(tan (/ float-pi 4))
+#+END_SRC
+
+#+RESULTS:
+: 0.9999999999999999
+
 * thing-at-point
 
 #+BEGIN_SRC elisp :eval no
@@ -2393,6 +2748,15 @@
 
 #+RESULTS:
 : "world\nhello\n"
+
+* truncate
+
+#+BEGIN_SRC elisp
+(truncate 1.2)
+#+END_SRC
+
+#+RESULTS:
+: 1
 
 * type-of
 
