@@ -1127,6 +1127,15 @@
 #+RESULTS:
 : 1.0
 
+* funcall
+
+#+BEGIN_SRC elisp
+(funcall (intern "+") 1 2 3)
+#+END_SRC
+
+#+RESULTS:
+: 6
+
 * gensym
 
 #+BEGIN_SRC elisp
