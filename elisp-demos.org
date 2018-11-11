@@ -242,6 +242,15 @@
 #+RESULTS:
 : (:exit-status 0 :output "       1       1       6\n")
 
+* capitalize
+
+#+BEGIN_SRC elisp
+(capitalize "THE cat in the hat")
+#+END_SRC
+
+#+RESULTS:
+: "The Cat In The Hat"
+
 * car
 
 #+BEGIN_SRC elisp
@@ -284,6 +293,26 @@
 
 #+RESULTS:
 : nil
+
+* char-equal
+
+#+BEGIN_SRC elisp
+(list (char-equal ?x ?X)
+      (let ((case-fold-search nil))
+        (char-equal ?x ?X)))
+#+END_SRC
+
+#+RESULTS:
+: (t nil)
+
+* char-to-string
+
+#+BEGIN_SRC elisp
+(char-to-string ?A)
+#+END_SRC
+
+#+RESULTS:
+: "A"
 
 * cl-assert
 
@@ -546,6 +575,15 @@
 #+RESULTS:
 : "01234"
 
+* downcase
+
+#+BEGIN_SRC elisp
+(downcase "Hello World")
+#+END_SRC
+
+#+RESULTS:
+: "hello world"
+
 * elt
 
 #+BEGIN_SRC elisp
@@ -641,6 +679,23 @@
 
 #+RESULTS:
 : "init.el"
+
+* format
+
+#+BEGIN_SRC elisp
+(format "Hello, %s!" "World")
+#+END_SRC
+
+#+RESULTS:
+: "Hello, World!"
+
+#+BEGIN_SRC elisp
+(apply #'format "%d (#o%o, #x%x, ?%c)"
+        (make-list 4 ?A))
+#+END_SRC
+
+#+RESULTS:
+: "65 (#o101, #x41, ?A)"
 
 * gensym
 
@@ -1388,6 +1443,15 @@
 #+RESULTS:
 : (10 9 8 7 6 5 4 3 2 1)
 
+* number-to-string
+
+#+BEGIN_SRC elisp
+(prin1-to-string 256)
+#+END_SRC
+
+#+RESULTS:
+: "256"
+
 * or
 
 #+BEGIN_SRC elisp
@@ -1458,6 +1522,17 @@
 
 #+RESULTS:
 : 1
+
+* prin1-to-string
+
+#+BEGIN_SRC elisp
+(list (prin1-to-string 'symbol)
+      (prin1-to-string "string")
+      (prin1-to-string 42))
+#+END_SRC
+
+#+RESULTS:
+: ("symbol" "\"string\"" "42")
 
 * process-lines
 
@@ -1575,6 +1650,16 @@
 
 #+RESULTS:
 : ("Intro" "Usage" "License")
+
+* read-from-string
+
+#+BEGIN_SRC elisp
+(read-from-string "(setq x \"hello\") (setq y 5)")
+#+END_SRC
+
+#+RESULTS:
+: ((setq x "hello")
+:  . 16)
 
 * record
 
@@ -1943,6 +2028,23 @@
 #+RESULTS:
 : t
 
+* string-to-char
+
+#+BEGIN_SRC elisp
+(string-to-char "abc")
+#+END_SRC
+
+#+RESULTS:
+: 97
+
+#+BEGIN_SRC elisp
+(list (string-to-char (string ?\0))
+      (string-to-char ""))
+#+END_SRC
+
+#+RESULTS:
+: (0 0)
+
 * string-to-list
 
 #+BEGIN_SRC elisp
@@ -1951,6 +2053,31 @@
 
 #+RESULTS:
 : (97 98 99)
+
+* string-to-number
+
+#+BEGIN_SRC elisp
+(string-to-number "42")
+#+END_SRC
+
+#+RESULTS:
+: 42
+
+#+BEGIN_SRC elisp
+(string-to-number "2A" 16)
+#+END_SRC
+
+#+RESULTS:
+: 42
+
+* string=
+
+#+BEGIN_SRC elisp
+(string= "foo" "foo")
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * subst-char-in-region
 
@@ -2091,6 +2218,24 @@
 
 #+RESULTS:
 : 123
+
+* upcase
+
+#+BEGIN_SRC elisp
+(upcase "Hello World")
+#+END_SRC
+
+#+RESULTS:
+: "HELLO WORLD"
+
+* upcase-initials
+
+#+BEGIN_SRC elisp
+(upcase-initials "The CAT in the hAt")
+#+END_SRC
+
+#+RESULTS:
+: "The CAT In The HAt"
 
 * url-hexify-string
 
