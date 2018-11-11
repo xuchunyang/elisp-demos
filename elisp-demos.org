@@ -2079,6 +2079,24 @@
 #+RESULTS:
 : 1
 
+* pp
+
+#+BEGIN_SRC elisp :results output
+(pp (lambda (a y) (+ x y)))
+#+END_SRC
+
+#+RESULTS:
+: "(lambda\n  (a y)\n  (+ x y))\n"
+
+* prin1
+
+#+BEGIN_SRC elisp :results output
+(prin1 "hello")
+#+END_SRC
+
+#+RESULTS:
+: "\"hello\""
+
 * prin1-to-string
 
 #+BEGIN_SRC elisp
@@ -2089,6 +2107,24 @@
 
 #+RESULTS:
 : ("symbol" "\"string\"" "42")
+
+* princ
+
+#+BEGIN_SRC elisp :results output
+(princ "hello")
+#+END_SRC
+
+#+RESULTS:
+: "hello"
+
+* print
+
+#+BEGIN_SRC elisp :results output
+(print "hello")
+#+END_SRC
+
+#+RESULTS:
+: "\n\"hello\"\n"
 
 * process-lines
 
@@ -2206,6 +2242,15 @@
 
 #+RESULTS:
 : ("Intro" "Usage" "License")
+
+* read
+
+#+BEGIN_SRC elisp
+(read "42")
+#+END_SRC
+
+#+RESULTS:
+: 42
 
 * read-from-string
 
@@ -3209,6 +3254,15 @@
 #+RESULTS:
 : 0.9999999999999999
 
+* terpri
+
+#+BEGIN_SRC elisp :results output
+(terpri)
+#+END_SRC
+
+#+RESULTS:
+: "\n"
+
 * thing-at-point
 
 #+BEGIN_SRC elisp :eval no
@@ -3450,6 +3504,16 @@
 #+RESULTS:
 : #<buffer *Messages*>
 
+* with-output-to-string
+
+#+BEGIN_SRC elisp
+(with-output-to-string
+  (princ "Hello World"))
+#+END_SRC
+
+#+RESULTS:
+: "Hello World"
+
 * with-temp-buffer
 
 #+BEGIN_SRC elisp
@@ -3461,6 +3525,15 @@
 
 #+RESULTS:
 : "helloworld"
+
+* write-char
+
+#+BEGIN_SRC elisp :results output
+(write-char ?a)
+#+END_SRC
+
+#+RESULTS:
+: "a"
 
 * write-region
 
