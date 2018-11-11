@@ -893,6 +893,15 @@
 #+RESULTS:
 : "hello world"
 
+* edit-and-eval-command
+
+#+BEGIN_SRC elisp
+(edit-and-eval-command "Please edit: " '(forward-word 1))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * elt
 
 #+BEGIN_SRC elisp
@@ -950,6 +959,15 @@
 
 #+RESULTS:
 : ""
+
+* eval-minibuffer
+
+#+BEGIN_SRC elisp
+(eval-minibuffer "Enter an expression: " (format "%s" '(+ 1 2)))
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * eval-when-compile
 
@@ -2252,6 +2270,15 @@
 #+RESULTS:
 : 42
 
+* read-from-minibuffer
+
+#+BEGIN_SRC elisp
+(read-from-minibuffer "Enter your name: ")
+#+END_SRC
+
+#+RESULTS:
+: "xuchunyang"
+
 * read-from-string
 
 #+BEGIN_SRC elisp
@@ -2261,6 +2288,33 @@
 #+RESULTS:
 : ((setq x "hello")
 :  . 16)
+
+* read-minibuffer
+
+#+BEGIN_SRC elisp
+(read-minibuffer "Enter an expression: " (format "%s" '(+ 1 2)))
+#+END_SRC
+
+#+RESULTS:
+: (+ 1 2)
+
+* read-no-blanks-input
+
+#+BEGIN_SRC elisp
+(read-no-blanks-input "Username (space and tab are not allowed): ")
+#+END_SRC
+
+#+RESULTS:
+: "xuchunyang"
+
+* read-regexp
+
+#+BEGIN_SRC elisp
+(read-regexp "Search for regexp: ")
+#+END_SRC
+
+#+RESULTS:
+: "^\\* "
 
 * read-string
 
