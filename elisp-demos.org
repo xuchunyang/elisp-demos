@@ -64,6 +64,15 @@
 #+RESULTS:
 : (3 nil)
 
+* append
+
+#+BEGIN_SRC elisp
+(append '(1) '(2 3 4) nil)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4)
+
 * apply
 
 #+BEGIN_SRC elisp
@@ -527,6 +536,15 @@
 #+RESULTS:
 : positive
 
+* cons
+
+#+BEGIN_SRC elisp
+(cons 1 (cons 2 (cons 3 nil)))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
 * consp
 
 #+BEGIN_SRC elisp
@@ -579,6 +597,19 @@
 :  (1)
 :  :copied
 :  (1 2 3 4))
+
+* copy-tree
+
+#+BEGIN_SRC elisp
+(let* ((list '((1 2)))
+       (shallow-copy (copy-sequence list))
+       (deep-copy (copy-tree list)))
+  (cl-assert      (eq (car shallow-copy) (car list)))
+  (cl-assert (not (eq (car deep-copy) (car list)))))
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * declare-function
 
@@ -882,6 +913,15 @@
 #+RESULTS:
 : nil
 
+* identity
+
+#+BEGIN_SRC elisp
+(identity 42)
+#+END_SRC
+
+#+RESULTS:
+: 42
+
 * if
 
 #+BEGIN_SRC elisp
@@ -890,6 +930,15 @@
 
 #+RESULTS:
 : 2
+
+* ignore
+
+#+BEGIN_SRC elisp
+(ignore 42)
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * insert
 
@@ -1177,6 +1226,15 @@
 #+RESULTS:
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : ())
+
+* make-list
+
+#+BEGIN_SRC elisp
+(make-list 3 'pigs)
+#+END_SRC
+
+#+RESULTS:
+: (pigs pigs pigs)
 
 * make-record
 
