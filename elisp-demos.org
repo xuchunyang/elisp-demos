@@ -1576,6 +1576,16 @@
 #+RESULTS:
 : #s(foo Z Z Z Z Z Z Z Z Z)
 
+* make-ring
+
+#+BEGIN_SRC elisp
+(make-ring 3)
+#+END_SRC
+
+#+RESULTS:
+: (0 0 .
+:    [nil nil nil])
+
 * make-string
 
 #+BEGIN_SRC elisp
@@ -2285,6 +2295,123 @@
 #+RESULTS:
 : ((1 2 3)
 :  (3 2 1))
+
+* ring-copy
+
+#+BEGIN_SRC elisp
+(ring-copy (make-ring 3))
+#+END_SRC
+
+#+RESULTS:
+: (0 0 .
+:    [nil nil nil])
+
+* ring-elements
+
+#+BEGIN_SRC elisp
+(let ((ring (make-ring 10)))
+  (ring-insert ring 1)
+  (ring-insert ring 2)
+  (ring-insert ring 3)
+  (ring-elements ring))
+#+END_SRC
+
+#+RESULTS:
+: (3 2 1)
+
+* ring-empty-p
+
+#+BEGIN_SRC elisp
+(ring-empty-p (make-ring 3))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* ring-insert
+
+#+BEGIN_SRC elisp
+(let ((ring (make-ring 3)))
+  (ring-insert ring 1)
+  (ring-insert ring 2)
+  (ring-insert ring 3)
+  ring)
+#+END_SRC
+
+#+RESULTS:
+: (0 3 .
+:    [1 2 3])
+
+* ring-insert-at-beginning
+
+#+BEGIN_SRC elisp
+(let ((ring (make-ring 3)))
+  (ring-insert ring 1)
+  (ring-insert ring 2)
+  (ring-insert-at-beginning ring 0)
+  ring)
+#+END_SRC
+
+#+RESULTS:
+: (2 3 .
+:    [1 2 0])
+
+* ring-length
+
+#+BEGIN_SRC elisp
+(let ((ring (make-ring 3)))
+  (ring-insert ring "hello")
+  (ring-length ring))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* ring-p
+
+#+BEGIN_SRC elisp
+(ring-p (make-ring 3))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* ring-ref
+
+#+BEGIN_SRC elisp
+(let ((ring (make-ring 3)))
+  (ring-insert ring 1)
+  (ring-insert ring 2)
+  (ring-insert ring 3)
+  (ring-ref ring 0))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* ring-remove
+
+#+BEGIN_SRC elisp
+(let ((ring (make-ring 3)))
+  (ring-insert ring 1)
+  (ring-insert ring 2)
+  (ring-insert ring 3)
+  (ring-remove ring)
+  ring)
+#+END_SRC
+
+#+RESULTS:
+: (0 2 .
+:    [2 3 nil])
+
+* ring-size
+
+#+BEGIN_SRC elisp
+(ring-size (make-ring 3))
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * round
 
