@@ -225,6 +225,35 @@
 #+RESULTS:
 : 5050
 
+* aref
+
+#+BEGIN_SRC elisp
+(aref [1 2 3] 0)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* arrayp
+
+#+BEGIN_SRC elisp
+(arrayp [])
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* aset
+
+#+BEGIN_SRC elisp
+(let ((array [vector 1 2 3]))
+  (aset array 0 100)
+  array)
+#+END_SRC
+
+#+RESULTS:
+: [100 1 2 3]
+
 * asin
 
 #+BEGIN_SRC elisp
@@ -1022,6 +1051,17 @@
 
 #+RESULTS:
 : "init.el"
+
+* fillarray
+
+#+BEGIN_SRC elisp
+(let ((array (vector 1 2 3)))
+  (fillarray array 0)
+  array)
+#+END_SRC
+
+#+RESULTS:
+: [0 0 0]
 
 * find-file
 
