@@ -12,6 +12,17 @@
 (org-sort-entries nil ?a)
 #+END_SRC
 
+* add-hook
+
+#+BEGIN_SRC elisp :eval no
+(add-hook 'find-file-hook
+          (lambda ()
+            (and buffer-file-name
+                 (equal buffer-file-name
+                        user-init-file)
+                 (message "Stop tweaking Emacs"))))
+#+END_SRC
+
 * add-to-list
 
 #+BEGIN_SRC elisp
@@ -52,6 +63,15 @@
 
 #+RESULTS:
 : (3 nil)
+
+* apply
+
+#+BEGIN_SRC elisp
+(apply #'+ (number-sequence 1 100))
+#+END_SRC
+
+#+RESULTS:
+: 5050
 
 * assoc
 
@@ -195,6 +215,18 @@
 #+RESULTS:
 : 14480
 
+* buffer-string
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert (propertize "hello" 'face 'bold))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: #("hello" 0 5
+:   (face bold))
+
 * calc-eval
 
 #+BEGIN_SRC elisp
@@ -293,6 +325,17 @@
 
 #+RESULTS:
 : nil
+
+* char-before
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert ?\n)
+  (char-before))
+#+END_SRC
+
+#+RESULTS:
+: 10
 
 * char-equal
 
@@ -543,6 +586,20 @@
 (declare-function dired-jump "dired-x" (&optional other-window file-name))
 #+END_SRC
 
+* define-advice
+
+#+BEGIN_SRC elisp :eval no
+(define-advice shell-command (:after (&rest _) trim-trailing-newline)
+  "Delete the annoying trailing newline after C-u M-!."
+  (when (and (eq this-command 'shell-command)
+             current-prefix-arg)
+    (exchange-point-and-mark t)
+    (when (eq (char-before) ?\n)
+      (delete-char -1))))
+
+;; (advice-remove 'shell-command #'shell-command@trim-trailing-newline)
+#+END_SRC
+
 * define-minor-mode
 
 #+BEGIN_SRC elisp
@@ -553,6 +610,18 @@
 
 #+RESULTS:
 : nil
+
+* delete-char
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello\n")
+  (delete-char -1)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "hello"
 
 * dolist
 
@@ -644,6 +713,15 @@
            (* 24 60 60)))
 #+END_SRC
 
+* file-exists-p
+
+#+BEGIN_SRC elisp
+(file-exists-p user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * file-name-base
 
 #+BEGIN_SRC elisp
@@ -680,6 +758,15 @@
 #+RESULTS:
 : "init.el"
 
+* find-file
+
+#+BEGIN_SRC elisp
+(find-file user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer init.el>
+
 * format
 
 #+BEGIN_SRC elisp
@@ -707,6 +794,15 @@
 
 #+RESULTS:
 : (11 g11 12)
+
+* get-buffer-create
+
+#+BEGIN_SRC elisp
+(get-buffer-create " *foo*")
+#+END_SRC
+
+#+RESULTS:
+: #<buffer  *foo*>
 
 * gethash
 
@@ -819,6 +915,15 @@
 : (:return-value
 :  ("/tmp/tmp.txt" 12)
 :  :file-contents "Hello World\n")
+
+* interactive
+
+#+BEGIN_SRC elisp :eval no
+(interactive "sName: \nbBuffer: \nP")
+;; (list (read-string "Name: ")
+;;       (read-buffer "Buffer: ")
+;;       current-prefix-arg)
+#+END_SRC
 
 * intern
 
@@ -1018,6 +1123,15 @@
 (with-current-buffer (url-retrieve-synchronously "http://example.com")
   (libxml-parse-html-region url-http-end-of-headers (point-max)))
 #+END_SRC
+
+* list
+
+#+BEGIN_SRC elisp
+(list 1 2 3)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
 
 * listp
 
@@ -1661,6 +1775,12 @@
 : ((setq x "hello")
 :  . 16)
 
+* read-string
+
+#+BEGIN_SRC elisp
+(read-string "Enter your name: ")
+#+END_SRC
+
 * record
 
 #+BEGIN_SRC elisp
@@ -1828,6 +1948,15 @@
 
 #+RESULTS:
 : (1 3 4 5)
+
+* seq-remove
+
+#+BEGIN_SRC elisp
+(seq-remove (lambda (elt) (> elt 0)) [1 -1 3 -3 5])
+#+END_SRC
+
+#+RESULTS:
+: (-1 -3)
 
 * sequencep
 
@@ -2145,6 +2274,12 @@
 #+RESULTS:
 : "foo"
 
+* thing-at-point
+
+#+BEGIN_SRC elisp :eval no
+(thing-at-point 'symbol)
+#+END_SRC
+
 * time-subtract
 
 #+BEGIN_SRC elisp
@@ -2282,6 +2417,12 @@
 #+RESULTS:
 : "hello world"
 
+* user-error
+
+#+BEGIN_SRC elisp
+(user-error "It's all your fault, not mime")
+#+END_SRC
+
 * vconcat
 
 #+BEGIN_SRC elisp
@@ -2385,4 +2526,13 @@
 
 #+RESULTS:
 : nil
+
+* zerop
+
+#+BEGIN_SRC elisp
+(zerop 0)
+#+END_SRC
+
+#+RESULTS:
+: t
 
