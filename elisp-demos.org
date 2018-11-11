@@ -2319,6 +2319,108 @@
 #+RESULTS:
 : (md5 sha1 sha224 sha256 sha384 sha512)
 
+* seq-concatenate
+
+#+BEGIN_SRC elisp
+(seq-concatenate 'list '(1 2) '(3 4) [5 6])
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6)
+
+* seq-contains
+
+#+BEGIN_SRC elisp
+(seq-contains '(symbol1 symbol2) 'symbol1)
+#+END_SRC
+
+#+RESULTS:
+: symbol1
+
+* seq-count
+
+#+BEGIN_SRC elisp
+(seq-count (lambda (elt) (> elt 0)) [-1 2 0 3 -2])
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* seq-difference
+
+#+BEGIN_SRC elisp
+(seq-difference '(2 3 4 5) [1 3 5 6 7])
+#+END_SRC
+
+#+RESULTS:
+: (2 4)
+
+* seq-do
+
+#+BEGIN_SRC elisp :results output
+(seq-do #'princ '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: "123"
+
+* seq-doseq
+
+#+BEGIN_SRC elisp :results output
+(seq-doseq (i [1 2 3]) 
+  (princ i))
+#+END_SRC
+
+#+RESULTS:
+: "123"
+
+* seq-drop
+
+#+BEGIN_SRC elisp
+(seq-drop [1 2 3 4 5 6] 3)
+#+END_SRC
+
+#+RESULTS:
+: [4 5 6]
+
+* seq-drop-while
+
+#+BEGIN_SRC elisp
+(seq-drop-while
+ (lambda (elt) (> elt 0))
+ '(1 2 3 -1 -2))
+#+END_SRC
+
+#+RESULTS:
+: (-1 -2)
+
+* seq-elt
+
+#+BEGIN_SRC elisp
+(seq-elt [1 2 3 4] 2)
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* seq-empty-p
+
+#+BEGIN_SRC elisp
+(seq-map #'seq-empty-p '([] () ""))
+#+END_SRC
+
+#+RESULTS:
+: (t t t)
+
+* seq-every-p
+
+#+BEGIN_SRC elisp
+(seq-every-p #'numberp [2 4 6])
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * seq-filter
 
 #+BEGIN_SRC elisp
@@ -2335,6 +2437,159 @@
 #+RESULTS:
 : (1 3 4 5)
 
+* seq-find
+
+#+BEGIN_SRC elisp
+(seq-find #'numberp ["abc" 1 nil])
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* seq-group-by
+
+#+BEGIN_SRC elisp
+(seq-group-by #'integerp '(1 2.1 3 2 3.2))
+#+END_SRC
+
+#+RESULTS:
+: ((t 1 3 2)
+:  (nil 2.1 3.2))
+
+* seq-intersection
+
+#+BEGIN_SRC elisp
+(seq-intersection [2 3 4 5] [1 3 5 6 7])
+#+END_SRC
+
+#+RESULTS:
+: (3 5)
+
+* seq-into
+
+#+BEGIN_SRC elisp
+(seq-into [1 2 3] 'list)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* seq-length
+
+#+BEGIN_SRC elisp
+(seq-length [0 1 2 3])
+#+END_SRC
+
+#+RESULTS:
+: 4
+
+* seq-let
+
+#+BEGIN_SRC elisp
+(seq-let (a _ c) '(1 2 3 4)
+  (list a c))
+#+END_SRC
+
+#+RESULTS:
+: (1 3)
+
+* seq-map
+
+#+BEGIN_SRC elisp
+(seq-map #'1+ '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (2 3 4)
+
+* seq-map-indexed
+
+#+BEGIN_SRC elisp
+(seq-map-indexed
+ (lambda (elt idx)
+   (list idx elt))
+ '(a b c))
+#+END_SRC
+
+#+RESULTS:
+: ((0 a)
+:  (1 b)
+:  (2 c))
+
+* seq-mapcat
+
+#+BEGIN_SRC elisp
+(seq-mapcat #'seq-reverse '((3 2 1) (6 5 4)))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6)
+
+* seq-mapn
+
+#+BEGIN_SRC elisp
+(seq-mapn #'+ '(2 4 6) '(20 40 60))
+#+END_SRC
+
+#+RESULTS:
+: (22 44 66)
+
+* seq-max
+
+#+BEGIN_SRC elisp
+(seq-max [1 3 2])
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* seq-min
+
+#+BEGIN_SRC elisp
+(seq-min [3 1 2])
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* seq-partition
+
+#+BEGIN_SRC elisp
+(seq-partition '(0 1 2 3 4 5 6 7) 3)
+#+END_SRC
+
+#+RESULTS:
+: ((0 1 2)
+:  (3 4 5)
+:  (6 7))
+
+* seq-position
+
+#+BEGIN_SRC elisp
+(seq-position '(a b c) 'b)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* seq-random-elt
+
+#+BEGIN_SRC elisp
+(seq-random-elt [1 2 3 4])
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* seq-reduce
+
+#+BEGIN_SRC elisp
+(seq-reduce #'+ (number-sequence 1 100) 0)
+#+END_SRC
+
+#+RESULTS:
+: 5050
+
 * seq-remove
 
 #+BEGIN_SRC elisp
@@ -2343,6 +2598,90 @@
 
 #+RESULTS:
 : (-1 -3)
+
+* seq-set-equal-p
+
+#+BEGIN_SRC elisp
+(seq-set-equal-p '(a b c) '(c b a))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* seq-some
+
+#+BEGIN_SRC elisp
+(seq-some #'numberp ["abc" 1 nil])
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* seq-sort
+
+#+BEGIN_SRC elisp
+(seq-sort #'< '(1 3 2))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* seq-sort-by
+
+#+BEGIN_SRC elisp
+(seq-sort-by #'seq-length #'> ["a" "ab" "abc"])
+#+END_SRC
+
+#+RESULTS:
+: ["abc" "ab" "a"]
+
+* seq-subseq
+
+#+BEGIN_SRC elisp
+(seq-subseq '(1 2 3 4 5) 1)
+#+END_SRC
+
+#+RESULTS:
+: (2 3 4 5)
+
+* seq-take
+
+#+BEGIN_SRC elisp
+(seq-take '(1 2 3 4) 3)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* seq-take-while
+
+#+BEGIN_SRC elisp
+(seq-take-while
+ (lambda (elt)
+   (> elt 0))
+ '(1 2 3 -1 -2))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* seq-uniq
+
+#+BEGIN_SRC elisp
+(seq-uniq '(1 2 2 1 3))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* seqp
+
+#+BEGIN_SRC elisp
+(seqp [1 2])
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * sequencep
 
