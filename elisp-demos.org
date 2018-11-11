@@ -1391,13 +1391,20 @@
 * lambda
 
 #+BEGIN_SRC elisp
-(lambda (x y) (+ x y))
+(lambda (x)
+  "Return the hyperbolic cosine of X."
+  (* 0.5 (+ (exp x) (exp (- x)))))
 #+END_SRC
 
 #+RESULTS:
 : (lambda
-:   (x y)
-:   (+ x y))
+:   (x)
+:   "Return the hyperbolic cosine of X."
+:   (* 0.5
+:      (+
+:       (exp x)
+:       (exp
+:        (- x)))))
 
 * lax-plist-get
 
