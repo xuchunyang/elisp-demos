@@ -914,6 +914,15 @@
 #+RESULTS:
 : "hello"
 
+* documentation
+
+#+BEGIN_SRC elisp
+(documentation '+)
+#+END_SRC
+
+#+RESULTS:
+: "Return sum of any number of arguments, which are numbers or markers.\n\n(fn &rest NUMBERS-OR-MARKERS)"
+
 * dolist
 
 #+BEGIN_SRC elisp
@@ -3419,6 +3428,15 @@
 
 #+RESULTS:
 : "foo"
+
+* symbol-value
+
+#+BEGIN_SRC elisp
+(symbol-value (intern "emacs-version"))
+#+END_SRC
+
+#+RESULTS:
+: "26.1"
 
 * tan
 
