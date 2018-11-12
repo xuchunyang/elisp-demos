@@ -778,6 +778,15 @@
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : (x 1 y 2))
 
+* copy-keymap
+
+#+BEGIN_SRC elisp
+(equal (current-local-map) (copy-keymap (current-local-map)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * copy-sequence
 
 #+BEGIN_SRC elisp
@@ -820,6 +829,15 @@
 #+RESULTS:
 : 1.0
 
+* current-active-maps
+
+#+BEGIN_SRC elisp
+(length (current-active-maps))
+#+END_SRC
+
+#+RESULTS:
+: 10
+
 * declare-function
 
 #+BEGIN_SRC elisp
@@ -838,6 +856,12 @@
       (delete-char -1))))
 
 ;; (advice-remove 'shell-command #'shell-command@trim-trailing-newline)
+#+END_SRC
+
+* define-key
+
+#+BEGIN_SRC elisp :eval no
+(define-key (current-global-map) (kbd "C-c C-c") #'emacs-version)
 #+END_SRC
 
 * define-minor-mode
@@ -1415,6 +1439,44 @@
 #+RESULTS:
 : "{\"id\":42,\"message\":\"hello world\"}"
 
+* kbd
+
+#+BEGIN_SRC elisp
+(kbd "C-x C-f")
+#+END_SRC
+
+#+RESULTS:
+: ""
+
+* key-binding
+
+#+BEGIN_SRC elisp
+(key-binding (kbd "C-x C-s"))
+#+END_SRC
+
+#+RESULTS:
+: save-buffer
+
+* keymap-parent
+
+#+BEGIN_SRC elisp
+(let ((map (make-sparse-keymap)))
+  (set-keymap-parent map text-mode-map)
+  (eq text-mode-map (keymap-parent map)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* keymapp
+
+#+BEGIN_SRC elisp
+(keymapp (current-global-map))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * lambda
 
 #+BEGIN_SRC elisp
@@ -1572,6 +1634,15 @@
 #+RESULTS:
 : 3.0
 
+* lookup-key
+
+#+BEGIN_SRC elisp
+(lookup-key (current-global-map) (kbd "C-x C-c"))
+#+END_SRC
+
+#+RESULTS:
+: save-buffers-kill-terminal
+
 * lsh
 
 #+BEGIN_SRC elisp
@@ -1591,6 +1662,12 @@
 #+RESULTS:
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : ())
+
+* make-keymap
+
+#+BEGIN_SRC elisp :results silent
+(make-keymap)
+#+END_SRC
 
 * make-list
 
@@ -1619,6 +1696,15 @@
 #+RESULTS:
 : (0 0 .
 :    [nil nil nil])
+
+* make-sparse-keymap
+
+#+BEGIN_SRC elisp
+(make-sparse-keymap)
+#+END_SRC
+
+#+RESULTS:
+: (keymap)
 
 * make-string
 
@@ -2975,6 +3061,14 @@
 
 #+RESULTS:
 : t
+
+* set-keymap-parent
+
+#+BEGIN_SRC elisp :results silent
+(let ((map (make-sparse-keymap)))
+  (set-keymap-parent map special-mode-map)
+  map)
+#+END_SRC
 
 * setf
 
