@@ -1,4 +1,4 @@
-# Elisp API Demos
+# Elisp API Demos [![Build Status](https://travis-ci.org/xuchunyang/elisp-demos.svg?branch=master)](https://travis-ci.org/xuchunyang/elisp-demos)
 
 Showing an Elisp demo of `mapcar` in `C-h f mapcar`:
 
