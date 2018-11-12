@@ -159,7 +159,7 @@
     map))
 
 ;;;###autoload
-(defun elisp-demos-advice-describe-function (function)
+(defun elisp-demos-advice-describe-function-1 (function)
   (when-let ((src (elisp-demos--search function))
              (buf (get-buffer "*Help*")))
     (with-current-buffer buf

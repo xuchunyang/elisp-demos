@@ -9,7 +9,7 @@ Showing an Elisp demo of `mapcar` in `C-h f mapcar`:
 To inject elisp demos into `*Help*`, such as `C-h f` (`M-x describe-function`), use
 
 ``` emacs-lisp
-(advice-add 'describe-function :after #'elisp-demos-advice-describe-function)
+(advice-add 'describe-function-1 :after #'elisp-demos-advice-describe-function-1)
 ```
 
 If you use [Helpful](https://github.com/Wilfred/helpful), use
