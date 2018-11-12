@@ -158,7 +158,8 @@
     (define-key map (kbd "RET") #'elisp-demos-help-find-demo-at-point)
     map))
 
-(defun elisp-demos--describe-function (function)
+;;;###autoload
+(defun elisp-demos-advice-describe-function (function)
   (when-let ((src (elisp-demos--search function))
              (buf (get-buffer "*Help*")))
     (with-current-buffer buf
@@ -182,7 +183,8 @@
 (defvar helpful--sym)
 (declare-function helpful--heading "helpful")
 
-(defun elisp-demos--helpful-update ()
+;;;###autoload
+(defun elisp-demos-advice-helpful-update ()
   (when-let ((src (elisp-demos--search helpful--sym)))
     (save-excursion
       (goto-char (point-min))
@@ -196,18 +198,6 @@
                        'symbol helpful--sym
                        'keymap elisp-demos-help-keymap)
            "\n\n"))))))
-
-;;;###autoload
-(define-minor-mode elisp-demos-help-mode
-  "Inject Elisp demos into *Help*."
-  :global t
-  :require 'elisp-demos
-  (if elisp-demos-help-mode
-      (progn
-        (advice-add 'describe-function :after #'elisp-demos--describe-function)
-        (advice-add 'helpful-update :after #'elisp-demos--helpful-update))
-    (advice-remove 'describe-function #'elisp-demos--describe-function)
-    (advice-remove 'helpful-update #'elisp-demos--helpful-update)))
 
 ;;; * JSON
 
