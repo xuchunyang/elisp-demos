@@ -844,6 +844,12 @@
 (declare-function dired-jump "dired-x" (&optional other-window file-name))
 #+END_SRC
 
+* defalias
+
+#+BEGIN_SRC elisp :eval no
+(defalias '\` (symbol-function 'backquote))
+#+END_SRC
+
 * define-advice
 
 #+BEGIN_SRC elisp :eval no
@@ -874,6 +880,27 @@
 
 #+RESULTS:
 : nil
+
+* defsubst
+
+#+BEGIN_SRC elisp :eval no
+(defsubst buffer-narrowed-p ()
+  "Return non-nil if the current buffer is narrowed."
+  (/= (- (point-max) (point-min)) (buffer-size)))
+#+END_SRC
+
+* defun
+
+#+BEGIN_SRC elisp
+(defun add-two-numbers (a b)
+  "Add A to B."
+  (+ a b))
+
+(add-two-numbers 1 2)
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * delete-char
 
