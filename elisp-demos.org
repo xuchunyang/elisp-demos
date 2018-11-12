@@ -990,6 +990,15 @@
 #+RESULTS:
 : "3"
 
+* emacs-version
+
+#+BEGIN_SRC elisp
+(emacs-version)
+#+END_SRC
+
+#+RESULTS:
+: "GNU Emacs 26.1 (build 1, x86_64-apple-darwin18.2.0, Carbon Version 158 AppKit 1671.1)\n of 2018-11-11"
+
 * eql
 
 #+BEGIN_SRC elisp
