@@ -137,6 +137,15 @@
 #+RESULTS:
 : t
 
+* `
+
+#+BEGIN_SRC elisp
+(apply #'+ `(1 ,@(number-sequence 2 4) 5))
+#+END_SRC
+
+#+RESULTS:
+: 15
+
 * abs
 
 #+BEGIN_SRC elisp
@@ -1028,6 +1037,26 @@
 
 #+RESULTS:
 : ""
+
+* eval
+
+#+BEGIN_SRC elisp
+(eval '(+ 1 2))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+#+BEGIN_SRC elisp
+(eval '(funcall
+        (let ((x 42))
+          (lambda ()
+            x)))
+      t)
+#+END_SRC
+
+#+RESULTS:
+: 42
 
 * eval-minibuffer
 
@@ -2383,6 +2412,23 @@
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : (x 1 y 2))
 
+* quote
+
+#+BEGIN_SRC elisp
+(quote (+ 1 2))
+#+END_SRC
+
+#+RESULTS:
+: (+ 1 2)
+
+#+BEGIN_SRC elisp
+;; (quote (quote foo))
+''foo
+#+END_SRC
+
+#+RESULTS:
+: 'foo
+
 * random
 
 #+BEGIN_SRC elisp
@@ -3274,6 +3320,17 @@
 10 * 100
 2 ^ 10
 :END:
+
+* special-form-p
+
+#+BEGIN_SRC elisp
+(list
+ :if   (special-form-p 'if)
+ :when (special-form-p 'when))
+#+END_SRC
+
+#+RESULTS:
+: (:if t :when nil)
 
 * split-string
 
