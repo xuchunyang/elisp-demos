@@ -1223,6 +1223,26 @@
 #+RESULTS:
 : 6
 
+* function-get
+
+#+BEGIN_SRC elisp
+(list (get 'count-matches 'modifier-cache)
+      (function-get 'count-matches 'modifier-cache))
+#+END_SRC
+
+#+RESULTS:
+: (nil
+:  ((0 . how-many)))
+
+* function-put
+
+#+BEGIN_SRC elisp
+(function-put 'count-matches 'foo "test")
+#+END_SRC
+
+#+RESULTS:
+: "test"
+
 * gensym
 
 #+BEGIN_SRC elisp
@@ -1233,6 +1253,15 @@
 
 #+RESULTS:
 : (11 g11 12)
+
+* get
+
+#+BEGIN_SRC elisp
+(get 'beginning-of-buffer 'interactive-only)
+#+END_SRC
+
+#+RESULTS:
+: "use `(goto-char (point-min))' instead."
 
 * get-buffer-create
 
@@ -2332,6 +2361,15 @@
 #+RESULTS:
 : (3 1 2)
 
+* put
+
+#+BEGIN_SRC elisp
+(put 'fly 'verb 'transitive)
+#+END_SRC
+
+#+RESULTS:
+: transitive
+
 * puthash
 
 #+BEGIN_SRC elisp
@@ -3132,6 +3170,17 @@
 (setf (point) (point-min))
 #+END_SRC
 
+* setplist
+
+#+BEGIN_SRC elisp
+(setplist 'foo '(a 1 b (2 3) c nil))
+#+END_SRC
+
+#+RESULTS:
+: (a 1 b
+:    (2 3)
+:    c nil)
+
 * setq
 
 #+BEGIN_SRC elisp
@@ -3438,6 +3487,18 @@
 #+RESULTS:
 : "foo"
 
+* symbol-plist
+
+#+BEGIN_SRC elisp
+(put 'fly 'verb 'transitive)
+(put 'fly 'noun '(a buzzing little bug))
+(symbol-plist 'fly)
+#+END_SRC
+
+#+RESULTS:
+: (verb transitive noun
+:       (a buzzing little bug))
+
 * symbol-value
 
 #+BEGIN_SRC elisp
@@ -3446,6 +3507,15 @@
 
 #+RESULTS:
 : "26.1"
+
+* symbolp
+
+#+BEGIN_SRC elisp
+(symbolp 'foo)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * tan
 
@@ -3544,6 +3614,17 @@
 
 #+RESULTS:
 : integer
+
+* unintern
+
+#+BEGIN_SRC elisp
+(let ((a-obarray (make-vector 3 0)))
+  (intern "foo" a-obarray)
+  (unintern "foo" a-obarray))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * unless
 
