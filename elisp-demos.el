@@ -164,12 +164,13 @@
              (buf (get-buffer "*Help*")))
     (with-current-buffer buf
       (save-excursion
-        (goto-char (point-max))
-        (re-search-backward
-         (rx line-start (or "[back]" "[forward]"))
-         nil t)
         (let ((inhibit-read-only t))
-          (when (eobp) (insert "\n"))
+          (goto-char (point-max))
+          ;; Ensure two final newlines
+          (if (not (eq (char-before) ?\n))
+              (insert "\n\n")
+            (if (not (eq (char-before (1- (point))) ?\n))
+                (insert "\n")))
           (insert
            (propertize (elisp-demos--syntax-highlight src)
                        'start (point)
