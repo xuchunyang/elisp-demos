@@ -977,6 +977,30 @@
 #+RESULTS:
 : positive
 
+* condition-case
+
+#+BEGIN_SRC elisp
+(condition-case err
+    (/ 1 0)
+  (arith-error
+   (message "%s" (error-message-string err))
+   nil))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* condition-case-unless-debug
+
+#+BEGIN_SRC elisp
+(condition-case-unless-debug nil
+    (/ 1 0)
+  (error nil))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * cons
 
 #+BEGIN_SRC elisp
@@ -1136,6 +1160,12 @@
       (delete-char -1))))
 
 ;; (advice-remove 'shell-command #'shell-command@trim-trailing-newline)
+#+END_SRC
+
+* define-error
+
+#+BEGIN_SRC elisp :eval no
+(define-error 'foo-error "A new error")
 #+END_SRC
 
 * define-key
@@ -1343,6 +1373,12 @@
 
 #+RESULTS:
 : ""
+
+* error
+
+#+BEGIN_SRC elisp
+(error "Invalid name `%s'" "A%%B")
+#+END_SRC
 
 * eval
 
@@ -1770,6 +1806,15 @@
 
 #+BEGIN_SRC elisp
 (ignore 42)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* ignore-errors
+
+#+BEGIN_SRC elisp
+(ignore-errors (/ 1 0))
 #+END_SRC
 
 #+RESULTS:
@@ -3784,6 +3829,12 @@
 #+RESULTS:
 : "hello world\n"
 
+* signal
+
+#+BEGIN_SRC elisp
+(signal 'wrong-number-of-arguments '(x y))
+#+END_SRC
+
 * sin
 
 #+BEGIN_SRC elisp
@@ -4217,6 +4268,16 @@
 #+RESULTS:
 : 123
 
+* unwind-protect
+
+#+BEGIN_SRC elisp :eval no
+(let ((buffer (get-buffer-create "*temp*")))
+  (with-current-buffer buffer
+    (unwind-protect
+        (foo-bar-baz-aux)
+      (kill-buffer buffer))))
+#+END_SRC
+
 * upcase
 
 #+BEGIN_SRC elisp
@@ -4377,6 +4438,16 @@
 
 #+RESULTS:
 : #<buffer *Messages*>
+
+* with-demoted-errors
+
+#+BEGIN_SRC elisp
+(with-demoted-errors "Error: %S"
+  (/ 1 0))
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * with-output-to-string
 
