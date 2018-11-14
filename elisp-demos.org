@@ -634,6 +634,15 @@
 #+RESULTS:
 : (:exit-status 0 :output "       1       1       6\n")
 
+* cancel-timer
+
+#+BEGIN_SRC elisp
+(cancel-timer (run-at-time 1 nil #'ignore))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * capitalize
 
 #+BEGIN_SRC elisp
@@ -1125,6 +1134,24 @@
 #+RESULTS:
 : #<buffer elisp-demos.org>
 
+* current-idle-time
+
+#+BEGIN_SRC elisp
+(run-at-time 3 nil
+             (lambda ()
+               (sit-for 1)
+               (message "=> %s" (time-to-seconds (current-idle-time)))))
+#+END_SRC
+
+#+RESULTS:
+: [nil 23532 38890 487039 nil
+:      (lambda nil
+:        (sit-for 1)
+:        (message "=> %s"
+:                 (time-to-seconds
+:                  (current-idle-time))))
+:      nil nil 0]
+
 * current-kill
 
 #+BEGIN_SRC elisp
@@ -1136,11 +1163,65 @@
 #+RESULTS:
 : ("hello" "hello")
 
+* current-time
+
+#+BEGIN_SRC elisp
+(current-time)
+#+END_SRC
+
+#+RESULTS:
+: (23532 37172 685559 0)
+
+* current-time-string
+
+#+BEGIN_SRC elisp
+(current-time-string)
+#+END_SRC
+
+#+RESULTS:
+: "Thu Nov 15 05:18:28 2018"
+
+* current-time-zone
+
+#+BEGIN_SRC elisp
+(current-time-zone)
+#+END_SRC
+
+#+RESULTS:
+: (28800 "CST")
+
+* date-leap-year-p
+
+#+BEGIN_SRC elisp
+(date-leap-year-p 2018)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* date-to-time
+
+#+BEGIN_SRC elisp
+(date-to-time "Fri, 25 Mar 2016 16:24:56 +0100")
+#+END_SRC
+
+#+RESULTS:
+: (22261 22600)
+
 * declare-function
 
 #+BEGIN_SRC elisp
 (declare-function dired-jump "dired-x" (&optional other-window file-name))
 #+END_SRC
+
+* decode-time
+
+#+BEGIN_SRC elisp
+(decode-time)
+#+END_SRC
+
+#+RESULTS:
+: (42 20 5 15 11 2018 4 nil 28800)
 
 * defalias
 
@@ -1308,6 +1389,33 @@
 #+RESULTS:
 : "3"
 
+* emacs-init-time
+
+#+BEGIN_SRC elisp
+(emacs-init-time)
+#+END_SRC
+
+#+RESULTS:
+: "3.9 seconds"
+
+* emacs-pid
+
+#+BEGIN_SRC elisp
+(emacs-pid)
+#+END_SRC
+
+#+RESULTS:
+: 76707
+
+* emacs-uptime
+
+#+BEGIN_SRC elisp
+(emacs-uptime)
+#+END_SRC
+
+#+RESULTS:
+: "3 hours, 3 minutes, 34 seconds"
+
 * emacs-version
 
 #+BEGIN_SRC elisp
@@ -1316,6 +1424,15 @@
 
 #+RESULTS:
 : "GNU Emacs 26.1 (build 1, x86_64-apple-darwin18.2.0, Carbon Version 158 AppKit 1671.1)\n of 2018-11-11"
+
+* encode-time
+
+#+BEGIN_SRC elisp
+(apply #'encode-time (decode-time))
+#+END_SRC
+
+#+RESULTS:
+: (23532 37316)
 
 * end-of-line
 
@@ -1510,6 +1627,18 @@
 #+RESULTS:
 : "init.el"
 
+* file-notify-add-watch
+
+#+BEGIN_SRC elisp
+(file-notify-add-watch
+ user-init-file
+ '(change attribute-change)
+ (lambda (event) (message "Event %S" event)))
+#+END_SRC
+
+#+RESULTS:
+: 45
+
 * fillarray
 
 #+BEGIN_SRC elisp
@@ -1540,6 +1669,15 @@
 #+RESULTS:
 : 1.0
 
+* float-time
+
+#+BEGIN_SRC elisp
+(float-time)
+#+END_SRC
+
+#+RESULTS:
+: 1542230331.775671
+
 * floor
 
 #+BEGIN_SRC elisp
@@ -1566,6 +1704,26 @@
 
 #+RESULTS:
 : "65 (#o101, #x41, ?A)"
+
+* format-seconds
+
+#+BEGIN_SRC elisp
+(format-seconds "Emacs is %y years, %d days, %h hours, %m minutes, %s seconds old"
+                ;; Initial release, 20 March 1985
+                (time-to-seconds (time-subtract nil (date-to-time "1985-03-20T00:00:00Z"))))
+#+END_SRC
+
+#+RESULTS:
+: "Emacs is 33 years, 247 days, 21 hours, 32 minutes, 51 seconds old"
+
+* format-time-string
+
+#+BEGIN_SRC elisp
+(format-time-string "%Y-%m-%d %H:%M:%S %z")
+#+END_SRC
+
+#+RESULTS:
+: "2018-11-15 05:23:25 +0800"
 
 * forward-line
 
@@ -1705,6 +1863,24 @@
 
 #+RESULTS:
 : #<buffer init.el>
+
+* get-internal-run-time
+
+#+BEGIN_SRC elisp
+(time-to-seconds (get-internal-run-time))
+#+END_SRC
+
+#+RESULTS:
+: 103.553696
+
+* getenv
+
+#+BEGIN_SRC elisp
+(getenv "TERM")
+#+END_SRC
+
+#+RESULTS:
+: "dumb"
 
 * gethash
 
@@ -2019,6 +2195,15 @@
 #+RESULTS:
 : t
 
+* kill-emacs
+
+#+BEGIN_SRC elisp
+;; (kill-emacs 0)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * kill-new
 
 #+BEGIN_SRC elisp
@@ -2208,6 +2393,15 @@
 
 #+RESULTS:
 : t
+
+* load-average
+
+#+BEGIN_SRC elisp
+(load-average)
+#+END_SRC
+
+#+RESULTS:
+: (108 117 122)
 
 * locate-user-emacs-file
 
@@ -2752,6 +2946,25 @@
 #+RESULTS:
 : #<buffer init.el>
 
+* parse-colon-path
+
+#+BEGIN_SRC elisp
+(parse-colon-path "/usr/bin:/bin:/usr/sbin:/sbin")
+#+END_SRC
+
+#+RESULTS:
+: ("/usr/bin/" "/bin/" "/usr/sbin/" "/sbin/")
+
+* parse-time-string
+
+#+BEGIN_SRC elisp
+;; RFC 2822
+(parse-time-string "2018-11-15")
+#+END_SRC
+
+#+RESULTS:
+: (nil nil nil 15 11 2018 nil nil nil)
+
 * pcase
 
 #+BEGIN_SRC elisp
@@ -3156,6 +3369,15 @@
 (read-string "Enter your name: ")
 #+END_SRC
 
+* recent-keys
+
+#+BEGIN_SRC elisp
+(length (recent-keys))
+#+END_SRC
+
+#+RESULTS:
+: 158
+
 * record
 
 #+BEGIN_SRC elisp
@@ -3372,6 +3594,27 @@
 #+RESULTS:
 : (1 2)
 
+* run-at-time
+
+#+BEGIN_SRC elisp
+(run-at-time 3 nil #'about-emacs)
+#+END_SRC
+
+#+RESULTS:
+: [nil 23532 38462 672975 nil about-emacs nil nil 0]
+
+* run-with-idle-timer
+
+#+BEGIN_SRC elisp
+(run-with-idle-timer 3 nil (lambda () (message "Your Emacs is idle for 3 seconds")))
+#+END_SRC
+
+#+RESULTS:
+: [nil 0 3 0 nil
+:      (lambda nil
+:        (message "Your Emacs is idle for 3 seconds"))
+:      nil idle 0]
+
 * save-current-buffer
 
 #+BEGIN_SRC elisp
@@ -3429,6 +3672,15 @@
 
 #+RESULTS:
 : (t nil t)
+
+* seconds-to-time
+
+#+BEGIN_SRC elisp
+(seconds-to-time (current-time))
+#+END_SRC
+
+#+RESULTS:
+: (23532 37240 461844 0)
 
 * secure-hash
 
@@ -3850,6 +4102,15 @@
   map)
 #+END_SRC
 
+* setenv
+
+#+BEGIN_SRC elisp
+(setenv "EMACS_VERSION" emacs-version)
+#+END_SRC
+
+#+RESULTS:
+: "26.1"
+
 * setf
 
 #+BEGIN_SRC elisp
@@ -4192,6 +4453,13 @@
 #+RESULTS:
 : "hello"
 
+* suspend-emacs
+
+#+BEGIN_SRC elisp
+;; Emacs -> Vim -> Emacs
+(suspend-emacs "vim ; fg")
+#+END_SRC
+
 * symbol-name
 
 #+BEGIN_SRC elisp
@@ -4254,6 +4522,24 @@
 (thing-at-point 'symbol)
 #+END_SRC
 
+* time-add
+
+#+BEGIN_SRC elisp
+(time-add nil 3600)
+#+END_SRC
+
+#+RESULTS:
+: (23532 41872 521709 0)
+
+* time-less-p
+
+#+BEGIN_SRC elisp
+(time-less-p before-init-time after-init-time)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * time-subtract
 
 #+BEGIN_SRC elisp
@@ -4265,6 +4551,42 @@
 
 #+RESULTS:
 : "Elapsed time: 1.006051s"
+
+* time-to-day-in-year
+
+#+BEGIN_SRC elisp
+(time-to-day-in-year (current-time))
+#+END_SRC
+
+#+RESULTS:
+: 319
+
+* time-to-days
+
+#+BEGIN_SRC elisp
+(time-to-days (current-time))
+#+END_SRC
+
+#+RESULTS:
+: 737013
+
+* time-to-seconds
+
+#+BEGIN_SRC elisp
+(time-to-seconds)
+#+END_SRC
+
+#+RESULTS:
+: 1542230349.328713
+
+* timerp
+
+#+BEGIN_SRC elisp
+(timerp (car timer-list))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * translate-region
 
@@ -4550,6 +4872,16 @@
 
 #+RESULTS:
 : "helloworld"
+
+* with-timeout
+
+#+BEGIN_SRC elisp
+(with-timeout (3 (message "You've not type any key"))
+  (read-char "Type some key in 3 seconds"))
+#+END_SRC
+
+#+RESULTS:
+: "You've not type any key"
 
 * write-char
 
