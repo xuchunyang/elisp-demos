@@ -401,6 +401,29 @@
 #+RESULTS:
 : "da39a3ee5e6b4b0d3255bfef95601890afd80709"
 
+* buffer-list
+
+#+BEGIN_SRC elisp
+(message "There are %d buffers" (length (buffer-list)))
+#+END_SRC
+
+#+RESULTS:
+: "There are 32 buffers"
+
+* buffer-live-p
+
+#+BEGIN_SRC elisp
+(let ((buffer (generate-new-buffer "*test*")))
+  (list buffer
+        (buffer-live-p buffer)
+        (kill-buffer buffer)
+        (buffer-live-p buffer)
+        buffer))
+#+END_SRC
+
+#+RESULTS:
+: (#<killed buffer> t t nil #<killed buffer>)
+
 * buffer-narrowed-p
 
 #+BEGIN_SRC elisp
