@@ -1009,6 +1009,20 @@
 #+RESULTS:
 : nil
 
+* defmacro
+
+#+BEGIN_SRC elisp
+(defmacro my-incf (var)
+  `(setq ,var (1+ ,var)))
+
+(let ((x 2))
+  (my-incf x)
+  x)
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * defsubst
 
 #+BEGIN_SRC elisp :eval no
