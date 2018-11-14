@@ -584,6 +584,42 @@
 #+RESULTS:
 : nil
 
+* cl-case
+
+#+BEGIN_SRC elisp
+(cl-case (random 5)
+  (0 "0")
+  ((1 2 3) "[1, 3]")
+  (t "4"))
+#+END_SRC
+
+#+RESULTS:
+: "[1, 3]"
+
+* cl-ecase
+
+#+BEGIN_SRC elisp
+(condition-case err
+    (cl-ecase 4
+      ((1 2 3) 'do-something))
+  (error err))
+#+END_SRC
+
+#+RESULTS:
+: (error "cl-ecase failed: 4, (3 2 1)")
+
+* cl-etypecase
+
+#+BEGIN_SRC elisp
+(condition-case err
+    (cl-etypecase 42
+      (float 'float))
+  (error err))
+#+END_SRC
+
+#+RESULTS:
+: (error "cl-etypecase failed: 42, (float)")
+
 * cl-incf
 
 #+BEGIN_SRC elisp
@@ -698,6 +734,21 @@
 
 #+RESULTS:
 : (0 1 3 5)
+
+* cl-typecase
+
+#+BEGIN_SRC elisp
+(mapcar (lambda (x)
+          (cl-typecase x
+            (integer 'integer)
+            (float   'float)
+            (string 'string)
+            (t 'anything-else)))
+        (list 42 float-pi emacs-version (current-time)))
+#+END_SRC
+
+#+RESULTS:
+: (integer float string anything-else)
 
 * clear-string
 
