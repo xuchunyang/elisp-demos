@@ -4053,14 +4053,13 @@
 * symbol-plist
 
 #+BEGIN_SRC elisp
-(put 'fly 'verb 'transitive)
-(put 'fly 'noun '(a buzzing little bug))
-(symbol-plist 'fly)
+(symbol-plist 'arith-error)
 #+END_SRC
 
 #+RESULTS:
-: (verb transitive noun
-:       (a buzzing little bug))
+: (error-conditions
+:  (arith-error error)
+:  error-message "Arithmetic error")
 
 * symbol-value
 
