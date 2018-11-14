@@ -12,6 +12,11 @@
 (org-sort-entries nil ?a)
 #+END_SRC
 
+#+CAPTION: Count headings
+#+BEGIN_SRC elisp :results silent
+(how-many "^\\* ")
+#+END_SRC
+
 * %
 
 #+BEGIN_SRC elisp
