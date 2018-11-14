@@ -1702,20 +1702,13 @@
 * lambda
 
 #+BEGIN_SRC elisp
-(lambda (x)
-  "Return the hyperbolic cosine of X."
-  (* 0.5 (+ (exp x) (exp (- x)))))
+(lambda (x) (+ x 100))
 #+END_SRC
 
 #+RESULTS:
 : (lambda
 :   (x)
-:   "Return the hyperbolic cosine of X."
-:   (* 0.5
-:      (+
-:       (exp x)
-:       (exp
-:        (- x)))))
+:   (+ x 100))
 
 * last
 
