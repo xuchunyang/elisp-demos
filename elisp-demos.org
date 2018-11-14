@@ -381,6 +381,15 @@
 #+RESULTS:
 : "aGVsbG8="
 
+* buffer-chars-modified-tick
+
+#+BEGIN_SRC elisp
+(buffer-chars-modified-tick)
+#+END_SRC
+
+#+RESULTS:
+: 62893
+
 * buffer-end
 
 #+BEGIN_SRC elisp
@@ -390,6 +399,15 @@
 
 #+RESULTS:
 : nil
+
+* buffer-file-name
+
+#+BEGIN_SRC elisp
+(buffer-file-name)
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/src/elisp-demos/elisp-demos.org"
 
 * buffer-hash
 
@@ -424,6 +442,33 @@
 #+RESULTS:
 : (#<killed buffer> t t nil #<killed buffer>)
 
+* buffer-modified-p
+
+#+BEGIN_SRC elisp
+(buffer-modified-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* buffer-modified-tick
+
+#+BEGIN_SRC elisp
+(buffer-modified-tick)
+#+END_SRC
+
+#+RESULTS:
+: 62561
+
+* buffer-name
+
+#+BEGIN_SRC elisp
+(buffer-name)
+#+END_SRC
+
+#+RESULTS:
+: "elisp-demos.org"
+
 * buffer-narrowed-p
 
 #+BEGIN_SRC elisp
@@ -457,6 +502,31 @@
 #+RESULTS:
 : #("hello" 0 5
 :   (face bold))
+
+* buffer-swap-text
+
+#+BEGIN_SRC elisp
+(let ((b1 (generate-new-buffer "*buffer 1*"))
+      (b2 (generate-new-buffer "*buffer 2*")))
+  (with-current-buffer b1
+    (insert "hello")
+    (with-current-buffer b2 (insert "world"))
+    (buffer-swap-text b2)
+    (list (buffer-string)
+          (with-current-buffer b2 (buffer-string)))))
+#+END_SRC
+
+#+RESULTS:
+: ("world" "hello")
+
+* bufferp
+
+#+BEGIN_SRC elisp
+(mapcar #'bufferp (list "*Messages*" (get-buffer "*Messages*")))
+#+END_SRC
+
+#+RESULTS:
+: (nil t)
 
 * butlast
 
@@ -843,6 +913,17 @@
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : ())
 
+* compare-buffer-substrings
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "foo foobar")
+  (compare-buffer-substrings nil 1 4 nil 5 8))
+#+END_SRC
+
+#+RESULTS:
+: 0
+
 * concat
 
 #+BEGIN_SRC elisp
@@ -965,6 +1046,15 @@
 
 #+RESULTS:
 : 10
+
+* current-buffer
+
+#+BEGIN_SRC elisp
+(current-buffer)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer elisp-demos.org>
 
 * declare-function
 
@@ -1405,6 +1495,42 @@
 #+RESULTS:
 : "test"
 
+* gap-position
+
+#+BEGIN_SRC elisp
+(gap-position)
+#+END_SRC
+
+#+RESULTS:
+: 18468
+
+* gap-size
+
+#+BEGIN_SRC elisp
+(gap-size)
+#+END_SRC
+
+#+RESULTS:
+: 2520
+
+* generate-new-buffer
+
+#+BEGIN_SRC elisp
+(generate-new-buffer "*foo*")
+#+END_SRC
+
+#+RESULTS:
+: #<buffer *foo*<3>>
+
+* generate-new-buffer-name
+
+#+BEGIN_SRC elisp
+(generate-new-buffer-name "foo")
+#+END_SRC
+
+#+RESULTS:
+: "foo"
+
 * gensym
 
 #+BEGIN_SRC elisp
@@ -1425,6 +1551,15 @@
 #+RESULTS:
 : "use `(goto-char (point-min))' instead."
 
+* get-buffer
+
+#+BEGIN_SRC elisp
+(get-buffer "*Messages*")
+#+END_SRC
+
+#+RESULTS:
+: #<buffer *Messages*>
+
 * get-buffer-create
 
 #+BEGIN_SRC elisp
@@ -1433,6 +1568,15 @@
 
 #+RESULTS:
 : #<buffer  *foo*>
+
+* get-file-buffer
+
+#+BEGIN_SRC elisp
+(get-file-buffer user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer init.el>
 
 * gethash
 
@@ -1549,6 +1693,22 @@
 
 #+RESULTS:
 : "hello world\n"
+
+* insert-buffer-substring
+
+#+BEGIN_SRC elisp
+(let ((src (generate-new-buffer "*source*"))
+      (dst (generate-new-buffer "*destination*")))
+  (princ "hello world" src)
+  (prog1 (with-current-buffer dst
+           (insert-buffer-substring src 1 6)
+           (buffer-string))
+    (kill-buffer src)
+    (kill-buffer dst)))
+#+END_SRC
+
+#+RESULTS:
+: "hello"
 
 * insert-file-contents
 
@@ -1713,6 +1873,15 @@
 #+RESULTS:
 : t
 
+* kill-buffer
+
+#+BEGIN_SRC elisp
+(kill-buffer (generate-new-buffer "*test*"))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * lambda
 
 #+BEGIN_SRC elisp
@@ -1732,6 +1901,15 @@
 
 #+RESULTS:
 : (3)
+
+* last-buffer
+
+#+BEGIN_SRC elisp
+(last-buffer)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer magit: elisp-demos>
 
 * lax-plist-get
 
@@ -2388,6 +2566,15 @@
 #+RESULTS:
 : 1
 
+* other-buffer
+
+#+BEGIN_SRC elisp
+(other-buffer)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer init.el>
+
 * plist-get
 
 #+BEGIN_SRC elisp
@@ -2928,6 +3115,19 @@
 #+RESULTS:
 : (1 2)
 
+* save-current-buffer
+
+#+BEGIN_SRC elisp
+(list (current-buffer)
+      (save-current-buffer
+        (set-buffer "*Messages*")
+        (current-buffer))
+      (current-buffer))
+#+END_SRC
+
+#+RESULTS:
+: (#<buffer elisp-demos.org> #<buffer *Messages*> #<buffer elisp-demos.org>)
+
 * save-excursion
 
 #+BEGIN_SRC elisp
@@ -3365,6 +3565,25 @@
 
 #+RESULTS:
 : t
+
+* set-buffer
+
+#+BEGIN_SRC elisp
+(progn (set-buffer "*Messages*")
+       (current-buffer))
+#+END_SRC
+
+#+RESULTS:
+: #<buffer *Messages*>
+
+* set-buffer-modified-p
+
+#+BEGIN_SRC elisp
+(set-buffer-modified-p (buffer-modified-p))
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * set-keymap-parent
 
@@ -3958,6 +4177,15 @@
 
 #+BEGIN_SRC elisp
 (vectorp [1 2 3])
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* verify-visited-file-modtime
+
+#+BEGIN_SRC elisp
+(verify-visited-file-modtime)
 #+END_SRC
 
 #+RESULTS:
