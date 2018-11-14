@@ -435,6 +435,33 @@
 : #("hello" 0 5
 :   (face bold))
 
+* butlast
+
+#+BEGIN_SRC elisp
+(butlast '(1 2 3 4 5) 2)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* caar
+
+#+BEGIN_SRC elisp
+(caar '((42)))
+#+END_SRC
+
+#+RESULTS:
+: 42
+
+* cadr
+
+#+BEGIN_SRC elisp
+(cadr '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
 * calc-eval
 
 #+BEGIN_SRC elisp
@@ -517,6 +544,24 @@
 
 #+RESULTS:
 : 42
+
+* cdar
+
+#+BEGIN_SRC elisp
+(cdar '((1 2 3)))
+#+END_SRC
+
+#+RESULTS:
+: (2 3)
+
+* cddr
+
+#+BEGIN_SRC elisp
+(cddr '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (3 4)
 
 * cdr
 
@@ -1649,6 +1694,15 @@
 :       (exp
 :        (- x)))))
 
+* last
+
+#+BEGIN_SRC elisp
+(last '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (3)
+
 * lax-plist-get
 
 #+BEGIN_SRC elisp
@@ -2197,6 +2251,17 @@
 #+RESULTS:
 : "hello"
 
+* nbutlast
+
+#+BEGIN_SRC elisp
+(let ((list (list 1 2 3 4 5)))
+  (nbutlast list 2)
+  list)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
 * not
 
 #+BEGIN_SRC elisp
@@ -2217,6 +2282,24 @@
 
 #+RESULTS:
 : (4 3 2 1)
+
+* nth
+
+#+BEGIN_SRC elisp
+(nth 2 '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* nthcdr
+
+#+BEGIN_SRC elisp
+(nthcdr 2 '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (3 4)
 
 * null
 
@@ -2336,6 +2419,17 @@
 
 #+RESULTS:
 : 1
+
+* pop
+
+#+BEGIN_SRC elisp
+(let ((l '(1 2 3)))
+  (pop l)
+  l)
+#+END_SRC
+
+#+RESULTS:
+: (2 3)
 
 * pp
 
