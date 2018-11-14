@@ -1101,6 +1101,17 @@
 #+RESULTS:
 : #<buffer elisp-demos.org>
 
+* current-kill
+
+#+BEGIN_SRC elisp
+(progn (kill-new "hello")
+       (list (current-kill 0 'do-not-move)
+             (car kill-ring)))
+#+END_SRC
+
+#+RESULTS:
+: ("hello" "hello")
+
 * declare-function
 
 #+BEGIN_SRC elisp
@@ -1962,6 +1973,15 @@
 
 #+RESULTS:
 : t
+
+* kill-new
+
+#+BEGIN_SRC elisp
+(kill-new "This message will be copied")
+#+END_SRC
+
+#+RESULTS:
+: "This message will be copied"
 
 * lambda
 
