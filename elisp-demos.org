@@ -2752,6 +2752,86 @@
 #+RESULTS:
 : #<buffer init.el>
 
+* pcase
+
+#+BEGIN_SRC elisp
+(mapcar
+ (lambda (arg)
+   (pcase arg
+     (`(,car . ,cdr) (apply #'+ car cdr))
+     (x (format "%S is a cons cell" x))))
+ '((1 2 3 4)
+   42))
+#+END_SRC
+
+#+RESULTS:
+: (10 "42 is a cons cell")
+
+* pcase-dolist
+
+#+BEGIN_SRC elisp
+(let (res)
+  (pcase-dolist (`(,key . ,val) '((one . 1)
+                                  (two . 2)
+                                  (three . 3)
+                                  (four . 4)))
+    (push (cons val key) res))
+  (nreverse res))
+#+END_SRC
+
+#+RESULTS:
+: ((1 . one)
+:  (2 . two)
+:  (3 . three)
+:  (4 . four))
+
+* pcase-exhaustive
+
+#+BEGIN_SRC elisp
+(condition-case nil
+    (pcase-exhaustive 'bar
+      ('foo 123))
+  (error
+   "Got no match error"))
+#+END_SRC
+
+#+RESULTS:
+: "Got no match error"
+
+* pcase-lambda
+
+#+BEGIN_SRC elisp
+(funcall
+ (pcase-lambda (`(,car . ,cdr))
+   (append cdr (list car)))
+ '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (2 3 4 1)
+
+* pcase-let
+
+#+BEGIN_SRC elisp
+(pcase-let ((`(,_ ,_ ,uid ,gid)
+             (file-attributes user-init-file)))
+  (list uid gid))
+#+END_SRC
+
+#+RESULTS:
+: (501 20)
+
+* pcase-let*
+
+#+BEGIN_SRC elisp
+(pcase-let* ((`[,x ,y] [1 2])
+             (`(,a ,b) (list y x)))
+  (list a b))
+#+END_SRC
+
+#+RESULTS:
+: (2 1)
+
 * plist-get
 
 #+BEGIN_SRC elisp
