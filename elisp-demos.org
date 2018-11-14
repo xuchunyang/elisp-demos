@@ -4831,6 +4831,15 @@
 #+RESULTS:
 : (:narrowed "hello" :widened "hello world")
 
+* window-list
+
+#+BEGIN_SRC elisp
+(window-list)
+#+END_SRC
+
+#+RESULTS:
+: (#<window 111 on elisp-demos.org> #<window 119 on *scratch*>)
+
 * with-current-buffer
 
 #+BEGIN_SRC elisp
