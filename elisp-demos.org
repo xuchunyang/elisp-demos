@@ -386,6 +386,33 @@
 #+RESULTS:
 : "aGVsbG8="
 
+* beginning-of-line
+
+#+BEGIN_SRC elisp
+(beginning-of-line)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* bobp
+
+#+BEGIN_SRC elisp
+(with-temp-buffer (bobp))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* bolp
+
+#+BEGIN_SRC elisp
+(with-temp-buffer (bolp))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * buffer-chars-modified-tick
 
 #+BEGIN_SRC elisp
@@ -1043,6 +1070,19 @@
 #+RESULTS:
 : 1.0
 
+* count-lines
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "foo\n"
+          "bar\n"
+          "baz\n")
+  (count-lines (point-min) (point-max)))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * current-active-maps
 
 #+BEGIN_SRC elisp
@@ -1235,6 +1275,33 @@
 
 #+RESULTS:
 : "GNU Emacs 26.1 (build 1, x86_64-apple-darwin18.2.0, Carbon Version 158 AppKit 1671.1)\n of 2018-11-11"
+
+* end-of-line
+
+#+BEGIN_SRC elisp
+(end-of-line)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* eobp
+
+#+BEGIN_SRC elisp
+(with-temp-buffer (eobp))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* eolp
+
+#+BEGIN_SRC elisp
+(with-temp-buffer (eolp))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * eql
 
@@ -1452,6 +1519,15 @@
 
 #+RESULTS:
 : "65 (#o101, #x41, ?A)"
+
+* forward-line
+
+#+BEGIN_SRC elisp
+(forward-line)
+#+END_SRC
+
+#+RESULTS:
+: 0
 
 * fround
 
@@ -2001,6 +2077,37 @@
 (with-current-buffer (url-retrieve-synchronously "http://example.com")
   (libxml-parse-html-region url-http-end-of-headers (point-max)))
 #+END_SRC
+
+* line-beginning-position
+
+#+BEGIN_SRC elisp
+(line-beginning-position)
+#+END_SRC
+
+#+RESULTS:
+: 25771
+
+* line-end-position
+
+#+BEGIN_SRC elisp
+(line-end-position)
+#+END_SRC
+
+#+RESULTS:
+: 25980
+
+* line-number-at-pos
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "foo\n"
+          "bar\n"
+          "baz\n")
+  (line-number-at-pos))
+#+END_SRC
+
+#+RESULTS:
+: 4
 
 * list
 
