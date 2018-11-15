@@ -849,6 +849,16 @@
 #+RESULTS:
 : "[1, 3]"
 
+* cl-destructuring-bind
+
+#+BEGIN_SRC elisp
+(cl-destructuring-bind (_ b c) (list 1 2 3)
+  (list b c))
+#+END_SRC
+
+#+RESULTS:
+: (2 3)
+
 * cl-ecase
 
 #+BEGIN_SRC elisp
