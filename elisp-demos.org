@@ -3269,11 +3269,16 @@
 * make-sparse-keymap
 
 #+BEGIN_SRC elisp
-(make-sparse-keymap)
+(let ((map (make-sparse-keymap)))
+  (define-key map "n" #'next-line)
+  (define-key map "p" #'previous-line)
+  map)
 #+END_SRC
 
 #+RESULTS:
-: (keymap)
+: (keymap
+:  (112 . previous-line)
+:  (110 . next-line))
 
 * make-string
 
