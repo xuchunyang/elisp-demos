@@ -4945,24 +4945,13 @@
 * setq
 
 #+BEGIN_SRC elisp
-(let (x)
-  (setq x 1)
+(let ((x 0))
+  (setq x 42)
   x)
 #+END_SRC
 
 #+RESULTS:
-: 1
-
-#+BEGIN_SRC elisp
-(let (x y z)
-  (setq x 1
-        y 2
-        z (+ x y))
-  (list x y z))
-#+END_SRC
-
-#+RESULTS:
-: (1 2 3)
+: 42
 
 * shell-command-to-string
 
