@@ -1572,6 +1572,19 @@
 #+RESULTS:
 : nil
 
+* delete-overlay
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (let ((ov (make-overlay 1 1)))
+    (list (format "%S" ov)
+          (delete-overlay ov)
+          (format "%S" ov))))
+#+END_SRC
+
+#+RESULTS:
+: ("#<overlay from 1 to 1 in  *temp*>" nil "#<overlay in no buffer>")
+
 * detect-coding-region
 
 #+BEGIN_SRC elisp
@@ -3287,6 +3300,15 @@
                         'display-buffer-alist "24.3")
 #+END_SRC
 
+* make-overlay
+
+#+BEGIN_SRC elisp
+(with-temp-buffer (make-overlay 1 1))
+#+END_SRC
+
+#+RESULTS:
+: #<overlay in no buffer>
+
 * make-progress-reporter
 
 #+BEGIN_SRC elisp
@@ -3702,6 +3724,18 @@
 #+RESULTS:
 : 0.5
 
+* move-overlay
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (let ((ov (make-overlay 1 1)))
+    (insert "hello")
+    (format "%S" (move-overlay ov 1 6))))
+#+END_SRC
+
+#+RESULTS:
+: "#<overlay from 1 to 6 in  *temp*>"
+
 * multibyte-char-to-unibyte
 
 #+BEGIN_SRC elisp
@@ -3743,6 +3777,19 @@
 
 #+RESULTS:
 : (1 2 3)
+
+* next-overlay-change
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (make-overlay 4 5)
+  (make-overlay 2 3)
+  (next-overlay-change 1))
+#+END_SRC
+
+#+RESULTS:
+: 2
 
 * not
 
@@ -3848,6 +3895,123 @@
 
 #+RESULTS:
 : #<buffer init.el>
+
+* overlay-buffer
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (let ((ov (make-overlay 1 1)))
+    (format "%s" (overlay-buffer ov))))
+#+END_SRC
+
+#+RESULTS:
+: " *temp*"
+
+* overlay-end
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (let ((ov (make-overlay 1 6)))
+    (overlay-end ov)))
+#+END_SRC
+
+#+RESULTS:
+: 6
+
+* overlay-get
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (let ((ov (make-overlay 1 1)))
+    (overlay-put ov 'happy t)
+    (overlay-get ov 'happy)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* overlay-properties
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (let ((ov (make-overlay 1 1)))
+    (overlay-put ov 'happy t)
+    (overlay-put ov 'hungry t)
+    (overlay-properties ov)))
+#+END_SRC
+
+#+RESULTS:
+: (hungry t happy t)
+
+* overlay-put
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (let ((ov (make-overlay (point-min) (point-max))))
+    (overlay-put ov 'face 'bold)))
+#+END_SRC
+
+#+RESULTS:
+: bold
+
+* overlay-recenter
+
+#+BEGIN_SRC elisp
+(overlay-recenter (point-max))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* overlay-start
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (let ((ov (make-overlay 1 1)))
+    (overlay-start ov)))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* overlayp
+
+#+BEGIN_SRC elisp
+(with-temp-buffer (overlayp (make-overlay 1 1)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* overlays-at
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (make-overlay 1 2)
+  (make-overlay 1 5)
+  (format "%S" (overlays-at 1)))
+#+END_SRC
+
+#+RESULTS:
+: "(#<overlay from 1 to 5 in  *temp*> #<overlay from 1 to 2 in  *temp*>)"
+
+* overlays-in
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  ;;       12345
+  (make-overlay 1 2)
+  (make-overlay 2 4)
+  (make-overlay 3 5)
+  (format "%S" (overlays-in 3 4)))
+#+END_SRC
+
+#+RESULTS:
+: "(#<overlay from 3 to 5 in  *temp*> #<overlay from 2 to 4 in  *temp*>)"
 
 * parse-colon-path
 
@@ -4029,6 +4193,19 @@
 
 #+RESULTS:
 : "(lambda\n  (a y)\n  (+ x y))\n"
+
+* previous-overlay-change
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (make-overlay 4 5)
+  (make-overlay 2 3)
+  (previous-overlay-change 6))
+#+END_SRC
+
+#+RESULTS:
+: 5
 
 * prin1
 
@@ -4314,6 +4491,19 @@
 #+RESULTS:
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : ( y 2))
+
+* remove-overlays
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (let ((ov (make-overlay 1 1)))
+    (overlay-put ov 'happy t)
+    (remove-overlays 1 1 'happy t)
+    (format "%S" ov)))
+#+END_SRC
+
+#+RESULTS:
+: "#<overlay in no buffer>"
 
 * replace-match
 
