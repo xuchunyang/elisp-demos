@@ -810,6 +810,15 @@
 #+RESULTS:
 : "A"
 
+* char-width
+
+#+BEGIN_SRC elisp
+(char-width ?你)
+#+END_SRC
+
+#+RESULTS:
+: 2
+
 * characterp
 
 #+BEGIN_SRC elisp
@@ -5355,6 +5364,15 @@
 ;; FIXME: I don't understand this function
 #+END_SRC
 
+* string-width
+
+#+BEGIN_SRC elisp
+(string-width "你好，世界！")
+#+END_SRC
+
+#+RESULTS:
+: 12
+
 * string=
 
 #+BEGIN_SRC elisp
@@ -5617,6 +5635,15 @@
 
 #+RESULTS:
 : 1
+
+* truncate-string-to-width
+
+#+BEGIN_SRC elisp
+(truncate-string-to-width "magit-diff: elisp-demos" 18 nil nil t)
+#+END_SRC
+
+#+RESULTS:
+: "magit-diff: eli..."
 
 * type-of
 
