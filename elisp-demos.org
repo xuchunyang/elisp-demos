@@ -151,6 +151,15 @@
 #+RESULTS:
 : 15
 
+* abbreviate-file-name
+
+#+BEGIN_SRC elisp
+(abbreviate-file-name user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: "~/.emacs.d/init.el"
+
 * abs
 
 #+BEGIN_SRC elisp
@@ -159,6 +168,15 @@
 
 #+RESULTS:
 : 4
+
+* access-file
+
+#+BEGIN_SRC elisp
+(access-file user-init-file "Can't open your init file")
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * acos
 
@@ -1313,6 +1331,52 @@
 #+RESULTS:
 : "hello"
 
+* delete-file
+
+#+BEGIN_SRC elisp
+(delete-file (make-temp-file "elisp-demos-"))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* directory-file-name
+
+#+BEGIN_SRC elisp
+(directory-file-name "~/.emacs.d/")
+#+END_SRC
+
+#+RESULTS:
+: "~/.emacs.d"
+
+* directory-files
+
+#+BEGIN_SRC elisp :results silent
+(directory-files "/bin/")
+#+END_SRC
+
+* directory-files-and-attributes
+
+#+BEGIN_SRC elisp :results silent
+(directory-files-and-attributes "/bin/")
+#+END_SRC
+
+* directory-files-recursively
+
+#+BEGIN_SRC elisp :results silent
+(directory-files-recursively package-user-dir (rx ".txt" eos))
+#+END_SRC
+
+* directory-name-p
+
+#+BEGIN_SRC elisp
+(list (directory-name-p ".")
+      (directory-name-p "./"))
+#+END_SRC
+
+#+RESULTS:
+: (nil t)
+
 * documentation
 
 #+BEGIN_SRC elisp
@@ -1546,6 +1610,15 @@
            (* 24 60 60)))
 #+END_SRC
 
+* executable-find
+
+#+BEGIN_SRC elisp
+(executable-find "git")
+#+END_SRC
+
+#+RESULTS:
+: "/usr/local/bin/git"
+
 * exp
 
 #+BEGIN_SRC elisp
@@ -1554,6 +1627,15 @@
 
 #+RESULTS:
 : 2.718281828459045
+
+* expand-file-name
+
+#+BEGIN_SRC elisp
+(expand-file-name "custom.el" user-emacs-directory)
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/.emacs.d/custom.el"
 
 * expt
 
@@ -1582,6 +1664,55 @@
 #+RESULTS:
 : 1.0
 
+* file-accessible-directory-p
+
+#+BEGIN_SRC elisp
+(file-accessible-directory-p user-emacs-directory)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-attributes
+
+#+BEGIN_SRC elisp
+(file-attributes user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: (nil 1 501 20
+:      (23533 25246 3637 220000)
+:      (23533 25245 994959 733000)
+:      (23533 25245 994959 733000)
+:      150332 "-rw-r--r--" t 8617049288 16777220)
+
+* file-directory-p
+
+#+BEGIN_SRC elisp
+(file-directory-p user-emacs-directory)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-equal-p
+
+#+BEGIN_SRC elisp
+(file-equal-p "~/.emacs.d/init.el" user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-executable-p
+
+#+BEGIN_SRC elisp
+(file-executable-p "/bin/sh")
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * file-exists-p
 
 #+BEGIN_SRC elisp
@@ -1591,6 +1722,95 @@
 #+RESULTS:
 : t
 
+* file-in-directory-p
+
+#+BEGIN_SRC elisp
+(file-in-directory-p user-init-file user-emacs-directory)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-modes
+
+#+BEGIN_SRC elisp
+(format "%o" (file-modes user-init-file))
+#+END_SRC
+
+#+RESULTS:
+: "644"
+
+#+BEGIN_SRC elisp
+;; 4 r
+;; 2 w
+;; 1 x
+
+;; -rw-r--r--
+;;  42 4  4
+;; 
+;; 6   4  4
+
+;; #o644 = 420
+
+(let* ((modes (file-modes user-init-file))
+       (modes-list ((lambda (n)
+                      "Split permission number N to (r w x)."
+                      (let* ((r (/ n 64))
+                             (w (/ (- n (* r 64)) 8))
+                             (x (- n (* r 64) (* w 8))))
+                        (list r w x)))
+                    modes))
+       (modes-string (mapconcat
+                      (lambda (number)
+                        "Convert permission NUMBER to string."
+                        (pcase-exhaustive number
+                          (7 "rwx")
+                          (6 "rw-")
+                          (5 "r-x")
+                          (4 "r--")
+                          (3 "-wx")
+                          (2 "-w-")
+                          (1 "--x")
+                          (0 "---")))
+                      modes-list "")))
+  (list :decimal modes
+        :octal modes-list
+        :string modes-string))
+#+END_SRC
+
+#+RESULTS:
+: (:decimal 420 :octal
+:           (6 4 4)
+:           :string "rw-r--r--")
+
+* file-name-absolute-p
+
+#+BEGIN_SRC elisp
+(list (file-name-absolute-p "README.md")
+      (file-name-absolute-p "/path/to/README.md"))
+#+END_SRC
+
+#+RESULTS:
+: (nil t)
+
+* file-name-all-completions
+
+#+BEGIN_SRC elisp
+(file-name-all-completions "vim" "/usr/bin/")
+#+END_SRC
+
+#+RESULTS:
+: ("vimtutor" "vimdiff" "vim")
+
+* file-name-as-directory
+
+#+BEGIN_SRC elisp
+(file-name-as-directory "~")
+#+END_SRC
+
+#+RESULTS:
+: "~/"
+
 * file-name-base
 
 #+BEGIN_SRC elisp
@@ -1599,6 +1819,25 @@
 
 #+RESULTS:
 : "init"
+
+* file-name-case-insensitive-p
+
+#+BEGIN_SRC elisp
+;; Some macOS systems's file system is case-insensitive
+(file-name-case-insensitive-p user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-name-completion
+
+#+BEGIN_SRC elisp
+(file-name-completion "em" "/usr/bin/")
+#+END_SRC
+
+#+RESULTS:
+: "emacs"
 
 * file-name-directory
 
@@ -1627,6 +1866,47 @@
 #+RESULTS:
 : "init.el"
 
+* file-name-sans-extension
+
+#+BEGIN_SRC elisp
+(file-name-sans-extension "simple.el.gz")
+#+END_SRC
+
+#+RESULTS:
+: "simple.el"
+
+* file-name-sans-versions
+
+#+BEGIN_SRC elisp
+(file-name-sans-versions "README.md~")
+#+END_SRC
+
+#+RESULTS:
+: "README.md"
+
+* file-newer-than-file-p
+
+#+BEGIN_SRC elisp
+(let ((file1 (make-temp-file "elisp-demo-"))
+      (file2 (make-temp-file "elisp-demo-")))
+  (unwind-protect
+      (file-newer-than-file-p file2 file1)
+    (delete-file file1)
+    (delete-file file2)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-nlinks
+
+#+BEGIN_SRC elisp
+(file-nlinks "/usr/bin/vim")
+#+END_SRC
+
+#+RESULTS:
+: 1
+
 * file-notify-add-watch
 
 #+BEGIN_SRC elisp
@@ -1638,6 +1918,69 @@
 
 #+RESULTS:
 : 45
+
+* file-ownership-preserved-p
+
+#+BEGIN_SRC elisp
+(file-ownership-preserved-p user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-readable-p
+
+#+BEGIN_SRC elisp
+(file-readable-p user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-regular-p
+
+#+BEGIN_SRC elisp
+(file-regular-p user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* file-relative-name
+
+#+BEGIN_SRC elisp
+(file-relative-name user-init-file user-emacs-directory)
+#+END_SRC
+
+#+RESULTS:
+: "init.el"
+
+* file-symlink-p
+
+#+BEGIN_SRC elisp
+(file-symlink-p "/usr/bin/ex")
+#+END_SRC
+
+#+RESULTS:
+: "vim"
+
+* file-truename
+
+#+BEGIN_SRC elisp
+(file-truename "~/../../")
+#+END_SRC
+
+#+RESULTS:
+: "/"
+
+* file-writable-p
+
+#+BEGIN_SRC elisp
+(file-writable-p user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * fillarray
 
@@ -1654,6 +1997,39 @@
 
 #+BEGIN_SRC elisp
 (find-file user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer init.el>
+
+* find-file-literally
+
+#+BEGIN_SRC elisp
+(find-file-literally user-init-file)
+#+END_SRC
+
+* find-file-noselect
+
+#+BEGIN_SRC elisp
+(find-file-noselect user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer init.el>
+
+* find-file-other-window
+
+#+BEGIN_SRC elisp
+(find-file-other-window user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: #<buffer init.el>
+
+* find-file-read-only
+
+#+BEGIN_SRC elisp
+(find-file-read-only user-init-file)
 #+END_SRC
 
 #+RESULTS:
@@ -2037,6 +2413,23 @@
 :  ("/tmp/tmp.txt" 12)
 :  :file-contents "Hello World\n")
 
+* insert-file-contents-literally
+
+#+BEGIN_SRC elisp
+;; Unicode Check Mark, ✓, #x2713, #xE2 #x9C #x93
+(write-region (string #x2713) nil "/tmp/tmp.txt")
+
+(list (with-temp-buffer
+        (insert-file-contents-literally "/tmp/tmp.txt")
+        (buffer-string))
+      (with-temp-buffer
+        (insert-file-contents "/tmp/tmp.txt")
+        (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: ("\342\234\223" "✓")
+
 * interactive
 
 #+BEGIN_SRC elisp :eval no
@@ -2403,6 +2796,15 @@
 #+RESULTS:
 : (108 117 122)
 
+* locate-file
+
+#+BEGIN_SRC elisp
+(locate-file "init.el" '("~/.emacs.d/"))
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/.emacs.d/init.el"
+
 * locate-user-emacs-file
 
 #+BEGIN_SRC elisp
@@ -2435,6 +2837,16 @@
 #+BEGIN_SRC elisp
 (cl-assert #b1010 (lsh #b101 1))
 (cl-assert #b10 (lsh #b101 -1))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* make-directory
+
+#+BEGIN_SRC elisp
+;; mkdir -p
+(make-directory "/tmp/elisp-demos/create/a/new/dir" 'parents)
 #+END_SRC
 
 #+RESULTS:
@@ -2510,6 +2922,24 @@
 
 #+RESULTS:
 : foo
+
+* make-temp-file
+
+#+BEGIN_SRC elisp
+(make-temp-file "elisp-demos-")
+#+END_SRC
+
+#+RESULTS:
+: "/var/folders/7f/s191h4q97p90374yw15ssrs00000gn/T/elisp-demos-iOSgE2"
+
+* make-temp-name
+
+#+BEGIN_SRC elisp
+(make-temp-name "elisp-demos-")
+#+END_SRC
+
+#+RESULTS:
+: "elisp-demos-hF3633"
 
 * make-vector
 
@@ -4094,6 +4524,19 @@
 #+RESULTS:
 : nil
 
+* set-file-modes
+
+#+BEGIN_SRC elisp
+(let ((file (make-temp-file "elisp-demos-")))
+  (unwind-protect
+      (progn (set-file-modes file #o644)
+             (format "%o" (file-modes file)))
+    (delete-file file)))
+#+END_SRC
+
+#+RESULTS:
+: "644"
+
 * set-keymap-parent
 
 #+BEGIN_SRC elisp :results silent
@@ -4425,6 +4868,15 @@
 
 #+RESULTS:
 : "hellO wOrld"
+
+* substitute-in-file-name
+
+#+BEGIN_SRC elisp
+(substitute-in-file-name "$HOME/.vimrc")
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/.vimrc"
 
 * substring
 
@@ -4881,6 +5333,19 @@
 
 #+RESULTS:
 : "helloworld"
+
+* with-temp-file
+
+#+BEGIN_SRC elisp
+(with-temp-file "/tmp/tmp.txt"
+  (insert "This will be inserted to /tmp/tmp.txt")
+  (insert ?\n ?\n)
+  (insert "Peace.\n")
+  42)
+#+END_SRC
+
+#+RESULTS:
+: 42
 
 * with-timeout
 
