@@ -587,6 +587,26 @@
 #+RESULTS:
 : (1 2 3)
 
+* byte-to-position
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "lambda λ")
+  (byte-to-position 10))
+#+END_SRC
+
+#+RESULTS:
+: 9
+
+* byte-to-string
+
+#+BEGIN_SRC elisp
+(byte-to-string 65)
+#+END_SRC
+
+#+RESULTS:
+: "A"
+
 * caar
 
 #+BEGIN_SRC elisp
@@ -763,6 +783,15 @@
 #+RESULTS:
 : (t nil)
 
+* char-from-name
+
+#+BEGIN_SRC elisp
+(string (char-from-name "GREEK SMALL LETTER LAMBDA"))
+#+END_SRC
+
+#+RESULTS:
+: "λ"
+
 * char-to-string
 
 #+BEGIN_SRC elisp
@@ -771,6 +800,24 @@
 
 #+RESULTS:
 : "A"
+
+* characterp
+
+#+BEGIN_SRC elisp
+(characterp 97)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* check-coding-system
+
+#+BEGIN_SRC elisp
+(check-coding-system 'utf-8)
+#+END_SRC
+
+#+RESULTS:
+: utf-8
 
 * cl-assert
 
@@ -971,6 +1018,69 @@
 #+RESULTS:
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : ())
+
+* coding-system-aliases
+
+#+BEGIN_SRC elisp
+(coding-system-aliases 'chinese-gbk)
+#+END_SRC
+
+#+RESULTS:
+: (chinese-gbk gbk cp936 windows-936)
+
+* coding-system-change-eol-conversion
+
+#+BEGIN_SRC elisp
+(coding-system-change-eol-conversion 'utf-8 'unix)
+#+END_SRC
+
+#+RESULTS:
+: utf-8-unix
+
+* coding-system-change-text-conversion
+
+#+BEGIN_SRC elisp
+(coding-system-change-text-conversion 'unix 'utf-8)
+#+END_SRC
+
+#+RESULTS:
+: utf-8-unix
+
+* coding-system-eol-type
+
+#+BEGIN_SRC elisp
+(coding-system-eol-type 'utf-8)
+#+END_SRC
+
+#+RESULTS:
+: [utf-8-unix utf-8-dos utf-8-mac]
+
+* coding-system-get
+
+#+BEGIN_SRC elisp
+(coding-system-get 'chinese-gbk :mime-charset)
+#+END_SRC
+
+#+RESULTS:
+: gbk
+
+* coding-system-list
+
+#+BEGIN_SRC elisp
+(length (coding-system-list 'base-only))
+#+END_SRC
+
+#+RESULTS:
+: 116
+
+* coding-system-p
+
+#+BEGIN_SRC elisp
+(coding-system-p 'utf-8)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * compare-buffer-substrings
 
@@ -1248,6 +1358,53 @@
 (declare-function dired-jump "dired-x" (&optional other-window file-name))
 #+END_SRC
 
+* decode-char
+
+#+BEGIN_SRC elisp
+(decode-char 'unicode ?λ)
+#+END_SRC
+
+#+RESULTS:
+: 955
+
+#+BEGIN_SRC elisp
+;; 文 GBK Codepoint #xCEC4
+(string (decode-char 'chinese-gbk #xCEC4))
+#+END_SRC
+
+#+RESULTS:
+: "文"
+
+* decode-coding-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (set-buffer-multibyte nil)
+  (insert #xCE #xC4)
+  (decode-coding-region (point-min) (point-max) 'chinese-gbk t))
+#+END_SRC
+
+#+RESULTS:
+: #("文" 0 1
+:   (charset chinese-gbk))
+
+* decode-coding-string
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (set-buffer-multibyte nil)
+  (insert #xCE #xC4)
+  (buffer-string)
+  (decode-coding-string (buffer-string) 'chinese-gbk))
+
+;; This doesn't work.
+;; (decode-coding-string (string #xCE #xC4) 'chinese-gbk)
+#+END_SRC
+
+#+RESULTS:
+: #("文" 0 1
+:   (charset chinese-gbk))
+
 * decode-time
 
 #+BEGIN_SRC elisp
@@ -1355,6 +1512,26 @@
 
 #+RESULTS:
 : nil
+
+* detect-coding-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert ?\0)
+  (detect-coding-region (point-min) (point-max)))
+#+END_SRC
+
+#+RESULTS:
+: (no-conversion)
+
+* detect-coding-string
+
+#+BEGIN_SRC elisp
+(detect-coding-string (string ?\0))
+#+END_SRC
+
+#+RESULTS:
+: (no-conversion)
 
 * directory-file-name
 
@@ -1504,6 +1681,49 @@
 
 #+RESULTS:
 : "GNU Emacs 26.1 (build 1, x86_64-apple-darwin18.2.0, Carbon Version 158 AppKit 1671.1)\n of 2018-11-11"
+
+* encode-char
+
+#+BEGIN_SRC elisp
+(encode-char ?a 'unicode)
+#+END_SRC
+
+#+RESULTS:
+: 97
+
+#+BEGIN_SRC elisp
+;; 文 
+;; Unicode Codepoint ?文 = #x6587
+;; GBK Codepoint #xCEC4
+(format "#x%X" (encode-char ?文 'chinese-gbk))
+#+END_SRC
+
+#+RESULTS:
+: "#xCEC4"
+
+* encode-coding-region
+
+#+BEGIN_SRC elisp
+;; 文 
+;; Unicode Codepoint #x6587, xE6 #x96 #x87
+;; GBK Codepoint #xCEC4, #xCE #xC4
+(with-temp-buffer
+  (insert ?文)
+  (mapcar #'identity (encode-coding-region (point-min) (point-max) 'chinese-gbk t)))
+#+END_SRC
+
+#+RESULTS:
+: (206 196)
+
+* encode-coding-string
+
+#+BEGIN_SRC elisp
+;; UTF 8 -> GBK
+(string-to-list (encode-coding-string "文" 'chinese-gbk))
+#+END_SRC
+
+#+RESULTS:
+: (206 196)
 
 * encode-time
 
@@ -2009,6 +2229,26 @@
 #+RESULTS:
 : [0 0 0]
 
+* find-coding-systems-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "世界，你好")
+  (length (find-coding-systems-region (point-min) (point-max))))
+#+END_SRC
+
+#+RESULTS:
+: 39
+
+* find-coding-systems-string
+
+#+BEGIN_SRC elisp
+(length (find-coding-systems-string "世界，你好"))
+#+END_SRC
+
+#+RESULTS:
+: 39
+
 * find-file
 
 #+BEGIN_SRC elisp
@@ -2246,6 +2486,16 @@
 
 #+RESULTS:
 : #<buffer  *foo*>
+
+* get-byte
+
+#+BEGIN_SRC elisp
+;; λ, #x3bb, #xCE #xBB
+(format "#x%X" (get-byte 0 (string-as-unibyte "λ")))
+#+END_SRC
+
+#+RESULTS:
+: "#xCE"
 
 * get-file-buffer
 
@@ -2991,6 +3241,21 @@
 : ((x . 1)
 :  (y . 2))
 
+* map-charset-chars
+
+#+BEGIN_SRC elisp
+(let ((count 0))
+  (map-charset-chars
+   (lambda (range _arg)
+     (pcase-let ((`(,from . ,to) range))
+       (setq count (+ count (- to from)))))
+   'chinese-gbk)
+  count)
+#+END_SRC
+
+#+RESULTS:
+: 45718
+
 * map-delete
 
 #+BEGIN_SRC elisp
@@ -3230,6 +3495,15 @@
 #+RESULTS:
 : 3
 
+* max-char
+
+#+BEGIN_SRC elisp
+(max-char)
+#+END_SRC
+
+#+RESULTS:
+: 4194303
+
 * md5
 
 #+BEGIN_SRC elisp
@@ -3265,6 +3539,25 @@
 
 #+RESULTS:
 : 0.5
+
+* multibyte-char-to-unibyte
+
+#+BEGIN_SRC elisp
+(multibyte-char-to-unibyte #x3FFF80)
+#+END_SRC
+
+#+RESULTS:
+: 128
+
+* multibyte-string-p
+
+#+BEGIN_SRC elisp
+(list (multibyte-string-p "lambda")
+      (multibyte-string-p "λ"))
+#+END_SRC
+
+#+RESULTS:
+: (nil t)
 
 * narrow-to-region
 
@@ -4542,6 +4835,19 @@
 #+RESULTS:
 : nil
 
+* set-buffer-multibyte
+
+#+BEGIN_SRC elisp
+;; λ, #x3bb, #xCE #xBB
+(with-temp-buffer
+  (insert "lambda λ")
+  ;; 7 + 2 + 1
+  (position-bytes (point-max)))
+#+END_SRC
+
+#+RESULTS:
+: 10
+
 * set-file-modes
 
 #+BEGIN_SRC elisp
@@ -4767,6 +5073,34 @@
 #+RESULTS:
 : "abc"
 
+* string-as-multibyte
+
+#+BEGIN_SRC elisp
+(string-as-multibyte (string-as-unibyte "λ"))
+#+END_SRC
+
+#+RESULTS:
+: "λ"
+
+* string-as-unibyte
+
+#+BEGIN_SRC elisp
+(mapcar #'identity (string-as-unibyte "λ"))
+#+END_SRC
+
+#+RESULTS:
+: (206 187)
+
+* string-bytes
+
+#+BEGIN_SRC elisp
+;; #x3bb, #xCE #xBB
+(string-bytes "λ")
+#+END_SRC
+
+#+RESULTS:
+: 2
+
 * string-match
 
 #+BEGIN_SRC elisp
@@ -4832,6 +5166,16 @@
 #+RESULTS:
 : (97 98 99)
 
+* string-to-multibyte
+
+#+BEGIN_SRC elisp
+;; λ, #x3bb, #xCE #xBB
+(string-to-multibyte "\u03BB")
+#+END_SRC
+
+#+RESULTS:
+: "λ"
+
 * string-to-number
 
 #+BEGIN_SRC elisp
@@ -4847,6 +5191,12 @@
 
 #+RESULTS:
 : 42
+
+* string-to-unibyte
+
+#+BEGIN_SRC elisp
+;; FIXME: I don't understand this function
+#+END_SRC
 
 * string=
 
@@ -5119,6 +5469,16 @@
 
 #+RESULTS:
 : integer
+
+* unibyte-string
+
+#+BEGIN_SRC elisp
+;; λ, #x3bb, #xCE #xBB
+(string-as-multibyte (unibyte-string #xCE #xBB))
+#+END_SRC
+
+#+RESULTS:
+: "λ"
 
 * unintern
 
