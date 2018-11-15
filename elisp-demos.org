@@ -1326,6 +1326,17 @@
 #+RESULTS:
 : ("hello" "hello")
 
+* current-message
+
+#+BEGIN_SRC elisp
+(progn
+  (message "Hello World")
+  (current-message))
+#+END_SRC
+
+#+RESULTS:
+: "Hello World"
+
 * current-time
 
 #+BEGIN_SRC elisp
@@ -1638,6 +1649,16 @@
 
 #+RESULTS:
 : "01234"
+
+* dotimes-with-progress-reporter
+
+#+BEGIN_SRC elisp
+(dotimes-with-progress-reporter (k 500) "Collecting some mana for Emacs..."
+  (sit-for 0.01))
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * downcase
 
@@ -3256,6 +3277,21 @@
 (make-obsolete-variable 'display-buffer-function
                         'display-buffer-alist "24.3")
 #+END_SRC
+
+* make-progress-reporter
+
+#+BEGIN_SRC elisp
+(let ((progress-reporter
+       (make-progress-reporter "Collecting mana for Emacs..."
+                               0  500)))
+  (dotimes (k 500)
+    (sit-for 0.01)
+    (progress-reporter-update progress-reporter k))
+  (progress-reporter-done progress-reporter))
+#+END_SRC
+
+#+RESULTS:
+: "Collecting mana for Emacs...done"
 
 * make-record
 
@@ -5880,6 +5916,18 @@
 
 #+RESULTS:
 : 42
+
+* with-temp-message
+
+#+BEGIN_SRC elisp
+(progn (message "The original message")
+       (sit-for 3)
+       (with-temp-message "Hello World"
+         (sit-for 3)))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * with-timeout
 
