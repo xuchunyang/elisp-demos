@@ -431,6 +431,15 @@
 #+RESULTS:
 : t
 
+* boundp
+
+#+BEGIN_SRC elisp
+(boundp 'emacs-version)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * buffer-chars-modified-tick
 
 #+BEGIN_SRC elisp
@@ -1420,6 +1429,13 @@
 (defalias '\` (symbol-function 'backquote))
 #+END_SRC
 
+* defconst
+
+#+BEGIN_SRC elisp :eval no
+(defconst foo-pi 3.141592653589793
+  "The value of Pi.")
+#+END_SRC
+
 * define-advice
 
 #+BEGIN_SRC elisp :eval no
@@ -1491,6 +1507,19 @@
 
 #+RESULTS:
 : 3
+
+* defvar
+
+#+BEGIN_SRC elisp :eval no
+(defvar foo-bar 23
+  "The normal weight of a bar.")
+#+END_SRC
+
+* defvaralias
+
+#+BEGIN_SRC elisp :eval no
+(defvaralias 'messages-buffer-max-lines 'message-log-max)
+#+END_SRC
 
 * delete-char
 
@@ -2847,6 +2876,15 @@
 #+RESULTS:
 : t
 
+* keywordp
+
+#+BEGIN_SRC elisp
+(keywordp :foo)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * kill-buffer
 
 #+BEGIN_SRC elisp
@@ -2945,6 +2983,27 @@
 
 #+RESULTS:
 : 3
+
+* let
+
+#+BEGIN_SRC elisp
+(let ((x 42))
+  x)
+#+END_SRC
+
+#+RESULTS:
+: 42
+
+* let*
+
+#+BEGIN_SRC elisp
+(let* ((x 1)
+       (y (+ x 100)))
+  y)
+#+END_SRC
+
+#+RESULTS:
+: 101
 
 * let-alist
 
@@ -3180,6 +3239,13 @@
 
 #+RESULTS:
 : (pigs pigs pigs)
+
+* make-obsolete-variable
+
+#+BEGIN_SRC elisp :eval no
+(make-obsolete-variable 'display-buffer-function
+                        'display-buffer-alist "24.3")
+#+END_SRC
 
 * make-record
 
@@ -4852,6 +4918,17 @@
 #+RESULTS:
 : t
 
+* set
+
+#+BEGIN_SRC elisp
+(let ((x 1))
+  (set 'x 42)
+  x)
+#+END_SRC
+
+#+RESULTS:
+: 42
+
 * set-buffer
 
 #+BEGIN_SRC elisp
@@ -4917,19 +4994,14 @@
 * setf
 
 #+BEGIN_SRC elisp
-(let ((nums (list 1 2 3 4 5)))
-  (setf (elt nums 2) 300)
-  nums)
+(let ((numbers (list 1 2 3)))
+  (setf (elt numbers 1) 200)
+  numbers)
+
 #+END_SRC
 
 #+RESULTS:
-: (1 2 300 4 5)
-
-#+BEGIN_SRC elisp :results silent
-(cl-assert (equal (macroexpand '(setf (point) (point-min)))
-                  '(goto-char (point-min))))
-(setf (point) (point-min))
-#+END_SRC
+: (1 200 3)
 
 * setplist
 
@@ -5041,6 +5113,15 @@
 
 #+RESULTS:
 : (:if t :when nil)
+
+* special-variable-p
+
+#+BEGIN_SRC elisp
+(special-variable-p 'emacs-version)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * split-string
 
