@@ -3110,6 +3110,42 @@
 #+RESULTS:
 : nil
 
+* macroexpand
+
+#+BEGIN_SRC elisp
+(macroexpand '(when t 0 42))
+#+END_SRC
+
+#+RESULTS:
+: (if t
+:     (progn 0 42))
+
+* macroexpand-all
+
+#+BEGIN_SRC elisp
+(macroexpand-all
+ '(when-let ((buffer (get-buffer "*Help*")))
+    (setf (point) 1)))
+#+END_SRC
+
+#+RESULTS:
+: (let*
+:     ((buffer
+:       (and t
+:            (get-buffer "*Help*"))))
+:   (if buffer
+:       (goto-char 1)
+:     nil))
+
+* macrop
+
+#+BEGIN_SRC elisp
+(macrop 'when)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * make-directory
 
 #+BEGIN_SRC elisp
