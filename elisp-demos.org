@@ -983,6 +983,22 @@
 #+RESULTS:
 : 0
 
+* completing-read
+
+#+BEGIN_SRC elisp
+(completing-read "Enter a name: " '("Tom" "Jerry" "Spike" "Tyke"))
+#+END_SRC
+
+#+RESULTS:
+: "Tom"
+
+#+BEGIN_SRC elisp
+(completing-read "M-x " obarray #'commandp)
+#+END_SRC
+
+#+RESULTS:
+: "emacs-version"
+
 * concat
 
 #+BEGIN_SRC elisp
