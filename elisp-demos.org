@@ -5736,6 +5736,42 @@
 #+RESULTS:
 : t
 
+* version-to-list
+
+#+BEGIN_SRC elisp
+(version-to-list "26.1")
+#+END_SRC
+
+#+RESULTS:
+: (26 1)
+
+* version<
+
+#+BEGIN_SRC elisp
+(version< "24.5" "26.1")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* version<=
+
+#+BEGIN_SRC elisp
+(version<= "24.5" "26.1")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* version=
+
+#+BEGIN_SRC elisp
+(version= "24.5" "24.5")
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * when
 
 #+BEGIN_SRC elisp
