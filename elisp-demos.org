@@ -190,12 +190,7 @@
 * add-hook
 
 #+BEGIN_SRC elisp :eval no
-(add-hook 'find-file-hook
-          (lambda ()
-            (and buffer-file-name
-                 (equal buffer-file-name
-                        user-init-file)
-                 (message "Stop tweaking Emacs"))))
+(add-hook 'lisp-interaction-mode-hook #'prettify-symbols-mode)
 #+END_SRC
 
 * add-to-list
@@ -2530,6 +2525,15 @@
 #+RESULTS:
 : "65 (#o101, #x41, ?A)"
 
+* format-mode-line
+
+#+BEGIN_SRC elisp
+(format-mode-line '(buffer-file-name "%f" "%b"))
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/src/elisp-demos/elisp-demos.org"
+
 * format-seconds
 
 #+BEGIN_SRC elisp
@@ -4726,6 +4730,12 @@
 #+RESULTS:
 : ((1)
 :  (3))
+
+* remove-hook
+
+#+BEGIN_SRC elisp :eval no
+(remove-hook 'lisp-interaction-mode-hook #'prettify-symbols-mode)
+#+END_SRC
 
 * remove-overlays
 
