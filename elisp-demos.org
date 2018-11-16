@@ -187,6 +187,15 @@
 #+RESULTS:
 : 1.5707963267948966
 
+* active-minibuffer-window
+
+#+BEGIN_SRC elisp
+(active-minibuffer-window)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * add-hook
 
 #+BEGIN_SRC elisp :eval no
@@ -3914,6 +3923,35 @@
 #+RESULTS:
 : -4
 
+* minibuffer-window
+
+#+BEGIN_SRC elisp
+(minibuffer-window)
+#+END_SRC
+
+#+RESULTS:
+: #<window 4 on  *Minibuf-0*>
+
+* minibuffer-with-setup-hook
+
+#+BEGIN_SRC elisp
+(minibuffer-with-setup-hook
+    (lambda () (insert "hello world"))
+  (read-string "Enter something: "))
+#+END_SRC
+
+#+RESULTS:
+: "hello world"
+
+* minibufferp
+
+#+BEGIN_SRC elisp
+(minibufferp)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * mod
 
 #+BEGIN_SRC elisp
@@ -6366,6 +6404,15 @@
 #+RESULTS:
 : (#<window 111 on elisp-demos.org> #<window 119 on *scratch*>)
 
+* window-minibuffer-p
+
+#+BEGIN_SRC elisp
+(window-minibuffer-p (minibuffer-window))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * with-current-buffer
 
 #+BEGIN_SRC elisp
@@ -6459,6 +6506,33 @@
 
 #+RESULTS:
 : nil
+
+* y-or-n-p
+
+#+BEGIN_SRC elisp
+(y-or-n-p "Are you ready? ")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* y-or-n-p-with-timeout
+
+#+BEGIN_SRC elisp
+(y-or-n-p-with-timeout "Are you ready? " 3 'default)
+#+END_SRC
+
+#+RESULTS:
+: default
+
+* yes-or-no-p
+
+#+BEGIN_SRC elisp
+(yes-or-no-p "Are you ready? ")
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * zerop
 
