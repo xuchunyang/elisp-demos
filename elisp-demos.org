@@ -661,6 +661,15 @@
 #+RESULTS:
 : "5"
 
+* call-interactively
+
+#+BEGIN_SRC elisp
+(call-interactively #'emacs-version)
+#+END_SRC
+
+#+RESULTS:
+: "GNU Emacs 26.1 (build 1, x86_64-apple-darwin18.2.0, Carbon Version 158 AppKit 1671.1) of 2018-11-11"
+
 * call-process
 
 #+BEGIN_SRC elisp
@@ -1141,6 +1150,15 @@
 
 #+BEGIN_SRC elisp
 (coding-system-p 'utf-8)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* commandp
+
+#+BEGIN_SRC elisp
+(commandp #'next-line)
 #+END_SRC
 
 #+RESULTS:
@@ -1732,6 +1750,16 @@
 
 #+RESULTS:
 : (nil t)
+
+* discard-input
+
+#+BEGIN_SRC elisp
+(progn (sleep-for 2)
+       (discard-input))
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * documentation
 
@@ -5622,6 +5650,24 @@
 
 #+RESULTS:
 : 1.0
+
+* sit-for
+
+#+BEGIN_SRC elisp
+(sit-for 3)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* sleep-for
+
+#+BEGIN_SRC elisp
+(sleep-for 3)
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * sort
 
