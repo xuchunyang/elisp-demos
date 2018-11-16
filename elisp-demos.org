@@ -2821,6 +2821,54 @@
 #+RESULTS:
 : (nil intern-soft)
 
+* iter-defun
+
+#+BEGIN_SRC elisp :lexical t
+(iter-defun foo-number-sequence (start)
+  (while t
+    (iter-yield start)
+    (setq start (1+ start))))
+
+(cl-loop repeat 10
+         for n iter-by (foo-number-sequence 1)
+         collect n)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6 7 8 9 10)
+
+* iter-do
+
+#+BEGIN_SRC elisp :lexical t
+(iter-defun foo-number-sequence (start)
+  (while t
+    (iter-yield start)
+    (setq start (1+ start))))
+
+(catch 'break
+  (let ((count 0) result)
+    (iter-do (n (foo-number-sequence 1))
+      (if (< count 10)
+          (push n result)
+        (throw 'break (nreverse result)))
+      (setq count (1+ count)))))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6 7 8 9 10)
+
+* iter-lambda
+
+#+BEGIN_SRC elisp :lexical t
+(cl-loop for n iter-by (funcall (iter-lambda ()
+                                  (dotimes (i 10)
+                                    (iter-yield i))))
+         collect n)
+#+END_SRC
+
+#+RESULTS:
+: (0 1 2 3 4 5 6 7 8 9)
+
 * json-encode
 
 #+BEGIN_SRC elisp
