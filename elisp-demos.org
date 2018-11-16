@@ -1879,6 +1879,19 @@
 (error "Invalid name `%s'" "A%%B")
 #+END_SRC
 
+* ert-deftest
+
+#+BEGIN_SRC elisp
+(ert-deftest foo ()
+  (should (> float-pi 3))
+  (should-not (< float-pi 3))
+  (should-error (/ 1 0) :type 'arith-error)
+  (skip-unless (featurep 'dbusbind)))
+#+END_SRC
+
+#+RESULTS:
+: foo
+
 * eval
 
 #+BEGIN_SRC elisp
