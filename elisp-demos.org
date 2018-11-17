@@ -1651,6 +1651,16 @@
 #+RESULTS:
 : "hello"
 
+* delete-consecutive-dups
+
+#+BEGIN_SRC elisp
+(let ((l (list 1 2 2 3 2)))
+  (delete-consecutive-dups l))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 2)
+
 * delete-dups
 
 #+BEGIN_SRC elisp
@@ -3273,6 +3283,19 @@
 #+RESULTS:
 : (:id 1234 :url "https://example.com")
 
+* letrec
+
+#+BEGIN_SRC elisp
+(letrec ((len (lambda (list)
+                (if list
+                    (1+ (funcall len (cdr list)))
+                  0))))
+  (funcall len '(a b c)))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * libxml-available-p
 
 #+BEGIN_SRC elisp
@@ -3384,6 +3407,15 @@
 
 #+RESULTS:
 : "/Users/xcy/.emacs.d/init.el"
+
+* locate-library
+
+#+BEGIN_SRC elisp
+(locate-library "pcase")
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/src/emacs-mac/lisp/emacs-lisp/pcase.elc"
 
 * locate-user-emacs-file
 
@@ -3687,6 +3719,24 @@
 #+RESULTS:
 : ((x . 1)
 :  (y . 2))
+
+* map-keymap
+
+#+BEGIN_SRC elisp
+(let (result)
+  (map-keymap
+   (lambda (event function)
+     (push (cons event function) result))
+   (let ((keymap (make-sparse-keymap)))
+     (define-key keymap "n" #'next-line)
+     (define-key keymap "p" #'previous-line)
+     keymap))
+  result)
+#+END_SRC
+
+#+RESULTS:
+: ((110 . next-line)
+:  (112 . previous-line))
 
 * map-keys
 
@@ -6014,6 +6064,15 @@
 ;; Emacs -> Vim -> Emacs
 (suspend-emacs "vim ; fg")
 #+END_SRC
+
+* symbol-file
+
+#+BEGIN_SRC elisp
+(symbol-file 'pcase)
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/src/emacs-mac/lisp/emacs-lisp/pcase.elc"
 
 * symbol-name
 
