@@ -4362,17 +4362,35 @@
 * pcase
 
 #+BEGIN_SRC elisp
-(mapcar
- (lambda (arg)
-   (pcase arg
-     (`(,car . ,cdr) (apply #'+ car cdr))
-     (x (format "%S is a cons cell" x))))
- '((1 2 3 4)
-   42))
+(mapcar (lambda (x)
+          (pcase x
+            ((and o (guard (not (numberp o)))) "Not a number")
+            ((and n (guard (< n 42))) '<)
+            (42 '=)
+            (_ '>)))
+        '(41 42 43 "hello"))
+;; => (< = > "Not a number")
 #+END_SRC
 
 #+RESULTS:
-: (10 "42 is a cons cell")
+: (< = > "Not a number")
+
+#+BEGIN_SRC elisp
+(mapcar
+ (lambda (exp)
+   (pcase exp
+     (`(defun ,args . ,body) "Function")
+     (`(defmacro ,args . ,body) "Macro")
+     (`(,(or 'defvar 'defvar-local 'defconst) ,var . ,rest) "Variable")
+     (_ (format "Unknown expression %s" exp))))
+ '((defun add1 (x) (+ x 1))
+   (defmacro incf (var) `(setq ,var (1+ ,var)))
+   (defvar foo 42 "A number")
+   (+ 1 2 3)))
+#+END_SRC
+
+#+RESULTS:
+: ("Function" "Macro" "Variable" "Unknown expression (+ 1 2 3)")
 
 * pcase-dolist
 
