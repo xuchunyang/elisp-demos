@@ -4131,7 +4131,7 @@
 * nreverse
 
 #+BEGIN_SRC elisp
-(let ((x '(1 2 3 4)))
+(let ((x (list 1 2 3 4)))
   (setq x (nreverse x))
   x)
 #+END_SRC
