@@ -1704,6 +1704,17 @@
 #+RESULTS:
 : (1 3)
 
+* derived-mode-p
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (emacs-lisp-mode)
+  (derived-mode-p 'prog-mode))
+#+END_SRC
+
+#+RESULTS:
+: prog-mode
+
 * detect-coding-region
 
 #+BEGIN_SRC elisp
