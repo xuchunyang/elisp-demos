@@ -255,11 +255,11 @@
 * apply
 
 #+BEGIN_SRC elisp
-(apply #'+ (number-sequence 1 100))
+(apply #'+ 1 2 '(3 4))
 #+END_SRC
 
 #+RESULTS:
-: 5050
+: 10
 
 * aref
 
