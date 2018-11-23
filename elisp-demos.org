@@ -243,6 +243,19 @@
 #+RESULTS:
 : (3 nil)
 
+* and-let*
+
+#+BEGIN_SRC elisp
+(and-let* ((bashrc (expand-file-name "~/.bashrc"))
+           ((file-readable-p bashrc))
+           (attrs (file-attributes bashrc))
+           (mt (file-attribute-modification-time attrs))
+           ((format-time-string "%Y-%m-%d" mt))))
+#+END_SRC
+
+#+RESULTS:
+: "2018-10-27"
+
 * append
 
 #+BEGIN_SRC elisp
@@ -2812,6 +2825,24 @@
 #+RESULTS:
 : 3
 
+* hash-table-empty-p
+
+#+BEGIN_SRC elisp
+(hash-table-empty-p #s(hash-table))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* hash-table-keys
+
+#+BEGIN_SRC elisp
+(hash-table-keys #s(hash-table data (x 1 y 2 z 3)))
+#+END_SRC
+
+#+RESULTS:
+: (x y z)
+
 * hash-table-p
 
 #+BEGIN_SRC elisp
@@ -2856,6 +2887,15 @@
 
 #+RESULTS:
 : eq
+
+* hash-table-values
+
+#+BEGIN_SRC elisp
+(hash-table-values #s(hash-table data (x 1 y 2 z 3)))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
 
 * hash-table-weakness
 
@@ -5923,6 +5963,15 @@
 #+RESULTS:
 : (206 187)
 
+* string-blank-p
+
+#+BEGIN_SRC elisp
+(string-blank-p " ")
+#+END_SRC
+
+#+RESULTS:
+: 0
+
 * string-bytes
 
 #+BEGIN_SRC elisp
@@ -5932,6 +5981,24 @@
 
 #+RESULTS:
 : 2
+
+* string-empty-p
+
+#+BEGIN_SRC elisp
+(string-empty-p "")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* string-join
+
+#+BEGIN_SRC elisp
+(string-join '("a" "b" "c") "-")
+#+END_SRC
+
+#+RESULTS:
+: "a-b-c"
 
 * string-match
 
@@ -5962,6 +6029,24 @@
 
 #+RESULTS:
 : t
+
+* string-remove-prefix
+
+#+BEGIN_SRC elisp
+(string-remove-prefix "=> " "=> Hello <=")
+#+END_SRC
+
+#+RESULTS:
+: "Hello <="
+
+* string-remove-suffix
+
+#+BEGIN_SRC elisp
+(string-remove-suffix " <=" "=> Hello <=")
+#+END_SRC
+
+#+RESULTS:
+: "=> Hello"
 
 * string-suffix-p
 
@@ -6029,6 +6114,33 @@
 #+BEGIN_SRC elisp
 ;; FIXME: I don't understand this function
 #+END_SRC
+
+* string-trim
+
+#+BEGIN_SRC elisp
+(string-trim " hello ")
+#+END_SRC
+
+#+RESULTS:
+: "hello"
+
+* string-trim-left
+
+#+BEGIN_SRC elisp
+(string-trim-left " hello ")
+#+END_SRC
+
+#+RESULTS:
+: "hello "
+
+* string-trim-right
+
+#+BEGIN_SRC elisp
+(string-trim-right " hello ")
+#+END_SRC
+
+#+RESULTS:
+: " hello"
 
 * string-width
 
@@ -6191,6 +6303,32 @@
 #+BEGIN_SRC elisp :eval no
 (thing-at-point 'symbol)
 #+END_SRC
+
+* thread-first
+
+#+BEGIN_SRC elisp
+(thread-first 5
+  (+ 20)
+  (/ 25)
+  -
+  (+ 40))
+#+END_SRC
+
+#+RESULTS:
+: 39
+
+* thread-last
+
+#+BEGIN_SRC elisp
+(thread-last 5
+  (+ 20)
+  (/ 25)
+  -
+  (+ 40))
+#+END_SRC
+
+#+RESULTS:
+: 39
 
 * time-add
 
