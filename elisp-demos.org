@@ -2621,6 +2621,15 @@
 #+RESULTS:
 : 0
 
+* frame-root-window
+
+#+BEGIN_SRC elisp
+(frame-root-window)
+#+END_SRC
+
+#+RESULTS:
+: #<window 43>
+
 * fround
 
 #+BEGIN_SRC elisp
@@ -5202,6 +5211,24 @@
 #+RESULTS:
 : (md5 sha1 sha224 sha256 sha384 sha512)
 
+* selected-window
+
+#+BEGIN_SRC elisp
+(selected-window)
+#+END_SRC
+
+#+RESULTS:
+: #<window 25 on elisp-demos.org>
+
+* selected-window-group
+
+#+BEGIN_SRC elisp
+(selected-window-group)
+#+END_SRC
+
+#+RESULTS:
+: (#<window 42 on elisp-demos.org> #<window 44 on elisp-demos.org>)
+
 * seq-concatenate
 
 #+BEGIN_SRC elisp
@@ -6529,6 +6556,15 @@
 #+RESULTS:
 : (:narrowed "hello" :widened "hello world")
 
+* window-frame
+
+#+BEGIN_SRC elisp
+(window-frame)
+#+END_SRC
+
+#+RESULTS:
+: #<frame /Users/xcy/src/elisp-demos/elisp-demos.org 0x10495b9c8>
+
 * window-list
 
 #+BEGIN_SRC elisp
@@ -6538,10 +6574,46 @@
 #+RESULTS:
 : (#<window 111 on elisp-demos.org> #<window 119 on *scratch*>)
 
+* window-live-p
+
+#+BEGIN_SRC elisp
+(window-live-p (selected-window))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * window-minibuffer-p
 
 #+BEGIN_SRC elisp
 (window-minibuffer-p (minibuffer-window))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* window-parent
+
+#+BEGIN_SRC elisp
+(window-parent)
+#+END_SRC
+
+#+RESULTS:
+: #<window 43>
+
+* window-valid-p
+
+#+BEGIN_SRC elisp
+(window-valid-p (selected-window))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* windowp
+
+#+BEGIN_SRC elisp
+(windowp (selected-window))
 #+END_SRC
 
 #+RESULTS:
