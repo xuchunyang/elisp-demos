@@ -56,7 +56,10 @@
   (with-temp-buffer
     (insert orgsrc)
     (delay-mode-hooks (org-mode))
-    (font-lock-ensure)
+    (if (fboundp 'font-lock-ensure)
+        (font-lock-ensure)
+      (with-no-warnings
+        (font-lock-fontify-buffer)))
     (buffer-string)))
 
 (defun elisp-demos--symbols ()
