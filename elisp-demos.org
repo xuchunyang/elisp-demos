@@ -2141,6 +2141,15 @@
 #+RESULTS:
 : 1024
 
+* fboundp
+
+#+BEGIN_SRC elisp
+(fboundp 'font-lock-ensure)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * fceiling
 
 #+BEGIN_SRC elisp
@@ -2149,6 +2158,15 @@
 
 #+RESULTS:
 : 2.0
+
+* featurep
+
+#+BEGIN_SRC elisp
+(featurep 'xemacs)
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * ffloor
 
@@ -4996,6 +5014,15 @@
 
 #+RESULTS:
 : "2018 Nov 07th"
+
+* require
+
+#+BEGIN_SRC elisp
+(require 'pcase)
+#+END_SRC
+
+#+RESULTS:
+: pcase
 
 * reverse
 
