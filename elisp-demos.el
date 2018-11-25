@@ -27,8 +27,8 @@
 
 ;;; Code:
 
-(require 'subr-x)
 (eval-when-compile (require 'cl-lib))
+(require 'subr-x)
 
 (defconst elisp-demos--load-dir (file-name-directory
                                  (or load-file-name buffer-file-name)))
@@ -122,10 +122,11 @@
                                          (special-form-p sym)
                                          (macrop sym))))))
   ;; Try to reuse existing window
-  (if-let ((buffer (get-file-buffer elisp-demos--elisp-demos.org))
-           (window (get-buffer-window buffer)))
-      (select-window window)
-    (find-file elisp-demos--elisp-demos.org))
+  (let* ((buffer (get-file-buffer elisp-demos--elisp-demos\.org))
+         (window (and buffer (get-buffer-window buffer))))
+    (if window
+        (select-window window)
+      (find-file elisp-demos--elisp-demos\.org)))
   (goto-char (point-min))
   (or
    (catch 'found
@@ -163,24 +164,25 @@
 
 ;;;###autoload
 (defun elisp-demos-advice-describe-function-1 (function)
-  (when-let ((src (elisp-demos--search function))
-             (buf (get-buffer "*Help*")))
-    (with-current-buffer buf
-      (save-excursion
-        (let ((inhibit-read-only t))
-          (goto-char (point-max))
-          ;; Ensure two final newlines
-          (if (not (eq (char-before) ?\n))
-              (insert "\n\n")
-            (if (not (eq (char-before (1- (point))) ?\n))
-                (insert "\n")))
-          (insert
-           (propertize (elisp-demos--syntax-highlight src)
-                       'start (point)
-                       'symbol function
-                       'keymap elisp-demos-help-keymap)
-           "\n")
-          (unless (eobp) (insert "\n")))))))
+  (let ((src (elisp-demos--search function))
+        (buf (get-buffer "*Help*")))
+    (when (and src buf)
+      (with-current-buffer buf
+        (save-excursion
+          (let ((inhibit-read-only t))
+            (goto-char (point-max))
+            ;; Ensure two final newlines
+            (if (not (eq (char-before) ?\n))
+                (insert "\n\n")
+              (if (not (eq (char-before (1- (point))) ?\n))
+                  (insert "\n")))
+            (insert
+             (propertize (elisp-demos--syntax-highlight src)
+                         'start (point)
+                         'symbol function
+                         'keymap elisp-demos-help-keymap)
+             "\n")
+            (unless (eobp) (insert "\n"))))))))
 
 ;;; * helpful.el - https://github.com/Wilfred/helpful
 
@@ -189,19 +191,20 @@
 
 ;;;###autoload
 (defun elisp-demos-advice-helpful-update ()
-  (when-let ((src (elisp-demos--search helpful--sym)))
-    (save-excursion
-      (goto-char (point-min))
-      (when (re-search-forward "^References$")
-        (goto-char (line-beginning-position))
-        (let ((inhibit-read-only t))
-          (insert
-           (helpful--heading "Demos")
-           (propertize (elisp-demos--syntax-highlight src)
-                       'start (point)
-                       'symbol helpful--sym
-                       'keymap elisp-demos-help-keymap)
-           "\n\n"))))))
+  (let ((src (elisp-demos--search helpful--sym)))
+    (when src
+      (save-excursion
+        (goto-char (point-min))
+        (when (re-search-forward "^References$")
+          (goto-char (line-beginning-position))
+          (let ((inhibit-read-only t))
+            (insert
+             (helpful--heading "Demos")
+             (propertize (elisp-demos--syntax-highlight src)
+                         'start (point)
+                         'symbol helpful--sym
+                         'keymap elisp-demos-help-keymap)
+             "\n\n")))))))
 
 ;;; * JSON
 
