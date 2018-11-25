@@ -6860,6 +6860,20 @@
 #+RESULTS:
 : "You've not type any key"
 
+* with-help-window
+
+#+BEGIN_SRC elisp
+(with-help-window "*My Help Window*"
+  (princ "Used keymap is help-mode-map:")
+  (terpri)
+  (terpri)
+  (prin1 help-mode-map)
+  (terpri))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * write-char
 
 #+BEGIN_SRC elisp :results output
