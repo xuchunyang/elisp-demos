@@ -5,9 +5,10 @@ addons:
     packages:
       - texinfo
 env:
+  - EMACS_VERSION=24.4-travis
   - EMACS_VERSION=24.5-travis
   - EMACS_VERSION=25.1-travis
-  - EMACS_VERSION=25.2-travis
+  # - EMACS_VERSION=25.2-travis
   - EMACS_VERSION=25.3-travis
   - EMACS_VERSION=26.1-travis
   # - EMACS_VERSION=git-snapshot
