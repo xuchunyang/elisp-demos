@@ -134,7 +134,7 @@
        (cond ((string= (match-string-no-properties 1) (symbol-name symbol))
               (goto-char (line-beginning-position))
               (user-error "%s already exists" symbol))
-             ((string> (match-string-no-properties 1) (symbol-name symbol))
+             ((string< (symbol-name symbol) (match-string-no-properties 1))
               (goto-char (line-beginning-position))
               (throw 'found t)))))
    (goto-char (point-max)))
