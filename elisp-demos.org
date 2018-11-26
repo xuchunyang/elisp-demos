@@ -3513,6 +3513,41 @@
 #+RESULTS:
 : 3.0
 
+* looking-at
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello\n")
+  (goto-char (point-min))
+  (looking-at "^hello$"))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* looking-at-p
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello\n")
+  (goto-char (point-min))
+  (looking-at-p "^hello$"))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* looking-back
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (looking-back "^hello$" (line-beginning-position)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * lookup-key
 
 #+BEGIN_SRC elisp
