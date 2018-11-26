@@ -17,6 +17,29 @@
 (how-many "^\\* ")
 #+END_SRC
 
+* !cdr
+
+#+BEGIN_SRC elisp
+(let ((l '(1 2 3)))
+  (!cdr l)
+  l)
+#+END_SRC
+
+#+RESULTS:
+: (2 3)
+
+* !cons
+
+#+BEGIN_SRC elisp
+(let (l)
+  (!cons 1 l)
+  (!cons 2 l)
+  l)
+#+END_SRC
+
+#+RESULTS:
+: (2 1)
+
 * %
 
 #+BEGIN_SRC elisp
@@ -52,6 +75,15 @@
 
 #+RESULTS:
 : 2
+
+* -->
+
+#+BEGIN_SRC elisp
+(--> "def" (concat "abc" it "ghi") (upcase it))
+#+END_SRC
+
+#+RESULTS:
+: "ABCDEFGHI"
 
 * --all?
 
@@ -91,6 +123,15 @@
 
 #+RESULTS:
 : 3
+
+* --dotimes
+
+#+BEGIN_SRC elisp :results output
+(--dotimes 3 (princ it))
+#+END_SRC
+
+#+RESULTS:
+: "012"
 
 * --drop-while
 
@@ -136,6 +177,17 @@
 
 #+RESULTS:
 : 5
+
+* --if-let
+
+#+BEGIN_SRC elisp
+(--if-let (cl-evenp 4)
+    it
+  nil)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * --iterate
 
@@ -443,6 +495,30 @@
 #+RESULTS:
 : ("foo" "bar" 3 "quux")
 
+* ->
+
+#+BEGIN_SRC elisp
+;; (/ (- 5 1) 2)
+(-> 5 (- 1) (/ 2))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* ->>
+
+#+BEGIN_SRC elisp
+;; (+ 40 (- (/ 25 (+ 20 5))))
+(->> 5
+     (+ 20)
+     (/ 25)
+     -
+     (+ 40))
+#+END_SRC
+
+#+RESULTS:
+: 39
+
 * -all?
 
 #+BEGIN_SRC elisp
@@ -471,6 +547,24 @@
 
 #+RESULTS:
 : t
+
+* -applify
+
+#+BEGIN_SRC elisp
+(funcall (-applify #'<) '(3 6))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* -as->
+
+#+BEGIN_SRC elisp
+(-as-> 3 my-var 1+ (/ my-var 2))
+#+END_SRC
+
+#+RESULTS:
+: 2
 
 * -butlast
 
@@ -503,6 +597,15 @@
 #+RESULTS:
 : (1 2)
 
+* -compose
+
+#+BEGIN_SRC elisp
+(funcall (-compose #'string-trim #'upcase) " hello ")
+#+END_SRC
+
+#+RESULTS:
+: "HELLO"
+
 * -concat
 
 #+BEGIN_SRC elisp
@@ -520,6 +623,15 @@
 
 #+RESULTS:
 : (1 2 . 3)
+
+* -const
+
+#+BEGIN_SRC elisp
+(-map (-const 1) '("a" "b" "c" "d"))
+#+END_SRC
+
+#+RESULTS:
+: (1 1 1 1)
 
 * -contains?
 
@@ -548,6 +660,15 @@
 #+RESULTS:
 : 2
 
+* -cut
+
+#+BEGIN_SRC elisp
+(funcall (-cut list 1 <> 3 <> 5) 2 4)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5)
+
 * -cycle
 
 #+BEGIN_SRC elisp
@@ -575,6 +696,24 @@
 #+RESULTS:
 : (1 2 4)
 
+* -dotimes
+
+#+BEGIN_SRC elisp :results output
+(-dotimes 3 #'princ)
+#+END_SRC
+
+#+RESULTS:
+: "012"
+
+* -doto
+
+#+BEGIN_SRC elisp
+(-doto '(1 . 2) (setcar 3) (setcdr 4))
+#+END_SRC
+
+#+RESULTS:
+: (3 . 4)
+
 * -drop
 
 #+BEGIN_SRC elisp
@@ -601,6 +740,53 @@
 
 #+RESULTS:
 : (1 2 3 4)
+
+* -each
+
+#+BEGIN_SRC elisp :results output
+(-each '(1 2 3) #'princ)
+#+END_SRC
+
+#+RESULTS:
+: "123"
+
+* -each-indexed
+
+#+BEGIN_SRC elisp :results output
+(-each-indexed '(a b c) (lambda (index item)
+                          (princ index)
+                          (princ item)))
+#+END_SRC
+
+#+RESULTS:
+: "0a1b2c"
+
+* -each-r
+
+#+BEGIN_SRC elisp :results output
+(-each-r '(1 2 3) #'princ)
+#+END_SRC
+
+#+RESULTS:
+: "321"
+
+* -each-r-while
+
+#+BEGIN_SRC elisp :results output
+(-each-r-while '(2 4 5 6) #'cl-evenp #'princ)
+#+END_SRC
+
+#+RESULTS:
+: "6"
+
+* -each-while
+
+#+BEGIN_SRC elisp :results output
+(-each-while '(2 4 5 6) #'cl-evenp #'princ)
+#+END_SRC
+
+#+RESULTS:
+: "24"
 
 * -elem-index
 
@@ -703,6 +889,15 @@
 :    (3 4)
 :    ((5 6)))
 
+* -flip
+
+#+BEGIN_SRC elisp
+(funcall (-flip #'<) 2 1)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * -fourth-item
 
 #+BEGIN_SRC elisp
@@ -721,6 +916,17 @@
 #+RESULTS:
 : ((nil 1 3)
 :  (t 2 4))
+
+* -if-let
+
+#+BEGIN_SRC elisp
+(-if-let (match-index (string-match "d" "abc"))
+    (+ match-index 3)
+  7)
+#+END_SRC
+
+#+RESULTS:
+: 7
 
 * -inits
 
@@ -807,6 +1013,15 @@
 #+RESULTS:
 : (1 2 3 4 5 6 7 8 9 10)
 
+* -juxt
+
+#+BEGIN_SRC elisp
+(funcall (-juxt #'+ #'-) 3 5)
+#+END_SRC
+
+#+RESULTS:
+: (8 -2)
+
 * -keep
 
 #+BEGIN_SRC elisp
@@ -817,6 +1032,19 @@
 
 #+RESULTS:
 : (4 16)
+
+* -lambda
+
+#+BEGIN_SRC elisp
+(-map (-lambda ((x . y))
+        (+ x y))
+      '((1 . 2)
+        (3 . 4)
+        (5 . 6)))
+#+END_SRC
+
+#+RESULTS:
+: (3 7 11)
 
 * -last
 
@@ -835,6 +1063,28 @@
 
 #+RESULTS:
 : 3
+
+* -let
+
+#+BEGIN_SRC elisp
+(-let (([a (b c) d]
+        [1 (2 3) 4]))
+  (list a b c d))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4)
+
+* -let*
+
+#+BEGIN_SRC elisp
+(-let* (((a b) '( 1 2))
+        ((c d) (--map (+ it 2) (list a b))))
+  (list a b c d))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4)
 
 * -list
 
@@ -962,10 +1212,39 @@
 #+RESULTS:
 : t
 
+* -not
+
+#+BEGIN_SRC elisp
+(funcall (-not #'cl-evenp) 5)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* -on
+
+#+BEGIN_SRC elisp
+(-sort (-on #'< #'length) '((1 2 3) (1) (1 2)))
+#+END_SRC
+
+#+RESULTS:
+: ((1)
+:  (1 2)
+:  (1 2 3))
+
 * -only-some?
 
 #+BEGIN_SRC elisp
 (-only-some? #'cl-evenp '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* -orfn
+
+#+BEGIN_SRC elisp
+(funcall (-orfn #'stringp #'cl-evenp) 4)
 #+END_SRC
 
 #+RESULTS:
@@ -980,6 +1259,15 @@
 #+RESULTS:
 : ((1 2 3)
 :  (4 5 0))
+
+* -partial
+
+#+BEGIN_SRC elisp
+(funcall (-partial '- 5) 3)
+#+END_SRC
+
+#+RESULTS:
+: 2
 
 * -partition
 
@@ -1311,6 +1599,15 @@
 #+RESULTS:
 : (5 6 7 1 2 3 4)
 
+* -rpartial
+
+#+BEGIN_SRC elisp
+(funcall (-rpartial '- 5) 8)
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * -running-product
 
 #+BEGIN_SRC elisp
@@ -1393,6 +1690,17 @@
 :  ((1)
 :   (4)))
 
+* -setq
+
+#+BEGIN_SRC elisp
+(let (a b)
+  (-setq [a b] [1 2 3])
+  (list a b))
+#+END_SRC
+
+#+RESULTS:
+: (1 2)
+
 * -slice
 
 #+BEGIN_SRC elisp
@@ -1419,6 +1727,33 @@
 
 #+RESULTS:
 : t
+
+* -some-->
+
+#+BEGIN_SRC elisp
+(-some--> "def" (concat "abc" it "ghi"))
+#+END_SRC
+
+#+RESULTS:
+: "abcdefghi"
+
+* -some->
+
+#+BEGIN_SRC elisp
+(-some-> 6 (/ 2))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* -some->>
+
+#+BEGIN_SRC elisp
+(-some->> '(2 4 6) (-last #'cl-evenp) (+ 100))
+#+END_SRC
+
+#+RESULTS:
+: 106
 
 * -sort
 
@@ -1659,6 +1994,28 @@
 
 #+RESULTS:
 : (9 1 2 3 4 5)
+
+* -when-let
+
+#+BEGIN_SRC elisp
+(-when-let (match-index (string-match "d" "abcd"))
+  (+ match-index 2))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
+* -when-let*
+
+#+BEGIN_SRC elisp
+(-when-let* ((x 5)
+             (y 3)
+             (z (+ y 4)))
+  (+ x y z))
+#+END_SRC
+
+#+RESULTS:
+: 15
 
 * -zip
 
