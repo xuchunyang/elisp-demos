@@ -5450,6 +5450,15 @@
 #+RESULTS:
 : "Emacs is 33 years, 247 days, 21 hours, 32 minutes, 51 seconds old"
 
+* format-spec
+
+#+BEGIN_SRC elisp
+(format-spec "%a + %b = %b + %a" '((?a . 1) (?b . 2)))
+#+END_SRC
+
+#+RESULTS:
+: "1 + 2 = 2 + 1"
+
 * format-time-string
 
 #+BEGIN_SRC elisp
