@@ -1836,6 +1836,290 @@
 #+RESULTS:
 : (3 2 1)
 
+* dom-add-child-before
+
+#+BEGIN_SRC elisp
+(let* ((dom '(ol nil
+                 (li nil "Perl")
+                 (li nil "Python")
+                 (li nil "PHP")))
+       (python (elt (dom-by-tag dom 'li) 1)))
+  (dom-add-child-before dom '(li nil "Ruby") python)
+  dom)
+#+END_SRC
+
+#+RESULTS:
+: (ol nil
+:     (li nil "Perl")
+:     (li nil "Ruby")
+:     (li nil "Python")
+:     (li nil "PHP"))
+
+* dom-append-child
+
+#+BEGIN_SRC elisp
+(dom-append-child '(ol nil
+                       (li nil "Perl")
+                       (li nil "Python")
+                       (li nil "PHP"))
+                  '(li nil "Ruby"))
+#+END_SRC
+
+#+RESULTS:
+: (ol nil
+:     (li nil "Perl")
+:     (li nil "Python")
+:     (li nil "PHP")
+:     (li nil "Ruby"))
+
+* dom-attr
+
+#+BEGIN_SRC elisp
+(dom-attr '(a ((href . "https://www.gnu.org/s/emacs/")) "GNU Emacs")
+          'href)
+#+END_SRC
+
+#+RESULTS:
+: "https://www.gnu.org/s/emacs/"
+
+* dom-attributes
+
+#+BEGIN_SRC elisp
+(dom-attributes '(a ((href . "https://www.gnu.org/s/emacs/")) "GNU Emacs"))
+#+END_SRC
+
+#+RESULTS:
+: ((href . "https://www.gnu.org/s/emacs/"))
+
+* dom-by-class
+
+#+BEGIN_SRC elisp
+(dom-by-class '(ol nil
+                   (li ((class . "compiled")) "C")
+                   (li ((class . "interpreted")) "Perl")
+                   (li ((class . "interpreted")) "Python")
+                   (li ((class . "interpreted")) "PHP")
+                   (li ((class . "compiled")) "Java"))
+              "compiled")
+#+END_SRC
+
+#+RESULTS:
+: ((li
+:   ((class . "compiled"))
+:   "C")
+:  (li
+:   ((class . "compiled"))
+:   "Java"))
+
+* dom-by-id
+
+#+BEGIN_SRC elisp
+(dom-by-id '(body nil
+                  (h1 nil "heading")
+                  (p ((id . "output")) "Here is some output."))
+           "output")
+#+END_SRC
+
+#+RESULTS:
+: ((p
+:   ((id . "output"))
+:   "Here is some output."))
+
+* dom-by-style
+
+#+BEGIN_SRC elisp
+(dom-by-style '(body nil
+                     (h1 ((style . "color: blue")) "h1 heading")
+                     (p ((style . "color: red")) "first paragraph")
+                     (p ((style . "color: green")) "second paragraph"))
+              (rx (or "red" "green")))
+#+END_SRC
+
+#+RESULTS:
+: ((p
+:   ((style . "color: red"))
+:   "first paragraph")
+:  (p
+:   ((style . "color: green"))
+:   "second paragraph"))
+
+* dom-by-tag
+
+#+BEGIN_SRC elisp
+(dom-by-tag '(body nil
+                   (nav nil
+                        (ol nil
+                            (li nil "Perl")
+                            (li nil "Python")
+                            (li nil "PHP")))
+                   (h1 nil "h1 heading")
+                   (p nil "paragraph"))
+            'li)
+#+END_SRC
+
+#+RESULTS:
+: ((li nil "Perl")
+:  (li nil "Python")
+:  (li nil "PHP"))
+
+* dom-children
+
+#+BEGIN_SRC elisp
+(dom-children
+ '(ol nil
+      (li nil "Perl")
+      (li nil "Python")
+      (li nil "PHP")))
+#+END_SRC
+
+#+RESULTS:
+: ((li nil "Perl")
+:  (li nil "Python")
+:  (li nil "PHP"))
+
+* dom-node
+
+#+BEGIN_SRC elisp
+;; <a href="https://www.gnu.org/s/emacs/">GNU Emacs</a>
+(dom-node 'a '((href . "https://www.gnu.org/s/emacs/")) "GNU Emacs")
+#+END_SRC
+
+#+RESULTS:
+: (a
+:  ((href . "https://www.gnu.org/s/emacs/"))
+:  "GNU Emacs")
+
+* dom-non-text-children
+
+#+BEGIN_SRC elisp
+(dom-non-text-children '(div nil
+                             (h1 nil "h1 heading")
+                             (p nil "paragraph")
+                             "some text"))
+#+END_SRC
+
+#+RESULTS:
+: ((h1 nil "h1 heading")
+:  (p nil "paragraph"))
+
+* dom-parent
+
+#+BEGIN_SRC elisp
+(let* ((dom '(nav nil
+                  (ol nil
+                      (li nil "Perl")
+                      (li nil "Python")
+                      (li nil "PHP"))))
+       (perl (car (dom-by-tag dom 'li))))
+  (dom-parent dom perl))
+#+END_SRC
+
+#+RESULTS:
+: (ol nil
+:     (li nil "Perl")
+:     (li nil "Python")
+:     (li nil "PHP"))
+
+* dom-pp
+
+#+BEGIN_SRC elisp :results drawer
+(with-temp-buffer
+  (dom-pp '(p nil "para"))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+(p nil
+ "para")
+:END:
+
+* dom-remove-node
+
+#+BEGIN_SRC elisp
+(let* ((dom '(div nil
+                  (h1 nil "title")
+                  (p nil "para")))
+       (p (car (dom-by-tag dom 'p))))
+  (dom-remove-node dom p)
+  dom)
+#+END_SRC
+
+#+RESULTS:
+: (div nil
+:      (h1 nil "title"))
+
+* dom-set-attribute
+
+#+BEGIN_SRC elisp
+(let ((dom '(a ((href . "https://www.gnu.org/s/emacs/")) "GNU Emacs")))
+  (dom-set-attribute dom 'href "#")
+  dom)
+#+END_SRC
+
+#+RESULTS:
+: (a
+:  ((href . "#"))
+:  "GNU Emacs")
+
+* dom-set-attributes
+
+#+BEGIN_SRC elisp
+(let ((dom '(a nil "Example Domain")))
+  (dom-set-attributes dom '((href . "https://example.com/")
+                            (title . "Example Domain")))
+  dom)
+#+END_SRC
+
+#+RESULTS:
+: (a
+:  ((href . "https://example.com/")
+:   (title . "Example Domain"))
+:  "Example Domain")
+
+* dom-strings
+
+#+BEGIN_SRC elisp
+(dom-strings '(body nil
+                    (h1 nil "Basic Emacs commands")
+                    (p nil "Type " (kbd nil "C-x C-f") " to open a file")
+                    (p nil "Type " (kbd nil "C-x C-c") " to quit Emacs")))
+#+END_SRC
+
+#+RESULTS:
+: ("Basic Emacs commands" "Type " "C-x C-f" " to open a file" "Type " "C-x C-c" " to quit Emacs")
+
+* dom-tag
+
+#+BEGIN_SRC elisp
+(dom-tag '(p nil "This is a paragraph"))
+#+END_SRC
+
+#+RESULTS:
+: p
+
+* dom-text
+
+#+BEGIN_SRC elisp
+(dom-text '(a ((href . "https://www.gnu.org/s/emacs/")) "GNU Emacs"))
+#+END_SRC
+
+#+RESULTS:
+: "GNU Emacs"
+
+* dom-texts
+
+#+BEGIN_SRC elisp
+(dom-texts '(ol nil
+                (li nil "Perl")
+                (li nil "Python")
+                (li nil "PHP"))
+           ", ")
+#+END_SRC
+
+#+RESULTS:
+: "Perl, Python, PHP"
+
 * dotimes
 
 #+BEGIN_SRC elisp :results output
