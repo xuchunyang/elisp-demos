@@ -2232,7 +2232,7 @@
 : 97
 
 #+BEGIN_SRC elisp
-;; 文 
+;; 文
 ;; Unicode Codepoint ?文 = #x6587
 ;; GBK Codepoint #xCEC4
 (format "#x%X" (encode-char ?文 'chinese-gbk))
@@ -2244,7 +2244,7 @@
 * encode-coding-region
 
 #+BEGIN_SRC elisp
-;; 文 
+;; 文
 ;; Unicode Codepoint #x6587, xE6 #x96 #x87
 ;; GBK Codepoint #xCEC4, #xCE #xC4
 (with-temp-buffer
@@ -2980,7 +2980,7 @@
 
 ;; -rw-r--r--
 ;;  42 4  4
-;; 
+;;
 ;; 6   4  4
 
 ;; #o644 = 420
@@ -4684,7 +4684,7 @@
 : (x 1 y 2 z 3)
 
 #+BEGIN_SRC elisp
-(mapcan (lambda (x) (and (numberp x) (list x))) 
+(mapcan (lambda (x) (and (numberp x) (list x)))
         '(a 1 b c 3 4 d 5))
 #+END_SRC
 
@@ -6573,7 +6573,7 @@
 * save-excursion
 
 #+BEGIN_SRC elisp
-(save-excursion 
+(save-excursion
   (goto-char (point-min)))
 #+END_SRC
 
@@ -6708,7 +6708,7 @@
 * seq-doseq
 
 #+BEGIN_SRC elisp :results output
-(seq-doseq (i [1 2 3]) 
+(seq-doseq (i [1 2 3])
   (princ i))
 #+END_SRC
 
