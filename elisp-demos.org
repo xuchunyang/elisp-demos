@@ -5524,6 +5524,606 @@
 :        (message "Your Emacs is idle for 3 seconds"))
 :      nil idle 0]
 
+* s-append
+
+#+BEGIN_SRC elisp
+(s-append "abc" "def")
+#+END_SRC
+
+#+RESULTS:
+: "defabc"
+
+* s-blank?
+
+#+BEGIN_SRC elisp
+(s-blank? " ")
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* s-capitalize
+
+#+BEGIN_SRC elisp
+(s-capitalize "HELLO WORLD")
+#+END_SRC
+
+#+RESULTS:
+: "Hello world"
+
+* s-capitalized-words
+
+#+BEGIN_SRC elisp
+(s-capitalized-words "hello_world")
+#+END_SRC
+
+#+RESULTS:
+: "Hello world"
+
+* s-capitalized?
+
+#+BEGIN_SRC elisp
+(s-capitalized? "Capitalized")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-center
+
+#+BEGIN_SRC elisp
+(s-center 5 "a")
+#+END_SRC
+
+#+RESULTS:
+: "  a  "
+
+* s-chomp
+
+#+BEGIN_SRC elisp
+(list (s-chomp "no newlines\n")
+      (s-chomp "no newlines\r\n")
+      (s-chomp "some newlines\n\n"))
+#+END_SRC
+
+#+RESULTS:
+: ("no newlines" "no newlines" "some newlines\n")
+
+* s-chop-prefix
+
+#+BEGIN_SRC elisp
+(s-chop-prefix "/tmp/" "/tmp/file.js")
+#+END_SRC
+
+#+RESULTS:
+: "file.js"
+
+* s-chop-prefixes
+
+#+BEGIN_SRC elisp
+(s-chop-prefixes '("/tmp" "/my/") "/tmp/my/file.js")
+#+END_SRC
+
+#+RESULTS:
+: "file.js"
+
+* s-chop-suffix
+
+#+BEGIN_SRC elisp
+(s-chop-suffix "-test.js" "penguin-test.js")
+#+END_SRC
+
+#+RESULTS:
+: "penguin"
+
+* s-chop-suffixes
+
+#+BEGIN_SRC elisp
+(s-chop-suffixes '(".gz" ".el") "simple.el.gz")
+#+END_SRC
+
+#+RESULTS:
+: "simple"
+
+* s-collapse-whitespace
+
+#+BEGIN_SRC elisp
+(s-collapse-whitespace "only   one space   please")
+#+END_SRC
+
+#+RESULTS:
+: "only one space please"
+
+* s-concat
+
+#+BEGIN_SRC elisp
+(s-concat "hello" " " "world")
+#+END_SRC
+
+#+RESULTS:
+: "hello world"
+
+* s-contains?
+
+#+BEGIN_SRC elisp
+(s-contains? "file" "lib/file.js")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-count-matches
+
+#+BEGIN_SRC elisp
+(s-count-matches "a" "aba")
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* s-dashed-words
+
+#+BEGIN_SRC elisp
+(s-dashed-words "foo bar baz")
+#+END_SRC
+
+#+RESULTS:
+: "foo-bar-baz"
+
+* s-downcase
+
+#+BEGIN_SRC elisp
+(s-downcase "EMACS")
+#+END_SRC
+
+#+RESULTS:
+: "emacs"
+
+* s-ends-with?
+
+#+BEGIN_SRC elisp
+(s-ends-with? ".md" "readme.md")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-equals?
+
+#+BEGIN_SRC elisp
+(s-equals? "abc" "abc")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-format
+
+#+BEGIN_SRC elisp
+(s-format
+ "help ${name}! I'm ${malady}"
+ 'aget
+ '(("name" . "nic")
+   ("malady" . "on fire")))
+#+END_SRC
+
+#+RESULTS:
+: "help nic! I'm on fire"
+
+* s-index-of
+
+#+BEGIN_SRC elisp
+(s-index-of "def" "abcdef")
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* s-join
+
+#+BEGIN_SRC elisp
+(s-join "-" '("a" "b" "c"))
+#+END_SRC
+
+#+RESULTS:
+: "a-b-c"
+
+* s-left
+
+#+BEGIN_SRC elisp
+(s-left 3 "lib/file.js")
+#+END_SRC
+
+#+RESULTS:
+: "lib"
+
+* s-less?
+
+#+BEGIN_SRC elisp
+(s-less? "abc" "abd")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-lex-format
+
+#+BEGIN_SRC elisp
+(let ((x 1))
+  (s-lex-format "x is ${x}"))
+#+END_SRC
+
+#+RESULTS:
+: "x is 1"
+
+* s-lines
+
+#+BEGIN_SRC elisp
+(s-lines "abc\ndef\nghi")
+#+END_SRC
+
+#+RESULTS:
+: ("abc" "def" "ghi")
+
+* s-lower-camel-case
+
+#+BEGIN_SRC elisp
+(s-lower-camel-case "foo bar baz")
+#+END_SRC
+
+#+RESULTS:
+: "fooBarBaz"
+
+* s-lowercase?
+
+#+BEGIN_SRC elisp
+(s-lowercase? "file")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-match
+
+#+BEGIN_SRC elisp
+(s-match
+ (rx (group (= 4 num)) "-"
+     (group (= 2 num)) "-"
+     (group (= 2 num)))
+ "Today is <2018-11-26>")
+#+END_SRC
+
+#+RESULTS:
+: ("2018-11-26" "2018" "11" "26")
+
+* s-match-strings-all
+
+#+BEGIN_SRC elisp
+(s-match-strings-all "ab." "abXabY")
+#+END_SRC
+
+#+RESULTS:
+: (("abX")
+:  ("abY"))
+
+* s-matched-positions-all
+
+#+BEGIN_SRC elisp
+(s-matched-positions-all "[0-9]" "a0b1")
+#+END_SRC
+
+#+RESULTS:
+: ((1 . 2)
+:  (3 . 4))
+
+* s-matches?
+
+#+BEGIN_SRC elisp
+(s-matches? "^[0-9]+$" "123")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-mixedcase?
+
+#+BEGIN_SRC elisp
+(s-mixedcase? "Emacs")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-numeric?
+
+#+BEGIN_SRC elisp
+(s-numeric? "123")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-pad-left
+
+#+BEGIN_SRC elisp
+(s-pad-left 3 "0" "3")
+#+END_SRC
+
+#+RESULTS:
+: "003"
+
+* s-pad-right
+
+#+BEGIN_SRC elisp
+(s-pad-right 10 "." "hello")
+#+END_SRC
+
+#+RESULTS:
+: "hello....."
+
+* s-prepend
+
+#+BEGIN_SRC elisp
+(s-prepend "abc" "def")
+#+END_SRC
+
+#+RESULTS:
+: "abcdef"
+
+* s-presence
+
+#+BEGIN_SRC elisp
+(s-presence " ")
+#+END_SRC
+
+#+RESULTS:
+: " "
+
+* s-present?
+
+#+BEGIN_SRC elisp
+(s-present? " ")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-repeat
+
+#+BEGIN_SRC elisp
+(s-repeat 3 "No")
+#+END_SRC
+
+#+RESULTS:
+: "NoNoNo"
+
+* s-replace
+
+#+BEGIN_SRC elisp
+(s-replace "file" "nope" "lib/file.js")
+#+END_SRC
+
+#+RESULTS:
+: "lib/nope.js"
+
+* s-replace-all
+
+#+BEGIN_SRC elisp
+(s-replace-all '(("Vim" . "Emacs")
+                 ("Emacs" . "Vim"))
+               "Vim and Emacs")
+#+END_SRC
+
+#+RESULTS:
+: "Emacs and Vim"
+
+* s-reverse
+
+#+BEGIN_SRC elisp
+(s-reverse "abc")
+#+END_SRC
+
+#+RESULTS:
+: "cba"
+
+* s-right
+
+#+BEGIN_SRC elisp
+(s-right 3 "lib/file.js")
+#+END_SRC
+
+#+RESULTS:
+: ".js"
+
+* s-shared-end
+
+#+BEGIN_SRC elisp
+(s-shared-end "bar" "var")
+#+END_SRC
+
+#+RESULTS:
+: "ar"
+
+* s-shared-start
+
+#+BEGIN_SRC elisp
+(s-shared-start "bar" "baz")
+#+END_SRC
+
+#+RESULTS:
+: "ba"
+
+* s-slice-at
+
+#+BEGIN_SRC elisp
+(s-slice-at "/" "/path/to/file")
+#+END_SRC
+
+#+RESULTS:
+: ("/path" "/to" "/file")
+
+* s-snake-case
+
+#+BEGIN_SRC elisp
+(s-snake-case "foo-bar-baz")
+#+END_SRC
+
+#+RESULTS:
+: "foo_bar_baz"
+
+* s-split
+
+#+BEGIN_SRC elisp
+(s-split "/" "/path/to/file" 'omit-nulls)
+#+END_SRC
+
+#+RESULTS:
+: ("path" "to" "file")
+
+* s-split-up-to
+
+#+BEGIN_SRC elisp
+(s-split-up-to "/" "/path/to/file" 2 'omit-nulls)
+#+END_SRC
+
+#+RESULTS:
+: ("path" "to/file")
+
+* s-split-words
+
+#+BEGIN_SRC elisp
+(s-split-words "hello_world")
+#+END_SRC
+
+#+RESULTS:
+: ("hello" "world")
+
+* s-starts-with?
+
+#+BEGIN_SRC elisp
+(s-starts-with? "lib/" "lib/file.js")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-titleize
+
+#+BEGIN_SRC elisp
+(s-titleize "hello world")
+#+END_SRC
+
+#+RESULTS:
+: "Hello World"
+
+* s-titleized-words
+
+#+BEGIN_SRC elisp
+(s-titleized-words "foo_bar_baz")
+#+END_SRC
+
+#+RESULTS:
+: "Foo Bar Baz"
+
+* s-trim
+
+#+BEGIN_SRC elisp
+(s-trim " hello ")
+#+END_SRC
+
+#+RESULTS:
+: "hello"
+
+* s-trim-left
+
+#+BEGIN_SRC elisp
+(s-trim-left " hello ")
+#+END_SRC
+
+#+RESULTS:
+: "hello "
+
+* s-trim-right
+
+#+BEGIN_SRC elisp
+(s-trim-right " hello ")
+#+END_SRC
+
+#+RESULTS:
+: " hello"
+
+* s-truncate
+
+#+BEGIN_SRC elisp
+(s-truncate 14 "This is too long")
+#+END_SRC
+
+#+RESULTS:
+: "This is too..."
+
+* s-upcase
+
+#+BEGIN_SRC elisp
+(s-upcase "emacs")
+#+END_SRC
+
+#+RESULTS:
+: "EMACS"
+
+* s-upper-camel-case
+
+#+BEGIN_SRC elisp
+(s-upper-camel-case "foo bar baz")
+#+END_SRC
+
+#+RESULTS:
+: "FooBarBaz"
+
+* s-uppercase?
+
+#+BEGIN_SRC elisp
+(s-uppercase? "EMACS")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* s-with
+
+#+BEGIN_SRC elisp
+(s-with "  hello  " s-trim s-upcase)
+#+END_SRC
+
+#+RESULTS:
+: "HELLO"
+
+* s-word-initials
+
+#+BEGIN_SRC elisp
+(s-word-initials "foo bar baz")
+#+END_SRC
+
+#+RESULTS:
+: "fbb"
+
+* s-word-wrap
+
+#+BEGIN_SRC elisp
+(s-word-wrap 10 "This is too long")
+#+END_SRC
+
+#+RESULTS:
+: "This is\ntoo long"
+
+* s-wrap
+
+#+BEGIN_SRC elisp
+(s-wrap "foo" "<" ">")
+#+END_SRC
+
+#+RESULTS:
+: "<foo>"
+
 * safe-length
 
 #+BEGIN_SRC elisp
