@@ -110,6 +110,33 @@
 #+RESULTS:
 : (2 4)
 
+* --find-index
+
+#+BEGIN_SRC elisp
+(--find-index (< 5 it) '(2 4 1 6 3 3 5 8))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* --find-indices
+
+#+BEGIN_SRC elisp
+(--find-indices (zerop (% it 2)) '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 3)
+
+* --find-last-index
+
+#+BEGIN_SRC elisp
+(--find-last-index (< 5 it) '(2 7 1 6 3 8 5 2))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
 * --iterate
 
 #+BEGIN_SRC elisp
@@ -215,6 +242,28 @@
 #+RESULTS:
 : t
 
+* --partition-by
+
+#+BEGIN_SRC elisp
+(--partition-by (< it 3) '(1 2 3 4 3 2 1))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2)
+:  (3 4 3)
+:  (2 1))
+
+* --partition-by-header
+
+#+BEGIN_SRC elisp
+(--partition-by-header (= it 1) '(1 2 3 1 2 1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2 3)
+:  (1 2)
+:  (1 2 3 4))
+
 * --reduce
 
 #+BEGIN_SRC elisp
@@ -278,6 +327,16 @@
 #+RESULTS:
 : (1 2 3)
 
+* --separate
+
+#+BEGIN_SRC elisp
+(--separate (< it 5) '(3 7 5 9 3 2 1 4 6))
+#+END_SRC
+
+#+RESULTS:
+: ((3 3 2 1 4)
+:  (7 5 9 6))
+
 * --splice
 
 #+BEGIN_SRC elisp
@@ -299,6 +358,18 @@
 
 #+RESULTS:
 : (1 a b c 2)
+
+* --split-when
+
+#+BEGIN_SRC elisp
+(--split-when (memq it '(&optional &rest))
+              '(a b &optional c d &rest args))
+#+END_SRC
+
+#+RESULTS:
+: ((a b)
+:  (c d)
+:  (args))
 
 * --take-while
 
@@ -404,6 +475,24 @@
 #+RESULTS:
 : 2
 
+* -difference
+
+#+BEGIN_SRC elisp
+(-difference '(1 2 3 4) '(3 4 5 6))
+#+END_SRC
+
+#+RESULTS:
+: (1 2)
+
+* -distinct
+
+#+BEGIN_SRC elisp
+(-distinct '(1 2 2 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 4)
+
 * -drop
 
 #+BEGIN_SRC elisp
@@ -431,6 +520,24 @@
 #+RESULTS:
 : (1 2 3 4)
 
+* -elem-index
+
+#+BEGIN_SRC elisp
+(-elem-index 2 '(6 7 8 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* -elem-indices
+
+#+BEGIN_SRC elisp
+(-elem-indices 2 '(6 7 8 2 3 4 2 1))
+#+END_SRC
+
+#+RESULTS:
+: (3 6)
+
 * -filter
 
 #+BEGIN_SRC elisp
@@ -439,6 +546,33 @@
 
 #+RESULTS:
 : (2 4)
+
+* -find-index
+
+#+BEGIN_SRC elisp
+(-find-index #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* -find-indices
+
+#+BEGIN_SRC elisp
+(-find-indices #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 3)
+
+* -find-last-index
+
+#+BEGIN_SRC elisp
+(-find-last-index #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * -flatten
 
@@ -459,6 +593,16 @@
 : (1 2
 :    (3 4)
 :    ((5 6)))
+
+* -group-by
+
+#+BEGIN_SRC elisp
+(-group-by #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: ((nil 1 3)
+:  (t 2 4))
 
 * -inits
 
@@ -481,6 +625,15 @@
 
 #+RESULTS:
 : (a x b c)
+
+* -intersection
+
+#+BEGIN_SRC elisp
+(-intersection '(1 2 3 4) '(3 4 5 6))
+#+END_SRC
+
+#+RESULTS:
+: (3 4)
 
 * -is-infix?
 
@@ -654,6 +807,145 @@
 
 #+RESULTS:
 : t
+
+* -partition
+
+#+BEGIN_SRC elisp
+(-partition 2 '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2)
+:  (3 4))
+
+* -partition-after-item
+
+#+BEGIN_SRC elisp
+(-partition-after-item '| '(a | b | c))
+#+END_SRC
+
+#+RESULTS:
+: ((a |)
+:  (b |)
+:  (c))
+
+* -partition-after-pred
+
+#+BEGIN_SRC elisp
+(-partition-after-pred #'cl-oddp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: ((1)
+:  (2 3)
+:  (4))
+
+* -partition-all
+
+#+BEGIN_SRC elisp
+(-partition-all 2 '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2)
+:  (3 4)
+:  (5))
+
+* -partition-all-in-steps
+
+#+BEGIN_SRC elisp
+(-partition-all-in-steps 3 2 '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2 3)
+:  (3 4))
+
+* -partition-before-item
+
+#+BEGIN_SRC elisp
+(-partition-before-item '| '(a | b | c))
+#+END_SRC
+
+#+RESULTS:
+: ((a)
+:  (| b)
+:  (| c))
+
+* -partition-before-pred
+
+#+BEGIN_SRC elisp
+(-partition-before-pred #'cl-oddp '(0 1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: ((0)
+:  (1 2)
+:  (3 4))
+
+* -partition-by
+
+#+BEGIN_SRC elisp
+(-partition-by #'cl-evenp '(1 1 2 2 2 3 4 6 8))
+#+END_SRC
+
+#+RESULTS:
+: ((1 1)
+:  (2 2 2)
+:  (3)
+:  (4 6 8))
+
+* -partition-by-header
+
+#+BEGIN_SRC elisp
+(-partition-by-header #'cl-evenp '(2 1 1 1 4 1 3 5 6 6 1))
+#+END_SRC
+
+#+RESULTS:
+: ((2 1 1 1)
+:  (4 1 3 5)
+:  (6 6 1))
+
+* -partition-in-steps
+
+#+BEGIN_SRC elisp
+(-partition-in-steps 2 1 '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2)
+:  (2 3)
+:  (3 4))
+
+* -permutations
+
+#+BEGIN_SRC elisp
+(-permutations '(a b c))
+#+END_SRC
+
+#+RESULTS:
+: ((a b c)
+:  (a c b)
+:  (b a c)
+:  (b c a)
+:  (c a b)
+:  (c b a))
+
+* -powerset
+
+#+BEGIN_SRC elisp
+(-powerset '(x y z))
+#+END_SRC
+
+#+RESULTS:
+: ((x y z)
+:  (x y)
+:  (x z)
+:  (x)
+:  (y z)
+:  (y)
+:  (z)
+:  nil)
 
 * -product
 
@@ -889,6 +1181,18 @@
 :  (a c)
 :  (:a :c))
 
+* -separate
+
+#+BEGIN_SRC elisp
+(-separate #'cdr '((1 2) (1) (1 2 3) (4)))
+#+END_SRC
+
+#+RESULTS:
+: (((1 2)
+:   (1 2 3))
+:  ((1)
+:   (4)))
+
 * -slice
 
 #+BEGIN_SRC elisp
@@ -915,6 +1219,49 @@
 
 #+RESULTS:
 : (1 a b c 2)
+
+* -split-at
+
+#+BEGIN_SRC elisp
+(-split-at 3 '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2 3)
+:  (4 5))
+
+* -split-on
+
+#+BEGIN_SRC elisp
+(-split-on '| '(Nil | Leaf a | Node [Tree a]))
+#+END_SRC
+
+#+RESULTS:
+: ((Nil)
+:  (Leaf a)
+:  (Node
+:   [Tree a]))
+
+* -split-when
+
+#+BEGIN_SRC elisp
+(-split-when #'cl-evenp '(1 2 3 4 5 6))
+#+END_SRC
+
+#+RESULTS:
+: ((1)
+:  (3)
+:  (5))
+
+* -split-with
+
+#+BEGIN_SRC elisp
+(-split-with #'cl-evenp '(2 4 5 6))
+#+END_SRC
+
+#+RESULTS:
+: ((2 4)
+:  (5 6))
 
 * -sum
 
@@ -975,6 +1322,15 @@
 
 #+RESULTS:
 : (10 9 8 7 6 5 4 3 2 1)
+
+* -union
+
+#+BEGIN_SRC elisp
+(-union '(1 1 2 2) '(3 2 1))
+#+END_SRC
+
+#+RESULTS:
+: (1 1 2 2 3)
 
 * -update-at
 
