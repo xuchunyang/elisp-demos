@@ -1013,6 +1013,20 @@
 #+RESULTS:
 : (1 102 3)
 
+* cl-labels
+
+#+BEGIN_SRC elisp
+(cl-labels ((len
+             (l)
+             (if l
+                 (1+ (len (cdr l)))
+               0)))
+  (len '(a b c d e)))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
 * cl-letf
 
 #+BEGIN_SRC elisp
