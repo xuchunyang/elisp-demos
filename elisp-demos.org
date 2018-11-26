@@ -2446,6 +2446,421 @@
 #+RESULTS:
 : 1024
 
+* f-absolute?
+
+#+BEGIN_SRC elisp
+(f-absolute? ".")
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* f-ancestor-of?
+
+#+BEGIN_SRC elisp
+(f-ancestor-of? (getenv "HOME") user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-append-bytes
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (unwind-protect
+      (progn
+        (f-append-bytes (unibyte-string 1 2 3) tmpfile)
+        (f-append-bytes (unibyte-string 4 5 6) tmpfile)
+        (string-to-list (f-read-bytes tmpfile)))
+    (delete-file tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6)
+
+* f-append-text
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (unwind-protect
+      (progn
+        (f-append-text "Hello" 'utf-8 tmpfile)
+        (f-append-text " World" 'utf-8 tmpfile)
+        (f-read-text tmpfile 'utf-8))
+    (delete-file tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: "Hello World"
+
+* f-base
+
+#+BEGIN_SRC elisp
+(f-base "/path/to/file.txt")
+#+END_SRC
+
+#+RESULTS:
+: "file"
+
+* f-child-of?
+
+#+BEGIN_SRC elisp
+(f-child-of? user-init-file user-emacs-directory)
+#+END_SRC
+
+* f-common-parent
+
+#+BEGIN_SRC elisp
+(f-common-parent '("foo/bar/baz" "foo/bar/qux" "foo/bar/mux"))
+#+END_SRC
+
+#+RESULTS:
+: "foo/bar/"
+
+* f-delete
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (message "%s is created" tmpfile)
+  (f-delete tmpfile)
+  (unless (file-exists-p tmpfile)
+    (message "%s is deleted" tmpfile))
+  nil)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* f-depth
+
+#+BEGIN_SRC elisp
+(f-depth "/path/to/file")
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* f-descendant-of?
+
+#+BEGIN_SRC elisp
+(f-descendant-of? user-init-file (getenv "HOME"))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-directory?
+
+#+BEGIN_SRC elisp
+(f-directory? user-emacs-directory)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-dirname
+
+#+BEGIN_SRC elisp
+(f-dirname "/path/to/file")
+#+END_SRC
+
+#+RESULTS:
+: "/path/to"
+
+* f-empty?
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (unwind-protect (f-empty? tmpfile)
+    (f-delete tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-executable?
+
+#+BEGIN_SRC elisp
+(f-executable? "/bin/sh")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-exists?
+
+#+BEGIN_SRC elisp
+(f-exists? user-emacs-directory)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-expand
+
+#+BEGIN_SRC elisp
+(f-expand "tmp/" "/")
+#+END_SRC
+
+#+RESULTS:
+: "/tmp/"
+
+* f-ext
+
+#+BEGIN_SRC elisp
+(f-ext "/path/to/file.txt")
+#+END_SRC
+
+#+RESULTS:
+: "txt"
+
+* f-ext?
+
+#+BEGIN_SRC elisp
+(f-ext? "init.el" "el")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-file?
+
+#+BEGIN_SRC elisp
+(f-file? user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-filename
+
+#+BEGIN_SRC elisp
+(f-filename "/path/to/file")
+#+END_SRC
+
+#+RESULTS:
+: "file"
+
+* f-join
+
+#+BEGIN_SRC elisp
+(f-join "/" "path" "to" "file")
+#+END_SRC
+
+#+RESULTS:
+: "/path/to/file"
+
+* f-mkdir
+
+#+BEGIN_SRC elisp
+(let ((tmpdir (make-temp-name "/tmp/elisp-demos-")))
+  (f-mkdir tmpdir)
+  (message "%s is a directory and exists? %s" tmpdir (f-dir? tmpdir))
+  (f-delete tmpdir))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* f-no-ext
+
+#+BEGIN_SRC elisp
+(f-no-ext "/path/to/file.txt")
+#+END_SRC
+
+#+RESULTS:
+: "/path/to/file"
+
+* f-parent-of?
+
+#+BEGIN_SRC elisp
+(f-parent-of? user-emacs-directory user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-read-bytes
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (unwind-protect
+      (progn
+        (f-write-bytes (unibyte-string 0 1 2 3) tmpfile)
+        (string-to-list (f-read-bytes tmpfile)))
+    (delete-file tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 2 3)
+
+* f-read-text
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (unwind-protect
+      (progn
+        (f-write-text "Hello world" 'utf-8 tmpfile)
+        (f-read-text tmpfile 'utf-8))
+    (delete-file tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: "Hello world"
+
+* f-readable?
+
+#+BEGIN_SRC elisp
+(f-readable? user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-relative
+
+#+BEGIN_SRC elisp
+(f-relative "/path/to/file.txt" "/path/to/")
+#+END_SRC
+
+#+RESULTS:
+: "file.txt"
+
+* f-relative?
+
+#+BEGIN_SRC elisp
+(f-relative? ".")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-root?
+
+#+BEGIN_SRC elisp
+(f-root? "/")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-same?
+
+#+BEGIN_SRC elisp
+(f-same? user-init-file "~/.emacs.d/init.el")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-short
+
+#+BEGIN_SRC elisp
+(f-short user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: "~/.emacs.d/init.el"
+
+* f-size
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (unwind-protect
+      (progn
+        (f-write-bytes (unibyte-string 0 #xff) tmpfile)
+        (f-size tmpfile))
+    (f-delete tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* f-slash
+
+#+BEGIN_SRC elisp
+(f-slash ".")
+#+END_SRC
+
+#+RESULTS:
+: "./"
+
+* f-split
+
+#+BEGIN_SRC elisp
+(f-split "/path/to/file")
+#+END_SRC
+
+#+RESULTS:
+: ("/" "path" "to" "file")
+
+* f-swap-ext
+
+#+BEGIN_SRC elisp
+(f-swap-ext "/path/to/file.txt" "org")
+#+END_SRC
+
+#+RESULTS:
+: "/path/to/file.org"
+
+* f-uniquify
+
+#+BEGIN_SRC elisp
+(f-uniquify '("/foo/bar" "/foo/baz" "/foo/quux"))
+#+END_SRC
+
+#+RESULTS:
+: ("bar" "baz" "quux")
+
+* f-uniquify-alist
+
+#+BEGIN_SRC elisp
+(f-uniquify-alist '("/foo/bar" "/foo/baz" "/foo/quux"))
+#+END_SRC
+
+#+RESULTS:
+: (("/foo/bar" . "bar")
+:  ("/foo/baz" . "baz")
+:  ("/foo/quux" . "quux"))
+
+* f-writable?
+
+#+BEGIN_SRC elisp
+(f-writable? user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* f-write-bytes
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (unwind-protect
+      (progn
+        (f-write-bytes (unibyte-string 0 1 2 3) tmpfile)
+        (string-to-list (f-read-bytes tmpfile)))
+    (delete-file tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 2 3)
+
+* f-write-text
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-")))
+  (unwind-protect
+      (progn
+        (f-write-text "Hello world" 'utf-8 tmpfile)
+        (f-read-text tmpfile 'utf-8))
+    (delete-file tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: "Hello world"
+
 * fboundp
 
 #+BEGIN_SRC elisp
