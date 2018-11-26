@@ -398,6 +398,30 @@
 #+RESULTS:
 : (1 2 3)
 
+* --tree-map
+
+#+BEGIN_SRC elisp
+(--tree-map (length it) '("<body>" ("<p>" "text" "</p>") "</body>"))
+#+END_SRC
+
+#+RESULTS:
+: (6
+:  (3 4 4)
+:  7)
+
+* --tree-reduce
+
+#+BEGIN_SRC elisp
+(--tree-reduce
+ (cond ((stringp it) (concat it " " acc))
+       (t (let ((sn (symbol-name it)))
+            (concat "<" sn ">" acc "</" sn ">"))))
+ '(body (p "some words") (div "more" (b "bold") "words")))
+#+END_SRC
+
+#+RESULTS:
+: "<body><p>some words</p> <div>more <b>bold</b> words</div></body>"
+
 * --unfold
 
 #+BEGIN_SRC elisp
@@ -456,6 +480,19 @@
 
 #+RESULTS:
 : (1 2)
+
+* -clone
+
+#+BEGIN_SRC elisp
+(let* ((original '(:x (1 2 3)))
+       (shallow (-copy original))
+       (deep (-clone original)))
+  (list (eq (plist-get original :x) (plist-get shallow :x))
+        (eq (plist-get original :x) (plist-get deep :x))))
+#+END_SRC
+
+#+RESULTS:
+: (t nil)
 
 * -common-prefix
 
@@ -1538,6 +1575,51 @@
 
 #+RESULTS:
 : 3
+
+* -tree-map
+
+#+BEGIN_SRC elisp
+(-tree-map #'1+ '(1 (2 3) (4 (5 6) 7)))
+#+END_SRC
+
+#+RESULTS:
+: (2
+:  (3 4)
+:  (5
+:   (6 7)
+:   8))
+
+* -tree-map-nodes
+
+#+BEGIN_SRC elisp
+(-tree-map-nodes
+ 'keywordp
+ (lambda (x) (symbol-name x))
+ '(1 :foo 4 ((5 6 :bar) :baz 8)))
+#+END_SRC
+
+#+RESULTS:
+: (1 ":foo" 4
+:    ((5 6 ":bar")
+:     ":baz" 8))
+
+* -tree-reduce
+
+#+BEGIN_SRC elisp
+(-tree-reduce #'+ '(1 (2 3) (4 5)))
+#+END_SRC
+
+#+RESULTS:
+: 15
+
+* -tree-reduce-from
+
+#+BEGIN_SRC elisp
+(-tree-reduce-from '+ 1 '(1 (1 1) ((1))))
+#+END_SRC
+
+#+RESULTS:
+: 8
 
 * -unfold
 
