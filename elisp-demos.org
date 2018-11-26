@@ -5047,6 +5047,15 @@
 #+RESULTS:
 : 1
 
+* org-babel-edit-distance
+
+#+BEGIN_SRC elisp
+(org-babel-edit-distance "kitten" "sitting")
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * other-buffer
 
 #+BEGIN_SRC elisp
