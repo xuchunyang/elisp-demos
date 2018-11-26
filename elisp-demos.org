@@ -336,6 +336,18 @@
 :  (2)
 :  nil)
 
+* assoc-string
+
+#+BEGIN_SRC elisp
+(assoc-string "path"
+              '(("Domain" . "example.com")
+                ("Path" . "/"))
+              'ignore-case)
+#+END_SRC
+
+#+RESULTS:
+: ("Path" . "/")
+
 * assq
 
 #+BEGIN_SRC elisp
@@ -1187,6 +1199,15 @@
 
 #+RESULTS:
 : 0
+
+* compare-strings
+
+#+BEGIN_SRC elisp
+(compare-strings "hello" nil nil "he" nil nil)
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * completing-read
 
@@ -6213,10 +6234,28 @@
 #+RESULTS:
 : 12
 
+* string<
+
+#+BEGIN_SRC elisp
+(string< "abc" "abd")
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * string=
 
 #+BEGIN_SRC elisp
 (string= "foo" "foo")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* string>
+
+#+BEGIN_SRC elisp
+(string> "abd" "abc")
 #+END_SRC
 
 #+RESULTS:
