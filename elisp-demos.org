@@ -962,6 +962,37 @@
 #+RESULTS:
 : (error "cl-etypecase failed: 42, (float)")
 
+* cl-flet
+
+#+BEGIN_SRC elisp
+(cl-flet ((mean
+           (numbers)
+           (/ (apply #'+ numbers)
+              (float (length numbers)))))
+  (mean '(1 2 3 4)))
+#+END_SRC
+
+#+RESULTS:
+: 2.5
+
+* cl-flet*
+
+#+BEGIN_SRC elisp
+(cl-flet* ((mean
+            (numbers)
+            (/ (apply #'+ numbers)
+               (float (length numbers))))
+           (variance
+            (numbers)
+            (let ((m (mean numbers)))
+              (/ (apply #'+ (mapcar (lambda (x) (expt (- x m) 2)) numbers))
+                 (float (length numbers))))))
+  (variance '(1 2 3 4)))
+#+END_SRC
+
+#+RESULTS:
+: 1.25
+
 * cl-incf
 
 #+BEGIN_SRC elisp
@@ -981,6 +1012,28 @@
 
 #+RESULTS:
 : (1 102 3)
+
+* cl-letf
+
+#+BEGIN_SRC elisp
+(cl-letf (((symbol-function 'emacs-version) #'ignore))
+  (emacs-version))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* cl-letf*
+
+#+BEGIN_SRC elisp
+(let ((lst (list 1 2 3 4)))
+  (cl-letf* (((car lst) 100)
+             ((car lst) 200))
+    (format "%s" lst)))
+#+END_SRC
+
+#+RESULTS:
+: "(200 2 3 4)"
 
 * cl-loop
 
