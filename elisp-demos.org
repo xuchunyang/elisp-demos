@@ -53,6 +53,405 @@
 #+RESULTS:
 : 2
 
+* --annotate
+
+#+BEGIN_SRC elisp
+(--annotate (< 1 it) '(0 1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: ((nil . 0)
+:  (nil . 1)
+:  (t . 2)
+:  (t . 3))
+
+* --drop-while
+
+#+BEGIN_SRC elisp
+(--drop-while (< it 4) '(1 2 3 4 3 2 1))
+#+END_SRC
+
+#+RESULTS:
+: (4 3 2 1)
+
+* --filter
+
+#+BEGIN_SRC elisp
+(--filter (= 0 (% it 2)) '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (2 4)
+
+* --map
+
+#+BEGIN_SRC elisp
+(--map (* it it) '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 4 9 16)
+
+* --map-first
+
+#+BEGIN_SRC elisp
+(--map-first (> it 2) (* it it) '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 9 4)
+
+* --map-indexed
+
+#+BEGIN_SRC elisp
+(--map-indexed (cons it-index it) '(a b c d))
+#+END_SRC
+
+#+RESULTS:
+: ((0 . a)
+:  (1 . b)
+:  (2 . c)
+:  (3 . d))
+
+* --map-last
+
+#+BEGIN_SRC elisp
+(--map-last (> it 2) (* it it) '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 16)
+
+* --map-when
+
+#+BEGIN_SRC elisp
+(--map-when (numberp it) (* it it) '(a b 1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (a b 1 4 9)
+
+* --mapcat
+
+#+BEGIN_SRC elisp
+(--mapcat
+ (list (car it) (cdr it))
+ '((x . 1) (y . 2) (z . 3)))
+#+END_SRC
+
+#+RESULTS:
+: (x 1 y 2 z 3)
+
+* --remove
+
+#+BEGIN_SRC elisp
+(--remove (= 0 (% it 2)) '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 3)
+
+* --remove-first
+
+#+BEGIN_SRC elisp
+(--remove-first (zerop (% it 2)) '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 3 4)
+
+* --remove-last
+
+#+BEGIN_SRC elisp
+(--remove-last #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* --splice
+
+#+BEGIN_SRC elisp
+(--splice t
+          (list (car it) (cdr it))
+          '((x . 1)
+            (y . 2)
+            (z . 3)))
+#+END_SRC
+
+#+RESULTS:
+: (x 1 y 2 z 3)
+
+* --splice-list
+
+#+BEGIN_SRC elisp
+(--splice-list (keywordp it) '(a b c) '(1 :foo 2))
+#+END_SRC
+
+#+RESULTS:
+: (1 a b c 2)
+
+* --take-while
+
+#+BEGIN_SRC elisp
+(--take-while (< it 4) '(1 2 3 4 3 2 1))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* -annotate
+
+#+BEGIN_SRC elisp
+(-annotate #'1+ '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: ((2 . 1)
+:  (3 . 2)
+:  (4 . 3))
+
+* -copy
+
+#+BEGIN_SRC elisp
+(-copy '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* -drop
+
+#+BEGIN_SRC elisp
+(-drop 3 '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: (4 5)
+
+* -drop-last
+
+#+BEGIN_SRC elisp
+(-drop-last 3 '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: (1 2)
+
+* -drop-while
+
+#+BEGIN_SRC elisp
+(-drop-while #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4)
+
+* -filter
+
+#+BEGIN_SRC elisp
+(-filter #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (2 4)
+
+* -map
+
+#+BEGIN_SRC elisp
+(-map #'1+ '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (2 3 4)
+
+* -map-first
+
+#+BEGIN_SRC elisp
+(-map-first #'numberp #'1+ '(a b 1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (a b 2 2 3)
+
+* -map-indexed
+
+#+BEGIN_SRC elisp
+(-map-indexed (lambda (index item)
+                (cons index item))
+              '(a b c d))
+#+END_SRC
+
+#+RESULTS:
+: ((0 . a)
+:  (1 . b)
+:  (2 . c)
+:  (3 . d))
+
+* -map-last
+
+#+BEGIN_SRC elisp
+(-map-last #'numberp #'1+ '(a b c 1 2))
+#+END_SRC
+
+#+RESULTS:
+: (a b c 1 3)
+
+* -map-when
+
+#+BEGIN_SRC elisp
+(-map-when #'numberp #'1+ '(a b 1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (a b 2 3 4)
+
+* -mapcat
+
+#+BEGIN_SRC elisp
+(-mapcat
+ (pcase-lambda (`(,key . ,val))
+   (list (intern (format ":%s" key))
+         val))
+ '((x . 1) (y . 2) (z . 3)))
+#+END_SRC
+
+#+RESULTS:
+: (:x 1 :y 2 :z 3)
+
+* -non-nil
+
+#+BEGIN_SRC elisp
+(-non-nil '(1 nil 2 nil nil 3 4 nil 5 nil))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5)
+
+* -remove
+
+#+BEGIN_SRC elisp
+(-remove #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 3)
+
+* -remove-first
+
+#+BEGIN_SRC elisp
+(-remove-first #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 3 4)
+
+* -remove-item
+
+#+BEGIN_SRC elisp
+(-remove-item 'foo '(foo bar baz foo))
+#+END_SRC
+
+#+RESULTS:
+: (bar baz)
+
+* -remove-last
+
+#+BEGIN_SRC elisp
+(-remove-last #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* -select-by-indices
+
+#+BEGIN_SRC elisp
+(-select-by-indices '(2 1 0) '(a b c))
+#+END_SRC
+
+#+RESULTS:
+: (c b a)
+
+* -select-column
+
+#+BEGIN_SRC elisp
+(-select-column 1 '((1 2 3)
+                    (a b c)
+                    (:a :b :c)))
+#+END_SRC
+
+#+RESULTS:
+: (2 b :b)
+
+* -select-columns
+
+#+BEGIN_SRC elisp
+(-select-columns '(0 2)
+                 '((1 2 3)
+                   (a b c)
+                   (:a :b :c)))
+#+END_SRC
+
+#+RESULTS:
+: ((1 3)
+:  (a c)
+:  (:a :c))
+
+* -slice
+
+#+BEGIN_SRC elisp
+(-slice '(a b c d e) 1 4)
+#+END_SRC
+
+#+RESULTS:
+: (b c d)
+
+* -splice
+
+#+BEGIN_SRC elisp
+(-splice #'cl-evenp (lambda (x) (list x x)) '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 2 3 4 4)
+
+* -splice-list
+
+#+BEGIN_SRC elisp
+(-splice-list 'keywordp '(a b c) '(1 :foo 2))
+#+END_SRC
+
+#+RESULTS:
+: (1 a b c 2)
+
+* -take
+
+#+BEGIN_SRC elisp
+(-take 3 '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* -take-last
+
+#+BEGIN_SRC elisp
+(-take-last 3 '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: (3 4 5)
+
+* -take-while
+
+#+BEGIN_SRC elisp
+(-take-while #'cl-evenp '(2 4 5 6))
+#+END_SRC
+
+#+RESULTS:
+: (2 4)
+
 * /
 
 #+BEGIN_SRC elisp
