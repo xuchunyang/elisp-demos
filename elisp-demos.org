@@ -6836,6 +6836,24 @@
 #+RESULTS:
 : 45718
 
+* map-contains-key
+
+#+BEGIN_SRC elisp
+(map-contains-key '((x . 1) (y . 2)) 'y)
+#+END_SRC
+
+#+RESULTS:
+: y
+
+* map-copy
+
+#+BEGIN_SRC elisp
+(map-copy [a b c])
+#+END_SRC
+
+#+RESULTS:
+: [a b c]
+
 * map-delete
 
 #+BEGIN_SRC elisp
@@ -6850,6 +6868,20 @@
 #+RESULTS:
 : ((y . 2)
 :  (z . 3))
+
+* map-do
+
+#+BEGIN_SRC elisp
+(let (result)
+  (map-do (lambda (k v) (push (* k v) result))
+          '((1 . 2)
+            (3 . 4)
+            (5 . 6)))
+  (nreverse result))
+#+END_SRC
+
+#+RESULTS:
+: (2 12 30)
 
 * map-elt
 
@@ -6873,6 +6905,40 @@
 
 #+RESULTS:
 : 2
+
+* map-empty-p
+
+#+BEGIN_SRC elisp
+(map-empty-p '())
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* map-every-p
+
+#+BEGIN_SRC elisp
+(map-every-p (lambda (key val)
+               (= (* key key) val))
+             '((1 . 1)
+               (2 . 4)
+               (3 . 9)
+               (4 . 16)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* map-filter
+
+#+BEGIN_SRC elisp
+(map-filter (lambda (index _item) (cl-evenp index))
+            [a b c d])
+#+END_SRC
+
+#+RESULTS:
+: ((0 . a)
+:  (2 . c))
 
 * map-into
 
@@ -6911,6 +6977,24 @@
 #+RESULTS:
 : (a b)
 
+* map-keys-apply
+
+#+BEGIN_SRC elisp
+(map-keys-apply #'identity '((a) (b) (c)))
+#+END_SRC
+
+#+RESULTS:
+: (a b c)
+
+* map-length
+
+#+BEGIN_SRC elisp
+(map-length [a b c])
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * map-let
 
 #+BEGIN_SRC elisp
@@ -6933,6 +7017,33 @@
 
 #+RESULTS:
 : (1 3)
+
+* map-merge
+
+#+BEGIN_SRC elisp
+(map-merge 'list #s(hash-table data (x 1 y 2)) '((z . 3)))
+#+END_SRC
+
+#+RESULTS:
+: ((z . 3)
+:  (x . 1)
+:  (y . 2))
+
+* map-merge-with
+
+#+BEGIN_SRC elisp
+(map-merge-with 'list
+                (lambda (v1 v2) (list v1 v2))
+                #s(hash-table data (x 1 y 2))
+                '((x . 3)
+                  (y . 4)
+                  (z . 5)))
+#+END_SRC
+
+#+RESULTS:
+: ((z . 5)
+:  (x 1 3)
+:  (y 2 4))
 
 * map-nested-elt
 
@@ -6970,6 +7081,30 @@
 :  (1 . 4)
 :  (2 . 5))
 
+* map-remove
+
+#+BEGIN_SRC elisp
+(map-remove (lambda (index item) (cl-evenp index))
+            [a b c d])
+#+END_SRC
+
+#+RESULTS:
+: ((1 . b)
+:  (3 . d))
+
+* map-some
+
+#+BEGIN_SRC elisp
+(map-some (lambda (k v)
+            (= k v))
+          '((1 . 2)
+            (3 . 4)
+            (5 . 5)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * map-values
 
 #+BEGIN_SRC elisp
@@ -6978,6 +7113,15 @@
 
 #+RESULTS:
 : (1 2)
+
+* map-values-apply
+
+#+BEGIN_SRC elisp
+(map-values-apply #'identity [a b c])
+#+END_SRC
+
+#+RESULTS:
+: (a b c)
 
 * mapatoms
 
