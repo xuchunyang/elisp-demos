@@ -7369,6 +7369,84 @@
 #+RESULTS:
 : "256"
 
+* obarray-get
+
+#+BEGIN_SRC elisp
+(let ((ob (obarray-make)))
+  (obarray-put ob "foo")
+  (obarray-get ob "foo"))
+#+END_SRC
+
+#+RESULTS:
+: foo
+
+* obarray-make
+
+#+BEGIN_SRC elisp
+(obarray-make 5)
+#+END_SRC
+
+#+RESULTS:
+: [0 0 0 0 0]
+
+* obarray-map
+
+#+BEGIN_SRC elisp
+(let ((ob (obarray-make)))
+  (obarray-put ob "x")
+  (obarray-put ob "y")
+  (obarray-put ob "z")
+  (let (syms)
+    (obarray-map
+     (lambda (sym)
+       (push sym syms))
+     ob)
+    syms))
+#+END_SRC
+
+#+RESULTS:
+: (x y z)
+
+* obarray-put
+
+#+BEGIN_SRC elisp
+(let ((ob (obarray-make)))
+  (obarray-put ob "foo"))
+#+END_SRC
+
+#+RESULTS:
+: foo
+
+* obarray-remove
+
+#+BEGIN_SRC elisp
+(let ((ob (obarray-make)))
+  (obarray-put    ob "foo")
+  (obarray-remove ob "foo")
+  (obarray-get    ob "foo"))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* obarray-size
+
+#+BEGIN_SRC elisp
+(obarray-size (obarray-make 5))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
+* obarrayp
+
+#+BEGIN_SRC elisp
+(obarrayp (obarray-make 5))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * or
 
 #+BEGIN_SRC elisp
