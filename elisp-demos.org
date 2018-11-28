@@ -10145,31 +10145,22 @@
 
 #+BEGIN_SRC elisp
 (with-temp-buffer
-  (insert "hello world")
-  (subst-char-in-region (point-min) (point-max) ?o ?O)
+  (insert "/Users/xcy/.emacs.d/init.el")
+  (subst-char-in-region (point-min) (point-max) ?/ ?!)
   (buffer-string))
 #+END_SRC
 
 #+RESULTS:
-: "hellO wOrld"
+: "!Users!xcy!.emacs.d!init.el"
 
 * subst-char-in-string
 
 #+BEGIN_SRC elisp
-(subst-char-in-string ?o ?O "hello world")
+(subst-char-in-string ?/ ?! "/Users/xcy/.emacs.d/init.el")
 #+END_SRC
 
 #+RESULTS:
-: "hellO wOrld"
-
-#+BEGIN_SRC elisp
-(let ((string "hello world"))
-  (subst-char-in-string ?o ?O string 'inplace)
-  string)
-#+END_SRC
-
-#+RESULTS:
-: "hellO wOrld"
+: "!Users!xcy!.emacs.d!init.el"
 
 * substitute-in-file-name
 
