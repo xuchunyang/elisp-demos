@@ -2897,6 +2897,17 @@
 #+RESULTS:
 : t
 
+* chart-bar-quickie
+
+#+BEGIN_SRC elisp :results silent
+;; http://francismurillo.github.io/2017-04-15-Exploring-Emacs-chart-Library/
+(chart-bar-quickie
+ 'vertical
+ "Eye Colors"
+ '("Green" "Hazel" "Blue" "Brown") "Colors"
+ '(64 93 215 220) "Frequency")
+#+END_SRC
+
 * check-coding-system
 
 #+BEGIN_SRC elisp
