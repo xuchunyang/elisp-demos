@@ -5407,6 +5407,14 @@
 #+RESULTS:
 : "init.el"
 
+#+BEGIN_SRC elisp
+;; Get filename of a directory
+(file-name-nondirectory (directory-file-name "~/src/elisp-demos/"))
+#+END_SRC
+
+#+RESULTS:
+: "elisp-demos"
+
 * file-name-sans-extension
 
 #+BEGIN_SRC elisp
