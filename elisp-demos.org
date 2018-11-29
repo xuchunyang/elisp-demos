@@ -6030,6 +6030,15 @@
 #+RESULTS:
 : nil
 
+* image-type-available-p
+
+#+BEGIN_SRC elisp
+(image-type-available-p 'imagemagick)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * insert
 
 #+BEGIN_SRC elisp
@@ -10294,6 +10303,205 @@
 ;; Emacs -> Vim -> Emacs
 (suspend-emacs "vim ; fg")
 #+END_SRC
+
+* svg-circle
+
+#+BEGIN_SRC elisp
+(let ((svg (svg-create 100 100)))
+  (svg-circle svg 50 50 50 :fill-color "red")
+  svg)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+(svg
+ ((width . 100)
+  (height . 100)
+  (version . "1.1")
+  (xmlns . "http://www.w3.org/2000/svg"))
+ (circle
+  ((cx . 50)
+   (cy . 50)
+   (r . 50)
+   (fill . "red"))))
+#+END_EXAMPLE
+
+* svg-create
+
+#+BEGIN_SRC elisp
+(svg-create 100 100)
+#+END_SRC
+
+#+RESULTS:
+: (svg
+:  ((width . 100)
+:   (height . 100)
+:   (version . "1.1")
+:   (xmlns . "http://www.w3.org/2000/svg")))
+
+* svg-gradient
+
+#+BEGIN_SRC elisp
+(let ((svg (svg-create 400 400)))
+  (svg-gradient svg "gradient1" 'linear '((0 . "red") (100 . "blue")))
+  (svg-circle svg 200 200 100 :gradient "gradient1")
+  svg)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+(svg
+ ((width . 400)
+  (height . 400)
+  (version . "1.1")
+  (xmlns . "http://www.w3.org/2000/svg"))
+ (defs nil
+   (linearGradient
+    ((id . "gradient1")
+     (x1 . 0)
+     (x2 . 0)
+     (y1 . 0)
+     (y2 . 1))
+    (stop
+     ((offset . "0%")
+      (stop-color . "red")))
+    (stop
+     ((offset . "100%")
+      (stop-color . "blue")))))
+ (circle
+  ((cx . 200)
+   (cy . 200)
+   (r . 100)
+   (x1 . 0)
+   (x2 . 0)
+   (y1 . 0)
+   (y2 . 1)
+   (fill . "url(#gradient1)"))))
+#+END_EXAMPLE
+
+* svg-insert-image
+
+#+BEGIN_SRC elisp
+(let ((svg (svg-create 300 200)))
+  (svg-rectangle svg 0 0 "100%" "100%" :fill-color "red")
+  (svg-circle svg 150 100 80 :fill-color "green")
+  (svg-text svg "SVG"
+            :font-size 60
+            :text-anchor "middle"
+            :x 150
+            :y 125
+            :fill-color "white")
+  (with-current-buffer (generate-new-buffer "*SVG*")
+    (svg-insert-image svg)
+    (display-buffer (current-buffer)))
+  nil)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* svg-line
+
+#+BEGIN_SRC elisp
+(let ((svg (svg-create 100 100)))
+  (svg-line svg 0 0 100 100 :stroke-color "red")
+  svg)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+(svg
+ ((width . 100)
+  (height . 100)
+  (version . "1.1")
+  (xmlns . "http://www.w3.org/2000/svg"))
+ (line
+  ((x1 . 0)
+   (x2 . 100)
+   (y1 . 0)
+   (y2 . 100)
+   (stroke . "red"))))
+#+END_EXAMPLE
+
+* svg-print
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (svg-print (svg-create 100 100))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "<svg width=\"100\" height=\"100\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"></svg>"
+
+* svg-rectangle
+
+#+BEGIN_SRC elisp
+(let ((svg (svg-create 100 100)))
+  (svg-rectangle svg 0 0 "100%" "100%" :fill-color "red")
+  svg)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+(svg
+ ((width . 100)
+  (height . 100)
+  (version . "1.1")
+  (xmlns . "http://www.w3.org/2000/svg"))
+ (rect
+  ((width . "100%")
+   (height . "100%")
+   (x . 0)
+   (y . 0)
+   (fill . "red"))))
+#+END_EXAMPLE
+
+* svg-remove
+
+#+BEGIN_SRC elisp
+(let ((svg (svg-create 100 100)))
+  (svg-line svg 0 0 100 100 :stroke-color "red" :id "line1")
+  (svg-remove svg "line1")
+  svg)
+#+END_SRC
+
+#+RESULTS:
+: (svg
+:  ((width . 100)
+:   (height . 100)
+:   (version . "1.1")
+:   (xmlns . "http://www.w3.org/2000/svg")))
+
+* svg-text
+
+#+BEGIN_SRC elisp
+(let ((svg (svg-create 300 200)))
+  (svg-text
+   svg "SVG"
+   :font-size 60
+   :text-anchor "middle"
+   :x 150
+   :y 125
+   :fill-color "white")
+  svg)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+(svg
+ ((width . 300)
+  (height . 200)
+  (version . "1.1")
+  (xmlns . "http://www.w3.org/2000/svg"))
+ (text
+  ((y . 125)
+   (x . 150)
+   (text-anchor . "middle")
+   (font-size . 60)
+   (fill . "white"))
+  "SVG"))
+#+END_EXAMPLE
 
 * symbol-file
 
