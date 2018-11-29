@@ -7628,6 +7628,96 @@
 #+RESULTS:
 : 3
 
+* org-element-map
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "* TODO Hack org-mode   :org: \n"
+          "* TODO Hack emacs      :emacs: \n"
+          "* TODO Cut hair        :life: \n")
+  (org-element-map (org-element-parse-buffer) 'headline
+    (lambda (hl)
+      (org-element-property :tags hl))))
+#+END_SRC
+
+#+RESULTS:
+: (("org")
+:  ("emacs")
+:  ("life"))
+
+* org-element-property
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "* TODO Hack org-mode :org:")
+  (delay-mode-hooks (org-mode))
+  (org-element-property :title (org-element-at-point)))
+#+END_SRC
+
+#+RESULTS:
+: "Hack org-mode"
+
+* org-entry-get
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "* TODO Hack org-mode")
+  (delay-mode-hooks (org-mode))
+  (org-entry-get (point-min) "ITEM"))
+#+END_SRC
+
+#+RESULTS:
+: "Hack org-mode"
+
+* org-entry-properties
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "* TODO Hack org-mode")
+  (delay-mode-hooks (org-mode))
+  (org-entry-properties (point-min)))
+#+END_SRC
+
+#+RESULTS:
+: (("CATEGORY" . "???")
+:  ("BLOCKED" . "")
+:  ("FILE")
+:  ("PRIORITY" . "B")
+:  ("TODO" . "TODO")
+:  ("ITEM" . "Hack org-mode"))
+
+* org-heading-components
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "* TODO Hack org-mode")
+  (delay-mode-hooks (org-mode))
+  (org-heading-components))
+#+END_SRC
+
+#+RESULTS:
+: (1 1 "TODO" nil "Hack org-mode" nil)
+
+* org-map-entries
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "* DONE Shave\n"
+          "* TODO Shower\n"
+          "* DONE Breakfast\n"
+          "* TODO Sleep\n")
+  (delay-mode-hooks (org-mode))
+  (let (todos)
+    (org-map-entries
+     (lambda ()
+       (push (org-entry-get (point) "ITEM") todos))
+     "/+TODO")
+    (nreverse todos)))
+#+END_SRC
+
+#+RESULTS:
+: ("Shower" "Sleep")
+
 * other-buffer
 
 #+BEGIN_SRC elisp
