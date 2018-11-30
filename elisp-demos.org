@@ -3953,6 +3953,15 @@
   "The value of Pi.")
 #+END_SRC
 
+* defcustom
+
+#+BEGIN_SRC elisp :eval no
+(defcustom magit-git-executable "git"
+  "The Git executable used by Magit."
+  :group 'magit-process
+  :type 'string)
+#+END_SRC
+
 * define-advice
 
 #+BEGIN_SRC elisp :eval no
