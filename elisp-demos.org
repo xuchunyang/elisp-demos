@@ -178,6 +178,18 @@
 #+RESULTS:
 : 5
 
+* --fix
+
+#+BEGIN_SRC elisp
+(--fix (if (zerop it)
+           it
+         (1- it))
+       5)
+#+END_SRC
+
+#+RESULTS:
+: 0
+
 * --if-let
 
 #+BEGIN_SRC elisp
@@ -528,6 +540,15 @@
 #+RESULTS:
 : t
 
+* -andfn
+
+#+BEGIN_SRC elisp
+(funcall (-andfn #'numberp #'cl-evenp) 4)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * -annotate
 
 #+BEGIN_SRC elisp
@@ -659,6 +680,18 @@
 
 #+RESULTS:
 : 2
+
+* -counter
+
+#+BEGIN_SRC elisp
+(let ((c (-counter 0)))
+  (list (funcall c)
+        (funcall c)
+        (funcall c)))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 2)
 
 * -cut
 
@@ -869,6 +902,26 @@
 #+RESULTS:
 : 1
 
+* -fix
+
+#+BEGIN_SRC elisp
+(-fix (lambda (x) (expt (+ x 10) 0.25))
+      2.0)
+#+END_SRC
+
+#+RESULTS:
+: 1.8555845286409378
+
+* -fixfn
+
+#+BEGIN_SRC elisp
+(funcall (-fixfn (lambda (x) (expt (+ x 10) 0.25)))
+         2.0)
+#+END_SRC
+
+#+RESULTS:
+: 1.8555845286409378
+
 * -flatten
 
 #+BEGIN_SRC elisp
@@ -1012,6 +1065,15 @@
 
 #+RESULTS:
 : (1 2 3 4 5 6 7 8 9 10)
+
+* -iteratefn
+
+#+BEGIN_SRC elisp
+(funcall (-iteratefn #'1+ 3) 1)
+#+END_SRC
+
+#+RESULTS:
+: 4
 
 * -juxt
 
@@ -1407,6 +1469,16 @@
 :  (y)
 :  (z)
 :  nil)
+
+* -prodfn
+
+#+BEGIN_SRC elisp
+(funcall (-prodfn '1+ '1- 'number-to-string)
+         '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (2 1 "3")
 
 * -product
 
