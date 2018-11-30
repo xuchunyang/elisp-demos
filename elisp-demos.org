@@ -3676,6 +3676,15 @@
 #+RESULTS:
 : "emacs-version"
 
+* completing-read-multiple
+
+#+BEGIN_SRC elisp
+(completing-read-multiple "> " '("alice" "bob" "eve"))
+#+END_SRC
+
+#+RESULTS:
+: ("alice" "bob")
+
 * concat
 
 #+BEGIN_SRC elisp
