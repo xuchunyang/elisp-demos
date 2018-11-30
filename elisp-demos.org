@@ -10089,6 +10089,182 @@
 #+RESULTS:
 : "Hello"
 
+* stream
+
+#+BEGIN_SRC elisp
+(stream-first (stream '(1 2 3)))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* stream-append
+
+#+BEGIN_SRC elisp
+(seq-into (stream-append (stream '(1 2 3)) (stream '(4 5 6)))
+          'list)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6)
+
+* stream-concatenate
+
+#+BEGIN_SRC elisp
+(let ((stream1 (stream '(1 2 3)))
+      (stream2 (stream '(4 5 6))))
+  (seq-into (stream-concatenate (stream (list stream1 stream2)))
+            'list))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6)
+
+* stream-cons
+
+#+BEGIN_SRC elisp :lexical t
+(cl-labels ((fib (a b) (stream-cons a (fib b (+ a b)))))
+  (let ((stream (fib 0 1)))
+    (seq-into (seq-take stream 11) 'list)))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 1 2 3 5 8 13 21 34 55)
+
+* stream-empty-p
+
+#+BEGIN_SRC elisp
+(stream-empty-p (stream-rest (stream '(1))))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* stream-first
+
+#+BEGIN_SRC elisp
+(stream-first (stream '(1 2 3)))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* stream-flush
+
+#+BEGIN_SRC elisp :lexical t :results silent
+(let ((i 0))
+  (cl-labels ((fun
+               ()
+               (stream-make
+                (when (< i 10)
+                  (setq i (1+ i))
+                  ;; do some side effects
+                  (message "=> %d" i)
+                  (cons nil (fun))))))
+    (stream-flush (fun))))
+#+END_SRC
+
+* stream-from-iterator
+
+#+BEGIN_SRC elisp :lexical t
+(let* ((iter-fn (iter-lambda ()
+                  (let ((a 0)
+                        (b 1))
+                    (while t
+                      (iter-yield a)
+                      (cl-psetq a b
+                                b (+ a b))))))
+       (iter (funcall iter-fn))
+       (stream (stream-from-iterator iter)))
+  (seq-into (seq-take stream 11) 'list))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 1 2 3 5 8 13 21 34 55)
+
+* stream-iterate-function
+
+#+BEGIN_SRC elisp
+(seq-into (seq-take (stream-iterate-function #'1+ 0)
+                    10)
+          'list)
+#+END_SRC
+
+#+RESULTS:
+: (0 1 2 3 4 5 6 7 8 9)
+
+* stream-pop
+
+#+BEGIN_SRC elisp
+(let ((stream (stream-range 1 10))
+      result)
+  (while (not (stream-empty-p stream))
+    (push (stream-pop stream) result))
+  (nreverse result))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6 7 8 9)
+
+* stream-range
+
+#+BEGIN_SRC elisp
+(let ((stream (stream-range 0))
+      result)
+  (dotimes (_ 10 (nreverse result))
+    (push (stream-first stream) result)
+    (setq stream (stream-rest stream))))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 2 3 4 5 6 7 8 9)
+
+* stream-regexp
+
+#+BEGIN_SRC elisp :lexical t
+(with-temp-buffer
+  (insert "<2018-11-30>")
+  (goto-char (point-min))
+  (let ((stream (stream-regexp (current-buffer) "[0-9]+")))
+    (seq-into (seq-map (lambda (match)
+                         (apply #'buffer-substring match))
+                       stream)
+              'list)))
+#+END_SRC
+
+#+RESULTS:
+: ("2018" "11" "30")
+
+* stream-rest
+
+#+BEGIN_SRC elisp
+(stream-first (stream-rest (stream '(1 2 3))))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* stream-scan
+
+#+BEGIN_SRC elisp
+;; (* 1 2 3 4 5)
+;; (* (* (* (* (* 1 1) 2) 3) 4) 5)
+(seq-elt (stream-scan #'* 1 (stream-range 1))
+         5)
+#+END_SRC
+
+#+RESULTS:
+: 120
+
+* streamp
+
+#+BEGIN_SRC elisp
+(streamp (stream '(1 2 3)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * string
 
 #+BEGIN_SRC elisp
