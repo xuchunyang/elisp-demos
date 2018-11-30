@@ -3631,6 +3631,42 @@
 #+RESULTS:
 : t
 
+* color-complement
+
+#+BEGIN_SRC elisp
+(color-complement "green")
+#+END_SRC
+
+#+RESULTS:
+: (1.0 0.0 1.0)
+
+* color-name-to-rgb
+
+#+BEGIN_SRC elisp
+(color-name-to-rgb "green")
+#+END_SRC
+
+#+RESULTS:
+: (0.0 1.0 0.0)
+
+* color-rgb-to-hex
+
+#+BEGIN_SRC elisp
+(color-rgb-to-hex 0.0 1.0 0.0 2)
+#+END_SRC
+
+#+RESULTS:
+: "#00ff00"
+
+* color-values
+
+#+BEGIN_SRC elisp
+(color-values "green")
+#+END_SRC
+
+#+RESULTS:
+: (0 65535 0)
+
 * commandp
 
 #+BEGIN_SRC elisp
