@@ -8521,6 +8521,42 @@
 #+RESULTS:
 : t
 
+* regexp-opt
+
+#+BEGIN_SRC elisp
+(regexp-opt '("foo" "bar" "baz"))
+#+END_SRC
+
+#+RESULTS:
+: "\\(?:ba[rz]\\|foo\\)"
+
+* regexp-opt-charset
+
+#+BEGIN_SRC elisp
+(regexp-opt-charset '(?a ?b ?c ?d ?e))
+#+END_SRC
+
+#+RESULTS:
+: "[a-e]"
+
+* regexp-opt-depth
+
+#+BEGIN_SRC elisp
+(regexp-opt-depth "\\(foo\\)\\(bar\\)\\(?:baz\\)")
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* regexp-quote
+
+#+BEGIN_SRC elisp
+(regexp-quote "^The cat$")
+#+END_SRC
+
+#+RESULTS:
+: "\\^The cat\\$"
+
 * remhash
 
 #+BEGIN_SRC elisp
