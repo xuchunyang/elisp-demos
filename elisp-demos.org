@@ -2527,6 +2527,77 @@
 #+RESULTS:
 : nil
 
+* bindat-get-field
+
+#+BEGIN_SRC elisp
+(let* ((binary-data [192 168 1 100 192 168 1 101 4 210 17 215])
+       (spec '((dest-ip ip)
+               (src-ip ip)
+               (dest-port u16)
+               (src-port u16)))
+       (decoded (bindat-unpack spec binary-data)))
+  (bindat-get-field decoded 'src-ip))
+#+END_SRC
+
+#+RESULTS:
+: [192 168 1 101]
+
+* bindat-ip-to-string
+
+#+BEGIN_SRC elisp
+(bindat-ip-to-string [127 0 0 1])
+#+END_SRC
+
+#+RESULTS:
+: "127.0.0.1"
+
+* bindat-length
+
+#+BEGIN_SRC elisp
+(bindat-length '((id strz 8)
+                 (ip ip))
+               '((id . [?A ?B ?C ?D ?E ?F ?G 0])
+                 (ip . [192 168 1 100])))
+#+END_SRC
+
+#+RESULTS:
+: 12
+
+* bindat-pack
+
+#+BEGIN_SRC elisp
+(string-to-vector
+ (bindat-pack '((dest-ip ip)
+                (src-ip ip)
+                (dest-port u16)
+                (src-port u16))
+              '((dest-ip   . [192 168 1 100])
+                (src-ip    . [192 168 1 101])
+                (dest-port . 1234)
+                (src-port  . 4567))))
+#+END_SRC
+
+#+RESULTS:
+: [192 168 1 100 192 168 1 101 4 210 17 215]
+
+* bindat-unpack
+
+#+BEGIN_SRC elisp
+(bindat-unpack '((dest-ip ip)
+                 (src-ip ip)
+                 (dest-port u16)
+                 (src-port u16))
+               [192 168 1 100 192 168 1 101 4 210 17 215])
+#+END_SRC
+
+#+RESULTS:
+: ((src-port . 4567)
+:  (dest-port . 1234)
+:  (src-ip .
+:          [192 168 1 101])
+:  (dest-ip .
+:           [192 168 1 100]))
+
 * bobp
 
 #+BEGIN_SRC elisp
