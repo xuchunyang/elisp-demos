@@ -10681,6 +10681,41 @@
 #+RESULTS:
 : 39
 
+* thunk-delay
+
+#+BEGIN_SRC elisp :lexical t
+(let ((delayed (thunk-delay (message "this message is delayed"))))
+  (thunk-force delayed))
+#+END_SRC
+
+#+RESULTS:
+: "this message is delayed"
+
+* thunk-evaluated-p
+
+#+BEGIN_SRC elisp :lexical t
+(let ((delayed (thunk-delay (message "this message is delayed"))))
+  (thunk-force delayed)
+  (thunk-evaluated-p delayed))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* thunk-force
+
+#+BEGIN_SRC elisp :lexical t
+(let ((x 1))
+  (let ((delayed (thunk-delay (setq x (1+ x)))))
+    (list x
+          (thunk-force delayed)
+          (thunk-force delayed)
+          (thunk-force delayed))))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 2 2)
+
 * time-add
 
 #+BEGIN_SRC elisp
