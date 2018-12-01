@@ -11159,6 +11159,15 @@
 #+RESULTS:
 : t
 
+* tooltip-show
+
+#+BEGIN_SRC elisp
+(tooltip-show "Emacs is addictive!")
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * translate-region
 
 #+BEGIN_SRC elisp
