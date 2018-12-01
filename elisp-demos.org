@@ -2527,6 +2527,54 @@
 #+RESULTS:
 : nil
 
+* benchmark
+
+#+BEGIN_SRC elisp
+(benchmark 10 '(sit-for 0.1))
+#+END_SRC
+
+#+RESULTS:
+: "Elapsed time: 1.087937s"
+
+* benchmark-elapse
+
+#+BEGIN_SRC elisp
+(benchmark-elapse
+  (sit-for 1))
+#+END_SRC
+
+#+RESULTS:
+: 1.011088
+
+* benchmark-run
+
+#+BEGIN_SRC elisp
+(benchmark-run 10 (sit-for 0.1))
+#+END_SRC
+
+#+RESULTS:
+: (1.072229 0 0.0)
+
+* benchmark-run-compiled
+
+#+BEGIN_SRC elisp
+(benchmark-run 1
+  (let ((i 10000000))
+    (while (> (setq i (1- i)) 0))))
+#+END_SRC
+
+#+RESULTS:
+: (1.377883 0 0.0)
+
+#+BEGIN_SRC elisp
+(benchmark-run-compiled 1
+  (let ((i 10000000))
+    (while (> (setq i (1- i)) 0))))
+#+END_SRC
+
+#+RESULTS:
+: (0.281128 0 0.0)
+
 * bindat-get-field
 
 #+BEGIN_SRC elisp
