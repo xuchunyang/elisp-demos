@@ -10710,6 +10710,15 @@
 #+RESULTS:
 : "!Users!xcy!.emacs.d!init.el"
 
+* substitute-command-keys
+
+#+BEGIN_SRC elisp
+(substitute-command-keys "To save a file, type \\[save-buffer].")
+#+END_SRC
+
+#+RESULTS:
+: "To save a file, type C-x C-s."
+
 * substitute-in-file-name
 
 #+BEGIN_SRC elisp
