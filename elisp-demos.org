@@ -11439,16 +11439,16 @@
 * while
 
 #+BEGIN_SRC elisp
-(let ((list '(1 2 3 4))
-      result)
-  (while list
-    (push (car list) result)
-    (setq list (cdr list)))
-  result)
+(let ((i 1)
+      (sum 0))
+  (while (<= i 100)
+    (setq sum (+ sum i))
+    (setq i (+ i 1)))
+  sum)
 #+END_SRC
 
 #+RESULTS:
-: (4 3 2 1)
+: 5050
 
 * widen
 
