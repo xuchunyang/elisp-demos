@@ -8959,6 +8959,30 @@
 :        (message "Your Emacs is idle for 3 seconds"))
 :      nil idle 0]
 
+* rx
+
+#+BEGIN_SRC elisp
+;; To match <2018-11-07>
+(rx "<" (group (in ?- "0-9")) ">")
+#+END_SRC
+
+#+RESULTS:
+: "<\\([-0-9]\\)>"
+
+* rx-to-string
+
+#+BEGIN_SRC elisp
+;; `rx' is a macro and can't compute regexp at run-time, that is, once the macro
+;; is expanded, the result is static, not only byte-compiler but also
+;; load/require/eval-buffer/etc expands macro eagerly.  By the way, We don't
+;; consider `eval' even if it works, it is simply bad
+;; (eval '(rx (eval (buffer-name))))
+(rx-to-string `(and bos ,(buffer-name) eos))
+#+END_SRC
+
+#+RESULTS:
+: "\\(?:\\`elisp-demos\\.org\\'\\)"
+
 * s-append
 
 #+BEGIN_SRC elisp
