@@ -2829,6 +2829,25 @@
 #+RESULTS:
 : (1 2 3)
 
+* byte-compile
+
+#+BEGIN_SRC elisp :results silent
+(byte-compile '(lambda (a b) (+ a a b)))
+#+END_SRC
+
+#+BEGIN_SRC elisp
+;; byte-compiled code is more efficient than interpreted code
+(let* ((form '(let ((i 10000000))
+                (while (> (setq i (- i 1)) 0))))
+       (fun `(lambda () ,form))
+       (compiled (byte-compile fun)))
+  (list (benchmark-elapse 1 (funcall fun))
+        (benchmark-elapse 1 (funcall compiled))))
+#+END_SRC
+
+#+RESULTS:
+: (1.628522 0.265482)
+
 * byte-to-position
 
 #+BEGIN_SRC elisp
