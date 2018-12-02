@@ -8317,6 +8317,43 @@
 #+RESULTS:
 : (2 3)
 
+* popup-cascade-menu
+
+#+BEGIN_SRC elisp
+(popup-cascade-menu '(("Foo" "Baz") "Bar"))
+#+END_SRC
+
+#+RESULTS:
+: "Baz"
+
+* popup-make-item
+
+#+BEGIN_SRC elisp
+(popup-menu* (list (popup-make-item "Yes" :value t)
+                   (popup-make-item "No" :value nil)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* popup-menu*
+
+#+BEGIN_SRC elisp
+(popup-menu* '("Foo" "Bar" "Baz"))
+#+END_SRC
+
+#+RESULTS:
+: "Foo"
+
+* popup-tip
+
+#+BEGIN_SRC elisp
+(popup-tip "This is a tooltip.")
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * pos-tip-show
 
 #+BEGIN_SRC elisp
