@@ -8317,6 +8317,24 @@
 #+RESULTS:
 : (2 3)
 
+* pos-tip-show
+
+#+BEGIN_SRC elisp
+(pos-tip-show "Hello World!")
+#+END_SRC
+
+#+RESULTS:
+: (8 . 425)
+
+* pos-tip-show-no-propertize
+
+#+BEGIN_SRC elisp
+(pos-tip-show-no-propertize "Hello World!")
+#+END_SRC
+
+#+RESULTS:
+: (8 . 578)
+
 * pp
 
 #+BEGIN_SRC elisp :results output
