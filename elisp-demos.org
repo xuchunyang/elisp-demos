@@ -11418,6 +11418,29 @@
 #+RESULTS:
 : integer
 
+#+BEGIN_SRC elisp :results raw table :colnames '("Object" "Type")
+(mapcar (lambda (object)
+          (list object (type-of object)))
+        (list 42
+              float-pi
+              nil
+              (cons 1 2)
+              "This is a string"
+              [1 2 3]
+              (start-process "pwd" nil "pwd")))
+#+END_SRC
+
+#+RESULTS:
+| Object            | Type    |
+|-------------------+---------|
+| 42                | integer |
+| 3.141592653589793 | float   |
+| nil               | symbol  |
+| (1 . 2)           | cons    |
+| This is a string  | string  |
+| [1 2 3]           | vector  |
+| pwd               | process |
+
 * unibyte-string
 
 #+BEGIN_SRC elisp
