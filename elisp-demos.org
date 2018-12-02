@@ -8815,6 +8815,23 @@
 #+RESULTS:
 : "2018 Nov 07th"
 
+* request
+
+#+BEGIN_SRC elisp
+(let (json)
+  (request
+   "https://api.github.com/status"
+   :parser #'json-read
+   :success (cl-function
+             (lambda (&key data &allow-other-keys)
+               (setq json data)))
+   :sync t)
+  json)
+#+END_SRC
+
+#+RESULTS:
+: ((message . "GitHub lives! (2018-12-01 23:36:08 -0800) (1)"))
+
 * require
 
 #+BEGIN_SRC elisp
