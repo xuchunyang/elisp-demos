@@ -5805,7 +5805,7 @@
 : "ba"
 
 #+BEGIN_SRC elisp
-(fill-common-string-prefix "bar" "foo") 
+(fill-common-string-prefix "bar" "foo")
 #+END_SRC
 
 #+RESULTS:
