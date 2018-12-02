@@ -5795,6 +5795,22 @@
 #+RESULTS:
 : t
 
+* fill-common-string-prefix
+
+#+BEGIN_SRC elisp
+(fill-common-string-prefix "bar" "baz")
+#+END_SRC
+
+#+RESULTS:
+: "ba"
+
+#+BEGIN_SRC elisp
+(fill-common-string-prefix "bar" "foo") 
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * fillarray
 
 #+BEGIN_SRC elisp
