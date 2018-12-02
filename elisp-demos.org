@@ -2895,6 +2895,37 @@
 #+RESULTS:
 : "5"
 
+* calendar-absolute-from-gregorian
+
+#+BEGIN_SRC elisp
+;; How many days since the Gregorian date 12/31/1 BC
+(calendar-absolute-from-gregorian
+ (calendar-current-date))
+#+END_SRC
+
+#+RESULTS:
+: 737031
+
+* calendar-chinese-from-absolute
+
+#+BEGIN_SRC elisp
+(calendar-chinese-from-absolute
+ (calendar-absolute-from-gregorian
+  (calendar-current-date)))
+#+END_SRC
+
+#+RESULTS:
+: (78 35 10 26)
+
+* calendar-current-date
+
+#+BEGIN_SRC elisp
+(calendar-current-date)
+#+END_SRC
+
+#+RESULTS:
+: (12 3 2018)
+
 * call-interactively
 
 #+BEGIN_SRC elisp
