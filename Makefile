@@ -2,7 +2,7 @@ EMACS ?= emacs
 
 .PHONY: compile test benchmark
 
-all: check
+all: check count
 
 check: compile test
 
@@ -20,3 +20,6 @@ local:
 	@for cmd in emacs-24.4 emacs-24.5 emacs-25.1 emacs-25.3 emacs-26.1; do \
 	    command -v $$cmd && make EMACS=$$cmd ;\
 	done
+
+count:
+	grep -c '^\* ' elisp-demos.org
