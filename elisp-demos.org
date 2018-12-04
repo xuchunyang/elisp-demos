@@ -11968,6 +11968,48 @@
 #+RESULTS:
 : nil
 
+* xmlgen
+
+#+BEGIN_SRC elisp :results drawer
+(funcall
+ (lambda (string)
+   "Prettify HTML in STRING."
+   (with-temp-buffer
+     (insert string)
+     (html-mode)
+     (sgml-pretty-print (point-min) (point-max))
+     (buffer-string)))
+ (xmlgen '(html
+           (head
+            (title "Example Domain")
+            (meta :charset "utf-8"))
+           (body
+            (h1 "Example Domain")
+            (p "This domain...")
+            (p (a :href "http://www.iana.org/domains/example" "More information..."))))))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+<html>
+  <head>
+    <title>Example Domain
+    </title>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <h1>Example Domain
+    </h1>
+    <p>This domain...
+    </p>
+    <p>
+      <a href="http://www.iana.org/domains/example">More information...
+      </a>
+    </p>
+  </body>
+</html>
+:END:
+
 * y-or-n-p
 
 #+BEGIN_SRC elisp
