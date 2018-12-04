@@ -8558,6 +8558,104 @@
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : (x 1 y 2))
 
+* queue-all
+
+#+BEGIN_SRC elisp
+(let ((q (queue-create)))
+  (queue-enqueue q 1)
+  (queue-enqueue q 2)
+  (queue-enqueue q 3)
+  (queue-prepend q 0)
+  (queue-all q))
+#+END_SRC
+
+#+RESULTS:
+: (0 1 2 3)
+
+* queue-clear
+
+#+BEGIN_SRC elisp
+(let ((q (queue-create)))
+  (queue-enqueue q 1)
+  (queue-enqueue q 2)
+  (queue-enqueue q 3)
+  (queue-clear q)
+  q)
+#+END_SRC
+
+#+RESULTS:
+: #s(queue nil nil)
+
+* queue-create
+
+#+BEGIN_SRC elisp
+;; FIFO (first in, first out)
+(let ((q (queue-create)))
+  (queue-enqueue q 1)
+  (queue-enqueue q 2)
+  (queue-enqueue q 3)
+  (list (queue-dequeue q)
+        (queue-dequeue q)
+        (queue-dequeue q)))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+#+BEGIN_SRC elisp
+;; FILO (first in, last out)
+(let ((q (queue-create)))
+  (queue-prepend q 1)
+  (queue-prepend q 2)
+  (queue-prepend q 3)
+  (list (queue-dequeue q)
+        (queue-dequeue q)
+        (queue-dequeue q)))
+#+END_SRC
+
+#+RESULTS:
+: (3 2 1)
+
+* queue-first
+
+#+BEGIN_SRC elisp
+(let ((q (queue-create)))
+  (queue-enqueue q 1)
+  (queue-enqueue q 2)
+  (queue-enqueue q 3)
+  (queue-first q))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* queue-last
+
+#+BEGIN_SRC elisp
+(let ((q (queue-create)))
+  (queue-enqueue q 1)
+  (queue-enqueue q 2)
+  (queue-enqueue q 3)
+  (queue-last q))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* queue-length
+
+#+BEGIN_SRC elisp
+(let ((q (queue-create)))
+  (queue-enqueue q 1)
+  (queue-enqueue q 2)
+  (queue-enqueue q 3)
+  (queue-prepend q 0)
+  (queue-length q))
+#+END_SRC
+
+#+RESULTS:
+: 4
+
 * quote
 
 #+BEGIN_SRC elisp
