@@ -3080,16 +3080,27 @@
 #+RESULTS:
 : 2
 
+* char-after
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "ABC")
+  (string (char-after (point-min))))
+#+END_SRC
+
+#+RESULTS:
+: "A"
+
 * char-before
 
 #+BEGIN_SRC elisp
 (with-temp-buffer
-  (insert ?\n)
-  (char-before))
+  (insert "ABC")
+  (string (char-before (1+ (point-min)))))
 #+END_SRC
 
 #+RESULTS:
-: 10
+: "A"
 
 * char-equal
 
@@ -5958,6 +5969,27 @@
 
 #+RESULTS:
 : nil
+
+* following-char
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "ABC")
+  (following-char))
+#+END_SRC
+
+#+RESULTS:
+: 0
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "ABC")
+  (goto-char (point-min))
+  (string (following-char)))
+#+END_SRC
+
+#+RESULTS:
+: "A"
 
 * format
 
