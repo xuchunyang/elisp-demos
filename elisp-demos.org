@@ -3182,13 +3182,14 @@
 * cl-callf
 
 #+BEGIN_SRC elisp
-(let ((x 1))
-  (cl-callf - x 2)
-  x)
+(let ((x 1) y)
+  (cl-callf or x 42)
+  (cl-callf or y 42)
+  (list x y))
 #+END_SRC
 
 #+RESULTS:
-: -1
+: (1 42)
 
 * cl-callf2
 
