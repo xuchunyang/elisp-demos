@@ -4976,6 +4976,83 @@
 #+RESULTS:
 : foo
 
+* esxml-query
+
+#+BEGIN_SRC elisp
+(esxml-query
+ "body > div > p > a"
+ (with-current-buffer (url-retrieve-synchronously "http://example.com")
+   (libxml-parse-html-region url-http-end-of-headers (point-max))))
+#+END_SRC
+
+#+RESULTS:
+: (a
+:  ((href . "http://www.iana.org/domains/example"))
+:  "More information...")
+
+* esxml-query-all
+
+#+BEGIN_SRC elisp
+(esxml-query-all
+ "li"
+ '(body nil
+        (nav nil
+             (ol nil
+                 (li nil "Perl")
+                 (li nil "Python")
+                 (li nil "PHP")))
+        (h1 nil "h1 heading")
+        (p nil "paragraph")))
+#+END_SRC
+
+#+RESULTS:
+: ((li nil "Perl")
+:  (li nil "Python")
+:  (li nil "PHP"))
+
+* esxml-to-xml
+
+#+BEGIN_SRC elisp :results drawer
+((lambda (string)
+   "Prettify HTML in STRING."
+   (with-temp-buffer
+     (insert string)
+     (html-mode)
+     (sgml-pretty-print (point-min) (point-max))
+     (buffer-string)))
+ (esxml-to-xml
+  '(html nil
+         (head nil
+               (title nil "Example Domain")
+               (meta ((charset . "utf-8"))))
+         (body nil
+               (h1 nil "Example Domain")
+               (p nil "This domain...")
+               (p nil (a ((href . "http://www.iana.org/domains/example"))
+                         "More information..."))))))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+<html>
+  <head>
+    <title>Example Domain
+    </title>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <h1>Example Domain
+    </h1>
+    <p>This domain...
+    </p>
+    <p>
+      <a href="http://www.iana.org/domains/example">More information...
+      </a>
+    </p>
+  </body>
+</html>
+:END:
+
 * eval
 
 #+BEGIN_SRC elisp
