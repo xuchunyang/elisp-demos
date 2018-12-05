@@ -12004,8 +12004,7 @@
 * xmlgen
 
 #+BEGIN_SRC elisp :results drawer
-(funcall
- (lambda (string)
+((lambda (string)
    "Prettify HTML in STRING."
    (with-temp-buffer
      (insert string)
