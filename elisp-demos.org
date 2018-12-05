@@ -3234,6 +3234,43 @@
 #+RESULTS:
 : 42.0
 
+* cl-defgeneric
+
+#+BEGIN_SRC elisp
+(cl-defgeneric greet (greeter))
+
+(cl-defstruct cow)
+
+(cl-defmethod greet ((_ cow))
+  "Moo!")
+
+(cl-defstruct bird)
+
+(cl-defmethod greet ((_ bird))
+  "Chirp!")
+
+(list (greet (make-cow))
+      (greet (make-bird)))
+#+END_SRC
+
+#+RESULTS:
+: ("Moo!" "Chirp!")
+
+* cl-defstruct
+
+#+BEGIN_SRC elisp
+(cl-defstruct (person (:constructor person-create)
+                      (:copier nil))
+  name age sex)
+
+(let ((tom (person-create :name "Tom" :age 19 :sex "Male")))
+  (cl-incf (person-age tom))
+  tom)
+#+END_SRC
+
+#+RESULTS:
+: #s(person "Tom" 20 "Male")
+
 * cl-defun
 
 #+BEGIN_SRC elisp
