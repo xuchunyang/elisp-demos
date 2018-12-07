@@ -3234,6 +3234,42 @@
 #+RESULTS:
 : 42.0
 
+* cl-concatenate
+
+#+BEGIN_SRC elisp
+(cl-concatenate 'vector '(1 2) [4 5] "67")
+#+END_SRC
+
+#+RESULTS:
+: [1 2 4 5 54 55]
+
+* cl-count
+
+#+BEGIN_SRC elisp
+(cl-count nil '(1 2 nil () 3 4 nil) :test #'eq)
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* cl-count-if
+
+#+BEGIN_SRC elisp
+(cl-count-if #'cl-evenp '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* cl-count-if-not
+
+#+BEGIN_SRC elisp
+(cl-count-if-not #'cl-evenp '(1 2 3 4 5))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * cl-defgeneric
 
 #+BEGIN_SRC elisp
@@ -3286,6 +3322,28 @@
 
 #+RESULTS:
 : (:a 1 :b 2 :c 3 :d 4 :e 17)
+
+* cl-delete
+
+#+BEGIN_SRC elisp :results value pp
+;; old will be changed by `cl-delete'
+(let* ((old (list 0 1 2 0))
+       (new (cl-delete 0 old :test #'=)))
+  (list new old))
+#+END_SRC
+
+#+RESULTS:
+: ((1 2)
+:  (0 1 2))
+
+* cl-delete-duplicates
+
+#+BEGIN_SRC elisp
+(cl-delete-duplicates (list 1 2 3 3 2 1) :test #'=)
+#+END_SRC
+
+#+RESULTS:
+: (3 2 1)
 
 * cl-destructuring-bind
 
@@ -3392,6 +3450,51 @@
 
 #+RESULTS:
 : (error "cl-etypecase failed: 42, (float)")
+
+* cl-every
+
+#+BEGIN_SRC elisp
+(cl-every #'cl-evenp [0 2 4 6])
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* cl-fill
+
+#+BEGIN_SRC elisp
+(cl-fill (list 1 2 3) 0)
+#+END_SRC
+
+#+RESULTS:
+: (0 0 0)
+
+* cl-find
+
+#+BEGIN_SRC elisp
+(cl-find ?o "hello" :test #'=)
+#+END_SRC
+
+#+RESULTS:
+: 111
+
+* cl-find-if
+
+#+BEGIN_SRC elisp
+(cl-find-if #'cl-evenp '(1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
+* cl-find-if-not
+
+#+BEGIN_SRC elisp
+(cl-find-if-not #'zerop '(0 0 0 1 2))
+#+END_SRC
+
+#+RESULTS:
+: 1
 
 * cl-flet
 
@@ -3502,6 +3605,24 @@
 #+RESULTS:
 : 43
 
+* cl-map
+
+#+BEGIN_SRC elisp
+(cl-map 'vector #'1+ '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: [2 3 4]
+
+* cl-mapc
+
+#+BEGIN_SRC elisp
+(cl-mapc #'message ["Hi, %s" "Hello, %s"] '(Emacs Tom))
+#+END_SRC
+
+#+RESULTS:
+: ["Hi, %s" "Hello, %s"]
+
 * cl-mapcan
 
 #+BEGIN_SRC elisp
@@ -3546,24 +3667,112 @@
 * cl-mapl
 
 #+BEGIN_SRC elisp :results output
-(cl-mapl #'print '(1 2 3))
+(cl-mapl #'princ '(1 2 3))
 #+END_SRC
 
 #+RESULTS:
-: "\n(1 2 3)\n\n(2 3)\n\n(3)\n"
+: "(1 2 3)(2 3)(3)"
 
 * cl-maplist
 
 #+BEGIN_SRC elisp
-(cl-maplist #'identity '(1 2 3 4 5))
+(cl-maplist #'identity '(1 2 3))
 #+END_SRC
 
 #+RESULTS:
-: ((1 2 3 4 5)
-:  (2 3 4 5)
-:  (3 4 5)
-:  (4 5)
-:  (5))
+: ((1 2 3)
+:  (2 3)
+:  (3))
+
+* cl-merge
+
+#+BEGIN_SRC elisp
+(cl-merge 'list '(1 4 6) '(2 3 5) #'<)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6)
+
+* cl-mismatch
+
+#+BEGIN_SRC elisp
+(cl-mismatch "HELLO" "hello1" :key #'upcase)
+#+END_SRC
+
+#+RESULTS:
+: 5
+
+* cl-notany
+
+#+BEGIN_SRC elisp
+(cl-notany #'zerop [1 2 3])
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* cl-notevery
+
+#+BEGIN_SRC elisp
+(cl-notevery #'zerop [0 0 0 0])
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* cl-nsubstitute
+
+#+BEGIN_SRC elisp
+(cl-nsubstitute :new :old (list 1 :old 2 :old) :test #'eq)
+#+END_SRC
+
+#+RESULTS:
+: (1 :new 2 :new)
+
+* cl-nsubstitute-if
+
+#+BEGIN_SRC elisp
+(cl-nsubstitute-if :zero #'zerop (list 1 0 1 0))
+#+END_SRC
+
+#+RESULTS:
+: (1 :zero 1 :zero)
+
+* cl-nsubstitute-if-not
+
+#+BEGIN_SRC elisp
+(cl-substitute-if-not :not-zero #'zerop (list 1 0 1 0))
+#+END_SRC
+
+#+RESULTS:
+: (:not-zero 0 :not-zero 0)
+
+* cl-position
+
+#+BEGIN_SRC elisp
+(cl-position "bar" '("foo" "bar" "bar") :test #'equal)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* cl-position-if
+
+#+BEGIN_SRC elisp
+(cl-position-if #'zerop '(1 1 1 0 0))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* cl-position-if-not
+
+#+BEGIN_SRC elisp
+(cl-position-if-not #'zerop '(0 0 0 1 2))
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * cl-progv
 
@@ -3600,6 +3809,33 @@
 #+RESULTS:
 : (2 1)
 
+* cl-reduce
+
+#+BEGIN_SRC elisp
+(cl-reduce #'+ [1 2 3])
+#+END_SRC
+
+#+RESULTS:
+: 6
+
+* cl-remove
+
+#+BEGIN_SRC elisp
+(cl-remove 0 [0 1 2 0] :test #'=)
+#+END_SRC
+
+#+RESULTS:
+: [1 2]
+
+* cl-remove-duplicates
+
+#+BEGIN_SRC elisp
+(cl-remove-duplicates (list 1 nil 2 () 1) :test #'eq)
+#+END_SRC
+
+#+RESULTS:
+: (2 nil 1)
+
 * cl-remove-if
 
 #+BEGIN_SRC elisp
@@ -3608,6 +3844,15 @@
 
 #+RESULTS:
 : (0 1 3 5)
+
+* cl-replace
+
+#+BEGIN_SRC elisp
+(cl-replace (list 0 0 3 4) (list 1 2))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4)
 
 * cl-return
 
@@ -3643,6 +3888,15 @@
 #+RESULTS:
 : (2 3 4 1)
 
+* cl-search
+
+#+BEGIN_SRC elisp
+(cl-search "ar" "foobarzzzzz" :test #'=)
+#+END_SRC
+
+#+RESULTS:
+: 4
+
 * cl-shiftf
 
 #+BEGIN_SRC elisp
@@ -3653,6 +3907,83 @@
 
 #+RESULTS:
 : (2 3 4 4)
+
+* cl-some
+
+#+BEGIN_SRC elisp
+(cl-some #'cdr '(nil (1) (2 . 3) (4 5)))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* cl-sort
+
+#+BEGIN_SRC elisp
+(cl-sort (list (cons 1 4)
+               (cons 3 6)
+               (cons 2 5))
+         #'<
+         :key #'car)
+#+END_SRC
+
+#+RESULTS:
+: ((1 . 4)
+:  (2 . 5)
+:  (3 . 6))
+
+* cl-stable-sort
+
+#+BEGIN_SRC elisp
+(cl-stable-sort (list (cons 1 4)
+                      (cons 3 6)
+                      (cons 2 5)
+                      (cons 3 0))
+                #'<
+                :key #'car)
+#+END_SRC
+
+#+RESULTS:
+: ((1 . 4)
+:  (2 . 5)
+:  (3 . 6)
+:  (3 . 0))
+
+* cl-subseq
+
+#+BEGIN_SRC elisp
+(cl-subseq '(a b c d) 1 3)
+#+END_SRC
+
+#+RESULTS:
+: (b c)
+
+* cl-substitute
+
+#+BEGIN_SRC elisp
+(cl-substitute ?A ?a "|aaa|" :test #'=)
+#+END_SRC
+
+#+RESULTS:
+: "|AAA|"
+
+* cl-substitute-if
+
+#+BEGIN_SRC elisp
+(cl-substitute-if :zero #'zerop '(1 0 1 0))
+#+END_SRC
+
+#+RESULTS:
+: (1 :zero 1 :zero)
+
+* cl-substitute-if-not
+
+#+BEGIN_SRC elisp
+(cl-substitute-if-not :not-zero #'zerop '(1 0 1 0))
+#+END_SRC
+
+#+RESULTS:
+: (:not-zero 0 :not-zero 0)
 
 * cl-symbol-macrolet
 
