@@ -3205,13 +3205,13 @@
 * cl-callf2
 
 #+BEGIN_SRC elisp
-(let ((x 1))
-  (cl-callf2 - 2 x)
-  x)
+(let ((s "foo"))
+  (cl-callf2 concat "<" s ">")
+  s)
 #+END_SRC
 
 #+RESULTS:
-: 1
+: "<foo>"
 
 * cl-case
 
