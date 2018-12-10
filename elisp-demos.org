@@ -2304,6 +2304,15 @@
 #+RESULTS:
 : 1
 
+* all-completions
+
+#+BEGIN_SRC elisp
+(all-completions "b" '("foo" "bar" "baz"))
+#+END_SRC
+
+#+RESULTS:
+: ("bar" "baz")
+
 * and
 
 #+BEGIN_SRC elisp
@@ -4323,6 +4332,31 @@
 
 #+RESULTS:
 : ("alice" "bob")
+
+* completion-table-dynamic
+
+#+BEGIN_SRC elisp :results silent
+(completing-read
+ "> "
+ (completion-table-dynamic
+  (lambda (s)
+    (list (concat s "123")
+          (concat s "456")))))
+#+END_SRC
+
+* completion-table-with-cache
+
+#+BEGIN_SRC elisp :results silent
+(completing-read
+ "> "
+ (completion-table-with-cache
+  (lambda (input)
+    (message "=> Caching %s" input)
+    (with-temp-buffer
+      (call-process "seq" nil t nil input)
+      (cl-loop for line in (split-string (buffer-string) "\n" t)
+               collect (concat input line))))))
+#+END_SRC
 
 * concat
 
@@ -11937,6 +11971,15 @@
 #+RESULTS:
 : "\n"
 
+* test-completion
+
+#+BEGIN_SRC elisp
+(test-completion "bar" '("foo" "bar" "baz"))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * thing-at-point
 
 #+BEGIN_SRC elisp :eval no
@@ -12140,6 +12183,15 @@
 
 #+RESULTS:
 : "magit-diff: eli..."
+
+* try-completion
+
+#+BEGIN_SRC elisp
+(try-completion "b" '("foo" "baz" "bar"))
+#+END_SRC
+
+#+RESULTS:
+: "ba"
 
 * type-of
 
