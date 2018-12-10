@@ -2496,6 +2496,30 @@
 #+RESULTS:
 : nil
 
+* auth-source-search
+
+#+BEGIN_SRC elisp
+(let ((tmpfile (make-temp-file "elisp-demos-authinfo-")))
+  (write-region
+   (concat "machine github.com login user1 password pass1" "\n"
+           "machine github.com login user2 password pass2" "\n"
+           "machine foobar.com login user2 password pass2" "\n")
+   nil tmpfile)
+  (unwind-protect
+      (progn
+        (let ((auth-source-do-cache nil)
+              (auth-sources (list tmpfile)))
+          (cl-loop for plist in (auth-source-search :host "github.com" :max 2)
+                   for user = (plist-get plist :user)
+                   for password = (funcall (plist-get plist :secret))
+                   collect (list user password))))
+    (delete-file tmpfile)))
+#+END_SRC
+
+#+RESULTS:
+: (("user1" "pass1")
+:  ("user2" "pass2"))
+
 * base64-decode-region
 
 #+BEGIN_SRC elisp
