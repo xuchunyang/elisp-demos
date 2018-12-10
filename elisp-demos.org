@@ -2336,6 +2336,17 @@
 #+RESULTS:
 : "2018-10-27"
 
+* ansi-color-apply
+
+#+BEGIN_SRC elisp
+(ansi-color-apply (concat "\e[31m" "Hello world" "\e[0m"))
+#+END_SRC
+
+#+RESULTS:
+: #("Hello world" 0 11
+:   (font-lock-face
+:    (foreground-color . "red3")))
+
 * append
 
 #+BEGIN_SRC elisp
