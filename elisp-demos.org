@@ -12664,6 +12664,18 @@
 </html>
 :END:
 
+* xor
+
+#+BEGIN_SRC elisp
+(list (xor nil t)
+      (xor t nil)
+      (xor nil nil)
+      (xor t t))
+#+END_SRC
+
+#+RESULTS:
+: (t t nil nil)
+
 * y-or-n-p
 
 #+BEGIN_SRC elisp
