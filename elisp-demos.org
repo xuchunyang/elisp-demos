@@ -11184,6 +11184,15 @@
 2 ^ 10
 :END:
 
+* soundex
+
+#+BEGIN_SRC elisp
+(soundex "Rubin")
+#+END_SRC
+
+#+RESULTS:
+: "R150"
+
 * special-form-p
 
 #+BEGIN_SRC elisp
