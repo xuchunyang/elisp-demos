@@ -9549,16 +9549,11 @@
 * remove
 
 #+BEGIN_SRC elisp
-(let ((l (list (list 1)
-               (list 2)
-               (list 3)
-               (list 2))))
-  (remove '(2) l))
+(remove "a" '("a" "b" "c" "a"))
 #+END_SRC
 
 #+RESULTS:
-: ((1)
-:  (3))
+: ("b" "c")
 
 * remove-hook
 
