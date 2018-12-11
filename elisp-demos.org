@@ -6791,11 +6791,11 @@
 * generate-new-buffer-name
 
 #+BEGIN_SRC elisp
-(generate-new-buffer-name "foo")
+(generate-new-buffer-name "*Messages*")
 #+END_SRC
 
 #+RESULTS:
-: "foo"
+: "*Messages*<2>"
 
 * gensym
 
