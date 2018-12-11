@@ -8447,6 +8447,15 @@
 #+RESULTS:
 : 2
 
+* nlistp
+
+#+BEGIN_SRC elisp
+(nlistp [])
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * not
 
 #+BEGIN_SRC elisp
