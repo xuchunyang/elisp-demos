@@ -6656,6 +6656,15 @@
 #+RESULTS:
 : "/Users/xcy/src/elisp-demos/elisp-demos.org"
 
+* format-network-address
+
+#+BEGIN_SRC elisp
+(format-network-address [192 160 0 102 0])
+#+END_SRC
+
+#+RESULTS:
+: "192.160.0.102:0"
+
 * format-seconds
 
 #+BEGIN_SRC elisp
@@ -8433,6 +8442,32 @@
 
 #+RESULTS:
 : (1 2 3 4)
+
+* network-interface-info
+
+#+BEGIN_SRC elisp
+(network-interface-info "en0")
+#+END_SRC
+
+#+RESULTS:
+: ([192 168 0 102 0]
+:  [192 168 0 255 0]
+:  [255 255 255 0 0]
+:  (18 .
+:      [72 215 5 181 112 87])
+:  (simplex multicast notrailers running broadcast up))
+
+* network-interface-list
+
+#+BEGIN_SRC elisp
+(network-interface-list)
+#+END_SRC
+
+#+RESULTS:
+: (("en0" .
+:   [192 168 0 102 0])
+:  ("lo0" .
+:   [127 0 0 1 0]))
 
 * next-overlay-change
 
