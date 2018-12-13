@@ -3269,6 +3269,15 @@
 #+RESULTS:
 : "[1, 3]"
 
+* cl-ceiling
+
+#+BEGIN_SRC elisp
+(cl-ceiling 10 3)
+#+END_SRC
+
+#+RESULTS:
+: (4 -2)
+
 * cl-coerce
 
 #+BEGIN_SRC elisp
@@ -3408,6 +3417,15 @@
 #+RESULTS:
 : (2 3)
 
+* cl-digit-char-p
+
+#+BEGIN_SRC elisp
+(cl-digit-char-p ?F 16)
+#+END_SRC
+
+#+RESULTS:
+: 15
+
 * cl-do
 
 #+BEGIN_SRC elisp
@@ -3504,6 +3522,15 @@
 #+RESULTS:
 : (error "cl-etypecase failed: 42, (float)")
 
+* cl-evenp
+
+#+BEGIN_SRC elisp
+(cl-evenp 0)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * cl-every
 
 #+BEGIN_SRC elisp
@@ -3580,6 +3607,24 @@
 #+RESULTS:
 : 1.25
 
+* cl-floor
+
+#+BEGIN_SRC elisp
+(cl-floor 10 3)
+#+END_SRC
+
+#+RESULTS:
+: (3 1)
+
+* cl-gcd
+
+#+BEGIN_SRC elisp
+(cl-gcd 4 6)
+#+END_SRC
+
+#+RESULTS:
+: 2
+
 * cl-incf
 
 #+BEGIN_SRC elisp
@@ -3609,6 +3654,15 @@
 #+RESULTS:
 : (3 2)
 
+* cl-isqrt
+
+#+BEGIN_SRC elisp
+(cl-isqrt 27)
+#+END_SRC
+
+#+RESULTS:
+: 5
+
 * cl-labels
 
 #+BEGIN_SRC elisp
@@ -3622,6 +3676,15 @@
 
 #+RESULTS:
 : 5
+
+* cl-lcm
+
+#+BEGIN_SRC elisp
+(cl-lcm 4 6)
+#+END_SRC
+
+#+RESULTS:
+: 12
 
 * cl-ldiff
 
@@ -3792,6 +3855,15 @@
 #+RESULTS:
 : (1 2 3 4 5 6)
 
+* cl-minusp
+
+#+BEGIN_SRC elisp
+(cl-minusp -1)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * cl-mismatch
 
 #+BEGIN_SRC elisp
@@ -3800,6 +3872,15 @@
 
 #+RESULTS:
 : 5
+
+* cl-mod
+
+#+BEGIN_SRC elisp
+(cl-mod 10 3)
+#+END_SRC
+
+#+RESULTS:
+: 1
 
 * cl-notany
 
@@ -3857,6 +3938,33 @@
 
 #+RESULTS:
 : (:not-zero 0 :not-zero 0)
+
+* cl-oddp
+
+#+BEGIN_SRC elisp
+(cl-oddp 1)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* cl-parse-integer
+
+#+BEGIN_SRC elisp
+(cl-parse-integer "400" :radix #x10)
+#+END_SRC
+
+#+RESULTS:
+: 1024
+
+* cl-plusp
+
+#+BEGIN_SRC elisp
+(cl-plusp 1)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * cl-position
 
@@ -3920,6 +4028,24 @@
 #+RESULTS:
 : (2 1)
 
+* cl-random
+
+#+BEGIN_SRC elisp
+(cl-random 10)
+#+END_SRC
+
+#+RESULTS:
+: 7
+
+* cl-random-state-p
+
+#+BEGIN_SRC elisp
+(cl-random-state-p (cl-make-random-state))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * cl-reduce
 
 #+BEGIN_SRC elisp
@@ -3928,6 +4054,15 @@
 
 #+RESULTS:
 : 6
+
+* cl-rem
+
+#+BEGIN_SRC elisp
+(cl-rem 10 3)
+#+END_SRC
+
+#+RESULTS:
+: 1
 
 * cl-remove
 
@@ -3998,6 +4133,15 @@
 
 #+RESULTS:
 : (2 3 4 1)
+
+* cl-round
+
+#+BEGIN_SRC elisp
+(cl-round 3 2)
+#+END_SRC
+
+#+RESULTS:
+: (2 -1)
 
 * cl-search
 
@@ -4156,6 +4300,15 @@
 
 #+RESULTS:
 : t
+
+* cl-truncate
+
+#+BEGIN_SRC elisp
+(cl-truncate 10 3)
+#+END_SRC
+
+#+RESULTS:
+: (3 1)
 
 * cl-typecase
 
