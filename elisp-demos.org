@@ -7768,7 +7768,7 @@
 * logior
 
 #+BEGIN_SRC elisp
-(logior #B1100 
+(logior #B1100
         #B0101)
 #+END_SRC
 
@@ -7787,7 +7787,7 @@
 * logxor
 
 #+BEGIN_SRC elisp
-(logxor #B1100 
+(logxor #B1100
         #B0101)
 #+END_SRC
 
