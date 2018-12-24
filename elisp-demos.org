@@ -2394,6 +2394,15 @@
 #+RESULTS:
 : [100 1 2 3]
 
+* ash
+
+#+BEGIN_SRC elisp
+(ash #B111 1)
+#+END_SRC
+
+#+RESULTS:
+: 14
+
 * asin
 
 #+BEGIN_SRC elisp
@@ -7737,6 +7746,54 @@
 #+RESULTS:
 : 3.0
 
+* logand
+
+#+BEGIN_SRC elisp
+(logand #B1110
+        #B1101)
+#+END_SRC
+
+#+RESULTS:
+: 12
+
+* logcount
+
+#+BEGIN_SRC elisp
+(logcount #B101011)
+#+END_SRC
+
+#+RESULTS:
+: 4
+
+* logior
+
+#+BEGIN_SRC elisp
+(logior #B1100 
+        #B0101)
+#+END_SRC
+
+#+RESULTS:
+: 13
+
+* lognot
+
+#+BEGIN_SRC elisp
+(lognot #B101)
+#+END_SRC
+
+#+RESULTS:
+: -6
+
+* logxor
+
+#+BEGIN_SRC elisp
+(logxor #B1100 
+        #B0101)
+#+END_SRC
+
+#+RESULTS:
+: 9
+
 * looking-at
 
 #+BEGIN_SRC elisp
@@ -7784,12 +7841,11 @@
 * lsh
 
 #+BEGIN_SRC elisp
-(cl-assert #b1010 (lsh #b101 1))
-(cl-assert #b10 (lsh #b101 -1))
+(lsh #B111 1)
 #+END_SRC
 
 #+RESULTS:
-: nil
+: 14
 
 * macroexpand
 
