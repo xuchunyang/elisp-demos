@@ -2787,6 +2787,15 @@
 #+RESULTS:
 : (#<killed buffer> t t nil #<killed buffer>)
 
+* buffer-local-value
+
+#+BEGIN_SRC elisp
+(buffer-local-value 'major-mode (get-buffer "*Messages*"))
+#+END_SRC
+
+#+RESULTS:
+: messages-buffer-mode
+
 * buffer-modified-p
 
 #+BEGIN_SRC elisp
