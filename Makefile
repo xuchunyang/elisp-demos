@@ -23,3 +23,6 @@ local:
 
 count:
 	grep -c '^\* ' elisp-demos.org
+
+readme:
+	sed -i '' -E "1s/[0-9]+/$(shell grep -c '^\* ' elisp-demos.org)/" README.md
