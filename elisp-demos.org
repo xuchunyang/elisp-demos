@@ -5701,6 +5701,16 @@
 #+RESULTS:
 : (t t nil)
 
+* equal-including-properties
+
+#+BEGIN_SRC elisp
+(equal-including-properties "asdf"
+                            (propertize "asdf" 'asdf t))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * erase-buffer
 
 #+BEGIN_SRC elisp
