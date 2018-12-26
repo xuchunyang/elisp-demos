@@ -3198,6 +3198,15 @@
 #+RESULTS:
 : "λ"
 
+* char-or-string-p
+
+#+BEGIN_SRC elisp
+(mapcar #'char-or-string-p '("" ?x 42 nil t))
+#+END_SRC
+
+#+RESULTS:
+: (t t t nil nil)
+
 * char-to-string
 
 #+BEGIN_SRC elisp
@@ -6770,6 +6779,15 @@
 #+RESULTS:
 : 1542230331.775671
 
+* floatp
+
+#+BEGIN_SRC elisp
+(floatp float-pi)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * floor
 
 #+BEGIN_SRC elisp
@@ -7305,6 +7323,15 @@
 
 #+RESULTS:
 : ("\342\234\223" "✓")
+
+* integerp
+
+#+BEGIN_SRC elisp
+(integerp 42)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * interactive
 
@@ -8682,6 +8709,15 @@
 #+RESULTS:
 : "hello"
 
+* natnump
+
+#+BEGIN_SRC elisp
+(natnump 0)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * nbutlast
 
 #+BEGIN_SRC elisp
@@ -8839,6 +8875,15 @@
 
 #+RESULTS:
 : "256"
+
+* numberp
+
+#+BEGIN_SRC elisp
+(numberp 42)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * obarray-get
 
@@ -11821,6 +11866,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (6 nil)
 
+* string-or-null-p
+
+#+BEGIN_SRC elisp
+(mapcar #'string-or-null-p '("" nil 42 t))
+#+END_SRC
+
+#+RESULTS:
+: (t t nil nil)
+
 * string-prefix-p
 
 #+BEGIN_SRC elisp
@@ -11973,6 +12027,15 @@ the second item can be anything such as %s"
 
 #+BEGIN_SRC elisp
 (string> "abd" "abc")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* stringp
+
+#+BEGIN_SRC elisp
+(stringp "")
 #+END_SRC
 
 #+RESULTS:
