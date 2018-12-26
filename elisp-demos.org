@@ -507,6 +507,16 @@
 #+RESULTS:
 : ("foo" "bar" 3 "quux")
 
+* --when-let
+
+#+BEGIN_SRC elisp
+(--when-let (string-match "d" "abcd")
+  (+ it 2))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
 * ->
 
 #+BEGIN_SRC elisp
@@ -7175,6 +7185,28 @@
 #+RESULTS:
 : 2
 
+* if-let
+
+#+BEGIN_SRC elisp
+(if-let ((match-index (string-match "d" "abcd")))
+    (+ match-index 2)
+  "It does not match")
+#+END_SRC
+
+#+RESULTS:
+: 5
+
+* if-let*
+
+#+BEGIN_SRC elisp
+(if-let* ((match-index (string-match "d" "abcd")))
+    (+ match-index 2)
+  "It does not match")
+#+END_SRC
+
+#+RESULTS:
+: 5
+
 * ignore
 
 #+BEGIN_SRC elisp
@@ -12722,6 +12754,26 @@
 
 #+RESULTS:
 : nil
+
+* when-let
+
+#+BEGIN_SRC elisp
+(when-let ((match-index (string-match "d" "abcd")))
+  (+ match-index 2))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
+* when-let*
+
+#+BEGIN_SRC elisp
+(when-let* ((match-index (string-match "d" "abcd")))
+  (+ match-index 2))
+#+END_SRC
+
+#+RESULTS:
+: 5
 
 * while
 
