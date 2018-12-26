@@ -2334,6 +2334,10 @@
 : (3 nil)
 
 * and-let*
+:PROPERTIES:
+:added:    26.1
+:feature:  subr-x
+:END:
 
 #+BEGIN_SRC elisp
 (and-let* ((bashrc (expand-file-name "~/.bashrc"))
@@ -7186,6 +7190,10 @@
 : 2
 
 * if-let
+:PROPERTIES:
+:added:    25.1
+:feature:  subr-x
+:END:
 
 #+BEGIN_SRC elisp
 (if-let ((match-index (string-match "d" "abcd")))
@@ -7197,6 +7205,10 @@
 : 5
 
 * if-let*
+:PROPERTIES:
+:added:    26.1
+:feature:  subr-x
+:END:
 
 #+BEGIN_SRC elisp
 (if-let* ((match-index (string-match "d" "abcd")))
@@ -12320,6 +12332,10 @@
 #+END_SRC
 
 * thread-first
+:PROPERTIES:
+:added:    25.1
+:feature:  subr-x
+:END:
 
 #+BEGIN_SRC elisp
 (thread-first 5
@@ -12333,6 +12349,10 @@
 : 39
 
 * thread-last
+:PROPERTIES:
+:added:    25.1
+:feature:  subr-x
+:END:
 
 #+BEGIN_SRC elisp
 (thread-last 5
@@ -12756,6 +12776,10 @@
 : nil
 
 * when-let
+:PROPERTIES:
+:added:    25.1
+:feature:  subr-x
+:END:
 
 #+BEGIN_SRC elisp
 (when-let ((match-index (string-match "d" "abcd")))
@@ -12766,6 +12790,10 @@
 : 5
 
 * when-let*
+:PROPERTIES:
+:added:    26.1
+:feature:  subr-x
+:END:
 
 #+BEGIN_SRC elisp
 (when-let* ((match-index (string-match "d" "abcd")))
