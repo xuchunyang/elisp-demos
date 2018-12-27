@@ -12472,6 +12472,58 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (1 2 2 2)
 
+* thunk-let
+:PROPERTIES:
+:added:    27
+:END:
+
+#+BEGIN_SRC elisp :lexical t
+(thunk-let ((x (/ 1 0)))
+  42)
+#+END_SRC
+
+#+RESULTS:
+: 42
+
+* thunk-let*
+:PROPERTIES:
+:added:    27
+:END:
+
+#+BEGIN_SRC elisp :lexical t :results drawer output
+(thunk-let* ((x (prog2 (print "Calculating x...")
+                    (+ 1 1)
+                  (print "Finished calculating x")))
+             (y (prog2 (print "Calculating y...")
+                    (+ x 1)
+                  (print "Finished calculating y")))
+             (z (prog2 (print "Calculating z...")
+                    (+ y 1)
+                  (print "Finished calculating z")))
+             (a (prog2 (print "Calculating a...")
+                    (+ z 1)
+                  (print "Finished calculating a"))))
+  (print (* z x)))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+"Calculating z..."
+
+"Calculating y..."
+
+"Calculating x..."
+
+"Finished calculating x"
+
+"Finished calculating y"
+
+"Finished calculating z"
+
+8
+:END:
+
 * time-add
 
 #+BEGIN_SRC elisp
