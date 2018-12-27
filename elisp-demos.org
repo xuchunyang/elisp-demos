@@ -2297,6 +2297,9 @@
 : (3 1 2)
 
 * alist-get
+:PROPERTIES:
+:changes:  26.1 The TESTFN argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (alist-get 'y '((x . 1) (y . 2)))
@@ -2427,6 +2430,9 @@
 : 1.5707963267948966
 
 * assoc
+:PROPERTIES:
+:changes:  26.1 The TESTFN argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (assoc "two" '(("one" 1)
@@ -2453,7 +2459,7 @@
 * assoc-delete-all
 :PROPERTIES:
 :added:    26.2
-:changes:  27.1 Added the optional argument TEST
+:changes:  27.1 The TEST argument is added.
 :END:
 
 #+BEGIN_SRC elisp
@@ -3207,6 +3213,9 @@
 : (t nil)
 
 * char-from-name
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (string (char-from-name "GREEK SMALL LETTER LAMBDA"))
@@ -6541,6 +6550,9 @@
 : "init"
 
 * file-name-case-insensitive-p
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 ;; Some macOS systems's file system is case-insensitive
@@ -6940,6 +6952,9 @@
 : "1 + 2 = 2 + 1"
 
 * format-time-string
+:PROPERTIES:
+:changes:  26.1 %q is supported.
+:END:
 
 #+BEGIN_SRC elisp
 (format-time-string "%Y-%m-%d %H:%M:%S %z")
@@ -6994,6 +7009,18 @@
 
 #+RESULTS:
 : 1.0
+
+* func-arity
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(func-arity #'+)
+#+END_SRC
+
+#+RESULTS:
+: (0 . many)
 
 * funcall
 
@@ -7785,6 +7812,9 @@
 : 25980
 
 * line-number-at-pos
+:PROPERTIES:
+:changes:  26.1 The ABSOLUTE argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (with-temp-buffer
@@ -8081,6 +8111,9 @@
 : "Collecting mana for Emacs...done"
 
 * make-record
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (make-record 'foo 9 'Z)
@@ -8132,6 +8165,9 @@
 : foo
 
 * make-temp-file
+:PROPERTIES:
+:changes:  26.1 The TEXT argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (make-temp-file "elisp-demos-")
@@ -8507,6 +8543,9 @@
 : "123"
 
 * mapcan
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (mapcan
@@ -9863,6 +9902,21 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (+ 1 2)
 
+* read-multiple-choice
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(read-multiple-choice "Continue connecting?"
+                      '((?a "always")
+                        (?s "session only")
+                        (?n "no")))
+#+END_SRC
+
+#+RESULTS:
+: (97 "always")
+
 * read-no-blanks-input
 
 #+BEGIN_SRC elisp
@@ -9897,6 +9951,9 @@ the second item can be anything such as %s"
 : 158
 
 * record
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (record 'foo 23 [bar baz] "rats")
@@ -9908,6 +9965,9 @@ the second item can be anything such as %s"
 :        "rats")
 
 * recordp
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (recordp #s(a))
@@ -9951,6 +10011,21 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : "\\^The cat\\$"
+
+* region-bounds
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (set-marker (mark-marker) 1)
+  (region-bounds))
+#+END_SRC
+
+#+RESULTS:
+: ((1 . 6))
 
 * remhash
 
@@ -10973,6 +11048,9 @@ the second item can be anything such as %s"
 : "5d41402abc4b2a76b9719d911017c592"
 
 * secure-hash-algorithms
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (secure-hash-algorithms)
@@ -11280,6 +11358,9 @@ the second item can be anything such as %s"
 : (-1 -3)
 
 * seq-set-equal-p
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (seq-set-equal-p '(a b c) '(c b a))
@@ -12077,6 +12158,18 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : " hello"
+
+* string-version-lessp
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(string-version-lessp "foo2.png" "foo12.png")
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * string-width
 
