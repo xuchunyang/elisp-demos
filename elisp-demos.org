@@ -5207,6 +5207,18 @@
 #+RESULTS:
 : (3 2 1)
 
+* dolist-with-progress-reporter
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp :results silent
+(dolist-with-progress-reporter
+    (k (number-sequence 0 500))
+    "Collecting some mana for Emacs..."
+  (sit-for 0.01))
+#+END_SRC
+
 * dom-add-child-before
 
 #+BEGIN_SRC elisp
@@ -6769,6 +6781,18 @@
 
 #+RESULTS:
 : #<buffer init.el>
+
+* flatten-tree
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(flatten-tree '(1 (2 . 3) nil (4 5 (6)) 7))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4 5 6 7)
 
 * float
 
@@ -9547,6 +9571,25 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 3
 
+* proper-list-p
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(proper-list-p '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+#+BEGIN_SRC elisp
+(proper-list-p '(1 2 . 3))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * propertize
 
 #+BEGIN_SRC elisp
@@ -11837,6 +11880,18 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 2
 
+* string-distance
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(org-babel-edit-distance "kitten" "sitting")
+#+END_SRC
+
+#+RESULTS:
+: 3
+
 * string-empty-p
 
 #+BEGIN_SRC elisp
@@ -12474,7 +12529,7 @@ the second item can be anything such as %s"
 
 * thunk-let
 :PROPERTIES:
-:added:    27
+:added:    27.1
 :END:
 
 #+BEGIN_SRC elisp :lexical t
@@ -12487,7 +12542,7 @@ the second item can be anything such as %s"
 
 * thunk-let*
 :PROPERTIES:
-:added:    27
+:added:    27.1
 :END:
 
 #+BEGIN_SRC elisp :lexical t :results drawer output
