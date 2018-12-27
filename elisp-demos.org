@@ -2450,6 +2450,23 @@
 :  (2)
 :  nil)
 
+* assoc-delete-all
+:PROPERTIES:
+:added:    26.2
+:changes:  27.1 Added the optional argument TEST
+:END:
+
+#+BEGIN_SRC elisp
+(assoc-delete-all "a" '(("a" 1)
+                        ("b" 2)
+                        ("c" 3)
+                        ("a" 4)))
+#+END_SRC
+
+#+RESULTS:
+: (("b" 2)
+:  ("c" 3))
+
 * assoc-string
 
 #+BEGIN_SRC elisp
