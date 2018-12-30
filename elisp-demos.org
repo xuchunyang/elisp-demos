@@ -3280,6 +3280,22 @@
 #+RESULTS:
 : utf-8
 
+* cl-adjoin
+
+#+BEGIN_SRC elisp
+(cl-adjoin 1 '(2 3))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+#+BEGIN_SRC elisp
+(cl-adjoin 1 '(2 3 1))
+#+END_SRC
+
+#+RESULTS:
+: (2 3 1)
+
 * cl-assert
 
 #+BEGIN_SRC elisp
@@ -4355,6 +4371,17 @@
 
 #+RESULTS:
 : (6 . 9)
+
+* cl-tailp
+
+#+BEGIN_SRC elisp
+(let* ((x '(3 4))
+       (y `(1 2 ,@x)))
+  (cl-tailp x y))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * cl-tree-equal
 
