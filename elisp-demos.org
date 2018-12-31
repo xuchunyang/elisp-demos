@@ -13320,6 +13320,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : nil
 
+* x-popup-dialog
+
+#+BEGIN_SRC elisp
+(x-popup-dialog (selected-frame) '("Are you ready?" ("Yes" . :yes) ("No" . :no)))
+#+END_SRC
+
+#+RESULTS:
+: :yes
+
 * xmlgen
 
 #+BEGIN_SRC elisp :results drawer
