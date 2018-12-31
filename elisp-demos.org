@@ -9901,6 +9901,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 42
 
+* read-char-choice
+
+#+BEGIN_SRC elisp
+(read-char-choice "Delete foo.txt? [Type y/n/q] " '(?y ?n ?q))
+#+END_SRC
+
+#+RESULTS:
+: 121
+
 * read-from-minibuffer
 
 #+BEGIN_SRC elisp
