@@ -13329,6 +13329,23 @@ the second item can be anything such as %s"
 #+RESULTS:
 : :yes
 
+* x-popup-menu
+
+#+BEGIN_SRC elisp
+(x-popup-menu
+ t
+ (list "What action?"
+       (cons ""
+	     '(("Copy here" . copy)
+	       ("Move here" . move)
+	       ("Link here" . link)
+	       "--"
+	       ("Cancel" . nil)))))
+#+END_SRC
+
+#+RESULTS:
+: copy
+
 * xmlgen
 
 #+BEGIN_SRC elisp :results drawer
