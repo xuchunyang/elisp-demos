@@ -6838,6 +6838,15 @@
 #+RESULTS:
 : #<buffer init.el>
 
+* find-lisp-object-file-name
+
+#+BEGIN_SRC elisp
+(find-lisp-object-file-name 'if (symbol-function 'if))
+#+END_SRC
+
+#+RESULTS:
+: "src/eval.c"
+
 * flatten-tree
 :PROPERTIES:
 :added:    27.1
@@ -7293,6 +7302,15 @@
 
 #+RESULTS:
 : nil
+
+* help-C-file-name
+
+#+BEGIN_SRC elisp
+(help-C-file-name (symbol-function 'if) 'subr)
+#+END_SRC
+
+#+RESULTS:
+: "src/eval.c"
 
 * identity
 
