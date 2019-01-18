@@ -3233,6 +3233,17 @@
 #+RESULTS:
 : (t t t nil nil)
 
+* char-syntax
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (set-syntax-table emacs-lisp-mode-syntax-table)
+  (string (char-syntax ?\;)))
+#+END_SRC
+
+#+RESULTS:
+: "<"
+
 * char-to-string
 
 #+BEGIN_SRC elisp
@@ -13345,6 +13356,22 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : "Hello World"
+
+* with-syntax-table
+
+#+BEGIN_SRC elisp
+(list
+ (with-syntax-table emacs-lisp-mode-syntax-table
+   ;; Comment starters: ‘<’
+   (string (char-syntax ?\;)))
+
+ (with-syntax-table text-mode-syntax-table
+   ;; Punctuation characters: ‘.’
+   (string (char-syntax ?\;))))
+#+END_SRC
+
+#+RESULTS:
+: ("<" ".")
 
 * with-temp-buffer
 
