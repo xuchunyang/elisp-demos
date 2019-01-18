@@ -9183,6 +9183,15 @@
 :  ("TODO" . "TODO")
 :  ("ITEM" . "Hack org-mode"))
 
+* org-export-number-to-roman
+
+#+BEGIN_SRC elisp
+(org-export-number-to-roman 3456)
+#+END_SRC
+
+#+RESULTS:
+: "MMMCDLVI"
+
 * org-heading-components
 
 #+BEGIN_SRC elisp
@@ -12047,7 +12056,7 @@ the second item can be anything such as %s"
 :END:
 
 #+BEGIN_SRC elisp
-(org-babel-edit-distance "kitten" "sitting")
+(string-distance "kitten" "sitting")
 #+END_SRC
 
 #+RESULTS:
