@@ -4788,6 +4788,15 @@
 #+RESULTS:
 : nil
 
+* copysign
+
+#+BEGIN_SRC elisp
+(copysign 4.0 -1.0)
+#+END_SRC
+
+#+RESULTS:
+: -4.0
+
 * cos
 
 #+BEGIN_SRC elisp
@@ -7026,6 +7035,15 @@
 #+RESULTS:
 : #<window 43>
 
+* frexp
+
+#+BEGIN_SRC elisp
+(frexp 8)
+#+END_SRC
+
+#+RESULTS:
+: (0.5 . 4)
+
 * fround
 
 #+BEGIN_SRC elisp
@@ -7493,6 +7511,15 @@
 #+RESULTS:
 : (nil intern-soft)
 
+* isnan
+
+#+BEGIN_SRC elisp
+(isnan 0.0e+NaN)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * iter-defun
 
 #+BEGIN_SRC elisp :lexical t
@@ -7746,6 +7773,15 @@
 #+RESULTS:
 : ("a" 1 "b" 200)
 
+* ldexp
+
+#+BEGIN_SRC elisp
+(ldexp 0.5 4)
+#+END_SRC
+
+#+RESULTS:
+: 8.0
+
 * length
 
 #+BEGIN_SRC elisp
@@ -7970,6 +8006,15 @@
 
 #+RESULTS:
 : 12
+
+* logb
+
+#+BEGIN_SRC elisp
+(logb 8)
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * logcount
 
