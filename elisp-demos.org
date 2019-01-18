@@ -6722,6 +6722,15 @@
 #+RESULTS:
 : "init.el"
 
+* file-size-human-readable
+
+#+BEGIN_SRC elisp
+(file-size-human-readable 1024)
+#+END_SRC
+
+#+RESULTS:
+: "1k"
+
 * file-symlink-p
 
 #+BEGIN_SRC elisp
