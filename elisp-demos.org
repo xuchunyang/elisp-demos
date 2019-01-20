@@ -7867,6 +7867,9 @@
 : 3
 
 * libxml-available-p
+:PROPERTIES:
+:added:    27.1
+:END:
 
 #+BEGIN_SRC elisp
 (libxml-available-p)
@@ -8028,6 +8031,9 @@
 : 3
 
 * logcount
+:PROPERTIES:
+:added:    27.1
+:END:
 
 #+BEGIN_SRC elisp
 (logcount #B101011)
@@ -11332,6 +11338,18 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 1
 
+* seq-first
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(string (seq-first "hello"))
+#+END_SRC
+
+#+RESULTS:
+: "h"
+
 * seq-group-by
 
 #+BEGIN_SRC elisp
@@ -11484,6 +11502,18 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : (-1 -3)
+
+* seq-rest
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(seq-rest "hello")
+#+END_SRC
+
+#+RESULTS:
+: "ello"
 
 * seq-set-equal-p
 :PROPERTIES:
@@ -12689,6 +12719,59 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : t
+
+* text-property-search-backward
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert (format "<< %s, %s, %s >>"
+                  (propertize "foo" 'face 'bold)
+                  (propertize "bar" 'face 'italic)
+                  (propertize "baz" 'face 'bold)))
+  (cl-loop with match
+           while (setq match (text-property-search-backward 'face 'bold t))
+           collect (buffer-substring (prop-match-beginning match)
+                                     (prop-match-end match))))
+#+END_SRC
+
+#+RESULTS:
+: (#("baz" 0 3
+:    (face bold))
+:  #("foo" 0 3
+:    (face bold)))
+
+* text-property-search-forward
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert
+   (replace-regexp-in-string
+    (rx (or "bold" "italic"))
+    (lambda (s)
+      (pcase s
+        ("bold" (propertize "bold" 'face 'bold))
+        ("italic" (propertize "italic" 'face 'italic))))
+    "This is a bold and here's bolditalic and this is the end."))
+  (goto-char (point-min))
+  (cl-loop with match
+           while (setq match (text-property-search-forward 'face nil nil))
+           collect (buffer-substring (prop-match-beginning match)
+                                     (prop-match-end match))))
+#+END_SRC
+
+#+RESULTS:
+: (#("bold" 0 4
+:    (face bold))
+:  #("bold" 0 4
+:    (face bold))
+:  #("italic" 0 6
+:    (face italic)))
 
 * thing-at-point
 
