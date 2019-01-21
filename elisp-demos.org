@@ -2340,7 +2340,6 @@
 * and-let*
 :PROPERTIES:
 :added:    26.1
-:feature:  subr-x
 :END:
 
 #+BEGIN_SRC elisp
@@ -7429,7 +7428,6 @@
 * if-let
 :PROPERTIES:
 :added:    25.1
-:feature:  subr-x
 :END:
 
 #+BEGIN_SRC elisp
@@ -7444,7 +7442,6 @@
 * if-let*
 :PROPERTIES:
 :added:    26.1
-:feature:  subr-x
 :END:
 
 #+BEGIN_SRC elisp
@@ -12277,7 +12274,6 @@ the second item can be anything such as %s"
 * string-join
 :PROPERTIES:
 :added:    24.4
-:feature:  subr-x
 :END:
 
 #+BEGIN_SRC elisp
@@ -12927,7 +12923,6 @@ the second item can be anything such as %s"
 * thread-first
 :PROPERTIES:
 :added:    25.1
-:feature:  subr-x
 :END:
 
 #+BEGIN_SRC elisp
@@ -12944,7 +12939,6 @@ the second item can be anything such as %s"
 * thread-last
 :PROPERTIES:
 :added:    25.1
-:feature:  subr-x
 :END:
 
 #+BEGIN_SRC elisp
@@ -13426,7 +13420,6 @@ the second item can be anything such as %s"
 * when-let
 :PROPERTIES:
 :added:    25.1
-:feature:  subr-x
 :END:
 
 #+BEGIN_SRC elisp
@@ -13440,7 +13433,6 @@ the second item can be anything such as %s"
 * when-let*
 :PROPERTIES:
 :added:    26.1
-:feature:  subr-x
 :END:
 
 #+BEGIN_SRC elisp
