@@ -4679,6 +4679,9 @@
 : positive
 
 * condition-case
+:PROPERTIES:
+:changes:  27.1 A CONDITION-NAME of t applies to any symbol.
+:END:
 
 #+BEGIN_SRC elisp
 (condition-case err
@@ -7029,6 +7032,19 @@
 #+RESULTS:
 : "65 (#o101, #x41, ?A)"
 
+* format-message
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((text-quoting-style 'curve))
+  (format-message "The version is stored in `emacs-version'"))
+#+END_SRC
+
+#+RESULTS:
+: "The version is stored in ‘emacs-version’"
+
 * format-mode-line
 
 #+BEGIN_SRC elisp
@@ -7479,6 +7495,24 @@
 
 #+RESULTS:
 : t
+
+* indirect-function
+
+#+BEGIN_SRC elisp
+(indirect-function #'+)
+#+END_SRC
+
+#+RESULTS:
+: #<subr +>
+
+* indirect-variable
+
+#+BEGIN_SRC elisp
+(indirect-variable 'indicate-unused-lines)
+#+END_SRC
+
+#+RESULTS:
+: indicate-empty-lines
 
 * insert
 
@@ -8344,6 +8378,9 @@ Process Date finished
 :  (110 . next-line))
 
 * make-string
+:PROPERTIES:
+:changes:  27.1 The optional MULTIBYTE argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (make-string 5 ?x)
@@ -9515,6 +9552,8 @@ Process Date finished
 * pcase
 :PROPERTIES:
 :added:    24.1
+:changes:  25.1 New UPatterns 'quote', 'app'.
+:changes+: 25.1 New vector QPattern.
 :END:
 
 #+BEGIN_SRC elisp :results silent
@@ -13676,11 +13715,11 @@ the second item can be anything such as %s"
  t
  (list "What action?"
        (cons ""
-	     '(("Copy here" . copy)
-	       ("Move here" . move)
-	       ("Link here" . link)
-	       "--"
-	       ("Cancel" . nil)))))
+             '(("Copy here" . copy)
+               ("Move here" . move)
+               ("Link here" . link)
+               "--"
+               ("Cancel" . nil)))))
 #+END_SRC
 
 #+RESULTS:

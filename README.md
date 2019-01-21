@@ -1,4 +1,4 @@
-# Elisp API Demos [![Build Status](https://travis-ci.org/xuchunyang/elisp-demos.svg?branch=master)](https://travis-ci.org/xuchunyang/elisp-demos) [![MELPA](https://melpa.org/packages/elisp-demos-badge.svg)](https://melpa.org/#/elisp-demos) [![Elisp Demos](https://img.shields.io/badge/demos-1256-blue.svg)](elisp-demos.org)
+# Elisp API Demos [![Build Status](https://travis-ci.org/xuchunyang/elisp-demos.svg?branch=master)](https://travis-ci.org/xuchunyang/elisp-demos) [![MELPA](https://melpa.org/packages/elisp-demos-badge.svg)](https://melpa.org/#/elisp-demos) [![Elisp Demos](https://img.shields.io/badge/demos-1259-blue.svg)](elisp-demos.org)
 
 Showing an Elisp demo of `mapcar` in `C-h f mapcar`:
 
