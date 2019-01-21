@@ -2298,6 +2298,7 @@
 
 * alist-get
 :PROPERTIES:
+:added:    25.1
 :changes:  26.1 The TESTFN argument is added.
 :END:
 
@@ -2861,6 +2862,9 @@
 : "elisp-demos.org"
 
 * buffer-narrowed-p
+:PROPERTIES:
+:added:    24.3
+:END:
 
 #+BEGIN_SRC elisp
 (list (buffer-narrowed-p)
@@ -4043,6 +4047,9 @@
 : t
 
 * cl-parse-integer
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp
 (cl-parse-integer "400" :radix #x10)
@@ -5032,6 +5039,9 @@
 #+END_SRC
 
 * define-error
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp :eval no
 (define-error 'foo-error "A new error")
@@ -5241,6 +5251,9 @@
 #+END_SRC
 
 * directory-name-p
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp
 (list (directory-name-p ".")
@@ -6588,6 +6601,9 @@
 : "~/"
 
 * file-name-base
+:PROPERTIES:
+:added:    24.3
+:END:
 
 #+BEGIN_SRC elisp
 (file-name-base "/Users/xcy/.emacs.d/init.el")
@@ -6778,6 +6794,20 @@
 #+RESULTS:
 : t
 
+* filepos-to-bufferpos
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "(λ)")
+  (filepos-to-bufferpos 1))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
 * fill-common-string-prefix
 
 #+BEGIN_SRC elisp
@@ -6961,6 +6991,28 @@
 #+RESULTS:
 : "A"
 
+* font-lock-ensure
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert ":foo")
+  (delay-mode-hooks (emacs-lisp-mode))
+  (font-lock-ensure)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: #(":foo" 0 4
+:   (face font-lock-builtin-face))
+
+* font-lock-flush
+:PROPERTIES:
+:added:    25.1
+:END:
+
 * format
 
 #+BEGIN_SRC elisp
@@ -7106,6 +7158,9 @@
 : 6
 
 * function-get
+:PROPERTIES:
+:added:    24.3
+:END:
 
 #+BEGIN_SRC elisp
 (list (get 'count-matches 'modifier-cache)
@@ -7117,6 +7172,9 @@
 :  ((0 . how-many)))
 
 * function-put
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp
 (function-put 'count-matches 'foo "test")
@@ -7854,6 +7912,9 @@
 : (:id 1234 :url "https://example.com")
 
 * letrec
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp
 (letrec ((len (lambda (list)
@@ -8210,6 +8271,29 @@
 
 #+RESULTS:
 : #<overlay in no buffer>
+
+* make-process
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp :results drawer
+(with-temp-buffer
+  (make-process
+   :name "Date"
+   :buffer (current-buffer)
+   :command '("date" "+%Y-%m-%d-%s")
+   :connection-type 'pipe)
+  (sit-for 0.1)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+2019-01-21-1548057165
+
+Process Date finished
+:END:
 
 * make-progress-reporter
 
@@ -9432,6 +9516,9 @@
 : (nil nil nil 15 11 2018 nil nil nil)
 
 * pcase
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp :results silent
 (pcase (read)
@@ -9464,6 +9551,9 @@ the second item can be anything such as %s"
 #+END_SRC
 
 * pcase-dolist
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp
 (let (res)
@@ -9482,6 +9572,9 @@ the second item can be anything such as %s"
 :  (4 . four))
 
 * pcase-exhaustive
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp
 (condition-case nil
@@ -9495,6 +9588,9 @@ the second item can be anything such as %s"
 : "Got no match error"
 
 * pcase-lambda
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp
 (funcall
@@ -9507,6 +9603,9 @@ the second item can be anything such as %s"
 : (2 3 4 1)
 
 * pcase-let
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp
 (pcase-let ((`(,_ ,_ ,uid ,gid)
@@ -9518,6 +9617,9 @@ the second item can be anything such as %s"
 : (501 20)
 
 * pcase-let*
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp
 (pcase-let* ((`[,x ,y] [1 2])
@@ -10000,6 +10102,9 @@ the second item can be anything such as %s"
 : 42
 
 * read-char-choice
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp
 (read-char-choice "Delete foo.txt? [Type y/n/q] " '(?y ?n ?q))
@@ -11848,6 +11953,9 @@ the second item can be anything such as %s"
 : "R150"
 
 * special-form-p
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (list
@@ -11859,6 +11967,9 @@ the second item can be anything such as %s"
 : (:if t :when nil)
 
 * special-variable-p
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp
 (special-variable-p 'emacs-version)
@@ -12118,6 +12229,9 @@ the second item can be anything such as %s"
 : (206 187)
 
 * string-blank-p
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (string-blank-p " ")
@@ -12149,6 +12263,9 @@ the second item can be anything such as %s"
 : 3
 
 * string-empty-p
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (string-empty-p "")
@@ -12158,6 +12275,10 @@ the second item can be anything such as %s"
 : t
 
 * string-join
+:PROPERTIES:
+:added:    24.4
+:feature:  subr-x
+:END:
 
 #+BEGIN_SRC elisp
 (string-join '("a" "b" "c") "-")
@@ -12197,6 +12318,9 @@ the second item can be anything such as %s"
 : (t t nil nil)
 
 * string-prefix-p
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp
 (string-prefix-p "Sat" "Saturday night plans")
@@ -12206,6 +12330,9 @@ the second item can be anything such as %s"
 : t
 
 * string-remove-prefix
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (string-remove-prefix "=> " "=> Hello <=")
@@ -12215,6 +12342,9 @@ the second item can be anything such as %s"
 : "Hello <="
 
 * string-remove-suffix
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (string-remove-suffix " <=" "=> Hello <=")
@@ -12224,6 +12354,9 @@ the second item can be anything such as %s"
 : "=> Hello"
 
 * string-suffix-p
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (string-suffix-p "!" "Cats are the best!")
@@ -12291,6 +12424,9 @@ the second item can be anything such as %s"
 #+END_SRC
 
 * string-trim
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (string-trim " hello ")
@@ -12300,6 +12436,9 @@ the second item can be anything such as %s"
 : "hello"
 
 * string-trim-left
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (string-trim-left " hello ")
@@ -12309,6 +12448,9 @@ the second item can be anything such as %s"
 : "hello "
 
 * string-trim-right
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (string-trim-right " hello ")
@@ -12357,6 +12499,9 @@ the second item can be anything such as %s"
 : t
 
 * string>
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp
 (string> "abd" "abc")
@@ -13182,6 +13327,9 @@ the second item can be anything such as %s"
 : "hello world"
 
 * user-error
+:PROPERTIES:
+:added:    24.3
+:END:
 
 #+BEGIN_SRC elisp
 (user-error "It's all your fault, not mime")
