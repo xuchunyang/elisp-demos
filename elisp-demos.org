@@ -9586,6 +9586,24 @@ the second item can be anything such as %s"
   (_ :anything-else))
 #+END_SRC
 
+* pcase-defmacro
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(pcase-defmacro my-alist (&rest patterns)
+  (cl-loop for pat in patterns
+           collect `(app (alist-get ',pat) ,pat) into aux
+           finally return `(and ,@aux)))
+
+(pcase '((a . 1) (b . 2) (c . 3) (d . 4))
+  ((my-alist a b c d) (list a b c d)))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3 4)
+
 * pcase-dolist
 :PROPERTIES:
 :added:    24.1
