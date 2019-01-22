@@ -7324,6 +7324,18 @@
 (goto-char (point-min))
 #+END_SRC
 
+* gv-define-setter
+
+#+BEGIN_SRC elisp :eval no
+(gv-define-setter caar (val x) `(setcar (car ,x) ,val))
+#+END_SRC
+
+* gv-define-simple-setter
+
+#+BEGIN_SRC elisp :eval no
+(gv-define-simple-setter car setcar)
+#+END_SRC
+
 * hash-table-count
 
 #+BEGIN_SRC elisp
