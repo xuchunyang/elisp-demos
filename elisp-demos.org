@@ -9552,7 +9552,7 @@ Process Date finished
 * pcase
 :PROPERTIES:
 :added:    24.1
-:changes:  25.1 New UPatterns 'quote', 'app'.
+:changes:  25.1 New UPatterns 'quote', 'app', 'cl-struct', 'eieio', 'seq', 'map'.
 :changes+: 25.1 New vector QPattern.
 :END:
 
