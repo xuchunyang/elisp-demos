@@ -9949,6 +9949,15 @@ the second item can be anything such as %s"
 : #("Hello" 0 5
 :   (face italic))
 
+* provided-mode-derived-p
+
+#+BEGIN_SRC elisp
+(provided-mode-derived-p 'lisp-interaction-mode 'prog-mode)
+#+END_SRC
+
+#+RESULTS:
+: prog-mode
+
 * push
 
 #+BEGIN_SRC elisp
