@@ -9108,7 +9108,7 @@ Process Date finished
 
 #+BEGIN_SRC elisp
 (let ((x (list 1 2))
-      (y (list 3 4)))
+      (y '(3 4)))
   (nconc x y)
   x)
 #+END_SRC
