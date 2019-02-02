@@ -2296,6 +2296,33 @@
 #+RESULTS:
 : (3 1 2)
 
+* advice-add
+:PROPERTIES:
+:added:    24.4
+:END:
+
+#+BEGIN_SRC elisp :eval no
+(advice-add 'emacs-version :around #'ignore)
+#+END_SRC
+
+* advice-eval-interactive-spec
+:PROPERTIES:
+:added:    24.4
+:END:
+
+#+BEGIN_SRC elisp
+(advice-eval-interactive-spec "r\nP")
+#+END_SRC
+
+* advice-remove
+:PROPERTIES:
+:added:    24.4
+:END:
+
+#+BEGIN_SRC elisp
+(advice-remove 'emacs-version #'ignore)
+#+END_SRC
+
 * alist-get
 :PROPERTIES:
 :added:    25.1
@@ -5026,7 +5053,19 @@
   :type 'string)
 #+END_SRC
 
+* defgroup
+
+#+BEGIN_SRC elisp :eval no
+(defgroup magit-status nil
+  "Inspect and manipulate Git repositories."
+  :link '(info-link "(magit)Status Buffer")
+  :group 'magit-modes)
+#+END_SRC
+
 * define-advice
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp :eval no
 (define-advice shell-command (:after (&rest _) trim-trailing-newline)
