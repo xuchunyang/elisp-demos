@@ -2409,6 +2409,15 @@
 #+RESULTS:
 : 10
 
+* apply-partially
+
+#+BEGIN_SRC elisp
+(mapcar (apply-partially #'* 2) '(1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (2 4 6)
+
 * aref
 
 #+BEGIN_SRC elisp
