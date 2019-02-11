@@ -10441,6 +10441,28 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (1 3)
 
+* replace-buffer-contents
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp :results drawer
+(with-temp-buffer
+  (insert "a\nb\nc\n")
+  (let ((sh-buf (generate-new-buffer " *temp*")))
+    (call-process-region nil nil "nl" nil sh-buf)
+    (replace-buffer-contents sh-buf)
+    (kill-buffer sh-buf))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+     1	a
+     2	b
+     3	c
+:END:
+
 * replace-match
 
 #+BEGIN_SRC elisp
