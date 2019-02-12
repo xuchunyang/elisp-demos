@@ -13887,6 +13887,17 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (t t nil nil)
 
+* xr
+
+#+BEGIN_SRC elisp
+(xr "\\.\\(?:mp4\\|mp3\\)\\'")
+#+END_SRC
+
+#+RESULTS:
+: (seq "."
+:      (or "mp4" "mp3")
+:      eos)
+
 * y-or-n-p
 
 #+BEGIN_SRC elisp
