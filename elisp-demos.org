@@ -2790,6 +2790,107 @@
 #+RESULTS:
 : t
 
+* bool-vector
+
+#+BEGIN_SRC elisp
+(vconcat (bool-vector nil t nil t))
+#+END_SRC
+
+#+RESULTS:
+: [nil t nil t]
+
+* bool-vector-count-consecutive
+
+#+BEGIN_SRC elisp
+(bool-vector-count-consecutive
+ (bool-vector nil t nil t t t t t nil)
+ t 3)
+#+END_SRC
+
+#+RESULTS:
+: 5
+
+* bool-vector-count-population
+
+#+BEGIN_SRC elisp
+(bool-vector-count-population (bool-vector nil t nil t t))
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* bool-vector-exclusive-or
+
+#+BEGIN_SRC elisp
+(vconcat
+ (bool-vector-exclusive-or (bool-vector nil t nil t)
+                           (bool-vector nil t t nil)))
+#+END_SRC
+
+#+RESULTS:
+: [nil nil t t]
+
+* bool-vector-intersection
+
+#+BEGIN_SRC elisp
+(vconcat
+ (bool-vector-intersection (bool-vector nil nil t t)
+                           (bool-vector nil t nil t)))
+#+END_SRC
+
+#+RESULTS:
+: [nil nil nil t]
+
+* bool-vector-not
+
+#+BEGIN_SRC elisp
+(vconcat (bool-vector-not (bool-vector nil t)))
+#+END_SRC
+
+#+RESULTS:
+: [t nil]
+
+* bool-vector-p
+
+#+BEGIN_SRC elisp
+(bool-vector-p (bool-vector))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* bool-vector-set-difference
+
+#+BEGIN_SRC elisp
+(vconcat
+ (bool-vector-set-difference (bool-vector nil nil t t)
+                             (bool-vector nil t nil t)))
+#+END_SRC
+
+#+RESULTS:
+: [nil nil t nil]
+
+* bool-vector-subsetp
+
+#+BEGIN_SRC elisp
+(bool-vector-subsetp (bool-vector t nil t nil)
+                     (bool-vector t t t t))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* bool-vector-union
+
+#+BEGIN_SRC elisp
+(vconcat
+ (bool-vector-union (bool-vector nil nil t t)
+                    (bool-vector nil t nil t)))
+#+END_SRC
+
+#+RESULTS:
+: [nil t t t]
+
 * boundp
 
 #+BEGIN_SRC elisp
@@ -3165,6 +3266,24 @@
 #+RESULTS:
 : 42
 
+* category-docstring
+
+#+BEGIN_SRC elisp
+(category-docstring ?a)
+#+END_SRC
+
+#+RESULTS:
+: "ASCII\nASCII graphic characters 32-126 (ISO646 IRV:1983[4/0])"
+
+* category-set-mnemonics
+
+#+BEGIN_SRC elisp
+(category-set-mnemonics (char-category-set ?a))
+#+END_SRC
+
+#+RESULTS:
+: ".Lalr"
+
 * cdar
 
 #+BEGIN_SRC elisp
@@ -3239,6 +3358,15 @@
 
 #+RESULTS:
 : "A"
+
+* char-category-set
+
+#+BEGIN_SRC elisp
+(aref (char-category-set ?A) ?a)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * char-equal
 
@@ -8312,6 +8440,15 @@
 #+RESULTS:
 : t
 
+* make-bool-vector
+
+#+BEGIN_SRC elisp
+(vconcat (make-bool-vector 5 t))
+#+END_SRC
+
+#+RESULTS:
+: [t t t t t]
+
 * make-directory
 
 #+BEGIN_SRC elisp
@@ -12943,6 +13080,15 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : "/Users/xcy/src/emacs-mac/lisp/emacs-lisp/pcase.elc"
+
+* symbol-function
+
+#+BEGIN_SRC elisp
+(symbol-function '+)
+#+END_SRC
+
+#+RESULTS:
+: #<subr +>
 
 * symbol-name
 
