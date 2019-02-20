@@ -13569,6 +13569,62 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "The CAT In The HAt"
 
+* url-build-query-string
+
+#+BEGIN_SRC elisp
+(url-build-query-string '((name "tom") (age 3)))
+#+END_SRC
+
+#+RESULTS:
+: "name=tom&age=3"
+
+* url-encode-url
+
+#+BEGIN_SRC elisp
+(url-encode-url "HTTPS://Google.com?q=hello world")
+#+END_SRC
+
+#+RESULTS:
+: "https://google.com?q=hello%20world"
+
+* url-file-directory
+
+#+BEGIN_SRC elisp
+(url-file-directory
+ "https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj_5qqF0sngAhXlw4sBHUT3DYcQPAgH")
+#+END_SRC
+
+#+RESULTS:
+: "https://www.google.com/"
+
+* url-file-extension
+
+#+BEGIN_SRC elisp
+(url-file-extension "https://github.com/rejeep/evm/blob/master/README.md?rel=xuchunyang")
+#+END_SRC
+
+#+RESULTS:
+: ".md"
+
+* url-file-nondirectory
+
+#+BEGIN_SRC elisp
+(url-file-nondirectory
+ "https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj_5qqF0sngAhXlw4sBHUT3DYcQPAgH")
+#+END_SRC
+
+#+RESULTS:
+: "webhp"
+
+* url-generic-parse-url
+
+#+BEGIN_SRC elisp
+(url-generic-parse-url "https://www.gnu.org/software/emacs/")
+#+END_SRC
+
+#+RESULTS:
+: #s(url "https" nil nil "www.gnu.org" nil "/software/emacs/" nil nil t nil t t)
+
 * url-hexify-string
 
 #+BEGIN_SRC elisp
@@ -13577,6 +13633,36 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : "hello%20world"
+
+* url-parse-query-string
+
+#+BEGIN_SRC elisp
+(url-parse-query-string "name=tom&age=3")
+#+END_SRC
+
+#+RESULTS:
+: (("age" "3")
+:  ("name" "tom"))
+
+* url-path-and-query
+
+#+BEGIN_SRC elisp
+(url-path-and-query
+ (url-generic-parse-url
+  "https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwj_5qqF0sngAhXlw4sBHUT3DYcQPAgH"))
+#+END_SRC
+
+#+RESULTS:
+: ("/webhp" . "hl=en&sa=X&ved=0ahUKEwj_5qqF0sngAhXlw4sBHUT3DYcQPAgH")
+
+* url-recreate-url
+
+#+BEGIN_SRC elisp
+(url-recreate-url (url-generic-parse-url "https://www.gnu.org/software/emacs/"))
+#+END_SRC
+
+#+RESULTS:
+: "https://www.gnu.org/software/emacs/"
 
 * url-retrieve
 
