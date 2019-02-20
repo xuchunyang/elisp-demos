@@ -9028,6 +9028,15 @@ Process Date finished
 : ((x . 1)
 :  (y . 2))
 
+* mapp
+
+#+BEGIN_SRC elisp
+(mapp '((a 1) (b 2)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * match-data
 
 #+BEGIN_SRC elisp
@@ -10290,6 +10299,148 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : 'foo
+
+* radix-tree-count
+
+#+BEGIN_SRC elisp
+(let ((tree ()))
+  (setq tree (radix-tree-insert tree "application" t))
+  (setq tree (radix-tree-insert tree "appetizer" t))
+  (setq tree (radix-tree-insert tree "applicative" t))
+  (setq tree (radix-tree-insert tree "apple" t))
+  (radix-tree-count tree))
+#+END_SRC
+
+#+RESULTS:
+: 4
+
+* radix-tree-from-map
+
+#+BEGIN_SRC elisp
+(radix-tree-from-map '(("application" . t)
+                       ("appetizer" . t)
+                       ("applicative" . t)
+                       ("apple" . t)))
+#+END_SRC
+
+#+RESULTS:
+: (("app"
+:   ("l"
+:    ("icati"
+:     ("on" . t)
+:     ("ve" . t))
+:    ("e" . t))
+:   ("etizer" . t)))
+
+* radix-tree-insert
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((tree ()))
+  (setq tree (radix-tree-insert tree "application" t))
+  (setq tree (radix-tree-insert tree "appetizer" t))
+  (setq tree (radix-tree-insert tree "applicative" t))
+  (setq tree (radix-tree-insert tree "apple" t))
+  tree)
+#+END_SRC
+
+#+RESULTS:
+: (("app"
+:   ("l"
+:    ("icati"
+:     ("on" . t)
+:     ("ve" . t))
+:    ("e" . t))
+:   ("etizer" . t)))
+
+* radix-tree-iter-mappings
+
+#+BEGIN_SRC elisp
+(let (tree words)
+  (setq tree (radix-tree-insert tree "application" t))
+  (setq tree (radix-tree-insert tree "appetizer" t))
+  (setq tree (radix-tree-insert tree "applicative" t))
+  (setq tree (radix-tree-insert tree "apple" t))
+  (radix-tree-iter-mappings
+   (radix-tree-subtree tree "app")
+   (lambda (k v) (push (concat "app" k) words)))
+  words)
+#+END_SRC
+
+#+RESULTS:
+: ("appetizer" "apple" "applicative" "application")
+
+* radix-tree-iter-subtrees
+
+#+BEGIN_SRC elisp
+(let (tree words)
+  (setq tree (radix-tree-insert tree "application" t))
+  (setq tree (radix-tree-insert tree "appetizer" t))
+  (setq tree (radix-tree-insert tree "applicative" t))
+  (setq tree (radix-tree-insert tree "apple" t))
+  (cl-labels ((mapping
+               (tree prefix)
+               (radix-tree-iter-subtrees
+                tree
+                (lambda (p s)
+                  (let ((nprefix (concat prefix p)))
+                    (pcase s
+                      ((radix-tree-leaf _v) (push nprefix words))
+                      (_ (mapping s nprefix))))))))
+    (mapping tree ""))
+  words)
+#+END_SRC
+
+#+RESULTS:
+: ("appetizer" "apple" "applicative" "application")
+
+* radix-tree-lookup
+
+#+BEGIN_SRC elisp
+(let ((tree ()))
+  (setq tree (radix-tree-insert tree "application" 1))
+  (setq tree (radix-tree-insert tree "appetizer"   2))
+  (setq tree (radix-tree-insert tree "applicative" 3))
+  (setq tree (radix-tree-insert tree "apple"       4))
+  (radix-tree-lookup tree "apple"))
+#+END_SRC
+
+#+RESULTS:
+: 4
+
+* radix-tree-prefixes
+
+#+BEGIN_SRC elisp
+(let ((tree ()))
+  (setq tree (radix-tree-insert tree "apply" t))
+  (setq tree (radix-tree-insert tree "applies" t))
+  (setq tree (radix-tree-insert tree "applied" t))
+  (setq tree (radix-tree-insert tree "applying" t))
+  (radix-tree-prefixes tree "applying"))
+#+END_SRC
+
+#+RESULTS:
+: (("applying" . t)
+:  ("apply" . t))
+
+* radix-tree-subtree
+
+#+BEGIN_SRC elisp
+(let ((tree ()))
+  (setq tree (radix-tree-insert tree "application" 1))
+  (setq tree (radix-tree-insert tree "appetizer"   2))
+  (setq tree (radix-tree-insert tree "applicative" 3))
+  (setq tree (radix-tree-insert tree "apple"       4))
+  (radix-tree-subtree tree "appl"))
+#+END_SRC
+
+#+RESULTS:
+: (("icati"
+:   ("on" . 1)
+:   ("ve" . 3))
+:  ("e" . 4))
 
 * random
 
