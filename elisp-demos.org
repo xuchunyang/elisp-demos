@@ -5231,6 +5231,17 @@
 (define-key (current-global-map) (kbd "C-c C-c") #'emacs-version)
 #+END_SRC
 
+* define-key-after
+
+#+BEGIN_SRC elisp
+(define-key-after
+  (lookup-key shell-mode-map [menu-bar signals])
+  [work] '("Work" . work-command) 'break)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * define-minor-mode
 
 #+BEGIN_SRC elisp
