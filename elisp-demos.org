@@ -10587,6 +10587,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "xuchunyang"
 
+* read-passwd
+
+#+BEGIN_SRC elisp
+(read-passwd "Your password: ")
+#+END_SRC
+
+#+RESULTS:
+: "123456"
+
 * read-regexp
 
 #+BEGIN_SRC elisp
