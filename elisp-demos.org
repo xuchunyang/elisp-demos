@@ -3498,14 +3498,12 @@
 * cl-callf
 
 #+BEGIN_SRC elisp
-(let ((x 1) y)
-  (cl-callf or x 42)
-  (cl-callf or y 42)
-  (list x y))
+;; Toggle the value of `lexical-binding'
+(cl-callf not lexical-binding)
 #+END_SRC
 
 #+RESULTS:
-: (1 42)
+: t
 
 * cl-callf2
 
