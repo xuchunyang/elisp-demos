@@ -13824,6 +13824,18 @@ the second item can be anything such as %s"
 #+RESULTS:
 : ("/webhp" . "hl=en&sa=X&ved=0ahUKEwj_5qqF0sngAhXlw4sBHUT3DYcQPAgH")
 
+* url-queue-retrieve
+
+#+BEGIN_SRC elisp
+(url-queue-retrieve "http://example.com/"
+                    (lambda (status)
+                      (message "Status: %s" status)
+                      (display-buffer (current-buffer))))
+#+END_SRC
+
+#+RESULTS:
+: [nil 0 1 0 1 url-queue-check-progress nil idle 0]
+
 * url-recreate-url
 
 #+BEGIN_SRC elisp
