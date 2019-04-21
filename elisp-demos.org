@@ -2277,6 +2277,26 @@
 #+RESULTS:
 : nil
 
+* add-face-text-property
+:PROPERTIES:
+:added:    24.4
+:END:
+
+#+BEGIN_SRC elisp
+(let ((s "RED|GREEN"))
+  (add-face-text-property 0 3 '(:foreground "red") 'append s)
+  (add-face-text-property 4 9 '(:foreground "green") 'append s)
+  (message s))
+#+END_SRC
+
+#+RESULTS:
+: #("RED|GREEN" 0 3
+:   (face
+:    (:foreground "red"))
+:   4 9
+:   (face
+:    (:foreground "green")))
+
 * add-hook
 
 #+BEGIN_SRC elisp :eval no
