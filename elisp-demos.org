@@ -6209,6 +6209,38 @@
 #+RESULTS:
 : 1024
 
+* extract-rectangle
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (set-mark (point))
+  (insert "AAA" ?\n
+          "BBB" ?\n
+          "CCC")
+  (rectangle-mark-mode)
+  (extract-rectangle (region-beginning) (region-end)))
+#+END_SRC
+
+#+RESULTS:
+: ("AAA" "BBB" "CCC")
+
+* extract-rectangle-bounds
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (set-mark (point))
+  (insert "AAA" ?\n
+          "BBB" ?\n
+          "CCC")
+  (rectangle-mark-mode)
+  (extract-rectangle-bounds (region-beginning) (region-end)))
+#+END_SRC
+
+#+RESULTS:
+: ((1 . 4)
+:  (5 . 8)
+:  (9 . 12))
+
 * f-absolute?
 
 #+BEGIN_SRC elisp
@@ -10755,13 +10787,46 @@ the second item can be anything such as %s"
 
 #+BEGIN_SRC elisp
 (with-temp-buffer
+  (set-mark (point))
   (insert "hello")
-  (set-marker (mark-marker) 1)
   (region-bounds))
 #+END_SRC
 
 #+RESULTS:
 : ((1 . 6))
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (set-mark (point))
+  (insert "AAA" ?\n
+          "BBB" ?\n
+          "CCC")
+  (rectangle-mark-mode)
+  (region-bounds))
+#+END_SRC
+
+#+RESULTS:
+: ((1 . 4)
+:  (5 . 8)
+:  (9 . 12))
+
+* region-noncontiguous-p
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (set-mark (point))
+  (insert "AAA" ?\n
+          "BBB" ?\n
+          "CCC")
+  (rectangle-mark-mode)
+  (region-noncontiguous-p))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * remhash
 
