@@ -7901,6 +7901,9 @@
 : t
 
 * iter-defun
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp :lexical t
 (iter-defun foo-number-sequence (start)
@@ -7917,6 +7920,9 @@
 : (1 2 3 4 5 6 7 8 9 10)
 
 * iter-do
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp :lexical t
 (iter-defun foo-number-sequence (start)
@@ -7937,6 +7943,9 @@
 : (1 2 3 4 5 6 7 8 9 10)
 
 * iter-lambda
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp :lexical t
 (cl-loop for n iter-by (funcall (iter-lambda ()
