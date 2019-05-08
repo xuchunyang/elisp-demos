@@ -12456,6 +12456,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "hello world\n"
 
+* shell-quote-argument
+
+#+BEGIN_SRC elisp
+(shell-quote-argument "Library/Application Support")
+#+END_SRC
+
+#+RESULTS:
+: "Library/Application\\ Support"
+
 * signal
 
 #+BEGIN_SRC elisp
