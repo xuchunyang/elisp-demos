@@ -5126,19 +5126,18 @@
 
 * declare
 :PROPERTIES:
-:added:    25.1
+:changes:  25.1 interactive-only is added.
 :END:
 
 #+BEGIN_SRC elisp
 (defun greeting ()
   (declare (interactive-only "Use `message' instead."))
   (interactive)
-  (let ((hour (string-to-number (format-time-string "%H"))))
-    (cond ((<= 5 hour 12) (message "Good Morning"))
-          ((<= 13 hour 17) (message "Good Afternoon"))
-          ((<= 18 hour 21) (message "Good Morning"))
-          (t (message "Good Night")))))
+  (message "Hello"))
 #+END_SRC
+
+#+RESULTS:
+: greeting
 
 * declare-function
 
