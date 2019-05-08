@@ -5124,6 +5124,22 @@
 #+RESULTS:
 : (22261 22600)
 
+* declare
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(defun greeting ()
+  (declare (interactive-only "Use `message' instead."))
+  (interactive)
+  (let ((hour (string-to-number (format-time-string "%H"))))
+    (cond ((<= 5 hour 12) (message "Good Morning"))
+          ((<= 13 hour 17) (message "Good Afternoon"))
+          ((<= 18 hour 21) (message "Good Morning"))
+          (t (message "Good Night")))))
+#+END_SRC
+
 * declare-function
 
 #+BEGIN_SRC elisp
