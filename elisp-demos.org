@@ -3399,6 +3399,15 @@
 #+RESULTS:
 : (t nil)
 
+* char-fold-to-regexp
+
+#+BEGIN_SRC elisp
+(char-fold-to-regexp "(")
+#+END_SRC
+
+#+RESULTS:
+: "[(⁽₍︵﹙（]"
+
 * char-from-name
 :PROPERTIES:
 :added:    26.1
