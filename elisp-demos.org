@@ -5476,6 +5476,9 @@
 #+END_SRC
 
 * directory-files-recursively
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp :results silent
 (directory-files-recursively package-user-dir (rx ".txt" eos))
@@ -11897,6 +11900,18 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : (t nil t)
+
+* seconds-to-string
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(seconds-to-string 150)
+#+END_SRC
+
+#+RESULTS:
+: "2.50m"
 
 * seconds-to-time
 
