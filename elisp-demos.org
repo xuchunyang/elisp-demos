@@ -10151,6 +10151,19 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (8 . 578)
 
+* position-bytes
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  ;; multibyte char is enabled by default, to turn off, use
+  ;; (set-buffer-multibyte nil)
+  (insert "λ")
+  (list (point) (position-bytes (point))))
+#+END_SRC
+
+#+RESULTS:
+: (2 3)
+
 * pp
 
 #+BEGIN_SRC elisp :results output
@@ -12359,15 +12372,14 @@ the second item can be anything such as %s"
 * set-buffer-multibyte
 
 #+BEGIN_SRC elisp
-;; λ, #x3bb, #xCE #xBB
 (with-temp-buffer
-  (insert "lambda λ")
-  ;; 7 + 2 + 1
-  (position-bytes (point-max)))
+  (set-buffer-multibyte nil)
+  (insert "λ")
+  (multibyte-string-p (buffer-string)))
 #+END_SRC
 
 #+RESULTS:
-: 10
+: nil
 
 * set-file-modes
 
