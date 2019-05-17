@@ -12157,6 +12157,9 @@ the second item can be anything such as %s"
 : (2 3 4)
 
 * seq-map-indexed
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (seq-map-indexed
