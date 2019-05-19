@@ -2598,6 +2598,21 @@
 #+RESULTS:
 : nil
 
+* atomic-change-group
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (ignore-errors
+    (atomic-change-group
+      (insert "world")
+      (error "I cannot do it")))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "hello"
+
 * auth-source-search
 
 #+BEGIN_SRC elisp
