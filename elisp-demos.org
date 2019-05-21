@@ -10774,6 +10774,9 @@ the second item can be anything such as %s"
 #+END_SRC
 
 * recent-keys
+:PROPERTIES:
+:changes:  25.1 The optional INCLUDE-CMDS argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (length (recent-keys))
