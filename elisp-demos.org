@@ -8373,6 +8373,19 @@
 #+RESULTS:
 : t
 
+* lm-header
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert-file-contents
+   (replace-regexp-in-string
+    "\\.elc$" ".el" (locate-library "elisp-demos")))
+  (lm-header "Homepage"))
+#+END_SRC
+
+#+RESULTS:
+: "https://github.com/xuchunyang/elisp-demos"
+
 * load-average
 
 #+BEGIN_SRC elisp
