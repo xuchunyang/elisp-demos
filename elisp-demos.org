@@ -2250,6 +2250,18 @@
 #+RESULTS:
 : 4
 
+* accept-process-output
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (start-process-shell-command "test" (current-buffer) "sleep 3 && echo hello")
+  (accept-process-output (get-buffer-process (current-buffer)) nil nil t )
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "hello\n\nProcess test finished\n"
+
 * access-file
 
 #+BEGIN_SRC elisp
