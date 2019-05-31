@@ -3657,6 +3657,33 @@
 #+RESULTS:
 : ("Moo!" "Chirp!")
 
+* cl-defmethod
+
+#+BEGIN_SRC elisp
+(cl-defstruct dog)
+(cl-defstruct person name)
+
+(cl-defgeneric say-hi (object)
+  "Greeting from OBJECT.")
+
+(cl-defmethod say-hi ((n number))
+  "Greating from a number."
+  (number-to-string n))
+
+(cl-defmethod say-hi ((d dog))
+  "Greeting from a dog."
+  "wowowowowoowooo")
+
+(cl-defmethod say-hi ((p person))
+  "Greeting from a person."
+  (format "Hello, I am %s" (person-name p)))
+
+(mapcar #'say-hi (list 42 (make-dog) (make-person :name user-full-name)))
+#+END_SRC
+
+#+RESULTS:
+: ("42" "wowowowowoowooo" "Hello, I am Xu Chunyang")
+
 * cl-defstruct
 
 #+BEGIN_SRC elisp
