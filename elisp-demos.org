@@ -6840,6 +6840,18 @@
 #+RESULTS:
 : t
 
+* file-local-name
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(file-local-name "/ssh:USER@HOST:/foo/bar")
+#+END_SRC
+
+#+RESULTS:
+: "/foo/bar"
+
 * file-modes
 
 #+BEGIN_SRC elisp
@@ -7077,6 +7089,15 @@
 
 #+RESULTS:
 : "init.el"
+
+* file-remote-p
+
+#+BEGIN_SRC elisp
+(file-remote-p "/ssh:USER@HOST:/foo/bar")
+#+END_SRC
+
+#+RESULTS:
+: "/ssh:USER@HOST:"
 
 * file-size-human-readable
 
