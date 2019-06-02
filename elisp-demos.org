@@ -2355,6 +2355,36 @@
 (advice-remove 'emacs-version #'ignore)
 #+END_SRC
 
+* aio-defun
+
+#+BEGIN_SRC elisp :lexical t
+(aio-defun foo (url)
+  (aio-await (aio-sleep 3))
+  (message "Done sleeping. Now fetching %s" url)
+  (let* ((result (aio-await (aio-url-retrieve url)))
+         (contents (with-current-buffer (cdr result)
+                     (prog1 (buffer-string)
+                       (kill-buffer)))))
+    (message "Result: %s" contents)))
+
+(foo "http://example.com")
+#+END_SRC
+
+#+RESULTS:
+: #s(aio-promise nil nil)
+
+* aio-lambda
+
+#+BEGIN_SRC elisp :lexical t
+(funcall
+ (aio-lambda ()
+   (aio-await (aio-sleep 3))
+   (message "Done sleeping 3 seconds")))
+#+END_SRC
+
+#+RESULTS:
+: #s(aio-promise nil nil)
+
 * alist-get
 :PROPERTIES:
 :added:    25.1
