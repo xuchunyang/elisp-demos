@@ -14043,6 +14043,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "name=tom&age=3"
 
+* url-copy-file
+
+#+BEGIN_SRC elisp
+(url-copy-file "http://example.com" "index.html")
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * url-encode-url
 
 #+BEGIN_SRC elisp
