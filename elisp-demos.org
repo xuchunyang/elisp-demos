@@ -8816,6 +8816,22 @@ Process Date finished
 #+RESULTS:
 : "elisp-demos-hF3633"
 
+* make-thread
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(make-thread
+ (lambda ()
+   (while t
+     (forward-char 1)
+     (sit-for 0.1))))
+#+END_SRC
+
+#+RESULTS:
+: #<thread 0x178fd5a30>
+
 * make-vector
 
 #+BEGIN_SRC elisp
