@@ -14163,6 +14163,21 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "hello%20world"
 
+* url-insert-file-contents
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  ;; (info "(url) Disk Caching") is breaking `url-insert-file-contents', so
+  ;; disable cache
+  (let ((url-request-extra-headers '(("Pragma" . "no-cache"))))
+    (url-insert-file-contents "http://example.com"))
+  (re-search-forward (rx "<title>" (group (1+ anything)) "</title>"))
+  (match-string 1))
+#+END_SRC
+
+#+RESULTS:
+: "Example Domain"
+
 * url-parse-query-string
 
 #+BEGIN_SRC elisp
