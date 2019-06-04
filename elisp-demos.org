@@ -8485,6 +8485,15 @@
 #+RESULTS:
 : (108 117 122)
 
+* locate-dominating-file
+
+#+BEGIN_SRC elisp
+(locate-dominating-file "." ".git")
+#+END_SRC
+
+#+RESULTS:
+: "~/src/elisp-demos/"
+
 * locate-file
 
 #+BEGIN_SRC elisp
