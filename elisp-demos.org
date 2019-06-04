@@ -10453,6 +10453,18 @@ the second item can be anything such as %s"
 #+RESULTS:
 : prog-mode
 
+* pulse-momentary-highlight-one-line
+
+#+BEGIN_SRC elisp :results silent
+(pulse-momentary-highlight-one-line (point))
+#+END_SRC
+
+* pulse-momentary-highlight-region
+
+#+BEGIN_SRC elisp :results silent
+(pulse-momentary-highlight-region (line-beginning-position) (line-end-position))
+#+END_SRC
+
 * push
 
 #+BEGIN_SRC elisp
