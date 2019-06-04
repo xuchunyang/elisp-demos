@@ -11190,6 +11190,22 @@ the second item can be anything such as %s"
 : ((1 2 3)
 :  (3 2 1))
 
+* rfc1843-decode-string
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (decode-coding-string
+   (apply #'unibyte-string
+          ;; FIXME: is `string-to-list' the best?
+          (string-to-list
+           (rfc1843-decode-string "~{<:Ky2;S{#,NpJ)l6HK!#~}")))
+   'chinese-gbk))
+#+END_SRC
+
+#+RESULTS:
+: #("己所不欲，勿施於人。" 0 10
+:   (charset chinese-gbk))
+
 * ring-copy
 
 #+BEGIN_SRC elisp
