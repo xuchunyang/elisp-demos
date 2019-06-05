@@ -7677,6 +7677,30 @@
 #+RESULTS:
 : "#xCE"
 
+* get-char-code-property
+
+#+BEGIN_SRC elisp
+(get-char-code-property ?A 'name)
+#+END_SRC
+
+#+RESULTS:
+: "LATIN CAPITAL LETTER A"
+
+#+BEGIN_SRC elisp
+;; (= ?一 19968)
+(get-char-code-property ?㊀ 'decomposition)
+#+END_SRC
+
+#+RESULTS:
+: (circle 19968)
+
+#+BEGIN_SRC elisp
+(string (get-char-code-property ?\《 'paired-bracket))
+#+END_SRC
+
+#+RESULTS:
+: "》"
+
 * get-file-buffer
 
 #+BEGIN_SRC elisp
