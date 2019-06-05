@@ -6052,6 +6052,17 @@
 #+RESULTS:
 : (206 196)
 
+#+BEGIN_SRC elisp
+;; #xE6 #x96 #x87
+(mapconcat
+ (lambda (c) (format "#x%X" c))
+ (encode-coding-string "文" 'utf-8)
+ " ")
+#+END_SRC
+
+#+RESULTS:
+: "#xE6 #x96 #x87"
+
 * encode-time
 
 #+BEGIN_SRC elisp
