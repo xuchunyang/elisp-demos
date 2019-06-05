@@ -3497,6 +3497,18 @@
 #+RESULTS:
 : "<"
 
+* char-table-range
+
+#+BEGIN_SRC elisp
+;; (aref char-width-table ?💯)
+;; => 2
+
+(char-table-range char-width-table ?💯)
+#+END_SRC
+
+#+RESULTS:
+: 2
+
 * char-to-string
 
 #+BEGIN_SRC elisp
@@ -8937,6 +8949,22 @@ Process Date finished
 #+RESULTS:
 : ((x . 1)
 :  (y . 2))
+
+* map-char-table
+
+#+BEGIN_SRC elisp
+(let (result)
+  (map-char-table
+   (lambda (range value)
+     ;; copy `range', see https://github.com/Wilfred/helpful/issues/210
+     (push (list (format "%S" range) value) result))
+   printable-chars)
+  result)
+#+END_SRC
+
+#+RESULTS:
+: (("(160 . 4194175)" t)
+:  ("(32 . 126)" t))
 
 * map-charset-chars
 
