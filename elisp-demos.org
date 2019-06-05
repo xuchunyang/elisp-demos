@@ -14070,6 +14070,29 @@ the second item can be anything such as %s"
 | [1 2 3]           | vector  |
 | pwd               | process |
 
+* ucs-names
+
+#+BEGIN_SRC elisp
+(hash-table-count (ucs-names))
+#+END_SRC
+
+#+RESULTS:
+: 43519
+
+#+BEGIN_SRC elisp
+(mapcar
+ #'string
+ (mapcar
+  #'cdr
+  (map-filter
+   (lambda (char-name char-code)
+     (string-prefix-p "SMILING FACE " char-name))
+   (ucs-names))))
+#+END_SRC
+
+#+RESULTS:
+: ("😃" "😄" "😅" "😆" "😇" "😈" "😊" "😍" "😎" "🤭" "🥰")
+
 * unibyte-string
 
 #+BEGIN_SRC elisp
