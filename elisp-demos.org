@@ -5312,6 +5312,24 @@
 (defalias '\` (symbol-function 'backquote))
 #+END_SRC
 
+* defclass
+
+#+BEGIN_SRC elisp
+(defclass person ()
+  ((name :initarg :name)
+   (age :initarg :age)))
+
+(cl-defmethod say-hi ((p person))
+  (message "Hi, I'm %s and %d years old"
+           (oref p :name)
+           (oref p :age)))
+
+(say-hi (person :name user-full-name :age 26))
+#+END_SRC
+
+#+RESULTS:
+: "Hi, I'm Xu Chunyang and 26 years old"
+
 * defconst
 
 #+BEGIN_SRC elisp :eval no
