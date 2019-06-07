@@ -164,7 +164,8 @@
 
 ;;;###autoload
 (defun elisp-demos-advice-describe-function-1 (function)
-  (let ((src (elisp-demos--search function))
+  (let ((src (and (symbolp function)
+                  (elisp-demos--search function)))
         (buf (get-buffer "*Help*")))
     (when (and src buf)
       (with-current-buffer buf
@@ -191,7 +192,8 @@
 
 ;;;###autoload
 (defun elisp-demos-advice-helpful-update ()
-  (let ((src (elisp-demos--search helpful--sym)))
+  (let ((src (and (symbolp helpful--sym)
+                  (elisp-demos--search helpful--sym))))
     (when src
       (save-excursion
         (goto-char (point-min))
