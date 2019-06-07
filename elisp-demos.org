@@ -14379,6 +14379,18 @@ the second item can be anything such as %s"
 #+RESULTS:
 : ((message . "GitHub lives! (2018-11-06 21:40:11 -0800) (1)"))
 
+#+BEGIN_SRC elisp :results silent
+(let ((url-user-agent (format "%s <%s>" user-full-name user-mail-address))
+      (url-request-method "POST")
+      (url-request-extra-headers '(("Content-Type" . "application/json")))
+      (url-request-data (encode-coding-string
+                         (json-encode '((id . 123)
+                                        ("en" . "hello world")
+                                        ("zh" . "你好，世界")))
+                         'utf-8)))
+  (pop-to-buffer (url-retrieve-synchronously "http://httpbin.org/post")))
+#+END_SRC
+
 * url-unhex-string
 
 #+BEGIN_SRC elisp
