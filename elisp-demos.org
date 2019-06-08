@@ -12928,6 +12928,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : #<process sleep>
 
+* stem-english
+
+#+BEGIN_SRC elisp
+(stem-english "mesmerizing")
+#+END_SRC
+
+#+RESULTS:
+: ("mesmer" "mesmeriz" "mesmerize" "mesmerizing")
+
 * store-substring
 
 #+BEGIN_SRC elisp
