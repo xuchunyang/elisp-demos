@@ -8398,6 +8398,9 @@
 : 101
 
 * let-alist
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp
 (let-alist '((id . 1234)
