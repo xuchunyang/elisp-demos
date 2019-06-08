@@ -7875,6 +7875,119 @@
 #+RESULTS:
 : nil
 
+* helm-build-async-source
+
+#+BEGIN_SRC elisp :results silent
+(helm
+ :prompt (format "%s $ find . -type f -iname " (helm-default-directory))
+ :sources
+ (helm-build-async-source "find"
+   :candidates-process
+   (lambda ()
+     (let ((proc (let (process-connection-type)
+                   (apply #'start-process "helm-find" helm-buffer
+                          "find" "." "-type" "f"
+                          (unless (string-empty-p helm-pattern)
+                            (list "-iname" helm-pattern))))))
+       (set-process-sentinel proc #'ignore)
+       proc))
+   :action #'find-file
+   :nohighlight t))
+#+END_SRC
+
+* helm-build-dummy-source
+
+#+BEGIN_SRC elisp
+(helm :sources
+      (helm-build-dummy-source "test"
+        :filtered-candidate-transformer
+        (lambda (_candidates _source)
+          (mapcar
+           (lambda (c) (format "%c: %d" c c))
+           helm-pattern))
+        :nohighlight t))
+#+END_SRC
+
+* helm-build-in-buffer-source
+
+#+BEGIN_SRC elisp
+(helm :sources (helm-build-in-buffer-source "test"
+                 :data '("foo" "bar" "baz"))
+      :buffer "*helm test*")
+#+END_SRC
+
+#+RESULTS:
+: "foo"
+
+#+BEGIN_SRC elisp
+(helm :sources (helm-build-in-buffer-source "test"
+                 :data "foo\nbar\nbaz")
+      :buffer "*helm test*")
+#+END_SRC
+
+#+RESULTS:
+: "baz"
+
+* helm-build-in-file-source
+
+#+BEGIN_SRC elisp
+(helm :sources (helm-build-in-file-source "search init.el" user-init-file))
+#+END_SRC
+
+#+RESULTS:
+: ";;; init.el --- Xu Chunyang's Emacs Configuration  -*- lexical-binding: t; -*-"
+
+* helm-build-sync-source
+
+#+BEGIN_SRC elisp
+(helm
+ :sources
+ (helm-build-sync-source "test"
+   :candidates '("foo" "bar" "baz")
+   :action '(("Message" . (lambda (candidate) (message "%s selected" candidate)))
+             ("Insert" . insert))))
+#+END_SRC
+
+#+RESULTS:
+: "bar selected"
+
+#+BEGIN_SRC elisp
+(helm
+ :sources
+ (helm-build-sync-source "test"
+   :candidates
+   ;; (DISPLAY . REAL)
+   '(("one" . 1)
+     ("two" . 2)
+     ("three" . 3))))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+#+BEGIN_SRC elisp :results silent
+(defvar helm-elisp-demos-source
+  (helm-build-sync-source "elisp demos"
+    :candidates
+    (lambda ()
+      (with-temp-buffer
+        (insert-buffer "elisp-demos.org")
+        (let (headings (linum 1))
+          (while (not (eobp))
+            (when (looking-at (rx bol "* " (group (1+ nonl)) eol))
+              (push (cons (match-string-no-properties 1) linum) headings))
+            (cl-incf linum)
+            (forward-line 1))
+          (nreverse headings))))
+    :action (helm-make-actions
+             "Goto line"
+             (lambda (linum)
+               (switch-to-buffer "elisp-demos.org")
+               (goto-line linum)))))
+
+(helm :sources helm-elisp-demos-source)
+#+END_SRC
+
 * help-C-file-name
 
 #+BEGIN_SRC elisp
