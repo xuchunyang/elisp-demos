@@ -7759,6 +7759,19 @@
 #+RESULTS:
 : "》"
 
+#+BEGIN_SRC elisp
+;; https://qntm.org/files/rot13/rot13.html
+(rot13-string
+ ;; NFD normalization, (99 97 102 233) -> (99 97 102 101 769)
+ (apply #'string (mapcan
+                  (lambda (char)
+                    (get-char-code-property char 'decomposition))
+                  "café")))
+#+END_SRC
+
+#+RESULTS:
+: "pnsŕ"
+
 * get-file-buffer
 
 #+BEGIN_SRC elisp
