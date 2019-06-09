@@ -5126,6 +5126,13 @@
 #+RESULTS:
 : 3
 
+* create-image
+
+#+BEGIN_SRC elisp :results silent
+(message (propertize " " 'display (create-image "splash.png")))
+(sit-for 3)
+#+END_SRC
+
 * current-active-maps
 
 #+BEGIN_SRC elisp
@@ -5354,6 +5361,17 @@
   :link '(info-link "(magit)Status Buffer")
   :group 'magit-modes)
 #+END_SRC
+
+* defimage
+
+#+BEGIN_SRC elisp
+(defimage my-splash-image
+  ((:type svg :file "splash.svg")
+   (:type png :file "splash.png")))
+#+END_SRC
+
+#+RESULTS:
+: my-splash-image
 
 * define-advice
 :PROPERTIES:
@@ -7309,6 +7327,16 @@
 #+RESULTS:
 : #<buffer init.el>
 
+* find-image
+
+#+BEGIN_SRC elisp
+(find-image '((:type svg :file "splash.svg")
+              (:type png :file "splash.png")))
+#+END_SRC
+
+#+RESULTS:
+: (image :type svg :file "/usr/local/share/emacs/26.2/etc/images/splash.svg")
+
 * find-lisp-object-file-name
 
 #+BEGIN_SRC elisp
@@ -8147,6 +8175,19 @@
 
 #+RESULTS:
 : ("\342\234\223" "✓")
+
+* insert-image
+
+#+BEGIN_SRC elisp :eval no
+(insert-image (create-image "splash.png"))
+#+END_SRC
+
+* insert-image-file
+
+#+BEGIN_SRC elisp :eval no
+(insert-image-file
+ (expand-file-name "splash.png" (car image-load-path)))
+#+END_SRC
 
 * integerp
 
