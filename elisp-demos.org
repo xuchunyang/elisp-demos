@@ -11189,6 +11189,26 @@ the second item can be anything such as %s"
 #+RESULTS:
 : t
 
+* recursive-edit
+
+#+BEGIN_SRC elisp
+(defun stop-watch ()
+  "Start a stop watch, type \\[exit-recursive-edit] to stop it."
+  (interactive)
+  (let ((t1 (current-time)))
+    (message
+     "%s"
+     (substitute-command-keys
+      "Type \\[exit-recursive-edit] to exit the stop watch"))
+    (recursive-edit)
+    (message
+     "%f seconds passed"
+     (float-time (time-subtract (current-time) t1)))))
+#+END_SRC
+
+#+RESULTS:
+: stop-watch
+
 * regexp-opt
 
 #+BEGIN_SRC elisp
