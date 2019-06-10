@@ -9733,6 +9733,15 @@ Process Date finished
 #+RESULTS:
 : (nil t)
 
+#+BEGIN_SRC elisp
+;; This is strange
+(list (multibyte-string-p "hello")
+      (multibyte-string-p (symbol-name 'hello)))
+#+END_SRC
+
+#+RESULTS:
+: (nil t)
+
 * narrow-to-region
 
 #+BEGIN_SRC elisp
