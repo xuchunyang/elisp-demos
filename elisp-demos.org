@@ -14519,6 +14519,18 @@ the second item can be anything such as %s"
 : (("age" "3")
 :  ("name" "tom"))
 
+#+BEGIN_SRC elisp
+(pcase (url-path-and-query
+        (url-generic-parse-url
+         "https://www.ldoceonline.com/autocomplete/english/?q=grea&contentType=application%2Fjson%3B+charset%3Dutf-8"))
+  (`(,_path . ,query)
+   (url-parse-query-string query)))
+#+END_SRC
+
+#+RESULTS:
+: (("contentType" "application/json;+charset=utf-8")
+:  ("q" "grea"))
+
 * url-path-and-query
 
 #+BEGIN_SRC elisp
