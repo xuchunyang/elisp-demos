@@ -5607,8 +5607,16 @@
 * directory-files
 
 #+BEGIN_SRC elisp :results silent
-(directory-files "/bin/")
+(directory-files "/bin/"))
 #+END_SRC
+
+#+BEGIN_SRC elisp
+;; MATCH is to filter the basename (not the full path)
+(directory-files user-emacs-directory 'full (rx ".el" eos))
+#+END_SRC
+
+#+RESULTS:
+: ("/Users/xcy/.emacs.d/custom.el" "/Users/xcy/.emacs.d/early-init.el" "/Users/xcy/.emacs.d/init.el" "/Users/xcy/.emacs.d/package-quickstart.el" "/Users/xcy/.emacs.d/xcy.el")
 
 * directory-files-and-attributes
 
