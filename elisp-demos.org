@@ -14503,6 +14503,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "hello%20world"
 
+* url-http-user-agent-string
+
+#+BEGIN_SRC elisp
+(url-http-user-agent-string)
+#+END_SRC
+
+#+RESULTS:
+: "User-Agent: URL/Emacs Emacs/26.2 (nil; x86_64-apple-darwin18.5.0)\n"
+
 * url-insert-file-contents
 
 #+BEGIN_SRC elisp
