@@ -13248,6 +13248,26 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (0 1 2 3 4 5 6 7 8 9)
 
+* stream-of-directory-files
+
+#+BEGIN_SRC elisp
+;; How many Emacs Lisp files do I have in ~/.emacs.d?
+(seq-length
+ (stream-of-directory-files
+  user-emacs-directory nil nil
+  (lambda (dir)
+    (let ((basename (file-name-nondirectory dir)))
+      (not (or (member basename '(".git" "var" "etc" ".cask" "el-get"))
+               ;; elpa-26.1, elpa-26.2
+               (string-prefix-p "elpa" basename)))))
+  nil
+  (lambda (file)
+    (equal "el" (file-name-extension file)))))
+#+END_SRC
+
+#+RESULTS:
+: 80
+
 * stream-pop
 
 #+BEGIN_SRC elisp
