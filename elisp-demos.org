@@ -5024,6 +5024,15 @@
 #+RESULTS:
 : nil
 
+* convert-standard-filename
+
+#+BEGIN_SRC elisp
+(convert-standard-filename "etc/")
+#+END_SRC
+
+#+RESULTS:
+: "etc/"
+
 * copy-alist
 
 #+BEGIN_SRC elisp
