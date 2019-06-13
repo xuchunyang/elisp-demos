@@ -4415,6 +4415,19 @@
 #+RESULTS:
 : (2 1)
 
+* cl-pushnew
+
+#+BEGIN_SRC elisp
+(let ((l (list 1 2 3)))
+  (cl-pushnew 0 l :test #'=)
+  (cl-pushnew 2 l :test #'=)
+  (cl-pushnew 4 l :test #'=)
+  l)
+#+END_SRC
+
+#+RESULTS:
+: (4 0 1 2 3)
+
 * cl-random
 
 #+BEGIN_SRC elisp
