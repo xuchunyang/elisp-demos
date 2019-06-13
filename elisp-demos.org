@@ -10340,6 +10340,19 @@ the second item can be anything such as %s"
   (_ :anything-else))
 #+END_SRC
 
+#+BEGIN_SRC elisp
+;; The `rx' pattern
+(pcase "pages.zh/linux/apt-get.md"
+  ((rx "pages."
+       (let lang (1+ anything)) "/"
+       (let platform (1+ anything)) "/"
+       (let command (1+ anything)) ".md")
+   (list command platform lang)))
+#+END_SRC
+
+#+RESULTS:
+: ("apt-get" "linux" "zh")
+
 * pcase-defmacro
 :PROPERTIES:
 :added:    25.1
