@@ -7575,6 +7575,23 @@
 #+RESULTS:
 : "1 + 2 = 2 + 1"
 
+* format-spec-make
+
+#+BEGIN_SRC elisp
+(format-spec-make ?a 1 ?b 2)
+#+END_SRC
+
+#+RESULTS:
+: ((97 . 1)
+:  (98 . 2))
+
+#+BEGIN_SRC elisp
+(format-spec "%a + %b = %b + %a" (format-spec-make ?a 1 ?b 2 ?s 3))
+#+END_SRC
+
+#+RESULTS:
+: "1 + 2 = 2 + 1"
+
 * format-time-string
 :PROPERTIES:
 :changes:  26.1 %q is supported.
