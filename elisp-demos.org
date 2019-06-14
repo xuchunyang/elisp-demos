@@ -8511,12 +8511,9 @@
 
 * kill-emacs
 
-#+BEGIN_SRC elisp
-;; (kill-emacs 0)
+#+BEGIN_SRC elisp :eval no
+(kill-emacs 0)
 #+END_SRC
-
-#+RESULTS:
-: nil
 
 * kill-new
 
