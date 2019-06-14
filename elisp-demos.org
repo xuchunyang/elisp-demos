@@ -14077,6 +14077,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : t
 
+* system-name
+
+#+BEGIN_SRC elisp
+(system-name)
+#+END_SRC
+
+#+RESULTS:
+: "Chunyangs-MacBook-Air.local"
+
 * tan
 
 #+BEGIN_SRC elisp
@@ -14756,6 +14765,34 @@ the second item can be anything such as %s"
 #+BEGIN_SRC elisp
 (user-error "It's all your fault, not mime")
 #+END_SRC
+
+* user-full-name
+
+#+BEGIN_SRC elisp
+(let ((user-full-name "Hello Kitty"))
+  (user-full-name))
+#+END_SRC
+
+#+RESULTS:
+: "Hello Kitty"
+
+* user-login-name
+
+#+BEGIN_SRC elisp
+(user-login-name)
+#+END_SRC
+
+#+RESULTS:
+: "xcy"
+
+* user-real-login-name
+
+#+BEGIN_SRC elisp
+(user-real-login-name)
+#+END_SRC
+
+#+RESULTS:
+: "xcy"
 
 * vconcat
 
