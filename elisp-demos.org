@@ -6950,6 +6950,15 @@
 #+RESULTS:
 : t
 
+* file-expand-wildcards
+
+#+BEGIN_SRC elisp
+(file-expand-wildcards "*.el")
+#+END_SRC
+
+#+RESULTS:
+: ("elisp-demos-tests.el" "elisp-demos.el")
+
 * file-in-directory-p
 
 #+BEGIN_SRC elisp
