@@ -5037,6 +5037,15 @@
 #+RESULTS:
 : nil
 
+* controlling-tty-p
+
+#+BEGIN_SRC elisp
+(list window-system (controlling-tty-p))
+#+END_SRC
+
+#+RESULTS:
+: (mac nil)
+
 * convert-standard-filename
 
 #+BEGIN_SRC elisp
