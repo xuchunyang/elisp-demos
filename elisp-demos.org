@@ -14686,6 +14686,13 @@ the second item can be anything such as %s"
 * url-retrieve-synchronously
 
 #+BEGIN_SRC elisp
+(url-retrieve-synchronously "http://example.com/")
+#+END_SRC
+
+#+RESULTS:
+: #<buffer  *http example.com:80*-771275>
+
+#+BEGIN_SRC elisp
 (with-current-buffer (url-retrieve-synchronously "https://api.github.com/status")
   (goto-char url-http-end-of-headers)
   (json-read))
