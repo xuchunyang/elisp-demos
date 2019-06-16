@@ -14873,7 +14873,7 @@ the second item can be anything such as %s"
 : 123
 
 #+BEGIN_SRC elisp
-(when nil 123
+(when nil 123)
 #+END_SRC
 
 #+RESULTS:
