@@ -9887,6 +9887,22 @@ Process Date finished
 #+RESULTS:
 : 2
 
+* next-property-change
+
+#+BEGIN_SRC elisp
+(next-property-change 0 "hello")
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+#+BEGIN_SRC elisp
+(next-property-change 0 (concat "hello" (propertize "world" 'world t)))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
 * nlistp
 
 #+BEGIN_SRC elisp
@@ -14109,6 +14125,34 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : t
+
+* text-property-any
+
+#+BEGIN_SRC elisp
+(let ((s (propertize
+          (concat (propertize "alice" 'sender t)
+                  (propertize " => " 'separator t)
+                  (propertize "bob" 'receiver t))
+          'message t)))
+  (text-property-any 0 (length s) 'separator t s))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
+* text-property-not-all
+
+#+BEGIN_SRC elisp
+(let ((s (propertize
+          (concat (propertize "alice" 'sender t)
+                  (propertize " => " 'separator t)
+                  (propertize "bob" 'receiver t))
+          'message t)))
+  (text-property-not-all 0 (length s) 'sender t s))
+#+END_SRC
+
+#+RESULTS:
+: 5
 
 * text-property-search-backward
 :PROPERTIES:
