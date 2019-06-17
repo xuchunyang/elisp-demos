@@ -1,28 +1,5 @@
 #+PROPERTY: header-args:elisp :results pp
 
-* !cdr
-
-#+BEGIN_SRC elisp
-(let ((l '(1 2 3)))
-  (!cdr l)
-  l)
-#+END_SRC
-
-#+RESULTS:
-: (2 3)
-
-* !cons
-
-#+BEGIN_SRC elisp
-(let (l)
-  (!cons 1 l)
-  (!cons 2 l)
-  l)
-#+END_SRC
-
-#+RESULTS:
-: (2 1)
-
 * %
 
 #+BEGIN_SRC elisp
