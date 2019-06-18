@@ -8694,6 +8694,12 @@
 #+RESULTS:
 : (1 2 3)
 
+* list-system-processes
+
+#+BEGIN_SRC elisp :results silent
+(list-system-processes)
+#+END_SRC
+
 * listp
 
 #+BEGIN_SRC elisp
@@ -10689,6 +10695,28 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : "\n\"hello\"\n"
+
+* process-attributes
+
+#+BEGIN_SRC elisp
+(process-attributes 1)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+((etime 8 3971 635846 0)
+ (start 23808 53217 185321 0)
+ (nice . 0)
+ (tpgid . 0)
+ (pgrp . 1)
+ (ppid . 0)
+ (state . "R")
+ (comm . "launchd")
+ (group . "wheel")
+ (egid . 0)
+ (user . "root")
+ (euid . 0))
+#+END_EXAMPLE
 
 * process-lines
 
