@@ -2615,6 +2615,15 @@
 #+RESULTS:
 : "hello"
 
+* auth-source-forget-all-cached
+
+#+BEGIN_SRC elisp
+(auth-source-forget-all-cached)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * auth-source-search
 
 #+BEGIN_SRC elisp
