@@ -12983,6 +12983,36 @@ the second item can be anything such as %s"
   map)
 #+END_SRC
 
+* set-transient-map
+
+#+BEGIN_SRC elisp :eval no
+(set-transient-map
+ (let ((map (make-sparse-keymap)))
+   (define-key map "a" (lambda () (interactive) (message "=> a")))
+   (define-key map "b" (lambda () (interactive) (message "=> b")))
+   map))
+#+END_SRC
+
+#+BEGIN_SRC elisp :lexical t
+(defun counter ()
+  (interactive)
+  (let* ((i 0)
+         (msg (lambda () (message "Use <up> and <down> to adjust: i = %d" i))))
+    (funcall msg)
+    (set-transient-map
+     (let ((map (make-sparse-keymap)))
+       (define-key map [up] (lambda () (interactive) (cl-incf i) (funcall msg)))
+       (define-key map [down] (lambda () (interactive) (cl-decf i) (funcall msg)))
+       map)
+     (lambda ()
+       (member (this-command-keys-vector) '([up] [down])))
+     (lambda ()
+       (message "Exiting: i = %d" i)))))
+#+END_SRC
+
+#+RESULTS:
+: counter
+
 * setcar
 
 #+BEGIN_SRC elisp
