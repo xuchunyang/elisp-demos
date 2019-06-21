@@ -14659,6 +14659,44 @@ the second item can be anything such as %s"
 #+RESULTS:
 : ("😃" "😄" "😅" "😆" "😇" "😈" "😊" "😍" "😎" "🤭" "🥰")
 
+* ucs-normalize-NFC-string
+
+#+BEGIN_SRC elisp
+;; (string ?e 769) -> (string ?é)
+(ucs-normalize-NFC-string (string ?e 769))
+#+END_SRC
+
+#+RESULTS:
+: "é"
+
+* ucs-normalize-NFD-string
+
+#+BEGIN_SRC elisp
+;; (string ?c ?a ?f ?é) -> (string ?c ?a ?f ?e 769)
+(ucs-normalize-NFD-string "café")
+#+END_SRC
+
+#+RESULTS:
+: "café"
+
+* ucs-normalize-NFKC-string
+
+#+BEGIN_SRC elisp
+(ucs-normalize-NFKC-string "ﬃ")
+#+END_SRC
+
+#+RESULTS:
+: "ffi"
+
+* ucs-normalize-NFKD-string
+
+#+BEGIN_SRC elisp
+(ucs-normalize-NFKD-string "⁵")
+#+END_SRC
+
+#+RESULTS:
+: "5"
+
 * unibyte-string
 
 #+BEGIN_SRC elisp
