@@ -11327,6 +11327,24 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "123456"
 
+* read-quoted-char
+
+#+BEGIN_SRC elisp
+(read-quoted-char "What character (octal)")
+#+END_SRC
+
+#+RESULTS:
+: 120
+
+#+BEGIN_SRC elisp
+(let ((read-quoted-char-radix 16))
+  ;; 😃 #x1f603
+  (string (read-quoted-char "What character (hexadecimal)")))
+#+END_SRC
+
+#+RESULTS:
+: "😃"
+
 * read-regexp
 
 #+BEGIN_SRC elisp
