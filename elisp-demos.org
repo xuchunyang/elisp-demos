@@ -11202,6 +11202,22 @@ the second item can be anything such as %s"
 : ((setq x "hello")
 :  . 16)
 
+* read-kbd-macro
+
+#+BEGIN_SRC elisp
+(read-kbd-macro "C-x C-f")
+#+END_SRC
+
+#+RESULTS:
+: ""
+
+#+BEGIN_SRC elisp
+(read-kbd-macro "C-x C-f" 'need-vector)
+#+END_SRC
+
+#+RESULTS:
+: [24 6]
+
 * read-minibuffer
 
 #+BEGIN_SRC elisp
