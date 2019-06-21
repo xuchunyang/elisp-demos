@@ -7352,6 +7352,15 @@
 #+RESULTS:
 : (image :type svg :file "/usr/local/share/emacs/26.2/etc/images/splash.svg")
 
+* find-library-name
+
+#+BEGIN_SRC elisp
+(find-library-name "seq")
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/src/emacs-mac/lisp/emacs-lisp/seq.el"
+
 * find-lisp-object-file-name
 
 #+BEGIN_SRC elisp
@@ -8733,18 +8742,76 @@
 #+RESULTS:
 : t
 
-* lm-header
+* lm-authors
 
 #+BEGIN_SRC elisp
-(with-temp-buffer
-  (insert-file-contents
-   (replace-regexp-in-string
-    "\\.elc$" ".el" (locate-library "elisp-demos")))
-  (lm-header "Homepage"))
+(lm-authors (find-library-name "magit"))
 #+END_SRC
 
 #+RESULTS:
-: "https://github.com/xuchunyang/elisp-demos"
+: (("Marius Vollmer" . "marius.vollmer@gmail.com"))
+
+* lm-commentary
+
+#+BEGIN_SRC elisp :results drawer
+(lm-commentary (find-library-name "cl-lib"))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+;;; Commentary:
+
+;; These are extensions to Emacs Lisp that provide a degree of
+;; Common Lisp compatibility, beyond what is already built-in
+;; in Emacs Lisp.
+;;
+;; This package was written by Dave Gillespie; it is a complete
+;; rewrite of Cesar Quiroz's original cl.el package of December 1986.
+;;
+;; Bug reports, comments, and suggestions are welcome!
+
+;; This file contains the portions of the Common Lisp extensions
+;; package which should always be present.
+
+
+:END:
+
+* lm-header
+
+#+BEGIN_SRC elisp
+(lm-with-file (find-library-name "elisp-demos")
+  (lm-header "package-requires"))
+#+END_SRC
+
+#+RESULTS:
+: "((emacs \"24.4\"))"
+
+* lm-homepage
+
+#+BEGIN_SRC elisp
+(lm-homepage (find-library-name "magit"))
+#+END_SRC
+
+#+RESULTS:
+: "https://github.com/magit/magit"
+
+* lm-maintainer
+
+#+BEGIN_SRC elisp
+(lm-maintainer (find-library-name "magit"))
+#+END_SRC
+
+#+RESULTS:
+: ("Jonas Bernoulli" . "jonas@bernoul.li")
+
+* lm-summary
+
+#+BEGIN_SRC elisp
+(lm-summary (find-library-name "cl-lib"))
+#+END_SRC
+
+#+RESULTS:
+: "Common Lisp extensions for Emacs"
 
 * load-average
 
