@@ -15233,6 +15233,115 @@ the second item can be anything such as %s"
 #+RESULTS:
 : copy
 
+* xml-get-children
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert
+   "<info>"
+   "<user id=\"1\"><name>Bob</name></user>"
+   "<user id=\"2\"><name>Joe</name></user>"
+   "</info>")
+  (let ((x (xml-parse-region)))
+    (xml-get-children (assq 'info x) 'user)))
+#+END_SRC
+
+#+RESULTS:
+: ((user
+:   ((id . "1"))
+:   (name nil "Bob"))
+:  (user
+:   ((id . "2"))
+:   (name nil "Joe")))
+
+#+BEGIN_SRC elisp
+(xml-get-children
+ '(info
+   nil
+   (user nil "Bob")
+   (user nil "Joe"))
+ 'user)
+#+END_SRC
+
+#+RESULTS:
+: ((user nil "Bob")
+:  (user nil "Joe"))
+
+* xml-node-attributes
+
+#+BEGIN_SRC elisp
+(xml-node-attributes
+ '(user
+   ((id . "1"))
+   (name nil "Bob")))
+#+END_SRC
+
+#+RESULTS:
+: ((id . "1"))
+
+* xml-node-children
+
+#+BEGIN_SRC elisp
+(xml-node-children
+ '(user
+   ((id . "1"))
+   (name nil "Bob")))
+#+END_SRC
+
+#+RESULTS:
+: ((name nil "Bob"))
+
+* xml-node-name
+
+#+BEGIN_SRC elisp
+(xml-node-name
+ '(user
+   ((id . "1"))
+   (name nil "Bob")))
+#+END_SRC
+
+#+RESULTS:
+: user
+
+* xml-parse-file
+
+#+BEGIN_SRC elisp
+(let ((file (make-temp-file "elisp-demos-")))
+  (write-region "<note>hello world!</note>" nil file)
+  (unwind-protect
+      (xml-parse-file file)
+    (delete-file file)))
+#+END_SRC
+
+#+RESULTS:
+: ((note nil "hello world!"))
+
+* xml-parse-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "\
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+</note>")
+  (xml-parse-region))
+#+END_SRC
+
+#+RESULTS:
+: ((note nil "\n  "
+:        (to nil "Tove")
+:        "\n  "
+:        (from nil "Jani")
+:        "\n  "
+:        (heading nil "Reminder")
+:        "\n  "
+:        (body nil "Don't forget me this weekend!")
+:        "\n"))
+
 * xmlgen
 
 #+BEGIN_SRC elisp :results drawer
