@@ -14373,6 +14373,18 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 39
 
+* thread-join
+
+#+BEGIN_SRC elisp
+(thread-join
+ (make-thread
+  (lambda ()
+    (sit-for 3))))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * thread-last
 :PROPERTIES:
 :added:    25.1
