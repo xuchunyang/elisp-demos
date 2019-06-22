@@ -5189,6 +5189,15 @@
 #+RESULTS:
 : "Hello World"
 
+* current-thread
+
+#+BEGIN_SRC elisp
+(current-thread)
+#+END_SRC
+
+#+RESULTS:
+: #<thread 0x10061fef8>
+
 * current-time
 
 #+BEGIN_SRC elisp
@@ -14400,6 +14409,15 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : 39
+
+* threadp
+
+#+BEGIN_SRC elisp
+(threadp (current-thread))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * thunk-delay
 
