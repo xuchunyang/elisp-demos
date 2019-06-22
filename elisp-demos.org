@@ -9025,6 +9025,15 @@
 #+RESULTS:
 : [t t t t t]
 
+* make-comint
+
+#+BEGIN_SRC elisp
+(make-comint "Janet" "janet" nil "-s")
+#+END_SRC
+
+#+RESULTS:
+: #<buffer *Janet*>
+
 * make-comint-in-buffer
 
 #+BEGIN_SRC elisp
