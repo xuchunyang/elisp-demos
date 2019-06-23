@@ -5551,6 +5551,18 @@
 #+RESULTS:
 : ("#<overlay from 1 to 1 in  *temp*>" nil "#<overlay in no buffer>")
 
+* delete-process
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(delete-process "*shell*")
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * delq
 
 #+BEGIN_SRC elisp
@@ -7775,6 +7787,18 @@
 #+RESULTS:
 : #<buffer  *foo*>
 
+* get-buffer-process
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(get-buffer-process "*shell*")
+#+END_SRC
+
+#+RESULTS:
+: #<process shell>
+
 * get-byte
 
 #+BEGIN_SRC elisp
@@ -7839,6 +7863,18 @@
 
 #+RESULTS:
 : 103.553696
+
+* get-process
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(get-process "shell")
+#+END_SRC
+
+#+RESULTS:
+: #<process shell>
 
 * getenv
 
@@ -8288,6 +8324,15 @@
 
 #+RESULTS:
 : (nil intern-soft)
+
+* interrupt-process
+
+#+BEGIN_SRC elisp
+(interrupt-process (start-process "sleep" nil "sleep" "100"))
+#+END_SRC
+
+#+RESULTS:
+: #<process sleep>
 
 * isnan
 
@@ -10819,6 +10864,91 @@ the second item can be anything such as %s"
  (euid . 0))
 #+END_EXAMPLE
 
+* process-buffer
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-buffer (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: #<buffer *shell*>
+
+* process-coding-system
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-coding-system (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: (utf-8-unix . utf-8-unix)
+
+* process-command
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-command (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: ("/bin/zsh" "-i")
+
+* process-contact
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-contact (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* process-exit-status
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-exit-status (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: 0
+
+* process-get
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-put (get-process "shell") 'bar 456)
+(process-get (get-process "shell") 'bar)
+#+END_SRC
+
+#+RESULTS:
+: 456
+
+* process-id
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-id (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: 44050
+
 * process-lines
 
 #+BEGIN_SRC elisp
@@ -10827,6 +10957,191 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : ("1" "2" "3")
+
+* process-list
+
+#+BEGIN_SRC elisp
+(process-list)
+#+END_SRC
+
+#+RESULTS:
+: (#<process shell> #<process atomic-chrome-httpd> #<process websocket server on port 64292> #<process server>)
+
+* process-live-p
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-live-p (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: (run open listen connect stop)
+
+* process-mark
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-mark (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: #<marker at 21 in *shell*>
+
+* process-name
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-name (get-buffer-process "*shell*"))
+#+END_SRC
+
+#+RESULTS:
+: "shell"
+
+* process-plist
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-put (get-process "shell") 'foo 123)
+(process-put (get-process "shell") 'bar 456)
+
+(process-plist (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: (foo 123 bar 456)
+
+* process-put
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-put (get-process "shell") 'foo 123)
+(process-get (get-process "shell") 'foo)
+#+END_SRC
+
+#+RESULTS:
+: 123
+
+* process-query-on-exit-flag
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-query-on-exit-flag (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* process-running-child-p
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-running-child-p (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-send-string (get-process "shell") "bash\n")
+;; wait for bash
+(sit-for 1)
+
+(process-running-child-p (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: 44214
+
+* process-send-eof
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-send-eof (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: #<process shell>
+
+* process-send-region
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(with-temp-buffer
+  (insert "date\n")
+  (process-send-region (get-process "shell") (point-min) (point-max)))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* process-send-string
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-send-string (get-process "shell") "date\n")
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* process-status
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-status "shell")
+#+END_SRC
+
+#+RESULTS:
+: run
+
+* process-tty-name
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-tty-name (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: "/dev/ttys001"
+
+* process-type
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(process-type (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: real
 
 * prog1
 
@@ -13111,6 +13426,32 @@ the second item can be anything such as %s"
   map)
 #+END_SRC
 
+* set-process-plist
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(set-process-plist (get-process "shell") '(foo 123 bar 456))
+
+(process-plist (get-process "shell"))
+#+END_SRC
+
+#+RESULTS:
+: (foo 123 bar 456)
+
+* set-process-query-on-exit-flag
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(set-process-query-on-exit-flag (get-process "shell") nil)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * set-transient-map
 
 #+BEGIN_SRC elisp :eval no
@@ -13228,6 +13569,15 @@ the second item can be anything such as %s"
 
 #+BEGIN_SRC elisp
 (signal 'wrong-number-of-arguments '(x y))
+#+END_SRC
+
+* signal-process
+
+#+BEGIN_SRC elisp
+;; Start the shell process if not already
+(shell)
+
+(signal-process (get-process "shell") 'SIGHUP)
 #+END_SRC
 
 * sin
