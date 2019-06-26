@@ -5360,6 +5360,25 @@
   :type 'string)
 #+END_SRC
 
+* defface
+
+#+BEGIN_SRC elisp :eval no
+(defface highlight
+  '((((class color) (min-colors 88) (background light))
+     :background "darkseagreen2")
+    (((class color) (min-colors 88) (background dark))
+     :background "darkolivegreen")
+    (((class color) (min-colors 16) (background light))
+     :background "darkseagreen2")
+    (((class color) (min-colors 16) (background dark))
+     :background "darkolivegreen")
+    (((class color) (min-colors 8))
+     :background "green" :foreground "black")
+    (t :inverse-video t))
+  "Basic face for highlighting."
+  :group 'basic-faces)
+#+END_SRC
+
 * defgroup
 
 #+BEGIN_SRC elisp :eval no
@@ -5665,6 +5684,159 @@
 
 #+RESULTS:
 : nil
+
+* display-backing-store
+
+#+BEGIN_SRC elisp
+(display-backing-store)
+#+END_SRC
+
+#+RESULTS:
+: not-useful
+
+* display-color-cells
+
+#+BEGIN_SRC elisp
+(display-color-cells)
+#+END_SRC
+
+#+RESULTS:
+: 16777216
+
+* display-color-p
+
+#+BEGIN_SRC elisp
+(display-color-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* display-graphic-p
+
+#+BEGIN_SRC elisp
+(display-graphic-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* display-grayscale-p
+
+#+BEGIN_SRC elisp
+(display-grayscale-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* display-images-p
+
+#+BEGIN_SRC elisp
+(display-images-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* display-mm-height
+
+#+BEGIN_SRC elisp
+(display-mm-height)
+#+END_SRC
+
+#+RESULTS:
+: 180
+
+* display-mm-width
+
+#+BEGIN_SRC elisp
+(display-mm-width)
+#+END_SRC
+
+#+RESULTS:
+: 290
+
+* display-mouse-p
+
+#+BEGIN_SRC elisp
+(display-mouse-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* display-pixel-height
+
+#+BEGIN_SRC elisp
+(display-pixel-height)
+#+END_SRC
+
+#+RESULTS:
+: 900
+
+* display-pixel-width
+
+#+BEGIN_SRC elisp
+(display-pixel-width)
+#+END_SRC
+
+#+RESULTS:
+: 1440
+
+* display-planes
+
+#+BEGIN_SRC elisp
+(display-planes)
+#+END_SRC
+
+#+RESULTS:
+: 24
+
+* display-popup-menus-p
+
+#+BEGIN_SRC elisp
+(display-popup-menus-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* display-save-under
+
+#+BEGIN_SRC elisp
+(display-save-under)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* display-screens
+
+#+BEGIN_SRC elisp
+(display-screens)
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* display-selections-p
+
+#+BEGIN_SRC elisp
+(display-selections-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* display-visual-class
+
+#+BEGIN_SRC elisp
+(display-visual-class)
+#+END_SRC
+
+#+RESULTS:
+: true-color
 
 * documentation
 
@@ -6877,6 +7049,97 @@
 #+RESULTS:
 : "Hello world"
 
+* face-all-attributes
+
+#+BEGIN_SRC elisp
+(face-all-attributes 'bold (selected-frame))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+((:family . unspecified)
+ (:foundry . unspecified)
+ (:width . unspecified)
+ (:height . unspecified)
+ (:weight . bold)
+ (:slant . unspecified)
+ (:underline . unspecified)
+ (:overline . unspecified)
+ (:strike-through . unspecified)
+ (:box . unspecified)
+ (:inverse-video . unspecified)
+ (:foreground . unspecified)
+ (:background . unspecified)
+ (:stipple . unspecified)
+ (:inherit . unspecified))
+#+END_EXAMPLE
+
+* face-attribute
+
+#+BEGIN_SRC elisp
+(face-attribute 'bold :weight)
+#+END_SRC
+
+#+RESULTS:
+: bold
+
+* face-attribute-relative-p
+
+#+BEGIN_SRC elisp
+(face-attribute-relative-p :height 2.0)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* face-differs-from-default-p
+
+#+BEGIN_SRC elisp
+(face-differs-from-default-p 'region)
+#+END_SRC
+
+#+RESULTS:
+: :background
+
+* face-documentation
+
+#+BEGIN_SRC elisp
+(face-documentation 'region)
+#+END_SRC
+
+#+RESULTS:
+: "Basic face for highlighting the region."
+
+* face-equal
+
+#+BEGIN_SRC elisp
+(face-equal 'error 'warning)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* face-id
+
+#+BEGIN_SRC elisp
+(face-id 'region)
+#+END_SRC
+
+#+RESULTS:
+: 12
+
+* face-list
+
+#+BEGIN_SRC elisp :results silent
+(face-list)
+#+END_SRC
+
+* facep
+
+#+BEGIN_SRC elisp :results silent
+(facep 'error)
+#+END_SRC
+
 * fboundp
 
 #+BEGIN_SRC elisp
@@ -7499,6 +7762,15 @@
 
 #+RESULTS:
 : "A"
+
+* font-at
+
+#+BEGIN_SRC elisp
+(font-at 1)
+#+END_SRC
+
+#+RESULTS:
+: #<font-object "-*-Source Code Pro-normal-italic-normal-*-13-*-*-*-m-0-iso10646-1">
 
 * font-family-list
 
@@ -9843,6 +10115,15 @@ Process Date finished
 
 #+RESULTS:
 : (1.2 1.3)
+
+* merge-face-attribute
+
+#+BEGIN_SRC elisp
+(merge-face-attribute :height 2.0 3.0)
+#+END_SRC
+
+#+RESULTS:
+: 6.0
 
 * message
 
@@ -15777,6 +16058,24 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : copy
+
+* x-server-vendor
+
+#+BEGIN_SRC elisp
+(x-server-vendor)
+#+END_SRC
+
+#+RESULTS:
+: "Apple Inc."
+
+* x-server-version
+
+#+BEGIN_SRC elisp
+(x-server-version)
+#+END_SRC
+
+#+RESULTS:
+: (10 14 5)
 
 * xml-get-children
 
