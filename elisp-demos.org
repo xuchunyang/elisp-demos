@@ -8493,6 +8493,28 @@
 #+RESULTS:
 : t
 
+* imap-open
+
+#+BEGIN_SRC elisp
+(let* ((server "imap.fastmail.com")
+       (user "mail@xuchunyang.me")
+       (pass (when-let ((auth (car (auth-source-search
+                                    :host server
+                                    :user user
+                                    :max 1)))
+                        (pass (plist-get auth :secret)))
+               (funcall pass))))
+  (with-current-buffer (imap-open server nil 'tls)
+    (imap-authenticate user pass)
+    (imap-mailbox-select "INBOX" 'read-only)
+    (prog1 (message "You have %d unread emails in Inbox"
+                    (length (imap-search "UNSEEN")))
+      (imap-close))))
+#+END_SRC
+
+#+RESULTS:
+: "You have 3 unread emails in Inbox"
+
 * indirect-function
 
 #+BEGIN_SRC elisp
