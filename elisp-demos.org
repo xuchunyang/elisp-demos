@@ -5999,6 +5999,20 @@
 :  (li nil "Python")
 :  (li nil "PHP"))
 
+* dom-child-by-tag
+
+#+BEGIN_SRC elisp
+(dom-child-by-tag
+ '(ol nil
+      (li nil "Perl")
+      (li nil "Python")
+      (li nil "PHP"))
+ 'li)
+#+END_SRC
+
+#+RESULTS:
+: (li nil "Perl")
+
 * dom-children
 
 #+BEGIN_SRC elisp
