@@ -5352,6 +5352,9 @@
 #+END_SRC
 
 * defcustom
+:PROPERTIES:
+:changes:  27.1 :local is added.
+:END:
 
 #+BEGIN_SRC elisp :eval no
 (defcustom magit-git-executable "git"
