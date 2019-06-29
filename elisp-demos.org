@@ -11570,6 +11570,19 @@ the second item can be anything such as %s"
 #+RESULTS:
 : transitive
 
+* put-text-property
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "x1")
+  (put-text-property 2 3 'display '(raise 0.5))
+  (message "%s" (buffer-string))
+  (sit-for 3))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * puthash
 
 #+BEGIN_SRC elisp
