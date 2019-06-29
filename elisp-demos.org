@@ -11919,6 +11919,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 121
 
+* read-color
+
+#+BEGIN_SRC elisp
+(read-color)
+#+END_SRC
+
+#+RESULTS:
+: "green"
+
 * read-from-minibuffer
 
 #+BEGIN_SRC elisp
