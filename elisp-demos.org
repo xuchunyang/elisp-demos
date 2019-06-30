@@ -14538,6 +14538,7 @@ the second item can be anything such as %s"
 * string-trim
 :PROPERTIES:
 :added:    24.4
+:changes:  26.1 The optional TRIM-LEFT and TRIM-RIGHT arguments are added.
 :END:
 
 #+BEGIN_SRC elisp
@@ -14550,6 +14551,7 @@ the second item can be anything such as %s"
 * string-trim-left
 :PROPERTIES:
 :added:    24.4
+:changes:  26.1 The optional REGEXP argument is added.
 :END:
 
 #+BEGIN_SRC elisp
@@ -14562,6 +14564,7 @@ the second item can be anything such as %s"
 * string-trim-right
 :PROPERTIES:
 :added:    24.4
+:changes:  26.1 The optional REGEXP argument is added.
 :END:
 
 #+BEGIN_SRC elisp
