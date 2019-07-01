@@ -2275,6 +2275,18 @@
 (add-hook 'lisp-interaction-mode-hook #'prettify-symbols-mode)
 #+END_SRC
 
+* add-text-properties
+
+#+BEGIN_SRC elisp
+(let ((s "hello"))
+  (add-text-properties 0 (length s) '(display "world") s)
+  s)
+#+END_SRC
+
+#+RESULTS:
+: #("hello" 0 5
+:   (display "world"))
+
 * add-to-list
 
 #+BEGIN_SRC elisp
