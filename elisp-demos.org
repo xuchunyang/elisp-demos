@@ -13830,6 +13830,20 @@ the second item can be anything such as %s"
 #+RESULTS:
 : nil
 
+* set-process-sentinel
+
+#+BEGIN_SRC elisp
+(set-process-sentinel
+ (start-process "sleep" nil "sleep" "3")
+ (lambda (process event)
+   (message "Process: %s had the event '%s'" process event)))
+#+END_SRC
+
+#+RESULTS:
+: (lambda
+:   (process event)
+:   (message "Process: %s had the event '%s'" process event))
+
 * set-transient-map
 
 #+BEGIN_SRC elisp :eval no
