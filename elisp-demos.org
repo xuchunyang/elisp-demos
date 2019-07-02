@@ -12572,6 +12572,9 @@ the second item can be anything such as %s"
 :      nil idle 0]
 
 * rx
+:PROPERTIES:
+:changes:  27.1 Add literal.
+:END:
 
 #+BEGIN_SRC elisp
 ;; To match <2018-11-07>
