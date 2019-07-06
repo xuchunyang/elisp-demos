@@ -10854,6 +10854,7 @@ Content-Length: 606
 :added:    24.1
 :changes:  25.1 New UPatterns 'quote', 'app', 'cl-struct', 'eieio', 'seq', 'map'.
 :changes+: 25.1 New vector QPattern.
+:changes+: 26.1 The rx pattern is added.
 :END:
 
 #+BEGIN_SRC elisp :results silent
