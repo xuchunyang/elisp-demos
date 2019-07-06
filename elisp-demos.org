@@ -5651,7 +5651,7 @@
 * directory-files
 
 #+BEGIN_SRC elisp :results silent
-(directory-files "/bin/"))
+(directory-files "/bin/")
 #+END_SRC
 
 #+BEGIN_SRC elisp
