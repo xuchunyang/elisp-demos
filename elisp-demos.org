@@ -3448,6 +3448,9 @@
 : (t nil)
 
 * char-fold-to-regexp
+:PROPERTIES:
+:added:    25.1
+:END:
 
 #+BEGIN_SRC elisp
 (char-fold-to-regexp "(")
