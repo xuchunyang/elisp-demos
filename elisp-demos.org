@@ -9424,6 +9424,9 @@
 :     nil))
 
 * macrop
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (macrop 'when)
