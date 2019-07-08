@@ -15583,6 +15583,9 @@ the second item can be anything such as %s"
 : t
 
 * url-encode-url
+:PROPERTIES:
+:added:    24.3
+:END:
 
 #+BEGIN_SRC elisp
 (url-encode-url "HTTPS://Google.com?q=hello world")
