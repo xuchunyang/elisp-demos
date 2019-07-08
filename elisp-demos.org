@@ -11319,6 +11319,9 @@ the second item can be anything such as %s"
 : 44050
 
 * process-lines
+:PROPERTIES:
+:added:    24.4
+:END:
 
 #+BEGIN_SRC elisp
 (process-lines "seq" "3")
