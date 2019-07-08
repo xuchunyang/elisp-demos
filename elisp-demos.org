@@ -4989,6 +4989,9 @@
 : nil
 
 * condition-case-unless-debug
+:PROPERTIES:
+:added:    24.1
+:END:
 
 #+BEGIN_SRC elisp
 (condition-case-unless-debug nil
