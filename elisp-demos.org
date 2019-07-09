@@ -8808,6 +8808,26 @@
 #+RESULTS:
 : (:name "Jessica")
 
+* json-pretty-print-ordered
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert (json-encode '((c . 3)
+                         (a . 1)
+                         (b . 2))))
+  (json-pretty-print-ordered (point-min) (point-max))
+  (goto-char (point-min))
+  (json-read))
+#+END_SRC
+
+#+RESULTS:
+: ((a . 1)
+:  (b . 2)
+:  (c . 3))
+
 * json-read
 
 #+BEGIN_SRC elisp
