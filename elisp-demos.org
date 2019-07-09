@@ -13717,7 +13717,7 @@ the second item can be anything such as %s"
 :END:
 
 #+BEGIN_SRC elisp
-(seq-set-equal-p '(a b c) '(c b a))
+(seq-set-equal-p "good" "dog")
 #+END_SRC
 
 #+RESULTS:
