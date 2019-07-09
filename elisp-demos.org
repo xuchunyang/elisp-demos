@@ -8808,6 +8808,26 @@
 #+RESULTS:
 : (:name "Jessica")
 
+* json-pretty-print
+:PROPERTIES:
+:changes:  25.1 The ordering of object keys will not be changed.
+:END:
+
+#+BEGIN_SRC elisp :results raw :wrap SRC json
+(with-temp-buffer
+  (insert " {  \"foo\" : 12, \n\n\n \"bar\":    34}")
+  (json-pretty-print (point-min) (point-max))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC json
+{
+  "foo": 12,
+  "bar": 34
+}
+#+END_SRC
+
 * json-pretty-print-ordered
 :PROPERTIES:
 :added:    25.1
