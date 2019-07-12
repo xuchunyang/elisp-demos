@@ -5,7 +5,7 @@
 ;; Author: Xu Chunyang <mail@xuchunyang.me>
 ;; Homepage: https://github.com/xuchunyang/elisp-demos
 ;; Keywords: lisp, docs
-;; Version: 2019.07.05
+;; Version: 2019.07.13
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
