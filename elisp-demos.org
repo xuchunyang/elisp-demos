@@ -7962,6 +7962,24 @@
 #+RESULTS:
 : 0
 
+* frame-list
+
+#+BEGIN_SRC elisp
+(frame-list)
+#+END_SRC
+
+#+RESULTS:
+: (#<frame /Users/xcy/src/elisp-demos/elisp-demos.org 0x1049a21e8>)
+
+* frame-list-z-order
+
+#+BEGIN_SRC elisp
+(frame-list-z-order)
+#+END_SRC
+
+#+RESULTS:
+: (#<frame /Users/xcy/src/elisp-demos/elisp-demos.org 0x1049a21e8>)
+
 * frame-root-window
 
 #+BEGIN_SRC elisp
@@ -8188,6 +8206,15 @@
 
 #+RESULTS:
 : "pnsŕ"
+
+* get-device-terminal
+
+#+BEGIN_SRC elisp
+(get-device-terminal nil)
+#+END_SRC
+
+#+RESULTS:
+: #<terminal 1 on Mac>
 
 * get-file-buffer
 
@@ -10403,6 +10430,15 @@ Process Date finished
 :  ("lo0" .
 :   [127 0 0 1 0]))
 
+* next-frame
+
+#+BEGIN_SRC elisp
+(next-frame)
+#+END_SRC
+
+#+RESULTS:
+: #<frame /Users/xcy/src/elisp-demos/elisp-demos.org 0x1049a21e8>
+
 * next-overlay-change
 
 #+BEGIN_SRC elisp
@@ -11208,6 +11244,15 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : "(lambda\n  (a y)\n  (+ x y))\n"
+
+* previous-frame
+
+#+BEGIN_SRC elisp
+(previous-frame)
+#+END_SRC
+
+#+RESULTS:
+: #<frame /Users/xcy/src/elisp-demos/elisp-demos.org 0x1049a21e8>
 
 * previous-overlay-change
 
@@ -13372,6 +13417,24 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (md5 sha1 sha224 sha256 sha384 sha512)
 
+* select-frame-set-input-focus
+
+#+BEGIN_SRC elisp
+(select-frame-set-input-focus (next-frame))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* selected-frame
+
+#+BEGIN_SRC elisp
+(selected-frame)
+#+END_SRC
+
+#+RESULTS:
+: #<frame /Users/xcy/src/elisp-demos/elisp-demos.org 0x1049a21e8>
+
 * selected-window
 
 #+BEGIN_SRC elisp
@@ -15074,6 +15137,24 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 0.9999999999999999
 
+* terminal-list
+
+#+BEGIN_SRC elisp
+(terminal-list)
+#+END_SRC
+
+#+RESULTS:
+: (#<terminal 1 on Mac>)
+
+* terminal-name
+
+#+BEGIN_SRC elisp
+(terminal-name)
+#+END_SRC
+
+#+RESULTS:
+: "Mac"
+
 * terpri
 
 #+BEGIN_SRC elisp :results output
@@ -15935,6 +16016,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : t
 
+* visible-frame-list
+
+#+BEGIN_SRC elisp
+(visible-frame-list)
+#+END_SRC
+
+#+RESULTS:
+: (#<frame /Users/xcy/src/elisp-demos/elisp-demos.org 0x1049a21e8>)
+
 * when
 
 #+BEGIN_SRC elisp
@@ -16193,6 +16283,15 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : nil
+
+* x-display-list
+
+#+BEGIN_SRC elisp
+(x-display-list)
+#+END_SRC
+
+#+RESULTS:
+: ("Mac")
 
 * x-popup-dialog
 
