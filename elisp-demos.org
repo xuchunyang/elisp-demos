@@ -4872,6 +4872,15 @@
 #+RESULTS:
 : (0 65535 0)
 
+* combine-and-quote-strings
+
+#+BEGIN_SRC elisp
+(combine-and-quote-strings '("-o" "foo bar.txt"))
+#+END_SRC
+
+#+RESULTS:
+: "-o \"foo bar.txt\""
+
 * commandp
 
 #+BEGIN_SRC elisp
@@ -14227,6 +14236,15 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : ("The" "quick" "brown" "fox.")
+
+* split-string-and-unquote
+
+#+BEGIN_SRC elisp
+(split-string-and-unquote "-o \"foo bar.txt\"")
+#+END_SRC
+
+#+RESULTS:
+: ("-o" "foo bar.txt")
 
 * sqrt
 
