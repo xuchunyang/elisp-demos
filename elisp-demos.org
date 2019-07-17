@@ -14097,6 +14097,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 42
 
+* sha1
+
+#+BEGIN_SRC elisp
+(sha1 "hello")
+#+END_SRC
+
+#+RESULTS:
+: "aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d"
+
 * shell-command-to-string
 
 #+BEGIN_SRC elisp
