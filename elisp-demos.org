@@ -16198,6 +16198,16 @@ the second item can be anything such as %s"
 #+RESULTS:
 : nil
 
+* with-eval-after-load
+
+#+BEGIN_SRC elisp
+(with-eval-after-load 'dired
+  (require 'dired-x))
+#+END_SRC
+
+#+RESULTS:
+: dired-x
+
 * with-help-window
 
 #+BEGIN_SRC elisp
