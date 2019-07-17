@@ -14719,6 +14719,15 @@ the second item can be anything such as %s"
 ;; FIXME: I don't understand this function
 #+END_SRC
 
+* string-to-vector
+
+#+BEGIN_SRC elisp
+(string-to-vector "hello")
+#+END_SRC
+
+#+RESULTS:
+: [104 101 108 108 111]
+
 * string-trim
 :PROPERTIES:
 :added:    24.4
