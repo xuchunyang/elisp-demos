@@ -2968,6 +2968,15 @@
 #+RESULTS:
 : [nil t t t]
 
+* booleanp
+
+#+BEGIN_SRC elisp
+(booleanp nil)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * boundp
 
 #+BEGIN_SRC elisp
