@@ -2658,6 +2658,15 @@
 #+RESULTS:
 : ("user2" "pass2")
 
+* autoload
+
+#+BEGIN_SRC elisp
+(autoload #'dired-omit-mode "dired-x")
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * autoloadp
 :PROPERTIES:
 :added:    24.3
