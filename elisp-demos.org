@@ -14032,6 +14032,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : counter
 
+* set-window-margins
+
+#+BEGIN_SRC elisp
+(set-window-margins (selected-window) 40 40)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * setcar
 
 #+BEGIN_SRC elisp
@@ -16177,6 +16186,15 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : t
+
+* window-margins
+
+#+BEGIN_SRC elisp
+(window-margins)
+#+END_SRC
+
+#+RESULTS:
+: (nil)
 
 * window-minibuffer-p
 
