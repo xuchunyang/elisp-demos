@@ -11648,11 +11648,11 @@ the second item can be anything such as %s"
 * prog2
 
 #+BEGIN_SRC elisp
-(progn 1 2 3)
+(prog2 1 2 3)
 #+END_SRC
 
 #+RESULTS:
-: 3
+: 2
 
 * progn
 
