@@ -4573,6 +4573,13 @@
 #+RESULTS:
 : (1 4)
 
+#+BEGIN_SRC elisp
+(cl-set-difference '("foo" "bar") '("foo") :test #'equal)
+#+END_SRC
+
+#+RESULTS:
+: ("bar")
+
 * cl-set-exclusive-or
 
 #+BEGIN_SRC elisp
