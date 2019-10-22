@@ -16137,6 +16137,23 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 5
 
+* where-is-internal
+
+#+BEGIN_SRC elisp
+(where-is-internal 'save-buffer)
+#+END_SRC
+
+#+RESULTS:
+: ([24 19]
+:  [menu-bar file save-buffer])
+
+#+BEGIN_SRC elisp
+(mapcar #'key-description (where-is-internal 'save-buffer))
+#+END_SRC
+
+#+RESULTS:
+: ("C-x C-s" "<menu-bar> <file> <save-buffer>")
+
 * while
 
 #+BEGIN_SRC elisp
