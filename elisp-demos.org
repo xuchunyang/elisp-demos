@@ -11720,6 +11720,51 @@ the second item can be anything such as %s"
 (pulse-momentary-highlight-region (line-beginning-position) (line-end-position))
 #+END_SRC
 
+* puny-decode-domain
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(puny-decode-domain "xn--bcher-kva.tld")
+#+END_SRC
+
+#+RESULTS:
+: "bücher.tld"
+
+* puny-decode-string
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(puny-decode-string "xn--bcher-kva")
+#+END_SRC
+
+#+RESULTS:
+: "bücher"
+
+* puny-encode-domain
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(puny-encode-domain "bücher.tld")
+#+END_SRC
+
+* puny-encode-string
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(puny-encode-string "bücher")
+#+END_SRC
+
+#+RESULTS:
+: "xn--bcher-kva"
+
 * push
 
 #+BEGIN_SRC elisp
