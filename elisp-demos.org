@@ -8668,6 +8668,18 @@
 #+RESULTS:
 : "hello"
 
+* insert-button
+
+#+BEGIN_SRC elisp :eval no
+(insert-button
+ "Example"
+ 'face 'link
+ 'action (lambda (_button)
+           (browse-url "http://example.com"))
+ 'help-echo "mouse-2, RET: Follow this link"
+ 'follow-link t)
+#+END_SRC
+
 * insert-file-contents
 
 #+BEGIN_SRC elisp
@@ -8713,6 +8725,30 @@
 (insert-image-file
  (expand-file-name "splash.png" (car image-load-path)))
 #+END_SRC
+
+* insert-text-button
+
+#+BEGIN_SRC elisp :eval no
+(insert-text-button
+   "Example"
+   'face 'link
+   'action (lambda (_button)
+             (browse-url "http://example.com"))
+   'help-echo "mouse-2, RET: Follow this link"
+   'follow-link t)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(list (with-temp-buffer (insert-button      "Example") (buffer-string))
+      (with-temp-buffer (insert-text-button "Example") (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: ("Example"
+:  #("Example" 0 7
+:    (button
+:     (t)
+:     category default-button)))
 
 * integerp
 
