@@ -15411,6 +15411,24 @@ the second item can be anything such as %s"
 (thing-at-point 'symbol)
 #+END_SRC
 
+* thing-at-point-looking-at
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "Today is <2019-10-30>.")
+  ;;       123456789abcdef
+  (goto-char #xf)
+  (when (thing-at-point-looking-at
+         (rx (+ (in "0-9-")))
+         ;; limit to current line
+         (max (- (point) (line-beginning-position))
+              (- (line-end-position) (point))))
+    (match-string 0)))
+#+END_SRC
+
+#+RESULTS:
+: "2019-10-30"
+
 * thread-first
 :PROPERTIES:
 :added:    25.1
