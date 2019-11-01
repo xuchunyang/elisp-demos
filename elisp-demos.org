@@ -15925,6 +15925,15 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "webhp"
 
+* url-filename
+
+#+BEGIN_SRC elisp
+(url-filename (url-generic-parse-url "http://localhost:8000/pkg/io/#CopyN"))
+#+END_SRC
+
+#+RESULTS:
+: "/pkg/io/"
+
 * url-generic-parse-url
 
 #+BEGIN_SRC elisp
@@ -16066,6 +16075,16 @@ the second item can be anything such as %s"
                          'utf-8)))
   (pop-to-buffer (url-retrieve-synchronously "http://httpbin.org/post")))
 #+END_SRC
+
+* url-target
+
+#+BEGIN_SRC elisp
+(url-target
+ (url-generic-parse-url "http://localhost:8000/pkg/io/#CopyN"))
+#+END_SRC
+
+#+RESULTS:
+: "CopyN"
 
 * url-unhex-string
 
