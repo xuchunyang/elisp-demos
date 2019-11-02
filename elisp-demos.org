@@ -14221,6 +14221,24 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "Library/Application\\ Support"
 
+* should
+
+#+BEGIN_SRC elisp
+(should (= (expt 2 10) 1024))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* should-error
+
+#+BEGIN_SRC elisp
+(should-error (/ 1 0) :type 'arith-error)
+#+END_SRC
+
+#+RESULTS:
+: (arith-error)
+
 * signal
 
 #+BEGIN_SRC elisp
