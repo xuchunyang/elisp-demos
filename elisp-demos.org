@@ -3439,11 +3439,11 @@
 #+BEGIN_SRC elisp
 (with-temp-buffer
   (insert "ABC")
-  (string (char-before (1+ (point-min)))))
+  (string (char-before)))
 #+END_SRC
 
 #+RESULTS:
-: "A"
+: "C"
 
 * char-category-set
 
