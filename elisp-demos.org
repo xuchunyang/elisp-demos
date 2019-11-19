@@ -7861,11 +7861,29 @@
 #+RESULTS:
 : #<font-object "-*-Source Code Pro-normal-italic-normal-*-13-*-*-*-m-0-iso10646-1">
 
+* font-face-attributes
+
+#+BEGIN_SRC elisp
+(font-face-attributes (face-attribute 'default :font))
+#+END_SRC
+
+#+RESULTS:
+: (:family "Source Code Pro" :height 130 :weight normal :slant normal :width normal)
+
 * font-family-list
 
 #+BEGIN_SRC elisp :results silent
 (font-family-list)
 #+END_SRC
+
+* font-get
+
+#+BEGIN_SRC elisp
+(font-get (face-attribute 'default :font) :size)
+#+END_SRC
+
+#+RESULTS:
+: 13
 
 * font-info
 
@@ -7897,6 +7915,15 @@
 :PROPERTIES:
 :added:    25.1
 :END:
+
+* fontp
+
+#+BEGIN_SRC elisp
+(fontp (face-attribute 'default :font))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * format
 
@@ -14032,6 +14059,15 @@ the second item can be anything such as %s"
   (set-buffer-multibyte nil)
   (insert "λ")
   (multibyte-string-p (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* set-face-attribute
+
+#+BEGIN_SRC elisp
+(set-face-attribute 'default nil :font "Source Code Pro-13")
 #+END_SRC
 
 #+RESULTS:
