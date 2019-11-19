@@ -2778,6 +2778,14 @@
 #+RESULTS:
 : (0.281128 0 0.0)
 
+* bind-keys
+
+#+BEGIN_SRC elisp
+(bind-keys :map winner-mode-map
+           ("M-N" . winner-redo)
+           ("M-P" . winner-undo))
+#+END_SRC
+
 * bindat-get-field
 
 #+BEGIN_SRC elisp
