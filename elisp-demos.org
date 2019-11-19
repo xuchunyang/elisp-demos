@@ -15662,6 +15662,39 @@ the second item can be anything such as %s"
 #+RESULTS:
 : nil
 
+* tq-close
+
+#+BEGIN_SRC elisp
+(let ((tq (tq-create (start-process "cat" "*cat*" "cat"))))
+  (tq-close tq))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* tq-create
+
+#+BEGIN_SRC elisp
+(tq-create (start-process "cat" "*cat*" "cat"))
+#+END_SRC
+
+#+RESULTS:
+: (nil #<process cat> . #<buffer  tq-temp-cat>)
+
+* tq-enqueue
+
+#+BEGIN_SRC elisp :results silent
+(let ((tq (tq-create (start-process "upcase" "*upcase*" "tr" "a-z" "A-Z"))))
+  (tq-enqueue tq
+              (concat user-full-name "\n")
+              "^$"
+              nil
+              (lambda (_ response)
+                (message "Result: %s" response)))
+  (sit-for .1)
+  (tq-close tq))
+#+END_SRC
+
 * translate-region
 
 #+BEGIN_SRC elisp
