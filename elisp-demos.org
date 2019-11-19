@@ -9672,6 +9672,37 @@
 #+RESULTS:
 : (pigs pigs pigs)
 
+* make-network-process
+
+#+BEGIN_SRC elisp :results drawer
+(let ((proc (make-network-process :name "example"
+                                  :buffer "*example.com*"
+                                  :host "example.com"
+                                  :service 80)))
+  (process-send-string proc (concat "HEAD / HTTP/1.1\n"
+                                    "Host: example.com\n"
+                                    "\n"))
+  (accept-process-output proc)
+  (with-current-buffer (process-buffer proc)
+    (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=UTF-8
+Date: Tue, 19 Nov 2019 14:29:56 GMT
+Etag: "3147526947"
+Expires: Tue, 26 Nov 2019 14:29:56 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECS (sgt/B386)
+X-Cache: HIT
+Content-Length: 1256
+
+:END:
+
 * make-obsolete-variable
 
 #+BEGIN_SRC elisp :eval no
