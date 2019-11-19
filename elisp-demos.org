@@ -9703,6 +9703,31 @@ Content-Length: 1256
 
 :END:
 
+#+BEGIN_SRC elisp
+;; Server
+(make-network-process
+ :name "clock-server"
+ :server t
+ :service 3000
+ :buffer "*clock-server*"
+ :sentinel
+ (lambda (process event)
+   (cond
+    ;; "open from 127.0.0.1\n"
+    ((string-prefix-p "open from" event)
+     (process-send-string process (concat (current-time-string) "\n")))
+    ((string= "connection broken by remote peer\n" event)
+     (kill-buffer (process-buffer process))))))
+
+;; ~ $ nc localhost 3000
+;; Wed Nov 20 00:23:48 2019
+;; interrupt: 2
+;; ~ $ 
+#+END_SRC
+
+#+RESULTS:
+: #<process clock-server>
+
 * make-obsolete-variable
 
 #+BEGIN_SRC elisp :eval no
