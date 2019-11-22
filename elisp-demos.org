@@ -1,4 +1,4 @@
-#+PROPERTY: header-args:elisp :results pp
+#+PROPERTY: header-args:elisp :results pp :exports both :eval never-export
 
 * %
 
