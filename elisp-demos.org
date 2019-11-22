@@ -6541,7 +6541,7 @@
 
 * esxml-to-xml
 
-#+BEGIN_SRC elisp :results drawer
+#+BEGIN_SRC elisp :results value raw :wrap SRC html
 ((lambda (string)
    "Prettify HTML in STRING."
    (with-temp-buffer
@@ -6562,7 +6562,7 @@
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+BEGIN_SRC html
 <html>
   <head>
     <title>Example Domain
@@ -6580,7 +6580,7 @@
     </p>
   </body>
 </html>
-:END:
+#+END_SRC
 
 * eval
 
@@ -16848,7 +16848,7 @@ the second item can be anything such as %s"
 
 * xmlgen
 
-#+BEGIN_SRC elisp :results drawer
+#+BEGIN_SRC elisp :results value raw :wrap SRC html
 ((lambda (string)
    "Prettify HTML in STRING."
    (with-temp-buffer
@@ -16867,7 +16867,7 @@ the second item can be anything such as %s"
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+BEGIN_SRC html
 <html>
   <head>
     <title>Example Domain
@@ -16885,7 +16885,7 @@ the second item can be anything such as %s"
     </p>
   </body>
 </html>
-:END:
+#+END_SRC
 
 * xor
 
