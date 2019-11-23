@@ -1,3 +1,4 @@
+#+TITLE: Elisp API Demos
 #+PROPERTY: header-args:elisp :results pp :exports both :eval never-export
 
 * %
