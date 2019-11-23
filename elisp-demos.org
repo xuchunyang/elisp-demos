@@ -9675,7 +9675,8 @@
 
 * make-network-process
 
-#+BEGIN_SRC elisp :results drawer
+#+BEGIN_SRC elisp :results value raw :wrap EXAMPLE
+;; HTTP client
 (let ((proc (make-network-process :name "example"
                                   :buffer "*example.com*"
                                   :host "example.com"
@@ -9689,20 +9690,20 @@
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
+#+BEGIN_EXAMPLE
 HTTP/1.1 200 OK
 Accept-Ranges: bytes
 Cache-Control: max-age=604800
 Content-Type: text/html; charset=UTF-8
-Date: Tue, 19 Nov 2019 14:29:56 GMT
+Date: Sat, 23 Nov 2019 07:46:49 GMT
 Etag: "3147526947"
-Expires: Tue, 26 Nov 2019 14:29:56 GMT
+Expires: Sat, 30 Nov 2019 07:46:49 GMT
 Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
-Server: ECS (sgt/B386)
+Server: ECS (oxr/8313)
 X-Cache: HIT
 Content-Length: 1256
 
-:END:
+#+END_EXAMPLE
 
 #+BEGIN_SRC elisp
 ;; Clock Server
@@ -9753,6 +9754,32 @@ Content-Length: 1256
 
 #+RESULTS:
 : #<process upcase-server>
+
+#+BEGIN_SRC elisp :results value raw :wrap EXAMPLE
+;; Client of Emacs Server via unix domain socket
+(let ((buffer "*server-client-test*"))
+  (make-network-process
+   :service (expand-file-name server-name server-socket-dir)
+   :family 'local
+   :name "server-client-test"
+   :buffer buffer)
+  (with-current-buffer buffer
+    (process-send-string
+     nil
+     (concat "-eval "
+             (server-quote-arg (format "%S" '(+ 1 2)))
+             "\n"))
+    (accept-process-output)
+    (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+-emacs-pid 67329
+-print 3
+
+Process server-client-test connection broken by remote peer
+#+END_EXAMPLE
 
 * make-obsolete-variable
 
