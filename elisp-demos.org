@@ -14103,6 +14103,35 @@ the second item can be anything such as %s"
 #+RESULTS:
 : t
 
+* server-eval-at
+
+#+BEGIN_SRC elisp
+(shell-command "emacs-24.4 -Q --daemon=foo")
+(prog1 (server-eval-at "foo" 'emacs-version)
+  (server-eval-at "foo" '(kill-emacs)))
+#+END_SRC
+
+#+RESULTS:
+: "24.4.1"
+
+* server-quote-arg
+
+#+BEGIN_SRC elisp
+(server-quote-arg "'(+ 1 2)")
+#+END_SRC
+
+#+RESULTS:
+: "'(+&_1&_2)"
+
+* server-unquote-arg
+
+#+BEGIN_SRC elisp
+(server-unquote-arg "'(+&_1&_2)")
+#+END_SRC
+
+#+RESULTS:
+: "'(+ 1 2)"
+
 * set
 
 #+BEGIN_SRC elisp
