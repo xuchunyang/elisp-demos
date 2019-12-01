@@ -4782,6 +4782,16 @@
 #+RESULTS:
 : (4 1 2 3)
 
+* class-p
+
+#+BEGIN_SRC elisp
+(defclass my-class () () "My Class.")
+(class-p 'my-class)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * clear-string
 
 #+BEGIN_SRC elisp
@@ -6282,6 +6292,86 @@
 #+RESULTS:
 : t
 
+* eieio-class-children
+
+#+BEGIN_SRC elisp
+(defclass circle ()
+  ((radius :initarg :radius))
+  "A circle class.")
+
+(defclass color-circle (circle)
+  ((color :initarg :color))
+  "A colorful circle class.")
+
+(eieio-class-children 'circle)
+#+END_SRC
+
+#+RESULTS:
+: (color-circle)
+
+* eieio-class-name
+
+#+BEGIN_SRC elisp
+(defclass rabbit ()
+  ((fur-color :initarg :fur-color)
+   (age :initarg :age))
+  "A rabbit class.")
+
+;; FIXME: The value is incorrect, I've submitted a bug report. (2019-11-24)
+(eieio-class-name 'rabbit)
+#+END_SRC
+
+#+RESULTS:
+: rabbit
+
+* eieio-class-parents
+
+#+BEGIN_SRC elisp
+(defclass circle ()
+  ((radius :initarg :radius))
+  "A circle class.")
+
+(defclass color-circle (circle)
+  ((color :initarg :color))
+  "A colorful circle class.")
+
+(eieio-class-parents 'color-circle)
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXAMPLE
+(#s(eieio--class circle "A circle class." nil
+                 [#s(cl-slot-descriptor radius unbound t nil)]
+                 #s(hash-table size 65 test eq rehash-size 1.5 rehash-threshold 0.8125 data
+                               (radius 0))
+                 (color-circle)
+                 ((:radius . radius))
+                 []
+                 []
+                 #s(#1 unbound)
+                 (:custom-groups nil :documentation "A circle class.")))
+#+END_EXAMPLE
+
+* eieio-object-class
+
+#+BEGIN_SRC elisp
+(defclass my-class () ())
+(eieio-object-class (my-class))
+#+END_SRC
+
+#+RESULTS:
+: my-class
+
+* eieio-object-name
+
+#+BEGIN_SRC elisp
+(defclass my-class () ())
+(eieio-object-name (my-class))
+#+END_SRC
+
+#+RESULTS:
+: "#<my-class my-class>"
+
 * elt
 
 #+BEGIN_SRC elisp
@@ -7678,6 +7768,24 @@
 #+RESULTS:
 : [0 0 0]
 
+* find-class
+
+#+BEGIN_SRC elisp
+(defclass my-class () () "My Class.")
+(find-class 'my-class)
+#+END_SRC
+
+#+RESULTS:
+: #s(eieio--class my-class "My Class." nil
+:                 []
+:                 #s(hash-table size 65 test eq rehash-size 1.5 rehash-threshold 0.8125 data
+:                               ())
+:                 nil nil
+:                 []
+:                 []
+:                 #s(#0)
+:                 (:custom-groups nil :documentation "My Class."))
+
 * find-coding-systems-region
 
 #+BEGIN_SRC elisp
@@ -8179,6 +8287,24 @@
 
 #+RESULTS:
 : "*Messages*<2>"
+
+* generic-p
+
+#+BEGIN_SRC elisp
+(defclass circle ()
+  ((radius :initarg :radius))
+  "A circle class.")
+
+(cl-defmethod area ((c circle))
+  "Return area of the circle C."
+  (* float-pi (expt (oref c :radius) 2)))
+
+;; C-h f area
+(generic-p 'area)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * gensym
 
@@ -13594,6 +13720,16 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 3
 
+* same-class-p
+
+#+BEGIN_SRC elisp
+(defclass my-class () ())
+(same-class-p (my-class) 'my-class)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * save-current-buffer
 
 #+BEGIN_SRC elisp
@@ -14480,6 +14616,36 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : nil
+
+* slot-boundp
+
+#+BEGIN_SRC elisp
+(defclass person ()
+  ((name :initarg :name
+         :initform user-full-name)
+   (birthday :initarg :birthday))
+  "A person class.")
+
+(list (slot-boundp (person) :name)
+      (slot-boundp (person) :birthday))
+#+END_SRC
+
+#+RESULTS:
+: (t nil)
+
+* slot-exists-p
+
+#+BEGIN_SRC elisp
+(defclass circle ()
+  ((radius :initarg :radius))
+  "A circle class.")
+
+(list (slot-exists-p 'circle 'radius)
+      (slot-exists-p (circle :radius 10) 'radius))
+#+END_SRC
+
+#+RESULTS:
+: (0 0)
 
 * sort
 
