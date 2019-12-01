@@ -20,6 +20,3 @@ local:
 	@for cmd in emacs-24.4 emacs-24.5 emacs-25.1 emacs-25.3 emacs-26.1; do \
 	    command -v $$cmd && make EMACS=$$cmd ;\
 	done
-
-readme:
-	sed -i '' -E "5s/[0-9]+/$(shell grep -c '^\* ' elisp-demos.org)/" README.md
