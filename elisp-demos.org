@@ -8340,6 +8340,24 @@
 (goto-char (point-min))
 #+END_SRC
 
+* group-gid
+
+#+BEGIN_SRC elisp
+(group-gid)
+#+END_SRC
+
+#+RESULTS:
+: 20
+
+* group-real-gid
+
+#+BEGIN_SRC elisp
+(group-real-gid)
+#+END_SRC
+
+#+RESULTS:
+: 20
+
 * gv-define-setter
 
 #+BEGIN_SRC elisp :eval no
@@ -16364,6 +16382,24 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : "xcy"
+
+* user-real-uid
+
+#+BEGIN_SRC elisp
+(user-real-uid)
+#+END_SRC
+
+#+RESULTS:
+: 501
+
+* user-uid
+
+#+BEGIN_SRC elisp
+(user-uid)
+#+END_SRC
+
+#+RESULTS:
+: 501
 
 * vconcat
 
