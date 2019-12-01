@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/xuchunyang/elisp-demos.svg?branch=master)](https://travis-ci.org/xuchunyang/elisp-demos)
 [![MELPA](https://melpa.org/packages/elisp-demos-badge.svg)](https://melpa.org/#/elisp-demos)
 [![MELPA Stable](https://stable.melpa.org/packages/elisp-demos-badge.svg)](https://stable.melpa.org/#/elisp-demos)
-[![Elisp Demos Counts](https://img.shields.io/badge/demos-1503-blue.svg)](elisp-demos.org)
 
 Showing an Elisp demo of `mapcar` in `C-h f mapcar`:
 
