@@ -1,5 +1,5 @@
 # Elisp API Demos
-[![Build Status](https://travis-ci.org/xuchunyang/elisp-demos.svg?branch=master)](https://travis-ci.org/xuchunyang/elisp-demos)
+[![Build Status](https://github.com/xuchunyang/elisp-demos/workflows/CI/badge.svg)](https://github.com/xuchunyang/elisp-demos/actions)
 [![MELPA](https://melpa.org/packages/elisp-demos-badge.svg)](https://melpa.org/#/elisp-demos)
 [![MELPA Stable](https://stable.melpa.org/packages/elisp-demos-badge.svg)](https://stable.melpa.org/#/elisp-demos)
 
