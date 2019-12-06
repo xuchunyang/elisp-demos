@@ -8860,6 +8860,32 @@
  'follow-link t)
 #+END_SRC
 
+* insert-directory
+
+#+BEGIN_SRC elisp :results value drawer
+(with-temp-buffer 
+  (insert-directory "." nil nil t)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+Makefile
+README.md
+elisp-demos-tests.el
+elisp-demos.el
+elisp-demos.org
+htmlize.el
+screenshot.png
+todo.org
+:END:
+
+#+BEGIN_SRC elisp :eval no
+;; GNU Coreutils's ls supports --dired and insert-directory treats --dired
+;; specially by adding the text property named "dired-filename" to it
+(insert-directory "." "-l --dired" nil t)
+#+END_SRC
+
 * insert-file-contents
 
 #+BEGIN_SRC elisp
