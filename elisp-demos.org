@@ -2858,6 +2858,25 @@
 :  (dest-ip .
 :           [192 168 1 100]))
 
+#+BEGIN_SRC elisp
+;; socks4: first packet to server
+(bindat-unpack
+ '((VER u8)
+   (CMD u8)
+   (DSTPORT u16)
+   (DSTIP ip)
+   (ID strz (eval (- (length bindat-raw) bindat-idx))))
+ [#x04 #x01 #x00 #x50 #x5d #xb8 #xd8 #x22 #x46 #x72 #x65 #x64 #x00])
+#+END_SRC
+
+#+RESULTS:
+: ((ID . "Fred")
+:  (DSTIP .
+:         [93 184 216 34])
+:  (DSTPORT . 80)
+:  (CMD . 1)
+:  (VER . 4))
+
 * bobp
 
 #+BEGIN_SRC elisp
