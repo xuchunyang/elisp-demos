@@ -6615,6 +6615,18 @@
 #+RESULTS:
 : foo
 
+* eshell-parse-command
+
+#+BEGIN_SRC elisp
+(eshell-parse-command "ls | nl")
+#+END_SRC
+
+#+RESULTS:
+: (eshell-trap-errors
+:  (eshell-execute-pipeline
+:   '((eshell-named-command "ls")
+:     (eshell-named-command "nl"))))
+
 * esxml-query
 
 #+BEGIN_SRC elisp
