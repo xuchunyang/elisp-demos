@@ -8912,7 +8912,7 @@
 * insert-directory
 
 #+BEGIN_SRC elisp :results value drawer
-(with-temp-buffer 
+(with-temp-buffer
   (insert-directory "." nil nil t)
   (buffer-string))
 #+END_SRC
