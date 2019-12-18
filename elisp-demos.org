@@ -8491,6 +8491,24 @@
 #+RESULTS:
 : 1
 
+* gnutls-negotiate
+
+#+BEGIN_SRC elisp
+(let* ((host "example.com") (port 443)
+       (buffer (generate-new-buffer "*https*"))
+       (proc (make-network-process
+              :name "https"
+              :buffer buffer
+              :host host
+              :service port)))
+  (display-buffer buffer)
+  (gnutls-negotiate :process proc
+                    :hostname host)
+  (process-send-string
+   proc
+   "GET / HTTP/1.1\r\nHost: example.com\r\nConnection: Close\r\n\r\n"))
+#+END_SRC
+
 * goto-char
 
 #+BEGIN_SRC elisp :results silent
@@ -11065,6 +11083,23 @@ Process Date finished
 
 #+RESULTS:
 : t
+
+* open-gnutls-stream
+
+#+BEGIN_SRC elisp
+(with-current-buffer (generate-new-buffer "*tls-buffer*")
+  (open-gnutls-stream "tls"
+                      (current-buffer)
+                      "example.com"
+                      "https")
+  (process-send-string
+   nil
+   "GET / HTTP/1.1\r\nHost: example.com\r\nConnection: Close\r\n\r\n")
+  (display-buffer (current-buffer)))
+#+END_SRC
+
+#+RESULTS:
+: #<window 59 on *https://example.com*<8>>
 
 * open-network-stream
 
