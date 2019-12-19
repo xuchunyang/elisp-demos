@@ -17297,3 +17297,26 @@ the second item can be anything such as %s"
 #+RESULTS:
 : t
 
+* zlib-available-p
+
+#+BEGIN_SRC elisp
+(zlib-available-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* zlib-decompress-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (set-buffer-multibyte nil)
+  (let ((coding-system-for-read 'binary)
+        (coding-system-for-write 'binary))
+    (call-process-region "hello" nil "gzip" nil t))
+  (when (zlib-decompress-region (point-min) (point-max))
+    (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: "hello"
