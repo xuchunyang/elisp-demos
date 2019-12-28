@@ -10865,6 +10865,18 @@ Process Date finished
 #+RESULTS:
 : (1 2 3 4)
 
+* netrc-credentials
+
+#+BEGIN_SRC elisp :results silent
+(netrc-credentials "api.github.com")
+#+END_SRC
+
+* netrc-parse
+
+#+BEGIN_SRC elisp :results silent
+(netrc-parse)
+#+END_SRC
+
 * network-interface-info
 
 #+BEGIN_SRC elisp
