@@ -8207,6 +8207,15 @@
 #+RESULTS:
 : #<window 43>
 
+* frame-terminal
+
+#+BEGIN_SRC elisp
+(frame-terminal)
+#+END_SRC
+
+#+RESULTS:
+: #<terminal 1 on Mac>
+
 * frexp
 
 #+BEGIN_SRC elisp
