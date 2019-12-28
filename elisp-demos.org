@@ -13038,6 +13038,15 @@ the second item can be anything such as %s"
 : #("己所不欲，勿施於人。" 0 10
 :   (charset chinese-gbk))
 
+* rfc2104-hash
+
+#+BEGIN_SRC elisp
+(rfc2104-hash 'md5 64 16 "passwd" "Hi There")
+#+END_SRC
+
+#+RESULTS:
+: "63c4c79cd364581232da80ca38adf486"
+
 * ring-copy
 
 #+BEGIN_SRC elisp
