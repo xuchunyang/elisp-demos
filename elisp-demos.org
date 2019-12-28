@@ -6509,6 +6509,15 @@
 #+RESULTS:
 : "#xE6 #x96 #x87"
 
+* encode-hex-string
+
+#+BEGIN_SRC elisp
+(encode-hex-string "abc")
+#+END_SRC
+
+#+RESULTS:
+: "616263"
+
 * encode-time
 
 #+BEGIN_SRC elisp
@@ -8756,6 +8765,25 @@
 
 #+RESULTS:
 : "src/eval.c"
+
+* hmac-md5
+
+#+BEGIN_SRC elisp
+(encode-hex-string (hmac-md5 "Hi There" (make-string 16 ?\x0b)))
+#+END_SRC
+
+#+RESULTS:
+: "9294727a3638bb1c13f48ef8158bfc9d"
+
+* hmac-md5-96
+
+#+BEGIN_SRC elisp
+(encode-hex-string
+ (hmac-md5-96 "Test With Truncation" (make-string 16 ?\x0c)))
+#+END_SRC
+
+#+RESULTS:
+: "56461ef2342edc00f9bab995"
 
 * identity
 
