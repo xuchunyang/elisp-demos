@@ -17505,6 +17505,10 @@ the second item can be anything such as %s"
 #+END_SRC
 
 * xor
+:PROPERTIES:
+:added:    26.1
+:changes:  27.1 Improved and moved from array.el to subr.el.
+:END:
 
 #+BEGIN_SRC elisp
 (list (xor nil t)
