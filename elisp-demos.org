@@ -8858,6 +8858,18 @@
 #+RESULTS:
 : nil
 
+* image-transforms-p
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(image-transforms-p)
+#+END_SRC
+
+#+RESULTS:
+: (scale rotate90)
+
 * image-type-available-p
 
 #+BEGIN_SRC elisp
