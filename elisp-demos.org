@@ -9962,57 +9962,31 @@ Content-Length: 1256
 #+END_EXAMPLE
 
 #+BEGIN_SRC elisp
-;; Clock Server
+;; TCP server
 (make-network-process
- :name "clock-server"
+ :name "time-server"
+ :buffer "*time-server*"
  :server t
  :service 3000
- :buffer "*clock-server*"
  :sentinel
  (lambda (process event)
    (cond
     ;; "open from 127.0.0.1\n"
     ((string-prefix-p "open from" event)
-     (process-send-string process (concat (current-time-string) "\n")))
+     (process-send-string process (concat (current-time-string) "\n"))
+     (process-send-eof process))
     ((string= "connection broken by remote peer\n" event)
      (kill-buffer (process-buffer process))))))
 
 ;; ~ $ nc localhost 3000
-;; Wed Nov 20 00:23:48 2019
-;; interrupt: 2
-;; ~ $
+;; Wed Jan  1 10:19:30 2020
 #+END_SRC
 
 #+RESULTS:
-: #<process clock-server>
-
-#+BEGIN_SRC elisp
-;; Upcase server
-(make-network-process
- :name "upcase-server"
- :server t
- :service 3000
- :buffer "*upcase-server*"
- :filter
- (lambda (process output)
-   (process-send-string process (upcase output))))
-
-;; ~ $ nc localhost 3000
-;; hello
-;; HELLO
-
-
-;; wow, this is cool
-;; WOW, THIS IS COOL
-;; interrupt: 2
-;; ~ $
-#+END_SRC
-
-#+RESULTS:
-: #<process upcase-server>
+: #<process time-server>
 
 #+BEGIN_SRC elisp :results value raw :wrap EXAMPLE
-;; Client of Emacs Server via unix domain socket
+;; UNIX domain socket client (as Emacsclient)
 (let ((buffer "*server-client-test*"))
   (make-network-process
    :service (expand-file-name server-name server-socket-dir)
