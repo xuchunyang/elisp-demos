@@ -14058,6 +14058,18 @@ the second item can be anything such as %s"
 #+RESULTS:
 : symbol1
 
+* seq-contains-p
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(seq-contains-p '(1 2 3) 3)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * seq-count
 
 #+BEGIN_SRC elisp
