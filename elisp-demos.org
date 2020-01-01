@@ -12939,6 +12939,7 @@ the second item can be anything such as %s"
 * replace-buffer-contents
 :PROPERTIES:
 :added:    26.1
+:changes:  27.1 The optional argument MAX-SECS and MAX-COSTS are added.
 :END:
 
 #+BEGIN_SRC elisp :results drawer
