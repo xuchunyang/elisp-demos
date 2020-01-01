@@ -6202,6 +6202,28 @@
 : (div nil
 :      (h1 nil "title"))
 
+* dom-search
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(dom-search '(body nil
+                   (nav nil
+                        (ol nil
+                            (li nil "Perl")
+                            (li nil "Python")
+                            (li nil "PHP")))
+                   (h1 nil "h1 heading")
+                   (p nil "paragraph"))
+            (lambda (node) (eq 'li (car node))))
+#+END_SRC
+
+#+RESULTS:
+: ((li nil "Perl")
+:  (li nil "Python")
+:  (li nil "PHP"))
+
 * dom-set-attribute
 
 #+BEGIN_SRC elisp
