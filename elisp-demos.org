@@ -2750,6 +2750,19 @@
 #+RESULTS:
 : 1.011088
 
+* benchmark-progn
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(benchmark-progn
+  (dotimes (i 1000000 i)))
+#+END_SRC
+
+#+RESULTS:
+: 1000000
+
 * benchmark-run
 
 #+BEGIN_SRC elisp
@@ -5327,6 +5340,18 @@
 #+RESULTS:
 : (28800 "CST")
 
+* date-days-in-month
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(date-days-in-month 2020 2)
+#+END_SRC
+
+#+RESULTS:
+: 29
+
 * date-leap-year-p
 
 #+BEGIN_SRC elisp
@@ -7771,6 +7796,18 @@
 #+RESULTS:
 : "vim"
 
+* file-system-info
+:PROPERTIES:
+:changes:  27.1 Available on all platforms, instead of just Microsoft platforms.
+:END:
+
+#+BEGIN_SRC elisp
+(file-system-info user-init-file)
+#+END_SRC
+
+#+RESULTS:
+: (121123069952 19899543552 15998967808)
+
 * file-truename
 
 #+BEGIN_SRC elisp
@@ -8492,6 +8529,15 @@
 #+RESULTS:
 : #<buffer init.el>
 
+* get-free-disk-space
+
+#+BEGIN_SRC elisp
+(get-free-disk-space ".")
+#+END_SRC
+
+#+RESULTS:
+: "14.9 GiB"
+
 * get-internal-run-time
 
 #+BEGIN_SRC elisp
@@ -8563,6 +8609,18 @@
 
 #+RESULTS:
 : 20
+
+* group-name
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(group-name (group-gid))
+#+END_SRC
+
+#+RESULTS:
+: "staff"
 
 * group-real-gid
 
@@ -8871,6 +8929,19 @@
 #+RESULTS:
 : nil
 
+* ignore-error
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(ignore-error end-of-file
+  (read ""))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * ignore-errors
 
 #+BEGIN_SRC elisp
@@ -9130,6 +9201,51 @@ todo.org
 
 #+RESULTS:
 : t
+
+* iso8601-parse
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(iso8601-parse "2020-01-01T18:32:12+08:00")
+#+END_SRC
+
+#+RESULTS:
+: (12 32 18 1 1 2020 nil nil 28800)
+
+* iso8601-parse-date
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(iso8601-parse-date "2020-01-22")
+#+END_SRC
+
+#+RESULTS:
+: (nil nil nil 22 1 2020 nil nil nil)
+
+* iso8601-parse-duration
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(iso8601-parse-duration "P3Y6M4DT12H30M5S")
+#+END_SRC
+
+#+RESULTS:
+: (5 30 12 4 6 3 nil nil nil)
+
+* iso8601-parse-time
+
+#+BEGIN_SRC elisp
+(iso8601-parse-time "18:32:12")
+#+END_SRC
+
+#+RESULTS:
+: (12 32 18 nil nil nil nil nil nil)
 
 * iter-defun
 :PROPERTIES:
@@ -10957,6 +11073,18 @@ Process Date finished
 
 #+RESULTS:
 : 5
+
+* ngettext
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(ngettext "mouse" "mice" 3)
+#+END_SRC
+
+#+RESULTS:
+: "mice"
 
 * nlistp
 
@@ -13187,6 +13315,24 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (0 2 .
 :    [2 3 nil])
+
+* ring-resize
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((r (make-ring 2)))
+  (ring-insert r "a")
+  (ring-insert r "b")
+  (ring-resize r 5)
+  (ring-insert r "c")
+  r)
+#+END_SRC
+
+#+RESULTS:
+: (0 3 .
+:    ["a" "b" "c" nil nil])
 
 * ring-size
 
@@ -16147,6 +16293,32 @@ the second item can be anything such as %s"
 
 #+RESULTS:
 : (23532 41872 521709 0)
+
+* time-convert
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(time-convert (current-time) 'integer)
+#+END_SRC
+
+#+RESULTS:
+: 1577874377
+
+* time-equal-p
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(time-equal-p
+ (encode-time '(29 31 17 30 4 2019 2 t 7200))
+ '(23752 27217))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * time-less-p
 
