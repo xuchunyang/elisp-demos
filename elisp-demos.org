@@ -13002,6 +13002,21 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "2018 Nov 07th"
 
+* replace-region-contents
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (replace-region-contents (point-min) (point-max) (lambda () '"world"))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "world"
+
 * request
 
 #+BEGIN_SRC elisp
