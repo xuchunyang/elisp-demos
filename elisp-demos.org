@@ -15002,6 +15002,70 @@ the second item can be anything such as %s"
 :  :sorted
 :  (0 1 2 3 4 5 6))
 
+* sort-columns
+
+#+BEGIN_SRC elisp :results drawer
+(with-temp-buffer
+  (insert
+   "\
+a 1. one
+b 3. three
+c 4. four
+d 2. two")
+  (sort-columns nil 3 34)
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+:results:
+a 1. one
+d 2. two
+b 3. three
+c 4. four
+:end:
+
+* sort-fields
+
+#+BEGIN_SRC elisp :results drawer
+(with-temp-buffer
+  (insert "\
+- fig
+- banana
+- apple
+- cucumber")
+  (sort-fields 2 (point-min) (point-max))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+:results:
+- apple
+- banana
+- cucumber
+- fig
+:end:
+
+* sort-numeric-fields
+
+#+BEGIN_SRC elisp :results drawer
+(with-temp-buffer
+  (insert "\
+- 13
+- 0xf (15)
+- 100
+- 010 (8)")
+  (sort-numeric-fields 2 (point-min) (point-max))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+:results:
+- 010 (8)
+- 13
+- 0xf (15)
+- 100
+:end:
+
 * sort-subr
 
 #+BEGIN_SRC elisp :results drawer
