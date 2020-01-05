@@ -15066,6 +15066,18 @@ c 4. four
 - 100
 :end:
 
+* sort-regexp-fields
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "d, a, c, b,")
+  (sort-regexp-fields nil ".," "\\&" (point-min) (point-max))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "a, b, c, d,"
+
 * sort-subr
 
 #+BEGIN_SRC elisp :results drawer
