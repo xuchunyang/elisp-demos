@@ -4165,6 +4165,18 @@
 #+RESULTS:
 : (1 2 3 4 5)
 
+#+BEGIN_SRC elisp :lexical t
+;; (info "(elisp) Generators") was added in Emacs 25.1
+(cl-loop for n iter-by (funcall (iter-lambda ()
+                                  (iter-yield 1)
+                                  (iter-yield 2)
+                                  (iter-yield 3)))
+         collect n)
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
 * cl-macrolet
 
 #+BEGIN_SRC elisp
