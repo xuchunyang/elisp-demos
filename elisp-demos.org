@@ -9304,6 +9304,59 @@ todo.org
 #+RESULTS:
 : (0 1 2 3 4 5 6 7 8 9)
 
+* iter-next
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp :lexical t
+(let ((i (funcall (iter-lambda ()
+                    (iter-yield 1)
+                    (iter-yield 2)
+                    (iter-yield 3)))))
+  (list (iter-next i)
+        (iter-next i)
+        (iter-next i)))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
+* iter-yield
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp :lexical t
+(let ((it (funcall (iter-lambda ()
+                     (iter-yield 1)
+                     2))))
+  (iter-next it))
+#+END_SRC
+
+#+RESULTS:
+: 1
+
+* iter-yield-from
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp :lexical t
+(let* ((it (funcall (iter-lambda ()
+                      (iter-yield 1)
+                      (iter-yield 2)
+                      (iter-yield 3))))
+       (it2 (funcall (iter-lambda ()
+                       (iter-yield-from it)))))
+  (list (iter-next it2)
+        (iter-next it2)
+        (iter-next it2)))
+#+END_SRC
+
+#+RESULTS:
+: (1 2 3)
+
 * json-encode
 
 #+BEGIN_SRC elisp
