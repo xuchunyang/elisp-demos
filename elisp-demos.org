@@ -14722,6 +14722,16 @@ the second item can be anything such as %s"
 #+RESULTS:
 : 42
 
+* set-binary-mode
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+;; Flush standard output
+(set-binary-mode 'stdout nil)
+#+END_SRC
+
 * set-buffer
 
 #+BEGIN_SRC elisp
