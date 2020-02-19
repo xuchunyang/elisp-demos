@@ -13273,6 +13273,16 @@ the second item can be anything such as %s"
 #+RESULTS:
 : "63c4c79cd364581232da80ca38adf486"
 
+* ring-convert-sequence-to-ring
+
+#+BEGIN_SRC elisp
+(ring-convert-sequence-to-ring '(a b c))
+#+END_SRC
+
+#+RESULTS:
+: (0 3 .
+:    [c b a])
+
 * ring-copy
 
 #+BEGIN_SRC elisp
