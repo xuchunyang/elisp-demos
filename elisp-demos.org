@@ -3542,13 +3542,11 @@
 * char-syntax
 
 #+BEGIN_SRC elisp
-(with-temp-buffer
-  (set-syntax-table emacs-lisp-mode-syntax-table)
-  (string (char-syntax ?\;)))
+(string (char-syntax ?a))
 #+END_SRC
 
 #+RESULTS:
-: "<"
+: "w"
 
 * char-table-range
 
@@ -10091,6 +10089,17 @@ todo.org
 #+RESULTS:
 : [t t t t t]
 
+* make-char-table
+
+#+BEGIN_SRC elisp
+;; Make a new empty syntax table
+(syntax-table-p
+ (make-char-table 'syntax-table nil))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * make-comint
 
 #+BEGIN_SRC elisp
@@ -10337,6 +10346,17 @@ Process Date finished
 #+RESULTS:
 : foo
 
+* make-syntax-table
+
+#+BEGIN_SRC elisp
+;; Create a new syntax table base on Emacs Lisp's
+(syntax-table-p
+ (make-syntax-table emacs-lisp-mode-syntax-table))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * make-temp-file
 :PROPERTIES:
 :changes:  26.1 The TEXT argument is added.
@@ -10421,6 +10441,21 @@ Process Date finished
 #+RESULTS:
 : (("(160 . 4194175)" t)
 :  ("(32 . 126)" t))
+
+#+BEGIN_SRC elisp
+;; How many different kinds of parentheses Emacs knows?
+;; () [] {} etc
+(let (parens)
+  (map-char-table
+   (lambda (k v)
+     (when (memq (car v) '(4 5))
+       (push (cdr v) parens)))
+   (syntax-table))
+  (/ (length parens) 2))
+#+END_SRC
+
+#+RESULTS:
+: 53
 
 * map-charset-chars
 
@@ -10978,6 +11013,30 @@ Process Date finished
 
 #+RESULTS:
 : 0.5
+
+* modify-syntax-entry
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "BEG (a) <b> [c] {d} END")
+  (goto-char (point-min))
+  (set-syntax-table
+   (let ((table (make-char-table 'syntax-table)))
+     ;; <> and {} are parenthesis, others aren't
+     (modify-syntax-entry ?\< "(>" table)
+     (modify-syntax-entry ?\> ")<" table)
+     (modify-syntax-entry ?\{ "(}" table)
+     (modify-syntax-entry ?\} "){" table)
+     table))
+  (goto-char (scan-lists (point) 1 0))
+  (insert "|")
+  (goto-char (scan-lists (point) 1 0))
+  (insert "|")
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "BEG (a) <b>| [c] {d}| END"
 
 * move-overlay
 
@@ -14871,6 +14930,21 @@ the second item can be anything such as %s"
 :   (process event)
 :   (message "Process: %s had the event '%s'" process event))
 
+* set-syntax-table
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (vector
+   (string (char-syntax ?\{))
+   (progn
+     ;; {} is not a pair of parens in Emacs Lisp
+     (set-syntax-table emacs-lisp-mode-syntax-table)
+     (string (char-syntax ?\{)))))
+#+END_SRC
+
+#+RESULTS:
+: ["(" "_"]
+
 * set-transient-map
 
 #+BEGIN_SRC elisp :eval no
@@ -15733,6 +15807,15 @@ c 4. four
 #+RESULTS:
 : 42
 
+* string-to-syntax
+
+#+BEGIN_SRC elisp
+(string-to-syntax "()")
+#+END_SRC
+
+#+RESULTS:
+: (4 . 41)
+
 * string-to-unibyte
 
 #+BEGIN_SRC elisp
@@ -16174,6 +16257,35 @@ c 4. four
 
 #+RESULTS:
 : t
+
+* syntax-after
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "()")
+  ;; the temporarily buffer uses standard-syntax-table
+  (syntax-after (point-min)))
+
+;; (string-to-syntax "()")
+;; => (4 . 41)
+#+END_SRC
+
+#+RESULTS:
+: (4 . 41)
+
+* syntax-class
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "()")
+  (syntax-class (syntax-after (point-min))))
+
+;; (string-to-syntax "(")
+;; => (4)
+#+END_SRC
+
+#+RESULTS:
+: 4
 
 * system-name
 
