@@ -14183,6 +14183,34 @@ the second item can be anything such as %s"
 #+RESULTS:
 : (t nil t)
 
+* scan-lists
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (with-syntax-table emacs-lisp-mode-syntax-table
+    (insert "(list (a) (b) (c) (d))")
+    (goto-char (scan-lists (point-min) 4 -1))
+    (insert "|")
+    (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: "(list (a) (b) (c)| (d))"
+
+* scan-sexps
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (with-syntax-table emacs-lisp-mode-syntax-table
+    (insert "a b c d")
+    (goto-char (scan-sexps (point-min) 3))
+    (insert "|")
+    (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: "a b c| d"
+
 * seconds-to-string
 :PROPERTIES:
 :added:    25.1
