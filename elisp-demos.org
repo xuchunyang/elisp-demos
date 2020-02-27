@@ -7446,6 +7446,15 @@
 #+RESULTS:
 : 2.0
 
+* feature-file
+
+#+BEGIN_SRC elisp
+(feature-file 'pcase)
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/src/emacs-mac/lisp/emacs-lisp/pcase.elc"
+
 * featurep
 
 #+BEGIN_SRC elisp
