@@ -6668,6 +6668,17 @@
 (error "Invalid name `%s'" "A%%B")
 #+END_SRC
 
+* error-message-string
+
+#+BEGIN_SRC elisp
+(condition-case err
+    (/ 1 0)
+  (arith-error (error-message-string err)))
+#+END_SRC
+
+#+RESULTS:
+: "Arithmetic error"
+
 * ert-deftest
 
 #+BEGIN_SRC elisp
