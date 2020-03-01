@@ -11543,6 +11543,33 @@ Content-Length: 606
 #+RESULTS:
 : 1
 
+* oref
+
+#+BEGIN_SRC elisp
+(defclass my-rabbit ()
+  ((color :initform "white"))
+  "A rabbit class.")
+
+(oref (my-rabbit) color)
+#+END_SRC
+
+#+RESULTS:
+: "white"
+
+* oref-default
+
+#+BEGIN_SRC elisp
+(defclass my-car ()
+  ((wheels :type integer
+           :initform 4
+           :allocation :class)))
+
+(oref-default my-car wheels)
+#+END_SRC
+
+#+RESULTS:
+: 4
+
 * org-babel-edit-distance
 
 #+BEGIN_SRC elisp
@@ -11650,6 +11677,39 @@ Content-Length: 606
 
 #+RESULTS:
 : ("Shower" "Sleep")
+
+* oset
+
+#+BEGIN_SRC elisp
+(defclass my-fish ()
+  ((size))
+  "A fish class.")
+
+(let ((obj (my-fish)))
+  (oset obj size 10 )
+  obj)
+#+END_SRC
+
+#+RESULTS:
+: #s(my-fish 10)
+
+* oset-default
+
+#+BEGIN_SRC elisp
+(defclass my-car ()
+  ((wheels :type integer
+           :initform 4
+           :allocation :class)))
+
+(let ((car1 (my-car))
+      (car2 (my-car)))
+  (oset-default my-car wheels 2)
+  (list (oref car1 wheels)
+        (oref car2 wheels)))
+#+END_SRC
+
+#+RESULTS:
+: (2 2)
 
 * other-buffer
 
@@ -17626,6 +17686,25 @@ c 4. four
 
 #+RESULTS:
 : nil
+
+* with-slots
+
+#+BEGIN_SRC elisp
+(defclass my-color ()
+  ((alpha) (red) (green) (blue))
+  "A color class.")
+
+(let ((c (my-color)))
+  (with-slots (red green blue (a alpha)) c
+    (setq red   #x41
+          green #x69
+          blue  #xE1
+          a 1.0))
+  c)
+#+END_SRC
+
+#+RESULTS:
+: #s(my-color 1.0 65 105 225)
 
 * with-syntax-table
 
