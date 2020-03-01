@@ -10211,6 +10211,24 @@ todo.org
 : #s(hash-table size 65 test eql rehash-size 1.5 rehash-threshold 0.8125 data
 : ())
 
+* make-instance
+
+#+BEGIN_SRC elisp
+(defclass my-book ()
+  ((title :initarg :title :type string)
+   (pages :initarg :pages :type integer))
+  "A book class.")
+
+;; These two are the same, and the `my-book' function uses `make-instance' under
+;; the ground
+(list (make-instance 'my-book :title "Practical Vim" :pages 487)
+      (my-book                :title "Practical Vim" :pages 487))
+#+END_SRC
+
+#+RESULTS:
+: (#s(my-book "Practical Vim" 487)
+:  #s(my-book "Practical Vim" 487))
+
 * make-keymap
 
 #+BEGIN_SRC elisp :results silent
