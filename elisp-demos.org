@@ -17580,6 +17580,20 @@ c 4. four
 #+RESULTS:
 : "Hello World"
 
+* with-silent-modifications
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (set-buffer-modified-p nil)
+  (with-silent-modifications
+    (add-text-properties (point-min) (point-max) '(display "world")))
+  (buffer-modified-p))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * with-syntax-table
 
 #+BEGIN_SRC elisp
