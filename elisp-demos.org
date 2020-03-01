@@ -7482,6 +7482,44 @@
 #+RESULTS:
 : t
 
+* file-attribute-modes
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(file-attribute-modes (file-attributes user-init-file))
+#+END_SRC
+
+#+RESULTS:
+: "-rw-r--r--"
+
+* file-attribute-modification-time
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(format-time-string
+ "%F %T"
+ (file-attribute-modification-time (file-attributes user-init-file)))
+#+END_SRC
+
+#+RESULTS:
+: "2020-03-01 02:20:27"
+
+* file-attribute-size
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(file-attribute-size (file-attributes user-init-file))
+#+END_SRC
+
+#+RESULTS:
+: 201878
+
 * file-attributes
 
 #+BEGIN_SRC elisp
