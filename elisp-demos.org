@@ -11096,6 +11096,14 @@ Process Date finished
 #+RESULTS:
 : nil
 
+* mm-url-encode-multipart-form-data
+
+#+BEGIN_SRC elisp :results silent
+(mm-url-encode-multipart-form-data
+ '(("username" . "john")
+   ("password" . "secret")))
+#+END_SRC
+
 * mod
 
 #+BEGIN_SRC elisp
