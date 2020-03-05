@@ -14871,6 +14871,9 @@ the second item can be anything such as %s"
 : (1 2 3)
 
 * seq-sort-by
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (seq-sort-by #'seq-length #'> ["a" "ab" "abc"])
