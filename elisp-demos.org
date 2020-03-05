@@ -14802,6 +14802,9 @@ the second item can be anything such as %s"
 : 1
 
 * seq-random-elt
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (seq-random-elt [1 2 3 4])
