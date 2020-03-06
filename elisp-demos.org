@@ -11874,46 +11874,60 @@ Content-Length: 606
 
 #+BEGIN_SRC elisp :results silent
 (pcase (read)
-  ('foo 'foo)
-  (42 42)
-  ("hello" "hello")
-  ((and (pred floatp) n) n)
-  ((and (pred integerp) (app (1+) 42)) "It's 41")
-  ((and (pred integerp)
-        n
-        (guard (<= -9 n 9)))
-   (format "%d is a single-digit integer" n))
-  ((and (or (pred vectorp) (pred stringp)) x)
-   (format "%S is vector or string" x))
-  ((and (pred integerp)
-        (pred cl-evenp)
-        n
-        (let half (/ n 2)))
-   (format "%d ÷ 2 = %d" n half))
-  (`("first" ,second-elem)
-   (format "Match a list of two element, the first item must be \"first\", \
-the second item can be anything such as %s"
-           second-elem))
-  (`(,(and (pred numberp) x)
-     ,(and (pred numberp) y)
-     ,(and (pred (= (+ x y))) z))
-   (format "Match a list of three element, %d + %d = %d" x y z))
-  (`(,car . ,cdr) (format "Match any list,  whose car = %s, cdr = %s" car cdr))
-  (_ :anything-else))
+  ;; 42
+  (42
+   (message "forty-two"))
+  ;; other numbers
+  ((and (pred numberp) n)
+   (message "Number: %d" n))
+  ;; string
+  ((and (pred stringp) s)
+   (message "String: %S" s))
+  ;; 'hello (symbol)
+  ('hello
+   (message "World"))
+  ;; default
+  (x (message "=> %S" x)))
 #+END_SRC
 
-#+BEGIN_SRC elisp
-;; The `rx' pattern
-(pcase "pages.zh/linux/apt-get.md"
-  ((rx "pages."
-       (let lang (1+ anything)) "/"
-       (let platform (1+ anything)) "/"
-       (let command (1+ anything)) ".md")
-   (list command platform lang)))
-#+END_SRC
+#+begin_src elisp :results silent
+;; pred
+(pcase (random 3)
+  ((pred zerop)           "zero")
+  ((pred (lambda (n) (= n 1))) "one")
+  ((pred (= 2))           "two"))
+#+end_src
+
+#+begin_src elisp :results silent
+;; app
+(pcase (random 3)
+  ((app identity 0) "zero")
+  ((app (lambda (n) n) 1) "one")
+  ((app (identity) 2) "two"))
+#+end_src
+
+#+begin_src elisp :results silent
+;; let
+(pcase (read-number "Number: ")
+  ((and 42 (let msg "forty-two"))
+   msg))
+#+end_src
+
+#+begin_src elisp
+;; rx
+(pcase (format-time-string "%Y-%m-%d")
+  ;; 2020-03-07
+  ((rx (let y (= 4 num)) "-"
+       (let m (= 2 num)) "-"
+       (let d (= 2 num)))
+   (list :year y
+         :month m
+         :day d)))
+#+end_src
 
 #+RESULTS:
-: ("apt-get" "linux" "zh")
+: (:year "2020" :month "03" :day "07")
+
 
 * pcase-defmacro
 :PROPERTIES:
