@@ -5422,18 +5422,22 @@
 * decode-coding-string
 
 #+BEGIN_SRC elisp
-(with-temp-buffer
-  (set-buffer-multibyte nil)
-  (insert #xCE #xC4)
-  (buffer-string)
-  (decode-coding-string (buffer-string) 'chinese-gbk))
+;; (string-to-vector (encode-coding-string "好" 'chinese-gbk))
+;; => [186 195]
 
-;; This doesn't work.
-;; (decode-coding-string (string #xCE #xC4) 'chinese-gbk)
+(decode-coding-string (unibyte-string 186 195) 'chinese-gbk)
+
+;; This does NOT work
+;; (decode-coding-string (string 186 195) 'chinese-gbk)
+;;
+;; (multibyte-string-p (unibyte-string 186 195))
+;; => nil
+;; (multibyte-string-p (string 186 195))
+;; => t
 #+END_SRC
 
 #+RESULTS:
-: #("文" 0 1
+: #("好" 0 1
 :   (charset chinese-gbk))
 
 * decode-time
