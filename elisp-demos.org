@@ -5440,6 +5440,13 @@
 : #("好" 0 1
 :   (charset chinese-gbk))
 
+#+BEGIN_SRC elisp
+(decode-coding-string (unibyte-string #xE5 #xA5 #xBD) 'utf-8)
+#+END_SRC
+
+#+RESULTS:
+: "好"
+
 * decode-time
 
 #+BEGIN_SRC elisp
