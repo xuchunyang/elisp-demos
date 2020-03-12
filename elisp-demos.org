@@ -9955,6 +9955,15 @@ todo.org
 #+RESULTS:
 : (108 117 122)
 
+* locale-info
+
+#+BEGIN_SRC elisp
+(locale-info 'days)
+#+END_SRC
+
+#+RESULTS:
+: ["Sunday" "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday"]
+
 * locate-dominating-file
 
 #+BEGIN_SRC elisp
