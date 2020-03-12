@@ -10002,6 +10002,15 @@ todo.org
 #+RESULTS:
 : ["Sunday" "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday"]
 
+* locale-translate
+
+#+BEGIN_SRC elisp
+(locale-translate "slovene")
+#+END_SRC
+
+#+RESULTS:
+: "sl_SI.ISO-8859-2"
+
 * locate-dominating-file
 
 #+BEGIN_SRC elisp
