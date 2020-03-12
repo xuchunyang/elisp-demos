@@ -9562,6 +9562,44 @@ todo.org
 #+RESULTS:
 : "{\"id\":42,\"message\":\"hello world\"}"
 
+* jsonrpc-process-connection
+
+#+BEGIN_SRC elisp
+(make-network-process
+ :name "JSONRPC server"
+ :server t
+ :host "localhost"
+ :service 44444
+ :log
+ (lambda (_server client _message)
+   (jsonrpc-process-connection
+    :name (process-name client)
+    :process client
+    :request-dispatcher
+    (lambda (_endpoint method params)
+      (unless (memq method '(+ - * /))
+        (signal 'jsonrpc-error
+                '((jsonrpc-error-message . "Sorry, this isn't allowed")
+                  (jsonrpc-error-code . -32601))))
+      (apply method (append params nil))))))
+
+(jsonrpc-process-connection
+ :name "JSONRPC client"
+ :process (make-network-process
+           :name "JSONRPC client process"
+           :host "localhost"
+           :service 44444))
+
+(jsonrpc-request
+ (process-get
+  (get-process "JSONRPC client process")
+  'jsonrpc-connection)
+ '* [3 4])
+#+END_SRC
+
+#+RESULTS:
+: 12
+
 * kbd
 
 #+BEGIN_SRC elisp
