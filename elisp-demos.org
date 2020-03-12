@@ -14513,11 +14513,13 @@ Content-Length: 606
 * seconds-to-time
 
 #+BEGIN_SRC elisp
-(seconds-to-time (current-time))
+(current-time-string
+ (seconds-to-time (* (+ (* 50 365) 12) (* 24 60 60)))
+ t)
 #+END_SRC
 
 #+RESULTS:
-: (23532 37240 461844 0)
+: "Wed Jan  1 00:00:00 2020"
 
 * secure-hash
 
