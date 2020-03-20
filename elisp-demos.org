@@ -15332,7 +15332,7 @@ Content-Length: 606
 * signal
 
 #+BEGIN_SRC elisp
-(signal 'wrong-number-of-arguments '(x y))
+(signal 'wrong-type-argument '(numberp "string"))
 #+END_SRC
 
 * signal-process
