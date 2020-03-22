@@ -12652,6 +12652,9 @@ Content-Length: 606
 :   (face italic))
 
 * provided-mode-derived-p
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 (provided-mode-derived-p 'lisp-interaction-mode 'prog-mode)
