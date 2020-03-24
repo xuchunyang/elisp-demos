@@ -2636,6 +2636,15 @@
 #+RESULTS:
 : nil
 
+* auth-source-pick-first-password
+
+#+BEGIN_SRC elisp
+(auth-source-pick-first-password :host "vlc")
+#+END_SRC
+
+#+RESULTS:
+: "secret"
+
 * auth-source-search
 
 #+BEGIN_SRC elisp
