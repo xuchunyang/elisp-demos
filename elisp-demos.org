@@ -12283,6 +12283,15 @@ Content-Length: 606
 #+RESULTS:
 : "\"hello\""
 
+* prin1-char
+
+#+BEGIN_SRC elisp
+(prin1-char 97)
+#+END_SRC
+
+#+RESULTS:
+: "?a"
+
 * prin1-to-string
 
 #+BEGIN_SRC elisp
