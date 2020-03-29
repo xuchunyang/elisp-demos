@@ -11917,6 +11917,18 @@ Content-Length: 606
 #+RESULTS:
 : ("/usr/bin/" "/bin/" "/usr/sbin/" "/sbin/")
 
+* parse-iso8601-time-string
+:PROPERTIES:
+:added:    25.1
+:END:
+
+#+BEGIN_SRC elisp
+(parse-iso8601-time-string "2020-03-25T01:53:53+08:00")
+#+END_SRC
+
+#+RESULTS:
+: (24186 18737)
+
 * parse-time-string
 
 #+BEGIN_SRC elisp
