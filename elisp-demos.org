@@ -6808,6 +6808,15 @@
 #+RESULTS:
 : 42
 
+* eval-after-load
+
+#+BEGIN_SRC elisp
+  (eval-after-load "elisp-mode"
+    '(progn
+       (setq answer 42)
+       (setq beast 666)))
+#+END_SRC
+
 * eval-buffer
 
 #+BEGIN_SRC elisp
