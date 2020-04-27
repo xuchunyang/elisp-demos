@@ -5456,6 +5456,9 @@
 : "好"
 
 * decode-time
+:PROPERTIES:
+:changes:  27.1 The optional FORM argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (decode-time)
