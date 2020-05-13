@@ -7553,6 +7553,15 @@
 :      (23533 25245 994959 733000)
 :      150332 "-rw-r--r--" t 8617049288 16777220)
 
+* file-dependents
+
+#+BEGIN_SRC elisp
+(file-dependents (feature-file 'cl))
+#+END_SRC
+
+#+RESULTS:
+: ("/Users/xcy/.emacs.d/package-quickstart.el")
+
 * file-directory-p
 
 #+BEGIN_SRC elisp
