@@ -17924,6 +17924,25 @@ c 4. four
 #+RESULTS:
 : nil
 
+* ws-start
+
+#+BEGIN_SRC elisp
+(require 'web-server)
+
+;; http://localhost:8888
+(ws-start
+ (lambda (request)
+   (process-send-string
+    (oref request process)
+    (let ((body "Hello, World!\n"))
+      (concat "HTTP/1.1 200 OK\r\n"
+              "Content-Type: text/plain; charset=UTF-8\r\n"
+              (format "Content-Length: %d\r\n" (string-bytes body))
+              "\r\n"
+              body))))
+ 8888)
+#+END_SRC
+
 * x-display-list
 
 #+BEGIN_SRC elisp
