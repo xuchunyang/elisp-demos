@@ -17412,6 +17412,9 @@ c 4. four
 : #<buffer  *http example.com:80*-426008>
 
 * url-retrieve-synchronously
+:PROPERTIES:
+:changes:  26.1 The optional TIMEOUT argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (url-retrieve-synchronously "http://example.com/")
