@@ -4945,6 +4945,15 @@
 #+RESULTS:
 : "#00ff00"
 
+* color-rgb-to-hsl
+
+#+BEGIN_SRC elisp
+(color-rgb-to-hsl #x86 #xDE #xFA)
+#+END_SRC
+
+#+RESULTS:
+: (0.5 -0.3036649214659686 192.0)
+
 * color-values
 
 #+BEGIN_SRC elisp
