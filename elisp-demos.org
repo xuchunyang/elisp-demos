@@ -7913,6 +7913,9 @@
 : "/ssh:USER@HOST:"
 
 * file-size-human-readable
+:PROPERTIES:
+:changes:  27.1 Add SPACE and UNIT arguments.
+:END:
 
 #+BEGIN_SRC elisp
 (file-size-human-readable 1024)
