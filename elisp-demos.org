@@ -10789,6 +10789,17 @@ Process Date finished
 : ((0 . a)
 :  (2 . c))
 
+* map-insert
+
+#+BEGIN_SRC elisp
+(map-insert '((x . 1) (y . 2)) 'z 3)
+#+END_SRC
+
+#+RESULTS:
+: ((z . 3)
+:  (x . 1)
+:  (y . 2))
+
 * map-into
 
 #+BEGIN_SRC elisp
