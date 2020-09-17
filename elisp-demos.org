@@ -3798,6 +3798,10 @@
 : ("42" "wowowowowoowooo" "Hello, I am Xu Chunyang")
 
 * cl-defstruct
+:PROPERTIES:
+:changes:  27.1  'cl-defstruct' has a new ':noinline' argument to prevent inlining its functions.
+:changes:  27.1  'cl-defstruct' slots accept a ':documentation' property.
+:END:
 
 #+BEGIN_SRC elisp
 (cl-defstruct (person (:constructor person-create)
