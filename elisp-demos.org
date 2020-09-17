@@ -6893,6 +6893,9 @@
 #+END_SRC
 
 * executable-find
+:PROPERTIES:
+:changes:  27.1 Add an optional argument REMOTE.
+:END:
 
 #+BEGIN_SRC elisp
 (executable-find "git")
