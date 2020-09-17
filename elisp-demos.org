@@ -6883,6 +6883,15 @@
            (* 24 60 60)))
 #+END_SRC
 
+* exec-path
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp :results silent
+(exec-path)
+#+END_SRC
+
 * executable-find
 
 #+BEGIN_SRC elisp
