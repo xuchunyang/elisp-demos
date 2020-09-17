@@ -10124,6 +10124,13 @@ todo.org
 #+RESULTS:
 : "/Users/xcy/src/emacs-mac/lisp/emacs-lisp/pcase.elc"
 
+#+BEGIN_SRC elisp
+(locate-library "pcase.el")
+#+END_SRC
+
+#+RESULTS:
+: "/Users/xcy/src/emacs-mac/lisp/emacs-lisp/pcase.el"
+
 * locate-user-emacs-file
 
 #+BEGIN_SRC elisp
