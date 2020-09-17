@@ -9886,6 +9886,25 @@ todo.org
   (libxml-parse-html-region url-http-end-of-headers (point-max)))
 #+END_SRC
 
+* libxml-parse-xml-region
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body></note>")
+  (libxml-parse-xml-region (point-min) (point-max)))
+#+END_SRC
+
+#+RESULTS:
+: (note nil
+:       (to nil "Tove")
+:       (from nil "Jani")
+:       (heading nil "Reminder")
+:       (body nil "Don't forget me this weekend!"))
+
 * line-beginning-position
 
 #+BEGIN_SRC elisp
