@@ -12022,6 +12022,19 @@ Content-Length: 606
 #+RESULTS:
 : "(#<overlay from 3 to 5 in  *temp*> #<overlay from 2 to 4 in  *temp*>)"
 
+* package-get-version
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-current-buffer (find-file-noselect (locate-library "magit.el"))
+  (package-get-version))
+#+END_SRC
+
+#+RESULTS:
+: "20200828.1757"
+
 * parse-colon-path
 
 #+BEGIN_SRC elisp
