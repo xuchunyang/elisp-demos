@@ -11381,6 +11381,18 @@ Process Date finished
 :  ("lo0" .
 :   [127 0 0 1 0]))
 
+* network-lookup-address-info
+:PROPERTIES:
+:added:    27.1
+:END:
+
+#+BEGIN_SRC elisp
+(network-lookup-address-info "example.com")
+#+END_SRC
+
+#+RESULTS:
+: ([93 184 216 34 0])
+
 * next-frame
 
 #+BEGIN_SRC elisp
