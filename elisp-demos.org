@@ -10686,13 +10686,16 @@ Process Date finished
 : 45718
 
 * map-contains-key
+:PROPERTIES:
+:changes:  27.1 'map-contains-key' now returns a boolean rather than the key.
+:END:
 
 #+BEGIN_SRC elisp
 (map-contains-key '((x . 1) (y . 2)) 'y)
 #+END_SRC
 
 #+RESULTS:
-: y
+: t
 
 * map-copy
 
