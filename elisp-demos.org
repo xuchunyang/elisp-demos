@@ -11370,6 +11370,9 @@ Process Date finished
 :  (simplex multicast notrailers running broadcast up))
 
 * network-interface-list
+:PROPERTIES:
+:changes:  27.1 Return IPv4 and IPv6 addresses.
+:END:
 
 #+BEGIN_SRC elisp
 (network-interface-list)
