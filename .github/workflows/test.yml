@@ -11,6 +11,7 @@ jobs:
           - 24.4
           - 25.3
           - 26.3
+          - 27.1
     steps:
     - uses: purcell/setup-emacs@master
       with:
