@@ -5295,6 +5295,17 @@
 #+RESULTS:
 : #<buffer elisp-demos.org>
 
+* current-column
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (current-column))
+#+END_SRC
+
+#+RESULTS:
+: 5
+
 * current-idle-time
 
 #+BEGIN_SRC elisp
