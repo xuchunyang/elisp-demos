@@ -3203,6 +3203,15 @@
 #+RESULTS:
 : (1 2 3)
 
+* byte-code-function-p
+
+#+BEGIN_SRC elisp
+(byte-code-function-p (symbol-function 'next-line))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * byte-compile
 
 #+BEGIN_SRC elisp :results silent
@@ -16333,6 +16342,24 @@ c 4. four
 
 #+BEGIN_SRC elisp
 (stringp "")
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* subr-arity
+
+#+BEGIN_SRC elisp
+(subr-arity (symbol-function 'message))
+#+END_SRC
+
+#+RESULTS:
+: (1 . many)
+
+* subrp
+
+#+BEGIN_SRC elisp
+(subrp (symbol-function 'message))
 #+END_SRC
 
 #+RESULTS:
