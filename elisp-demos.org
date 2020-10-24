@@ -17745,6 +17745,24 @@ c 4. four
 #+RESULTS:
 : (#<frame /Users/xcy/src/elisp-demos/elisp-demos.org 0x1049a21e8>)
 
+* websocket-open
+
+#+BEGIN_SRC elisp :results silent
+(websocket-open
+ "wss://echo.websocket.org/"
+ :on-open
+ (lambda (ws)
+   (message "Connected")
+   (websocket-send-text ws "Hello, WebSocket!"))
+ :on-message
+ (lambda (ws frame)
+   (message "Receive: %s" (websocket-frame-text frame))
+   (websocket-close ws))
+ :on-close
+ (lambda (ws)
+   (message "Closed")))
+#+END_SRC
+
 * when
 
 #+BEGIN_SRC elisp
