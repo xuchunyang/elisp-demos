@@ -17763,6 +17763,46 @@ c 4. four
    (message "Closed")))
 #+END_SRC
 
+* websocket-server
+
+#+BEGIN_SRC elisp :lexical t :results silent
+(let ((wss
+       (websocket-server
+        8888
+        :on-open
+        (lambda (ws)
+          (message "[Server] on-open"))
+        :on-message
+        (lambda (ws frame)
+          (message "[Server] on-message")
+          (message "[Server] Received %S from client" (websocket-frame-text frame))
+          (message "[Server] Sending %S to client" (upcase (websocket-frame-text frame)))
+          (websocket-send-text ws (upcase (websocket-frame-text frame))))
+        :on-close
+        (lambda (ws)
+          (message "[Server] on-close")))))
+  (websocket-open
+   "ws://localhost:8888/"
+   :on-open
+   (lambda (ws)
+     (message "[Client] on-open")
+     (message "[Client] Sending %S to server" "Hello, WebSocket!")
+     (websocket-send-text ws "Hello, WebSocket!"))
+   :on-message
+   (lambda (ws frame)
+     (message "[Client] Received %S from server" (websocket-frame-text frame))
+     ;; Close the client
+     (websocket-close ws))
+   :on-close
+   (lambda (ws)
+     (message "[Client] on-close")))
+  (run-with-idle-timer
+   1 nil
+   (lambda ()
+     (message "Cleanup, closing the server")
+     (websocket-server-close wss))))
+#+END_SRC
+
 * when
 
 #+BEGIN_SRC elisp
