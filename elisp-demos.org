@@ -11281,6 +11281,15 @@ Process Date finished
 #+RESULTS:
 : nil
 
+* mm-default-file-encoding
+
+#+BEGIN_SRC elisp
+(mm-default-file-encoding "index.html")
+#+END_SRC
+
+#+RESULTS:
+: "text/html"
+
 * mm-url-encode-multipart-form-data
 
 #+BEGIN_SRC elisp :results silent
