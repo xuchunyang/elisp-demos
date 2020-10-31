@@ -10424,6 +10424,19 @@ todo.org
 #+RESULTS:
 : (pigs pigs pigs)
 
+* make-nearby-temp-file
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((default-directory "/ssh:root@192.168.8.1:"))
+  (make-nearby-temp-file "foo-"))
+#+END_SRC
+
+#+RESULTS:
+: "/ssh:root@192.168.8.1:/tmp/foo-Mf9ZSa"
+
 * make-network-process
 
 #+BEGIN_SRC elisp :results value raw :wrap EXAMPLE
@@ -16757,6 +16770,22 @@ c 4. four
 
 #+RESULTS:
 : 0.9999999999999999
+
+* temporary-file-directory
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp
+(list :local
+      (temporary-file-directory)
+      :remote
+      (let ((default-directory "/ssh:root@192.168.8.1:"))
+        (temporary-file-directory)))
+#+END_SRC
+
+#+RESULTS:
+: (:local "/var/folders/7f/s191h4q97p90374yw15ssrs00000gn/T/" :remote "/ssh:root@192.168.8.1:/tmp")
 
 * terminal-list
 
