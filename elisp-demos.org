@@ -4081,6 +4081,15 @@
 #+RESULTS:
 : 2
 
+* cl-generic-p
+:PROPERTIES:
+:added:    26.1
+:END:
+
+#+BEGIN_SRC elisp :results silent
+(cl-generic-p #'seq-map)
+#+END_SRC
+
 * cl-incf
 
 #+BEGIN_SRC elisp
