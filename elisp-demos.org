@@ -8071,6 +8071,15 @@
 #+RESULTS:
 : 39
 
+* find-definition-noselect
+
+#+BEGIN_SRC elisp
+(find-definition-noselect 'pcase nil)
+#+END_SRC
+
+#+RESULTS:
+: (#<buffer pcase.el.gz> . 4220)
+
 * find-file
 
 #+BEGIN_SRC elisp
@@ -8113,6 +8122,35 @@
 #+RESULTS:
 : #<buffer init.el>
 
+* find-function-C-source
+
+#+BEGIN_SRC elisp
+(find-function-C-source 'car "data.c" nil)
+#+END_SRC
+
+#+RESULTS:
+: (#<buffer data.c> . 13992)
+
+* find-function-noselect
+
+#+BEGIN_SRC elisp
+(find-function-noselect 'pcase)
+#+END_SRC
+
+#+RESULTS:
+: (#<buffer pcase.el.gz> . 4220)
+
+* find-function-search-for-symbol
+
+#+BEGIN_SRC elisp
+(find-function-search-for-symbol
+ 'car nil
+ (help-C-file-name (symbol-function 'car) 'subr))
+#+END_SRC
+
+#+RESULTS:
+: (#<buffer data.c> . 13992)
+
 * find-image
 
 #+BEGIN_SRC elisp
@@ -8140,6 +8178,15 @@
 
 #+RESULTS:
 : "src/eval.c"
+
+* find-variable-noselect
+
+#+BEGIN_SRC elisp
+(find-variable-noselect 'emacs-version)
+#+END_SRC
+
+#+RESULTS:
+: (#<buffer emacs.c> . 91318)
 
 * flatten-tree
 :PROPERTIES:
