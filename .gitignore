@@ -1,2 +1,5 @@
 # Compiled
 *.elc
+
+# My todo list
+/todo.org
