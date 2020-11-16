@@ -5295,6 +5295,17 @@
 (sit-for 3)
 #+END_SRC
 
+#+begin_src elisp :results silent
+(create-image
+ ;; binary data
+ (with-temp-buffer
+   (set-buffer-multibyte nil)
+   (insert-file-contents-literally
+    (expand-file-name "images/splash.png" data-directory))
+   (buffer-string))
+ 'png 'data)
+#+end_src
+
 * current-active-maps
 
 #+BEGIN_SRC elisp
