@@ -15184,6 +15184,15 @@ Content-Length: 606
 #+RESULTS:
 : "ello"
 
+* seq-reverse
+
+#+BEGIN_SRC elisp
+(seq-reverse (list 1 2 3))
+#+END_SRC
+
+#+RESULTS:
+: (3 2 1)
+
 * seq-set-equal-p
 :PROPERTIES:
 :added:    26.1
