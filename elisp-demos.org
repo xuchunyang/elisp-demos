@@ -16602,6 +16602,15 @@ c 4. four
    (fill . "url(#gradient1)"))))
 #+END_EXAMPLE
 
+* svg-image
+
+#+BEGIN_SRC elisp
+(svg-image (svg-create 100 100))
+#+END_SRC
+
+#+RESULTS:
+: (image :type svg :data "<svg width=\"100\" height=\"100\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"></svg>" :scale 1)
+
 * svg-insert-image
 
 #+BEGIN_SRC elisp
