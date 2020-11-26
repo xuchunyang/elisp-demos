@@ -8801,6 +8801,23 @@
 #+RESULTS:
 : 1
 
+* gnutls-hash-mac
+
+#+BEGIN_SRC elisp
+;; ~ $ echo -n "value" | openssl dgst -sha1 -hmac "key"
+;; 57443a4c052350a44638835d64fd66822f813319
+(mapconcat
+ (lambda (char) (format "%02x" char))
+ (gnutls-hash-mac
+  (alist-get 'SHA1 (gnutls-macs))
+  "key"
+  "value")
+ "")
+#+END_SRC
+
+#+RESULTS:
+: "57443a4c052350a44638835d64fd66822f813319"
+
 * gnutls-negotiate
 
 #+BEGIN_SRC elisp
