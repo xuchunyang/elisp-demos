@@ -17639,6 +17639,15 @@ c 4. four
 #+RESULTS:
 : "hello%20world"
 
+* url-host
+
+#+BEGIN_SRC elisp
+(url-host (url-generic-parse-url "http://example.com/index.html"))
+#+END_SRC
+
+#+RESULTS:
+: "example.com"
+
 * url-http-user-agent-string
 
 #+BEGIN_SRC elisp
