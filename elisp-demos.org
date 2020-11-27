@@ -2898,6 +2898,15 @@
 :  (CMD . 1)
 :  (VER . 4))
 
+* bindat-vector-to-hex
+
+#+BEGIN_SRC elisp
+(bindat-vector-to-hex [0 1 2 255 256] " ")
+#+END_SRC
+
+#+RESULTS:
+: "00 01 02 ff 100"
+
 * bobp
 
 #+BEGIN_SRC elisp
