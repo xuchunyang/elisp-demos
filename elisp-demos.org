@@ -8801,6 +8801,15 @@
 #+RESULTS:
 : 1
 
+* gnutls-available-p
+
+#+BEGIN_SRC elisp
+(length (gnutls-available-p))
+#+END_SRC
+
+#+RESULTS:
+: 30
+
 * gnutls-hash-mac
 
 #+BEGIN_SRC elisp
