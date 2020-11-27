@@ -8854,6 +8854,27 @@
    "GET / HTTP/1.1\r\nHost: example.com\r\nConnection: Close\r\n\r\n"))
 #+END_SRC
 
+* gnutls-symmetric-decrypt
+
+#+BEGIN_SRC elisp
+(gnutls-symmetric-decrypt
+ 'RC2-40 "key12" "iv123456"
+ (unibyte-string
+  96 70 247 93 105 98 150 70))
+#+END_SRC
+
+#+RESULTS:
+: ("VALUE121" "iv123456")
+
+* gnutls-symmetric-encrypt
+
+#+BEGIN_SRC elisp
+(gnutls-symmetric-encrypt 'RC2-40 "key12" "iv123456" "VALUE121")
+#+END_SRC
+
+#+RESULTS:
+: ("`F\367]ib\226F" "iv123456")
+
 * goto-char
 
 #+BEGIN_SRC elisp :results silent
