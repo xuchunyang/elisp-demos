@@ -8820,6 +8820,9 @@
 : 30
 
 * gnutls-hash-mac
+:PROPERTIES:
+:added:    26.1
+:END:
 
 #+BEGIN_SRC elisp
 ;; ~ $ echo -n "value" | openssl dgst -sha1 -hmac "key"
