@@ -14856,6 +14856,16 @@ Content-Length: 606
 #+RESULTS:
 : "5d41402abc4b2a76b9719d911017c592"
 
+#+BEGIN_SRC elisp
+(mapconcat
+ (lambda (n) (format "%x" n))
+ (secure-hash 'md5 "hello" nil nil 'binary)
+ "")
+#+END_SRC
+
+#+RESULTS:
+: "5d41402abc4b2a76b9719d911017c592"
+
 * secure-hash-algorithms
 :PROPERTIES:
 :added:    26.1
