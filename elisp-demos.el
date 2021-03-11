@@ -208,6 +208,12 @@
                          'keymap elisp-demos-help-keymap)
              "\n\n")))))))
 
+;;;###autoload
+(defun elisp-demos-for-helpful ()
+  "Find a demo for the current `helpful' buffer."
+  (interactive)
+  (elisp-demos-find-demo helpful--sym))
+
 ;;; * JSON
 
 (declare-function json-encode-string "json" (string))
