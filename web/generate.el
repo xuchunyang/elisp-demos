@@ -16,8 +16,8 @@
                                     "")))
             (list
              (cons "name" title)
-             (cons "demo-src" src-txt)
-             (cons "demo-result" result-txt))
+             (cons "demo_src"  (replace-regexp-in-string "\n" "<br>" src-txt))
+             (cons "demo_result" (replace-regexp-in-string "\n" "<br>" result-txt)))
             ))))))
 
 (defun elisp-demos-generate-json ()
