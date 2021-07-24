@@ -4,4 +4,4 @@ var t;!function(e,r){"object"==typeof exports&&"undefined"!=typeof module?module
 },{}],"vZyd":[function(require,module,exports) {
 "use strict";var e=n(require("algoliasearch"));function n(e){return e&&e.__esModule?e:{default:e}}var t=(0,e.default)("9ALKW0EDLK","e26f227f28a5434dd8f751fce0959525"),c=t.initIndex("elisp-demos"),i=document.querySelector("#searchBox input[type=search]"),a=document.querySelector("#hits");function o(e){c.search(e).then(function(e){a.innerHTML='\n      <ol class="ais-hits">\n        '.concat(e.hits.map(function(e){return'<li class="ais-hits--item">\n      <article>\n      <h1>'.concat(e._highlightResult.name.value,"</h1>\n      <h5>Example</h5>\n      <p><code>").concat(e.demo_src,"</code></p>\n      <h5>Result</h5>\n      <p><code>").concat(e.demo_result,"</code></p>\n      </article>\n      </li>")}).join(""),"\n      </ol>")})}i.addEventListener("input",function(e){o(e.target.value)}),o("");
 },{"algoliasearch":"ApTp"}]},{},["vZyd"], null)
-//# sourceMappingURL=/app.aa484c5f.js.map
+//# sourceMappingURL=https://liujiacai.net/elisp-demos/app.aa484c5f.js.map
