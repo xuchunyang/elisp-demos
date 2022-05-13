@@ -5130,7 +5130,7 @@
 * condition-case
 :PROPERTIES:
 :changes:  27.1 A CONDITION-NAME of t applies to any symbol.
-:changes:  28.1 'condition-case' now allows for a success handler.
+:changes+:  28.1 'condition-case' now allows for a success handler.
 :END:
 
 #+BEGIN_SRC elisp
@@ -5466,7 +5466,7 @@
 * declare
 :PROPERTIES:
 :changes:  25.1 interactive-only is added.
-:changes:  28.1 completion and modes are added.
+:changes+:  28.1 completion and modes are added.
 :END:
 
 #+BEGIN_SRC elisp
@@ -17103,7 +17103,7 @@ c 4. four
 * thing-at-point
 :PROPERTIES:
 :changes:  28.1 New 'thing-at-point' target: 'existing-filename' and 'string'.
-:changes:  28.1 New variable 'thing-at-point-provider-alist'.
+:changes+:  28.1 New variable 'thing-at-point-provider-alist'.
 :END:
 
 #+BEGIN_SRC elisp :eval no
