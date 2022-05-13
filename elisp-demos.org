@@ -2748,6 +2748,18 @@
 #+RESULTS:
 : "Elapsed time: 1.087937s"
 
+* benchmark-call
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(benchmark-call (lambda () (sit-for 0.01)) 2.0)
+#+END_SRC
+
+#+RESULTS:
+: (211 3.319833 0 0.0)
+
 * benchmark-elapse
 
 #+BEGIN_SRC elisp
@@ -5118,6 +5130,7 @@
 * condition-case
 :PROPERTIES:
 :changes:  27.1 A CONDITION-NAME of t applies to any symbol.
+:changes:  28.1 'condition-case' now allows for a success handler.
 :END:
 
 #+BEGIN_SRC elisp
@@ -5453,6 +5466,7 @@
 * declare
 :PROPERTIES:
 :changes:  25.1 interactive-only is added.
+:changes:  28.1 completion and modes are added.
 :END:
 
 #+BEGIN_SRC elisp
@@ -5667,6 +5681,9 @@
 : nil
 
 * define-minor-mode
+:PROPERTIES:
+:changes:  28.1 'define-minor-mode' now takes an ':interactive' argument.
+:END:
 
 #+BEGIN_SRC elisp
 (define-minor-mode display-point-mode
@@ -6979,6 +6996,9 @@
 : 2.718281828459045
 
 * expand-file-name
+:PROPERTIES:
+:changes:  28.1 The function will now check for null bytes.
+:END:
 
 #+BEGIN_SRC elisp
 (expand-file-name "custom.el" user-emacs-directory)
@@ -9437,6 +9457,9 @@ todo.org
 : t
 
 * interactive
+:PROPERTIES:
+:changes:  28.1 The 'interactive' syntax has been extended to allow listing applicable modes.
+:END:
 
 #+BEGIN_SRC elisp :eval no
 (interactive "sName: \nbBuffer: \nP")
@@ -11519,6 +11542,18 @@ Process Date finished
 #+RESULTS:
 : "hello"
 
+* native-comp-available-p
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(native-comp-available-p)
+#+END_SRC
+
+#+RESULTS:
+: nil
+
 * natnump
 
 #+BEGIN_SRC elisp
@@ -12240,6 +12275,8 @@ Content-Length: 606
 :changes:  25.1 New UPatterns 'quote', 'app', 'cl-struct', 'eieio', 'seq', 'map'.
 :changes+: 25.1 New vector QPattern.
 :changes+: 26.1 The rx pattern is added.
+:changes+: 28.1 The 'pred' pattern can now take the form '(pred (not FUN))'.
+:changes+: 28.1 Added 'cl-type' pattern.
 :END:
 
 #+BEGIN_SRC elisp :results silent
@@ -12395,6 +12432,20 @@ Content-Length: 606
 
 #+RESULTS:
 : (2 1)
+
+* pcase-setq
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(let (a b)
+  (pcase-setq `((,a) [(,b)]) '((1) [(2)]))
+  (list a b))
+#+END_SRC
+
+#+RESULTS:
+: (1 2)
 
 * plist-get
 
@@ -13714,6 +13765,9 @@ Content-Length: 606
 : ("b" "c")
 
 * remove-hook
+:PROPERTIES:
+:changes:  28.1 'remove-hook' is now an interactive command.
+:END:
 
 #+BEGIN_SRC elisp :eval no
 (remove-hook 'lisp-interaction-mode-hook #'prettify-symbols-mode)
@@ -17047,6 +17101,10 @@ c 4. four
 :    (face italic)))
 
 * thing-at-point
+:PROPERTIES:
+:changes:  28.1 New 'thing-at-point' target: 'existing-filename' and 'string'.
+:changes:  28.1 New variable 'thing-at-point-provider-alist'.
+:END:
 
 #+BEGIN_SRC elisp :eval no
 (thing-at-point 'symbol)
@@ -18089,6 +18147,18 @@ c 4. four
 
 #+RESULTS:
 : (:narrowed "hello" :widened "hello world")
+
+* window-bump-use-time
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(window-bump-use-time)
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * window-frame
 
