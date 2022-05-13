@@ -6694,6 +6694,18 @@
 #+RESULTS:
 : nil
 
+* ensure-list
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(ensure-list 42)
+#+END_SRC
+
+#+RESULTS:
+: (42)
+
 * eobp
 
 #+BEGIN_SRC elisp
@@ -15984,6 +15996,18 @@ c 4. four
 #+RESULTS:
 : ("-o" "foo bar.txt")
 
+* split-string-shell-command
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(split-string-shell-command "ls -a -l '/'")
+#+END_SRC
+
+#+RESULTS:
+: ("ls" "-a" "-l" "/")
+
 * sqrt
 
 #+BEGIN_SRC elisp
@@ -16276,6 +16300,27 @@ c 4. four
 #+RESULTS:
 : 2
 
+* string-chop-newline
+
+#+BEGIN_SRC elisp
+(string-chop-newline "hello\nworld\n\n\n")
+#+END_SRC
+
+#+RESULTS:
+: "hello\nworld\n\n"
+
+* string-clean-whitespace
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(string-clean-whitespace "\thello    \rworld    \n ")
+#+END_SRC
+
+#+RESULTS:
+: "hello world"
+
 * string-distance
 :PROPERTIES:
 :added:    27.1
@@ -16300,6 +16345,15 @@ c 4. four
 #+RESULTS:
 : t
 
+* string-fill
+
+#+BEGIN_SRC elisp
+(string-fill (emacs-version) 48)
+#+END_SRC
+
+#+RESULTS:
+: "GNU Emacs 28.1 (build 1,\naarch64-apple-darwin21.4.0, NS appkit-2113.40\nVersion 12.3.1 (Build 21E258)) of 2022-05-08"
+
 * string-join
 :PROPERTIES:
 :added:    24.4
@@ -16311,6 +16365,30 @@ c 4. four
 
 #+RESULTS:
 : "a-b-c"
+
+* string-limit
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(string-limit "hello world" 5)
+#+END_SRC
+
+#+RESULTS:
+: "hello"
+
+* string-lines
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(string-lines "hello\nworld\n")
+#+END_SRC
+
+#+RESULTS:
+: ("hello" "world" "")
 
 * string-match
 
@@ -16341,6 +16419,18 @@ c 4. four
 
 #+RESULTS:
 : (t t nil nil)
+
+* string-pad
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(string-pad "12" 4 ?0 'start)
+#+END_SRC
+
+#+RESULTS:
+: "0012"
 
 * string-prefix-p
 :PROPERTIES:
@@ -16377,6 +16467,30 @@ c 4. four
 
 #+RESULTS:
 : "=> Hello"
+
+* string-replace
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(string-replace "bar" "BAR" "foobar")
+#+END_SRC
+
+#+RESULTS:
+: "fooBAR"
+
+* string-search
+:PROPERTIES:
+:added:    28.1
+:END:
+
+#+BEGIN_SRC elisp
+(string-search "bar" "foobar")
+#+END_SRC
+
+#+RESULTS:
+: 3
 
 * string-suffix-p
 :PROPERTIES:
