@@ -9867,10 +9867,14 @@ todo.org
 (json-encode '((id . 42)
                (comment ((author . "Spike")
                          (date . "2018-11-08")))))
+
+;; backquote
+(json-encode `((content . ,(concat "Hello, " "world"))))
 #+END_SRC
 
 #+RESULTS:
 : "{\"id\":42,\"comment\":[{\"author\":\"Spike\",\"date\":\"2018-11-08\"}]}"
+: "{\"content\":\"Hello, world\"}"
 
 * json-insert
 
