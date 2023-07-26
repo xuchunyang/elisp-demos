@@ -10824,7 +10824,7 @@ todo.org
 
 * make-network-process
 
-#+BEGIN_SRC elisp :results value raw :wrap EXAMPLE
+#+BEGIN_SRC elisp :results silent
 ;; HTTP client
 (let ((proc (make-network-process :name "example"
                                   :buffer "*example.com*"
@@ -10837,22 +10837,6 @@ todo.org
   (with-current-buffer (process-buffer proc)
     (buffer-string)))
 #+END_SRC
-
-#+RESULTS:
-#+BEGIN_EXAMPLE
-HTTP/1.1 200 OK
-Accept-Ranges: bytes
-Cache-Control: max-age=604800
-Content-Type: text/html; charset=UTF-8
-Date: Sat, 23 Nov 2019 07:46:49 GMT
-Etag: "3147526947"
-Expires: Sat, 30 Nov 2019 07:46:49 GMT
-Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
-Server: ECS (oxr/8313)
-X-Cache: HIT
-Content-Length: 1256
-
-#+END_EXAMPLE
 
 #+BEGIN_SRC elisp
 ;; TCP server
@@ -12178,7 +12162,7 @@ Process Date finished
 
 * open-network-stream
 
-#+BEGIN_SRC elisp :results drawer
+#+BEGIN_SRC elisp :results silent
 ;; curl -I example.com
 (let* ((buffer (get-buffer-create "*test*"))
        (process (open-network-stream "example" buffer
@@ -12191,23 +12175,6 @@ Process Date finished
   (with-current-buffer buffer
     (substring-no-properties (buffer-string))))
 #+END_SRC
-
-#+RESULTS:
-:RESULTS:
-HTTP/1.1 200 OK
-Content-Encoding: gzip
-Accept-Ranges: bytes
-Cache-Control: max-age=604800
-Content-Type: text/html; charset=UTF-8
-Date: Sun, 21 Apr 2019 13:12:28 GMT
-Etag: "1541025663+gzip"
-Expires: Sun, 28 Apr 2019 13:12:28 GMT
-Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
-Server: ECS (sjc/4E45)
-X-Cache: HIT
-Content-Length: 606
-
-:END:
 
 * or
 
@@ -18178,11 +18145,11 @@ c 4. four
 * url-http-user-agent-string
 
 #+BEGIN_SRC elisp
-(url-http-user-agent-string)
+(string-trim (url-http-user-agent-string))
 #+END_SRC
 
 #+RESULTS:
-: "User-Agent: URL/Emacs Emacs/26.2 (nil; x86_64-apple-darwin18.5.0)\n"
+: "User-Agent: URL/Emacs Emacs/28.2 (nil; aarch64-apple-darwin22.2.0)"
 
 * url-insert-file-contents
 
