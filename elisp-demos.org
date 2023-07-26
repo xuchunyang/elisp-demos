@@ -2017,7 +2017,7 @@
 #+END_SRC
 
 #+RESULTS:
-: (1 2 3)
+: (1 1 2 2 3)
 
 * -unzip
 
@@ -18182,8 +18182,7 @@ c 4. four
 #+END_SRC
 
 #+RESULTS:
-: "User-Agent: URL/Emacs Emacs/26.2 (nil; x86_64-apple-darwin18.5.0)
-\n"
+: "User-Agent: URL/Emacs Emacs/26.2 (nil; x86_64-apple-darwin18.5.0)\n"
 
 * url-insert-file-contents
 
