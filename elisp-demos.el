@@ -151,9 +151,9 @@ If set, new notes are added to the first file in this list."
   (insert (symbol-name symbol) "\n"
           "\n"
           "#+BEGIN_SRC elisp\n"
-          "\n"
+          (format "  (%s )\n" (symbol-name symbol))
           "#+END_SRC")
-  (search-backward "\n#+END_SRC"))
+  (search-backward ")\n#+END_SRC"))
 
 ;;; * C-h f (`describe-function')
 
