@@ -37,20 +37,28 @@
                                         "elisp-demos.org"
                                         elisp-demos--load-dir))
 
+(defcustom elisp-demos-user-files nil
+	"Files to search in addition to the one from the elisp-demos package.
+If set, new notes are added to the first file in this list."
+	:group 'help
+	:type '(repeat file))
+
 (defun elisp-demos--search (symbol)
-  (with-temp-buffer
-    (insert-file-contents elisp-demos--elisp-demos.org)
-    (goto-char (point-min))
-    (when (re-search-forward
-           (format "^\\* %s$" (regexp-quote (symbol-name symbol)))
-           nil t)
-      (let (beg end)
-        (forward-line 1)
-        (setq beg (point))
-        (if (re-search-forward "^\\*" nil t)
-            (setq end (line-beginning-position))
-          (setq end (point-max)))
-        (string-trim (buffer-substring-no-properties beg end))))))
+	(let (results)
+		(dolist (file (append elisp-demos-user-files (list elisp-demos--elisp-demos.org)))
+			(when (file-exists-p file)
+				(with-temp-buffer
+					(insert-file-contents file)
+					(delay-mode-hooks (org-mode))
+					(when-let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
+						(goto-char pos)
+						(org-end-of-meta-data)
+						(push (string-trim
+									 (buffer-substring-no-properties
+										(point)
+										(org-end-of-subtree)))
+									results)))))
+		(string-join (nreverse results) "\n\n")))
 
 (defun elisp-demos--syntax-highlight (orgsrc)
   (with-temp-buffer
@@ -117,24 +125,25 @@
   "Add demo for SYMBOL."
   (interactive
    (list (elisp-demos--read-symbol "Add demo: "
-                                   (lambda (sym)
-                                     (or (functionp sym)
-                                         (special-form-p sym)
-                                         (macrop sym))))))
+                        (lambda (sym)
+                          (or (functionp sym)
+                              (special-form-p sym)
+                              (macrop sym))))))
   ;; Try to reuse existing window
-  (let* ((buffer (get-file-buffer elisp-demos--elisp-demos\.org))
+  (let* ((file (or (car elisp-demos-user-files) elisp-demos--elisp-demos\.org))
+				 (buffer (get-file-buffer file))
          (window (and buffer (get-buffer-window buffer))))
     (if window
         (select-window window)
-      (find-file elisp-demos--elisp-demos\.org)))
+      (find-file file)))
   (goto-char (point-min))
   (or
    (catch 'found
      (while (re-search-forward "^\\* \\(.+\\)$" nil t)
-       (cond ((string= (match-string-no-properties 1) (symbol-name symbol))
+       (cond ((string= (org-entry-get (point) "ITEM") (symbol-name symbol))
               (goto-char (line-beginning-position))
               (user-error "%s already exists" symbol))
-             ((string< (symbol-name symbol) (match-string-no-properties 1))
+             ((string< (symbol-name symbol) (org-entry-get (point) "ITEM"))
               (goto-char (line-beginning-position))
               (throw 'found t)))))
    (goto-char (point-max)))
@@ -201,12 +210,14 @@
           (goto-char (line-beginning-position))
           (let ((inhibit-read-only t))
             (insert
-             (helpful--heading "Demos")
-             (propertize (elisp-demos--syntax-highlight src)
-                         'start (point)
-                         'symbol helpful--sym
-                         'keymap elisp-demos-help-keymap)
-             "\n\n")))))))
+						 (helpful--heading "Demos")
+						 (propertize (elisp-demos--syntax-highlight src)
+												 'start (point)
+												 'symbol helpful--sym
+												 'keymap elisp-demos-help-keymap)
+						 (if (string= src "") "" "\n\n")
+						 (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
+						 "\n\n")))))))
 
 ;;;###autoload
 (defun elisp-demos-for-helpful ()
