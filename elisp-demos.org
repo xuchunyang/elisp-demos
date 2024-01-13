@@ -9420,6 +9420,9 @@
 : (scale rotate90)
 
 * image-type-available-p
+:PROPERTIES:
+:changes:  29.1 Support for the WebP image format.
+:END:
 
 #+BEGIN_SRC elisp
 (image-type-available-p 'imagemagick)
@@ -16678,14 +16681,24 @@ c 4. four
 * string-lines
 :PROPERTIES:
 :added:    28.1
+:changes:  29.1 It no longer returns an empty final string if the string ends with a newline. The optional KEEP-NEWLINES argument is added.
 :END:
 
 #+BEGIN_SRC elisp
+;; Emacs 28.x
 (string-lines "hello\nworld\n")
 #+END_SRC
 
 #+RESULTS:
 : ("hello" "world" "")
+
+#+BEGIN_SRC elisp
+;; Emacs 29.1
+(string-lines "hello\nworld\n")
+#+END_SRC
+
+#+RESULTS:
+: ("hello" "world")
 
 * string-match
 
