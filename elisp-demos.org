@@ -3148,6 +3148,9 @@
 : messages-buffer-mode
 
 * buffer-modified-p
+:PROPERTIES:
+:changes:  29.1 The return value has been changed to nil/'autosaved'/non-nil
+:END:
 
 #+BEGIN_SRC elisp
 (buffer-modified-p)
@@ -5089,7 +5092,22 @@
 #+RESULTS:
 : 3
 
+* compiled-function-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(compiled-function-p (symbol-function 'car))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * completing-read
+:PROPERTIES:
+:changes:  29.1 Allows a function as its REQUIRE-MATCH argument.
+:END:
 
 #+BEGIN_SRC elisp
 (completing-read "Enter a name: " '("Tom" "Jerry" "Spike" "Tyke"))
@@ -7721,6 +7739,18 @@
 
 #+RESULTS:
 : t
+
+* file-attribute-file-identifier
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(file-attribute-file-identifier (file-attributes user-init-file))
+#+END_SRC
+
+#+RESULTS:
+: (1417104 16777233)
 
 * file-attribute-modes
 :PROPERTIES:
@@ -10649,6 +10679,9 @@ todo.org
 : save-buffers-kill-terminal
 
 * lsh
+:PROPERTIES:
+:changes:  29.1 Calling 'lsh' now elicits a byte-compiler warning.
+:END:
 
 #+BEGIN_SRC elisp
 (lsh #B111 1)
@@ -10910,6 +10943,7 @@ Process server-client-test connection broken by remote peer
 * make-process
 :PROPERTIES:
 :added:    25.1
+:changes:  29.1 'make-process' has been extended to support ptys when ':stderr' is set.
 :END:
 
 #+BEGIN_SRC elisp :results drawer
@@ -11580,6 +11614,9 @@ Process Date finished
 : 3
 
 * max-char
+:PROPERTIES:
+:changes:  29.1 The optional UNICODE argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (max-char)
@@ -12400,6 +12437,18 @@ Process Date finished
 #+RESULTS:
 : t
 
+* overlay-lists
+:PROPERTIES:
+:changes:  29.1 The function returns one unified list of overlays.
+:END:
+
+#+BEGIN_SRC elisp
+(overlay-lists)
+#+END_SRC
+
+#+RESULTS:
+: (nil)
+
 * overlay-properties
 
 #+BEGIN_SRC elisp
@@ -12426,6 +12475,9 @@ Process Date finished
 : bold
 
 * overlay-recenter
+:PROPERTIES:
+:changes:  29.1 The function 'overlay-recenter' is now a no-op.
+:END:
 
 #+BEGIN_SRC elisp
 (overlay-recenter (point-max))
@@ -12705,6 +12757,9 @@ Process Date finished
 : (1 2)
 
 * plist-get
+:PROPERTIES:
+:changes:  29.1 The optional PREDICATE argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (plist-get '(:a 1 :b 2 :c 3) :b)
@@ -12714,6 +12769,9 @@ Process Date finished
 : 2
 
 * plist-member
+:PROPERTIES:
+:changes:  29.1 The optional PREDICATE argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (plist-member '(:x nil) :x)
@@ -12730,6 +12788,9 @@ Process Date finished
 : nil
 
 * plist-put
+:PROPERTIES:
+:changes:  29.1 The optional PREDICATE argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (let ((plist (list :a 1 :b 2)))
@@ -12814,6 +12875,30 @@ Process Date finished
 #+RESULTS:
 : t
 
+* pos-bol
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(pos-bol)
+#+END_SRC
+
+#+RESULTS:
+: 182190
+
+* pos-eol
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(pos-eol)
+#+END_SRC
+
+#+RESULTS:
+: 182305
+
 * pos-tip-show
 
 #+BEGIN_SRC elisp
@@ -12877,6 +12962,9 @@ Process Date finished
 : 5
 
 * prin1
+:PROPERTIES:
+:changes:  29.1 'prin1' doesn't always escape "." and "?" in symbols any more.
+:END:
 
 #+BEGIN_SRC elisp :results output
 (prin1 "hello")
@@ -13805,6 +13893,7 @@ Process Date finished
 * read-multiple-choice
 :PROPERTIES:
 :added:    26.1
+:changes:  29.1 The optional SHOW-HELP and LONG-FORM arguments are added.
 :END:
 
 #+BEGIN_SRC elisp
@@ -15893,6 +15982,9 @@ Process Date finished
 : ["(" "_"]
 
 * set-transient-map
+:PROPERTIES:
+:changes:  29.1 New arguments MESSAGE and TIMEOUT of 'set-transient-map'.
+:END:
 
 #+BEGIN_SRC elisp :eval no
 (set-transient-map
@@ -16645,6 +16737,18 @@ c 4. four
 #+RESULTS:
 : t
 
+* string-equal-ignore-case
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(string-equal-ignore-case "hello" "HELLO")
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * string-fill
 
 #+BEGIN_SRC elisp
@@ -17289,6 +17393,9 @@ c 4. four
 #+END_EXAMPLE
 
 * symbol-file
+:PROPERTIES:
+:changes:  29.1 The optional NATIVE-P argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (symbol-file 'pcase)
@@ -17716,6 +17823,7 @@ c 4. four
 * time-convert
 :PROPERTIES:
 :added:    27.1
+:changes:  29.1 The FORM argument of 'time-convert' is mandatory.
 :END:
 
 #+BEGIN_SRC elisp
@@ -18712,6 +18820,25 @@ c 4. four
 #+RESULTS:
 : t
 
+* with-memoization
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let* ((cache nil)
+       (func (lambda ()
+               (with-memoization cache
+                 (with-current-buffer
+                     (url-retrieve-synchronously "https://example.com/")
+                   (current-time))))))
+  (equal (funcall func)
+         (funcall func)))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * with-output-to-string
 
 #+BEGIN_SRC elisp
@@ -18721,6 +18848,21 @@ c 4. four
 
 #+RESULTS:
 : "Hello World"
+
+* with-restriction
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello world")
+  (with-restriction 1 6
+    (buffer-string)))
+#+END_SRC
+
+#+RESULTS:
+: "hello"
 
 * with-silent-modifications
 
@@ -18816,6 +18958,22 @@ c 4. four
 
 #+RESULTS:
 : "You've not type any key"
+
+* without-restriction
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello world")
+  (with-restriction 1 6
+    (without-restriction
+      (buffer-string))))
+#+END_SRC
+
+#+RESULTS:
+: "hello world"
 
 * write-char
 
