@@ -208,21 +208,23 @@ If set, new notes are added to the first file in this list."
 (defun elisp-demos-advice-helpful-update ()
   (let ((src (and (symbolp helpful--sym)
                   (elisp-demos--search helpful--sym))))
-    (when src
-      (save-excursion
-        (goto-char (point-min))
-        (when (re-search-forward "^References$")
-          (goto-char (line-beginning-position))
-          (let ((inhibit-read-only t))
-            (insert
-						 (helpful--heading "Demos")
-						 (propertize (elisp-demos--syntax-highlight src)
-												 'start (point)
-												 'symbol helpful--sym
-												 'keymap elisp-demos-help-keymap)
-						 (if (string= src "") "" "\n\n")
-						 (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
-						 "\n\n")))))))
+    (save-excursion
+      (goto-char (point-min))
+      (when (re-search-forward "^References$")
+        (goto-char (line-beginning-position))
+        (let ((inhibit-read-only t))
+          (insert
+					 (helpful--heading "Demos")
+					 (if (and src (not (string= src "")))
+							 (concat
+								(propertize (elisp-demos--syntax-highlight src)
+														'start (point)
+											 			'symbol helpful--sym
+														'keymap elisp-demos-help-keymap)
+								 "\n\n")
+						 "")
+					 (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
+					 "\n\n"))))))
 
 ;;;###autoload
 (defun elisp-demos-for-helpful ()
