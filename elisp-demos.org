@@ -3147,6 +3147,19 @@
 #+RESULTS:
 : messages-buffer-mode
 
+* buffer-match-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((case-fold-search t))
+  (buffer-match-p "messages" (get-buffer "*Messages*")))
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * buffer-modified-p
 :PROPERTIES:
 :changes:  29.1 The return value has been changed to nil/'autosaved'/non-nil
@@ -3229,6 +3242,20 @@
 
 #+RESULTS:
 : ("world" "hello")
+
+* buffer-text-pixel-size
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (insert "hello")
+  (buffer-text-pixel-size))
+#+END_SRC
+
+#+RESULTS:
+: (40 . 18)
 
 * bufferp
 
@@ -3630,6 +3657,18 @@
 
 #+RESULTS:
 : "A"
+
+* char-uppercase-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(char-uppercase-p ?A)
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * char-width
 
@@ -5407,6 +5446,18 @@
 
 #+RESULTS:
 : 5
+
+* current-cpu-time
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(current-cpu-time)
+#+END_SRC
+
+#+RESULTS:
+: (66672543 . 1000000)
 
 * current-idle-time
 
@@ -8048,6 +8099,18 @@
 #+RESULTS:
 : "elisp-demos"
 
+* file-name-parent-directory
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(file-name-parent-directory "/path/to/file")
+#+END_SRC
+
+#+RESULTS:
+: "/path/to/"
+
 * file-name-sans-extension
 
 #+BEGIN_SRC elisp
@@ -8065,6 +8128,18 @@
 
 #+RESULTS:
 : "README.md"
+
+* file-name-split
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(file-name-split "/path/to/file")
+#+END_SRC
+
+#+RESULTS:
+: ("" "path" "to" "file")
 
 * file-name-with-extension
 :PROPERTIES:
@@ -8623,6 +8698,9 @@
 : "Emacs is 33 years, 247 days, 21 hours, 32 minutes, 51 seconds old"
 
 * format-spec
+:PROPERTIES:
+:changes:  29.1 'format-spec' now accepts functions in the replacement.
+:END:
 
 #+BEGIN_SRC elisp
 (format-spec "%a + %b = %b + %a" '((?a . 1) (?b . 2)))
@@ -8763,6 +8841,18 @@
 
 #+RESULTS:
 : 6
+
+* function-alias-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(function-alias-p 'join-line)
+#+END_SRC
+
+#+RESULTS:
+: (delete-indentation)
 
 * function-get
 :PROPERTIES:
@@ -9368,6 +9458,18 @@
 
 #+RESULTS:
 : 42
+
+* ietf-drums-parse-date-string
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(ietf-drums-parse-date-string "Tue, 16 Jan 2024 00:02:50 +0800")
+#+END_SRC
+
+#+RESULTS:
+: (50 2 0 16 1 2024 2 -1 28800)
 
 * if
 
@@ -10076,6 +10178,18 @@ todo.org
 
 #+RESULTS:
 : save-buffer
+
+* key-valid-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(key-valid-p "C-c C-c")
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * keymap-parent
 
@@ -11533,6 +11647,9 @@ Process Date finished
 : (2 3 4)
 
 * mapconcat
+:PROPERTIES:
+:changes:  29.1 Third 'mapconcat' argument SEPARATOR is now optional.
+:END:
 
 #+BEGIN_SRC elisp
 (mapconcat #'identity '("abc" "def" "ghi") ", ")
@@ -11563,6 +11680,15 @@ Process Date finished
 
 #+RESULTS:
 : t
+
+* match-buffers
+
+#+BEGIN_SRC elisp
+(match-buffers '(major-mode . lisp-interaction-mode))
+#+END_SRC
+
+#+RESULTS:
+: (#<buffer *scratch*>)
 
 * match-data
 
@@ -12004,6 +12130,20 @@ Process Date finished
 
 #+RESULTS:
 : (4 3 2 1)
+
+* ntake
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((l (list 1 2 3 4)))
+  (ntake 2 l)
+  l)
+#+END_SRC
+
+#+RESULTS:
+: (1 2)
 
 * nth
 
@@ -12939,6 +13079,17 @@ Process Date finished
 #+RESULTS:
 : "(lambda\n  (a y)\n  (+ x y))\n"
 
+* pp-emacs-lisp-code
+
+#+BEGIN_SRC elisp
+(with-temp-buffer
+  (pp-emacs-lisp-code '(lambda (a b) (+ a b)))
+  (buffer-string))
+#+END_SRC
+
+#+RESULTS:
+: "(lambda (a b)\n  (+ a b))\n"
+
 * previous-frame
 
 #+BEGIN_SRC elisp
@@ -12964,6 +13115,7 @@ Process Date finished
 * prin1
 :PROPERTIES:
 :changes:  29.1 'prin1' doesn't always escape "." and "?" in symbols any more.
+:changes:  29.1 The optional OVERRIDES argument is added.
 :END:
 
 #+BEGIN_SRC elisp :results output
@@ -12983,6 +13135,9 @@ Process Date finished
 : "?a"
 
 * prin1-to-string
+:PROPERTIES:
+:changes:  29.1 The optional OVERRIDES argument is added.
+:END:
 
 #+BEGIN_SRC elisp
 (list (prin1-to-string 'symbol)
@@ -13956,6 +14111,18 @@ Process Date finished
 #+BEGIN_SRC elisp
 (read-string "Enter your name: ")
 #+END_SRC
+
+* readablep
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(readablep (current-buffer))
+#+END_SRC
+
+#+RESULTS:
+: nil
 
 * recent-keys
 :PROPERTIES:
@@ -15536,6 +15703,21 @@ Process Date finished
 #+RESULTS:
 : (1 2 3)
 
+* seq-keep
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(seq-keep (lambda (n)
+            (and (cl-evenp n)
+                 (* 2 n)))
+          (number-sequence 1 5))
+#+END_SRC
+
+#+RESULTS:
+: (4 8)
+
 * seq-length
 
 #+BEGIN_SRC elisp
@@ -15651,6 +15833,18 @@ Process Date finished
 #+RESULTS:
 : 1
 
+* seq-positions
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(seq-positions '(a b c a) 'a #'eq)
+#+END_SRC
+
+#+RESULTS:
+: (0 3)
+
 * seq-random-elt
 :PROPERTIES:
 :added:    26.1
@@ -15680,6 +15874,18 @@ Process Date finished
 
 #+RESULTS:
 : (-1 -3)
+
+* seq-remove-at-position
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(seq-remove-at-position (list 1 2 3) 1)
+#+END_SRC
+
+#+RESULTS:
+: (1 3)
 
 * seq-rest
 :PROPERTIES:
@@ -15743,6 +15949,20 @@ Process Date finished
 
 #+RESULTS:
 : ["abc" "ab" "a"]
+
+* seq-split
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(seq-split (number-sequence 1 5) 2)
+#+END_SRC
+
+#+RESULTS:
+: ((1 2)
+:  (3 4)
+:  (5))
 
 * seq-subseq
 
@@ -16107,6 +16327,9 @@ Process Date finished
 : "hello world\n"
 
 * shell-quote-argument
+:PROPERTIES:
+:changes:  29.1 The optional argument POSIX is added.
+:END:
 
 #+BEGIN_SRC elisp
 (shell-quote-argument "Library/Application Support")
@@ -16399,6 +16622,81 @@ c 4. four
 
 #+RESULTS:
 : ("ls" "-a" "-l" "/")
+
+* sqlite-available-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(sqlite-available-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* sqlite-execute
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((db (sqlite-open)))
+  (prog1 (sqlite-execute db "SELECT 1 + 2")
+    (sqlite-close db)))
+#+END_SRC
+
+#+RESULTS:
+: ((3))
+
+* sqlite-next
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((db (sqlite-open)))
+  (sqlite-execute db "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)")
+  (sqlite-execute db "INSERT INTO users (name) VALUES (?), (?), (?)"
+                  (list "alice" "bob" "calb"))
+  (prog1 (let ((statement (sqlite-select db "select * from users" nil 'set))
+               (rows nil))
+           (while-let ((row (sqlite-next statement)))
+             (push row rows))
+           (nreverse rows))
+    (sqlite-close db)))
+#+END_SRC
+
+#+RESULTS:
+: ((1 "alice")
+:  (2 "bob")
+:  (3 "calb"))
+
+* sqlite-open
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((db (sqlite-open)))
+  (prog1 db
+    (sqlite-close db)))
+#+END_SRC
+
+#+RESULTS:
+: #<sqlite db=0x0 name=:memory:3>
+
+* sqlite-version
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(sqlite-version)
+#+END_SRC
+
+#+RESULTS:
+: "3.39.5"
 
 * sqrt
 
@@ -17500,6 +17798,18 @@ c 4. four
 
 #+RESULTS:
 : "Chunyangs-MacBook-Air.local"
+
+* take
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(take 2 (list 1 2 3 4))
+#+END_SRC
+
+#+RESULTS:
+: (1 2)
 
 * tan
 
@@ -18785,6 +19095,16 @@ c 4. four
 
 #+RESULTS:
 : #<buffer *Messages*>
+
+* with-delayed-message
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(with-delayed-message (1 "This takes too long")
+  (sleep-for 1.2))
+#+END_SRC
 
 * with-demoted-errors
 
