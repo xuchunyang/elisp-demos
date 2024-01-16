@@ -84,7 +84,7 @@ If set, new notes are added to the first file in this list."
         (delay-mode-hooks (org-mode))
         (while (re-search-forward "^\\* +\\(.+\\)$" nil t)
           (push (org-entry-get (point) "ITEM") symbols))))
-    (mapcar 'intern (sort (seq-uniq symbols) #'string<))))
+    (mapcar 'intern (sort (cl-remove-duplicates symbols :test #'eq) #'string<))))
 
 (defun elisp-demos-find-demo (symbol)
   "Find the demo of the SYMBOL."
