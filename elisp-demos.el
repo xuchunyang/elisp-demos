@@ -1,11 +1,11 @@
 ;;; elisp-demos.el --- Elisp API Demos               -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018-2020  Xu Chunyang
+;; Copyright (C) 2018-2024  Xu Chunyang
 
 ;; Author: Xu Chunyang
 ;; Homepage: https://github.com/xuchunyang/elisp-demos
 ;; Keywords: lisp, docs
-;; Version: 2020.03.30
+;; Version: 2024.01.16
 ;; Package-Requires: ((emacs "24.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
