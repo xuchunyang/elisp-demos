@@ -27,7 +27,7 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl-lib))
+(require 'cl-lib)
 (require 'subr-x)
 (require 'org)
 
@@ -85,7 +85,7 @@ If set, new notes are added to the first file in this list."
         (delay-mode-hooks (org-mode))
         (while (re-search-forward "^\\* +\\(.+\\)$" nil t)
           (push (org-entry-get (point) "ITEM") symbols))))
-    (mapcar 'intern (sort (cl-remove-duplicates symbols :test #'eq) #'string<))))
+    (mapcar 'intern (sort (cl-delete-duplicates symbols :test #'eq) #'string<))))
 
 (defun elisp-demos-find-demo (symbol)
   "Find the demo of the SYMBOL."
