@@ -31,26 +31,35 @@
 (require 'subr-x)
 
 (defconst elisp-demos--load-dir (file-name-directory
-                                 (or load-file-name buffer-file-name)))
+                      (or load-file-name buffer-file-name)))
 
 (defconst elisp-demos--elisp-demos.org (expand-file-name
-                                        "elisp-demos.org"
-                                        elisp-demos--load-dir))
+                             "elisp-demos.org"
+                             elisp-demos--load-dir))
+
+(defcustom elisp-demos-user-files nil
+  "Files to search in addition to the one from the elisp-demos package.
+If set, new notes are added to the first file in this list."
+  :group 'help
+  :type '(repeat file))
 
 (defun elisp-demos--search (symbol)
-  (with-temp-buffer
-    (insert-file-contents elisp-demos--elisp-demos.org)
-    (goto-char (point-min))
-    (when (re-search-forward
-           (format "^\\* %s$" (regexp-quote (symbol-name symbol)))
-           nil t)
-      (let (beg end)
-        (forward-line 1)
-        (setq beg (point))
-        (if (re-search-forward "^\\*" nil t)
-            (setq end (line-beginning-position))
-          (setq end (point-max)))
-        (string-trim (buffer-substring-no-properties beg end))))))
+  (let (results)
+    (dolist (file (append elisp-demos-user-files (list elisp-demos--elisp-demos.org)))
+      (when (file-exists-p file)
+        (with-temp-buffer
+          (insert-file-contents file)
+          (delay-mode-hooks (org-mode))
+          (when-let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
+            (goto-char pos)
+            (org-end-of-meta-data)
+            (push (string-trim
+                   (buffer-substring-no-properties
+                    (point)
+                    (org-end-of-subtree)))
+                  results)))))
+    (when results
+      (string-join (nreverse results) "\n\n"))))
 
 (defun elisp-demos--syntax-highlight (orgsrc)
   (with-temp-buffer
@@ -63,13 +72,15 @@
     (buffer-string)))
 
 (defun elisp-demos--symbols ()
-  (with-temp-buffer
-    (insert-file-contents elisp-demos--elisp-demos.org)
-    (goto-char (point-min))
-    (let (symbols)
-      (while (re-search-forward "^\\* \\(.+\\)$" nil t)
-        (push (intern (match-string-no-properties 1)) symbols))
-      (nreverse symbols))))
+  (let (symbols)
+    (dolist (file (append elisp-demos-user-files (list elisp-demos--elisp-demos.org)))
+      (with-temp-buffer
+        (insert-file-contents file)
+        (goto-char (point-min))
+        (delay-mode-hooks (org-mode))
+        (while (re-search-forward "^\\* +\\(.+\\)$" nil t)
+          (push (org-entry-get (point) "ITEM") symbols))))
+    (mapcar 'intern (sort (seq-uniq symbols) #'string<))))
 
 (declare-function org-show-entry "org" ())
 (declare-function org-insert-heading "org" (&optional arg invisible-ok top))
@@ -89,20 +100,22 @@
                                   (mapcar #'symbol-name symbols)
                                   nil t nil nil default-val)))))
   (cl-assert symbol)
-  (find-file elisp-demos--elisp-demos.org)
-  (goto-char (point-min))
-  (and (re-search-forward
-        (format "^\\* %s$" (regexp-quote (symbol-name symbol))))
-       (goto-char (line-beginning-position))
-       (org-show-entry))
+  (catch 'found
+    (dolist (file (append elisp-demos-user-files (list elisp-demos--elisp-demos.org)))
+      (with-current-buffer (find-file-noselect file)
+        (let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
+          (when pos
+            (goto-char pos)
+            (org-show-entry)
+            (throw 'found (point)))))))
   t)
 
 ;; Borrowed from `helpful--read-symbol'
 (defun elisp-demos--read-symbol (prompt predicate)
   (let* ((sym-here (symbol-at-point))
          (default-val
-           (when (funcall predicate sym-here)
-             (symbol-name sym-here))))
+          (when (funcall predicate sym-here)
+            (symbol-name sym-here))))
     (when default-val
       (setq prompt
             (replace-regexp-in-string
@@ -122,19 +135,20 @@
                                          (special-form-p sym)
                                          (macrop sym))))))
   ;; Try to reuse existing window
-  (let* ((buffer (get-file-buffer elisp-demos--elisp-demos\.org))
+  (let* ((file (or (car elisp-demos-user-files) elisp-demos--elisp-demos\.org))
+         (buffer (get-file-buffer file))
          (window (and buffer (get-buffer-window buffer))))
     (if window
         (select-window window)
-      (find-file elisp-demos--elisp-demos\.org)))
+      (find-file file)))
   (goto-char (point-min))
   (or
    (catch 'found
      (while (re-search-forward "^\\* \\(.+\\)$" nil t)
-       (cond ((string= (match-string-no-properties 1) (symbol-name symbol))
+       (cond ((string= (org-entry-get (point) "ITEM") (symbol-name symbol))
               (goto-char (line-beginning-position))
               (user-error "%s already exists" symbol))
-             ((string< (symbol-name symbol) (match-string-no-properties 1))
+             ((string< (symbol-name symbol) (org-entry-get (point) "ITEM"))
               (goto-char (line-beginning-position))
               (throw 'found t)))))
    (goto-char (point-max)))
@@ -142,9 +156,9 @@
   (insert (symbol-name symbol) "\n"
           "\n"
           "#+BEGIN_SRC elisp\n"
-          "\n"
+          (format "  (%s )\n" (symbol-name symbol))
           "#+END_SRC")
-  (search-backward "\n#+END_SRC"))
+  (search-backward ")\n#+END_SRC"))
 
 ;;; * C-h f (`describe-function')
 
@@ -194,19 +208,23 @@
 (defun elisp-demos-advice-helpful-update ()
   (let ((src (and (symbolp helpful--sym)
                   (elisp-demos--search helpful--sym))))
-    (when src
-      (save-excursion
-        (goto-char (point-min))
-        (when (re-search-forward "^References$")
-          (goto-char (line-beginning-position))
-          (let ((inhibit-read-only t))
-            (insert
-             (helpful--heading "Demos")
-             (propertize (elisp-demos--syntax-highlight src)
-                         'start (point)
-                         'symbol helpful--sym
-                         'keymap elisp-demos-help-keymap)
-             "\n\n")))))))
+    (save-excursion
+      (goto-char (point-min))
+      (when (re-search-forward "^References$")
+        (goto-char (line-beginning-position))
+        (let ((inhibit-read-only t))
+          (insert
+           (helpful--heading "Demos")
+           (if (and src (not (string= src "")))
+               (concat
+                (propertize (elisp-demos--syntax-highlight src)
+                            'start (point)
+                             'symbol helpful--sym
+                            'keymap elisp-demos-help-keymap)
+                "\n\n")
+             "")
+           (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
+           "\n\n"))))))
 
 ;;;###autoload
 (defun elisp-demos-for-helpful ()
@@ -221,32 +239,34 @@
 (defun elisp-demos--export-json-file (json-file)
   "Export all demos as json to JSON-FILE."
   (require 'json)
-  (with-temp-buffer
-    (insert-file-contents elisp-demos--elisp-demos.org)
-    (goto-char (point-min))
-    (let ((output-buffer (generate-new-buffer " *elisp-demos-json*"))
-          title body beg end)
-      (while (re-search-forward "^\\* \\(.+\\)$" nil t)
-        (setq title (match-string-no-properties 1))
-        (setq beg (save-excursion
-                    (forward-line 1)
-                    (line-beginning-position)))
-        (setq end (save-excursion
-                    (if (re-search-forward "^\\* " nil t)
-                        (line-beginning-position)
-                      (point-max))))
-        (setq body (buffer-substring-no-properties beg end))
-        (setq title (string-trim title))
-        (setq body (string-trim body))
-        (with-current-buffer output-buffer
-          (insert
-           (json-encode-string title) ": " (json-encode-string body) ",\n")))
-      (with-current-buffer output-buffer
-        (delete-char -2)
-        (goto-char (point-min)) (insert "{\n")
-        (goto-char (point-max)) (insert "}\n")
-        (write-region (point-min) (point-max) json-file))
-      (kill-buffer output-buffer))))
+  (let ((output-buffer (generate-new-buffer " *elisp-demos-json*"))
+        title body beg end)
+    (dolist (file (append elisp-demos-user-files (list elisp-demos--elisp-demos.org)))
+      (with-temp-buffer
+        (insert-file-contents file)
+        (goto-char (point-min))
+        (delay-mode-hooks (org-mode))
+        (while (re-search-forward "^\\* +\\(.+\\)$" nil t)
+          (setq title (org-entry-get (point) "ITEM"))
+          (setq beg (save-excursion
+                      (forward-line 1)
+                      (line-beginning-position)))
+          (setq end (save-excursion
+                      (if (re-search-forward "^\\* " nil t)
+                          (line-beginning-position)
+                        (point-max))))
+          (setq body (buffer-substring-no-properties beg end))
+          (setq title (string-trim title))
+          (setq body (string-trim body))
+          (with-current-buffer output-buffer
+            (insert
+             (json-encode-string title) ": " (json-encode-string body) ",\n")))))
+    (with-current-buffer output-buffer
+      (delete-char -2)
+      (goto-char (point-min)) (insert "{\n")
+      (goto-char (point-max)) (insert "}\n")
+      (write-region (point-min) (point-max) json-file))
+    (kill-buffer output-buffer)))
 
 (provide 'elisp-demos)
 ;;; elisp-demos.el ends here
