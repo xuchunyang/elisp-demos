@@ -29,9 +29,10 @@
 
 (eval-when-compile (require 'cl-lib))
 (require 'subr-x)
+(require 'org)
 
 (defconst elisp-demos--load-dir (file-name-directory
-                      (or load-file-name buffer-file-name)))
+                                 (or load-file-name buffer-file-name)))
 
 (defconst elisp-demos--elisp-demos.org (expand-file-name
                              "elisp-demos.org"
@@ -84,9 +85,6 @@ If set, new notes are added to the first file in this list."
         (while (re-search-forward "^\\* +\\(.+\\)$" nil t)
           (push (org-entry-get (point) "ITEM") symbols))))
     (mapcar 'intern (sort (seq-uniq symbols) #'string<))))
-
-(declare-function org-show-entry "org" ())
-(declare-function org-insert-heading "org" (&optional arg invisible-ok top))
 
 (defun elisp-demos-find-demo (symbol)
   "Find the demo of the SYMBOL."
