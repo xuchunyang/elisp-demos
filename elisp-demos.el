@@ -51,17 +51,18 @@ If set, new notes are added to the first file in this list."
         (with-temp-buffer
           (insert-file-contents file)
           (delay-mode-hooks (org-mode))
-          (when-let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
-            (goto-char pos)
-            (org-end-of-meta-data)
-            (push (propertize
-                   (string-trim
-                    (buffer-substring-no-properties
-                     (point)
-                     (org-end-of-subtree)))
-                   'file file
-                   'pos (marker-position pos))
-                  results)))))
+          (let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
+            (when pos
+              (goto-char pos)
+              (org-end-of-meta-data)
+              (push (propertize
+                     (string-trim
+                      (buffer-substring-no-properties
+                       (point)
+                       (org-end-of-subtree)))
+                     'file file
+                     'pos (marker-position pos))
+                    results))))))
     (when results
       (string-join (nreverse results) "\n\n"))))
 
