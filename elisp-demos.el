@@ -31,11 +31,11 @@
 (require 'subr-x)
 
 (defconst elisp-demos--load-dir (file-name-directory
-                                 (or load-file-name buffer-file-name)))
+                      (or load-file-name buffer-file-name)))
 
 (defconst elisp-demos--elisp-demos.org (expand-file-name
-                                        "elisp-demos.org"
-                                        elisp-demos--load-dir))
+                             "elisp-demos.org"
+                             elisp-demos--load-dir))
 
 (defcustom elisp-demos-user-files nil
 	"Files to search in addition to the one from the elisp-demos package.
@@ -114,8 +114,8 @@ If set, new notes are added to the first file in this list."
 (defun elisp-demos--read-symbol (prompt predicate)
   (let* ((sym-here (symbol-at-point))
          (default-val
-           (when (funcall predicate sym-here)
-             (symbol-name sym-here))))
+          (when (funcall predicate sym-here)
+            (symbol-name sym-here))))
     (when default-val
       (setq prompt
             (replace-regexp-in-string
@@ -130,10 +130,10 @@ If set, new notes are added to the first file in this list."
   "Add demo for SYMBOL."
   (interactive
    (list (elisp-demos--read-symbol "Add demo: "
-                        (lambda (sym)
-                          (or (functionp sym)
-                              (special-form-p sym)
-                              (macrop sym))))))
+                                   (lambda (sym)
+                                     (or (functionp sym)
+                                         (special-form-p sym)
+                                         (macrop sym))))))
   ;; Try to reuse existing window
   (let* ((file (or (car elisp-demos-user-files) elisp-demos--elisp-demos\.org))
 				 (buffer (get-file-buffer file))
@@ -221,7 +221,7 @@ If set, new notes are added to the first file in this list."
 														'start (point)
 											 			'symbol helpful--sym
 														'keymap elisp-demos-help-keymap)
-								 "\n\n")
+								"\n\n")
 						 "")
 					 (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
 					 "\n\n"))))))
