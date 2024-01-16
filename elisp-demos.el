@@ -226,7 +226,13 @@ If set, new notes are added to the first file in this list."
                             'keymap elisp-demos-help-keymap)
                 "\n\n")
              "")
-           (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
+           (if (fboundp 'buttonize)
+               (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
+             (insert-text-button
+              "[Add]"
+              'face 'link
+              'action (lambda (_button)
+                        (elisp-demos-add-demo helpful--sym))))
            "\n\n"))))))
 
 ;;;###autoload
