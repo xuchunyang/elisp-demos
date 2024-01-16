@@ -53,10 +53,13 @@ If set, new notes are added to the first file in this list."
           (when-let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
             (goto-char pos)
             (org-end-of-meta-data)
-            (push (string-trim
-                   (buffer-substring-no-properties
-                    (point)
-                    (org-end-of-subtree)))
+            (push (propertize
+                   (string-trim
+                    (buffer-substring-no-properties
+                     (point)
+                     (org-end-of-subtree)))
+                   'file file
+                   'pos (marker-position pos))
                   results)))))
     (when results
       (string-join (nreverse results) "\n\n"))))
@@ -165,11 +168,10 @@ If set, new notes are added to the first file in this list."
 (defun elisp-demos-help-find-demo-at-point ()
   "Find the demo at point."
   (interactive)
-  (let ((offset (- (point) (get-text-property (point) 'start))))
-    (and (elisp-demos-find-demo (get-text-property (point) 'symbol))
-         ;; Skip heading and an empty line
-         (forward-line 2)
-         (forward-char offset))))
+  (let ((file (get-text-property (point) 'file))
+        (pos (get-text-property (point) 'pos)))
+    (find-file file)
+    (goto-char pos)))
 
 (defvar elisp-demos-help-keymap
   (let ((map (make-sparse-keymap)))
@@ -230,7 +232,10 @@ If set, new notes are added to the first file in this list."
 (defun elisp-demos-for-helpful ()
   "Find a demo for the current `helpful' buffer."
   (interactive)
-  (elisp-demos-find-demo helpful--sym))
+  (let ((file (get-text-property (point) 'file))
+        (pos (get-text-property (point) 'pos)))
+    (find-file file)
+    (goto-char pos)))
 
 ;;; * JSON
 
