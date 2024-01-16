@@ -6,7 +6,7 @@
 ;; Homepage: https://github.com/xuchunyang/elisp-demos
 ;; Keywords: lisp, docs
 ;; Version: 2024.01.16
-;; Package-Requires: ((emacs "24.4"))
+;; Package-Requires: ((emacs "26.3"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,11 +27,12 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl-lib))
+(require 'cl-lib)
 (require 'subr-x)
+(require 'org)
 
 (defconst elisp-demos--load-dir (file-name-directory
-                      (or load-file-name buffer-file-name)))
+                                 (or load-file-name buffer-file-name)))
 
 (defconst elisp-demos--elisp-demos.org (expand-file-name
                              "elisp-demos.org"
@@ -50,14 +51,18 @@ If set, new notes are added to the first file in this list."
         (with-temp-buffer
           (insert-file-contents file)
           (delay-mode-hooks (org-mode))
-          (when-let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
-            (goto-char pos)
-            (org-end-of-meta-data)
-            (push (string-trim
-                   (buffer-substring-no-properties
-                    (point)
-                    (org-end-of-subtree)))
-                  results)))))
+          (let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
+            (when pos
+              (goto-char pos)
+              (org-end-of-meta-data)
+              (push (propertize
+                     (string-trim
+                      (buffer-substring-no-properties
+                       (point)
+                       (org-end-of-subtree)))
+                     'file file
+                     'pos (marker-position pos))
+                    results))))))
     (when results
       (string-join (nreverse results) "\n\n"))))
 
@@ -80,10 +85,7 @@ If set, new notes are added to the first file in this list."
         (delay-mode-hooks (org-mode))
         (while (re-search-forward "^\\* +\\(.+\\)$" nil t)
           (push (org-entry-get (point) "ITEM") symbols))))
-    (mapcar 'intern (sort (seq-uniq symbols) #'string<))))
-
-(declare-function org-show-entry "org" ())
-(declare-function org-insert-heading "org" (&optional arg invisible-ok top))
+    (mapcar 'intern (sort (cl-delete-duplicates symbols :test #'eq) #'string<))))
 
 (defun elisp-demos-find-demo (symbol)
   "Find the demo of the SYMBOL."
@@ -107,6 +109,9 @@ If set, new notes are added to the first file in this list."
           (when pos
             (goto-char pos)
             (org-show-entry)
+            (if (fboundp 'pop-to-buffer-same-window)
+                (pop-to-buffer-same-window (current-buffer))
+              (pop-to-buffer (current-buffer)))
             (throw 'found (point)))))))
   t)
 
@@ -165,11 +170,10 @@ If set, new notes are added to the first file in this list."
 (defun elisp-demos-help-find-demo-at-point ()
   "Find the demo at point."
   (interactive)
-  (let ((offset (- (point) (get-text-property (point) 'start))))
-    (and (elisp-demos-find-demo (get-text-property (point) 'symbol))
-         ;; Skip heading and an empty line
-         (forward-line 2)
-         (forward-char offset))))
+  (let ((file (get-text-property (point) 'file))
+        (pos (get-text-property (point) 'pos)))
+    (find-file file)
+    (goto-char pos)))
 
 (defvar elisp-demos-help-keymap
   (let ((map (make-sparse-keymap)))
@@ -223,14 +227,23 @@ If set, new notes are added to the first file in this list."
                             'keymap elisp-demos-help-keymap)
                 "\n\n")
              "")
-           (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
+           (if (fboundp 'buttonize)
+               (buttonize "[Add]" #'elisp-demos-add-demo helpful--sym)
+             (insert-text-button
+              "[Add]"
+              'face 'link
+              'action (lambda (_button)
+                        (elisp-demos-add-demo helpful--sym))))
            "\n\n"))))))
 
 ;;;###autoload
 (defun elisp-demos-for-helpful ()
   "Find a demo for the current `helpful' buffer."
   (interactive)
-  (elisp-demos-find-demo helpful--sym))
+  (let ((file (get-text-property (point) 'file))
+        (pos (get-text-property (point) 'pos)))
+    (find-file file)
+    (goto-char pos)))
 
 ;;; * JSON
 
