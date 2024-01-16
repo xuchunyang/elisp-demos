@@ -110,6 +110,9 @@ If set, new notes are added to the first file in this list."
           (when pos
             (goto-char pos)
             (org-show-entry)
+            (if (fboundp 'pop-to-buffer-same-window)
+                (pop-to-buffer-same-window (current-buffer))
+              (pop-to-buffer (current-buffer)))
             (throw 'found (point)))))))
   t)
 
