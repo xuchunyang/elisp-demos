@@ -54,7 +54,7 @@ If set, new notes are added to the first file in this list."
           (let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
             (when pos
               (goto-char pos)
-              (org-end-of-meta-data)
+              (forward-line)
               (push (propertize
                      (string-trim
                       (buffer-substring-no-properties
