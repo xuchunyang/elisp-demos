@@ -10012,6 +10012,9 @@ todo.org
 : "{\"content\":\"Hello, world\"}"
 
 * json-insert
+:PROPERTIES:
+:added:    27.1
+:END:
 
 #+BEGIN_SRC elisp
 (with-temp-buffer
@@ -10023,6 +10026,9 @@ todo.org
 : "{\"id\":42,\"message\":\"hello world\"}"
 
 * json-parse-buffer
+:PROPERTIES:
+:added:    27.1
+:END:
 
 #+BEGIN_SRC elisp
 (with-current-buffer (url-retrieve-synchronously "https://api.github.com/status")
@@ -10034,6 +10040,9 @@ todo.org
 : ((message . "GitHub lives! (2018-11-08 07:59:55 -0800) (1)"))
 
 * json-parse-string
+:PROPERTIES:
+:added:    27.1
+:END:
 
 #+BEGIN_SRC elisp
 (json-parse-string "{\"name\": \"Jessica\"}"
@@ -10115,6 +10124,9 @@ todo.org
 :  (age . 13))
 
 * json-serialize
+:PROPERTIES:
+:added:    27.1
+:END:
 
 #+BEGIN_SRC elisp
 (json-serialize '(:id 42 :message "hello world"))
