@@ -108,7 +108,9 @@ If set, new notes are added to the first file in this list."
         (let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
           (when pos
             (goto-char pos)
-            (org-show-entry)
+            (funcall (if (fboundp 'org-fold-show-entry)
+                         'org-fold-show-entry
+                       'org-show-entry))
             (if (fboundp 'pop-to-buffer-same-window)
                 (pop-to-buffer-same-window (current-buffer))
               (pop-to-buffer (current-buffer)))
