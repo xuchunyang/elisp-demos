@@ -50,18 +50,20 @@ If set, new notes are added to the first file in this list."
       (when (file-exists-p file)
         (with-temp-buffer
           (insert-file-contents file)
-          (delay-mode-hooks (org-mode))
-          (let ((pos (org-find-exact-headline-in-buffer (symbol-name symbol))))
-            (when pos
-              (goto-char pos)
-              (forward-line)
+          (goto-char (point-min))
+          (when (re-search-forward
+                 (format "^\\* %s$" (regexp-quote (symbol-name symbol)))
+                 nil t)
+            (let (beg end)
+              (forward-line 1)
+              (setq beg (point))
+              (if (re-search-forward "^\\*" nil t)
+                  (setq end (line-beginning-position))
+                (setq end (point-max)))
               (push (propertize
-                     (string-trim
-                      (buffer-substring-no-properties
-                       (point)
-                       (org-end-of-subtree)))
+                     (string-trim (buffer-substring-no-properties beg end))
                      'file file
-                     'pos (marker-position pos))
+                     'pos beg)
                     results))))))
     (when results
       (string-join (nreverse results) "\n\n"))))
