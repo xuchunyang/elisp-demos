@@ -17965,6 +17965,18 @@ c 4. four
 :  #("italic" 0 6
 :    (face italic)))
 
+* textsec-suspicious-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(textsec-suspicious-p "https://аpple.com" 'url)
+#+END_SRC
+
+#+RESULTS:
+: "`аpple.com' mixes characters from different scripts in suspicious ways"
+
 * thing-at-point
 :PROPERTIES:
 :changes:  28.1 New 'thing-at-point' target: 'existing-filename' and 'string'.
