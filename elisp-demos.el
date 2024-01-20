@@ -29,7 +29,6 @@
 
 (require 'cl-lib)
 (require 'subr-x)
-(require 'org)
 
 (defconst elisp-demos--load-dir (file-name-directory
                                  (or load-file-name buffer-file-name)))
