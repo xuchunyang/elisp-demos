@@ -34,8 +34,8 @@
                                  (or load-file-name buffer-file-name)))
 
 (defconst elisp-demos--elisp-demos.org (expand-file-name
-                             "elisp-demos.org"
-                             elisp-demos--load-dir))
+                                        "elisp-demos.org"
+                                        elisp-demos--load-dir))
 
 (defcustom elisp-demos-user-files nil
   "Files to search in addition to the one from the elisp-demos package.
