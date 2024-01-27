@@ -16647,6 +16647,30 @@ c 4. four
 #+RESULTS:
 : t
 
+* sqlite-close
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(sqlite-close (sqlite-open))
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* sqlite-columns
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(sqlite-columns (sqlite-select (sqlite-open) "SELECT 1 + 2, ? * ?" [3 4] 'set))
+#+END_SRC
+
+#+RESULTS:
+: ("1 + 2" "? * ?")
+
 * sqlite-execute
 :PROPERTIES:
 :added:    29.1
@@ -16654,12 +16678,28 @@ c 4. four
 
 #+BEGIN_SRC elisp
 (let ((db (sqlite-open)))
-  (prog1 (sqlite-execute db "SELECT 1 + 2")
-    (sqlite-close db)))
+  (sqlite-execute
+   db
+   "CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL)")
+  (sqlite-execute db "INSERT INTO users (name) VALUES (?), (?)" ["Tom" "Jerry"])
+  (sqlite-select db "SELECT * FROM users"))
 #+END_SRC
 
 #+RESULTS:
-: ((3))
+: ((1 "Tom")
+:  (2 "Jerry"))
+
+* sqlite-more-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(sqlite-more-p (sqlite-select (sqlite-open) "SELECT 1 + 2" nil 'set))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * sqlite-next
 :PROPERTIES:
@@ -16671,12 +16711,11 @@ c 4. four
   (sqlite-execute db "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)")
   (sqlite-execute db "INSERT INTO users (name) VALUES (?), (?), (?)"
                   (list "alice" "bob" "calb"))
-  (prog1 (let ((statement (sqlite-select db "select * from users" nil 'set))
-               (rows nil))
-           (while-let ((row (sqlite-next statement)))
-             (push row rows))
-           (nreverse rows))
-    (sqlite-close db)))
+  (let ((statement (sqlite-select db "SELECT * FROM users" nil 'set))
+        (rows nil))
+    (while-let ((row (sqlite-next statement)))
+      (push row rows))
+    (nreverse rows)))
 #+END_SRC
 
 #+RESULTS:
@@ -16698,6 +16737,68 @@ c 4. four
 #+RESULTS:
 : #<sqlite db=0x0 name=:memory:3>
 
+* sqlite-pragma
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(sqlite-pragma (sqlite-open) "auto_vacuum = FULL")
+#+END_SRC
+
+* sqlite-rollback
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((db (sqlite-open)))
+  (sqlite-transaction db)
+  (sqlite-execute db "CREATE TABLE users (name TEXT)")
+
+  ;; Rollback the transaction, undoing the table creation.
+  (sqlite-rollback db)
+
+  (sqlite-execute db "CREATE TABLE users (id INTEGER PRIMRY KEY, name TEXT)")
+  (sqlite-commit db))
+#+END_SRC
+
+#+RESULTS:
+: nil
+
+* sqlite-select
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((db (sqlite-open)))
+  (sqlite-select db "SELECT ? + ?" '(1 2)))
+#+END_SRC
+
+#+RESULTS:
+: ((3))
+
+* sqlite-transaction
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let* ((file (make-temp-file "elisp-demos-" nil ".db"))
+       (db1 (sqlite-open file))
+       (db2 (sqlite-open file)))
+  (sqlite-transaction db1)
+  (sqlite-execute db1 "CREATE TABLE users (name TEXT)")
+  (sqlite-commit db1) ; Commit to make 'users' table visible to other connections.
+
+  ;; Ensure db1 commits before db2's operations to see the latest changes.
+  (sqlite-execute db2 "INSERT INTO users (name) VALUES (?), (?)" ["Tom" "Jerry"]))
+#+END_SRC
+
+#+RESULTS:
+: 2
+
 * sqlite-version
 :PROPERTIES:
 :added:    29.1
@@ -16709,6 +16810,20 @@ c 4. four
 
 #+RESULTS:
 : "3.39.5"
+
+* sqlitep
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(let ((db (sqlite-open)))
+  (prog1 (sqlitep db)
+    (sqlite-close db)))
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * sqrt
 
@@ -19240,6 +19355,22 @@ c 4. four
 
 #+RESULTS:
 : #s(my-color 1.0 65 105 225)
+
+* with-sqlite-transaction
+
+#+BEGIN_SRC elisp
+;; (require 'sqlite)
+(let ((db (sqlite-open)))
+  (with-sqlite-transaction db
+    (sqlite-execute db "CREATE TABLE users (name TEXT)")
+    (sqlite-execute db "INSERT INTO users (name) VALUES ('Tom')")
+    (sqlite-execute db "INSERT INTO users (name) VALUES ('Jerry')")
+    (sqlite-select db "SELECT * FROM users")))
+#+END_SRC
+
+#+RESULTS:
+: (("Tom")
+:  ("Jerry"))
 
 * with-syntax-table
 
