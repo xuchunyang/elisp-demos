@@ -18439,6 +18439,63 @@ c 4. four
 #+RESULTS:
 : "world\nhello\n"
 
+* treesit-available-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(treesit-available-p)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* treesit-language-abi-version
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(treesit-language-abi-version 'bash)
+#+END_SRC
+
+#+RESULTS:
+: 14
+
+* treesit-language-available-p
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(treesit-language-available-p 'bash)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* treesit-library-abi-version
+
+#+BEGIN_SRC elisp
+(list (treesit-library-abi-version) (treesit-library-abi-version t))
+#+END_SRC
+
+#+RESULTS:
+: (14 13)
+
+* treesit-parse-string
+:PROPERTIES:
+:added:    29.1
+:END:
+
+#+BEGIN_SRC elisp
+(treesit-parse-string "<h1>hi</h1>" 'html)
+#+END_SRC
+
+#+RESULTS:
+: #<treesit-node fragment in 1-12>
+
 * truncate
 
 #+BEGIN_SRC elisp
