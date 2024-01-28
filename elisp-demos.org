@@ -18476,6 +18476,9 @@ c 4. four
 : t
 
 * treesit-library-abi-version
+:PROPERTIES:
+:added:    29.1
+:END:
 
 #+BEGIN_SRC elisp
 (list (treesit-library-abi-version) (treesit-library-abi-version t))
