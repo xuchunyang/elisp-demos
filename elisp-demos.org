@@ -11199,6 +11199,13 @@ Process Date finished
 #+RESULTS:
 : "/var/folders/7f/s191h4q97p90374yw15ssrs00000gn/T/elisp-demos-iOSgE2"
 
+#+BEGIN_SRC elisp
+(make-temp-file "elisp-demos-" nil ".txt")
+#+END_SRC
+
+#+RESULTS:
+: "/var/folders/xc/srm9vhz12s5g57prnf9prbmc0000gn/T/elisp-demos-xKeRC3.txt"
+
 * make-temp-name
 
 #+BEGIN_SRC elisp
