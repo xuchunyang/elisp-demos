@@ -30,6 +30,10 @@
 (eval-when-compile (require 'cl-lib))
 (require 'subr-x)
 
+(declare-function org-entry-get "org")
+(declare-function org-find-exact-headline-in-buffer "org")
+(declare-function org-insert-heading "org")
+
 (defconst elisp-demos--load-dir (file-name-directory
                                  (or load-file-name buffer-file-name)))
 
